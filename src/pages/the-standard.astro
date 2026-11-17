@@ -1,0 +1,1534 @@
+---
+// src/pages/the-standard.astro
+// Exact implementation ported directly from https://crate44.in/the-standard
+import Layout from '../layouts/Layout.astro'
+import Footer from '../components/Footer.astro'
+---
+
+<Layout title="The Standard | Crate 44 — Logistics & Grading">
+  <main class="min-h-screen w-full overflow-x-clip bg-[#131313] selection:bg-[#F8FE03] selection:text-black">
+    <!-- Section 0: Hero -->
+<section class="hero-section-std relative w-full h-[100dvh] min-h-[100dvh] flex items-center justify-center overflow-hidden bg-[#131313] border-b border-[#1E1E1E] pt-[90px] sm:pt-[105px] lg:pt-[100px] pb-6 sm:pb-8 lg:pb-12">
+ <div class="px-4 lg:px-8 relative z-10 w-full">
+  <div class="w-full mx-auto w-full flex flex-col lg:flex-row items-center justify-between gap-2 lg:gap-8 xl:gap-12" style="max-width:none">
+   <div class="w-full lg:flex-1 flex flex-col items-center lg:items-start text-center lg:text-left min-w-0">
+    <h1 class="hero-headline select-none flex flex-col items-center lg:items-start w-full text-center lg:text-left">
+     <span class="block overflow-hidden pb-[0.05em]">
+      <span
+        class="hero-line-inner block will-change-transform"
+        style="background: linear-gradient(180deg, var(--Color-Creme, #FBF9D6) 0%, var(--Color-Fushia, #FC558D) 100%); background-size: 100% 200%; background-position: top; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;"
+      >
+       MOST
+      </span>
+     </span>
+     <span class="block overflow-hidden pb-[0.05em]">
+      <span
+        class="hero-line-inner block will-change-transform"
+        style="background: linear-gradient(180deg, var(--Color-Creme, #FBF9D6) 0%, var(--Color-Fushia, #FC558D) 100%); background-size: 100% 200%; background-position: bottom; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;"
+      >
+       FRUIT FAILS.
+      </span>
+     </span>
+    </h1>
+    <div class="w-full max-w-[340px] lg:max-w-[500px] mt-2 lg:mt-5 text-[#FC558D] font-body font-semibold text-center lg:text-left text-[14px] leading-[17px] tracking-[-0.4px] lg:text-[16px] lg:leading-[20px]">
+     <span class="block overflow-hidden">
+      <span class="hero-sub-line-inner block will-change-transform">
+       <span class="lg:hidden">
+        “What our grading table does to 500 fruits, every morning.”
+       </span>
+       <span class="hidden lg:inline">
+        What our grading table does to 500 fruits, every morning.
+       </span>
+      </span>
+     </span>
+    </div>
+   </div>
+   <div class="w-full lg:w-auto flex-shrink-0 flex items-center justify-center lg:justify-end mt-4 sm:mt-6 lg:mt-0">
+    <div class="hero-fruit-img relative w-[clamp(280px,40vh,420px)] max-w-[calc(100vw-32px)] lg:w-[clamp(440px,38vw,880px)] aspect-square flex items-center justify-center will-change-transform select-none">
+     <div id="standard-fruit-container" class="w-full h-full relative cursor-grab active:cursor-grabbing pointer-events-auto filter drop-shadow-[0_24px_40px_rgba(0,0,0,0.3)]">
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+
+    <!-- Section: This Month's Ledger -->
+    <section class="ledger-section-std relative w-full bg-[#131313] border-b border-[#1E1E1E] py-14 sm:py-16 lg:py-20 xl:py-24 overflow-hidden">
+      <div class="px-4 lg:px-8 relative z-10 w-full">
+        <div class="w-full mx-auto flex flex-col gap-10 sm:gap-12 lg:gap-16">
+          <!-- Section Title -->
+          <h2 class="ledger-title text-[#F8FE03] font-body font-semibold select-none">
+            This Month’s Ledger
+          </h2>
+
+          <!-- 4 Stats: 2x2 Grid on Desktop, Single Column Stack on Mobile -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-x-12 lg:gap-y-16 w-full">
+            <!-- Stat 1: Graded -->
+            <div class="flex flex-col gap-2.5 lg:gap-5 items-start">
+              <span class="ledger-number select-none">14,206</span>
+              <span class="ledger-label text-[#FBF9D6] font-body font-semibold select-none">Graded</span>
+            </div>
+
+            <!-- Stat 2: Rejected -->
+            <div class="flex flex-col gap-2.5 lg:gap-5 items-start">
+              <span class="ledger-number select-none">8,660</span>
+              <span class="ledger-label text-[#FBF9D6] font-body font-semibold select-none">Rejected</span>
+            </div>
+
+            <!-- Stat 3: Replaced, No Questions Asked -->
+            <div class="flex flex-col gap-2.5 lg:gap-5 items-start">
+              <span class="ledger-number select-none">11</span>
+              <span class="ledger-label text-[#FBF9D6] font-body font-semibold select-none">
+                <span class="block">Replaced,</span>
+                <span class="block">No Questions Asked</span>
+              </span>
+            </div>
+
+            <!-- Stat 4: Farms Under Contract -->
+            <div class="flex flex-col gap-2.5 lg:gap-5 items-start">
+              <span class="ledger-number select-none">5</span>
+              <span class="ledger-label text-[#FBF9D6] font-body font-semibold select-none">Farms Under Contract</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Section 1: The Four Tests -->
+<section class="tests-section-std relative w-full bg-[#131313] border-b border-[#1E1E1E] py-16 sm:py-20 lg:py-28 text-white overflow-hidden">
+ <div class="px-4 lg:px-8 relative z-10 w-full">
+  <div class="w-full mx-auto w-full flex flex-col" style="max-width:none">
+   <div class="w-full mb-8 sm:mb-10 lg:mb-12">
+    <h2 class="select-none flex flex-col items-start w-full font-condensed font-semibold uppercase tracking-[0.48px] text-[#FBF9D6] text-[92px] md:text-[clamp(68px,24vw,92px)] leading-[76px] md:leading-[clamp(58px,20vw,76px)] lg:text-[clamp(130px,13.5vw,240px)] lg:leading-[clamp(105px,11vw,195px)]">
+     <span class="block overflow-hidden pb-[0.05em]">
+      <span class="tests-headline-line block will-change-transform">
+       THE FOUR
+      </span>
+     </span>
+     <span class="block overflow-hidden pb-[0.05em]">
+      <span class="tests-headline-line block will-change-transform">
+       TESTS
+      </span>
+     </span>
+    </h2>
+   </div>
+   <div class="w-full flex flex-col lg:flex-row items-stretch justify-between gap-10 sm:gap-12 lg:gap-16 xl:gap-24">
+    <div class="w-full lg:w-[48%] flex-shrink-0 flex flex-col">
+     <div class="tests-placeholder-box w-full aspect-[4/3] lg:aspect-auto lg:h-full lg:flex-1 rounded-[8px] bg-[#1a1a1a] overflow-hidden shadow-2xl relative flex items-center justify-center">
+      <img
+       src="/images/the-four-tests.avif"
+       alt="Testing and grading fresh fruit"
+       class="the-tests-img absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-center rounded-[8px] will-change-transform"
+       loading="lazy"
+       decoding="async"
+      />
+     </div>
+    </div>
+    <div class="w-full lg:w-[48%] flex flex-col space-y-[20px] lg:space-y-[40px]">
+     <div class="test-item-card flex flex-col items-start text-left">
+      <h3 class="suisse-title-56 text-[#FBF9D6]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">S</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">u</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span></span>
+       </span>
+      </h3>
+      <p class="mt-[12px] font-body font-semibold text-[#FBF9D6] text-[16px] leading-[22px] tracking-[-0.2px] lg:text-[18px] lg:leading-[24px] lg:tracking-normal max-w-[560px]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">A</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">f</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">c</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">v</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">y</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">l</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">p</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">c</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">T</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">f</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">l</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">f</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">1</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">4</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">°</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">B</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">x</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">B</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">l</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">w</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">,</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">j</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">c</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">w</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span></span><span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">l</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">k</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span>
+       </span>
+      </p>
+     </div>
+     <div class="test-item-card flex flex-col items-start text-left">
+      <h3 class="suisse-title-56 text-[#FBF9D6]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">P</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">u</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span>
+       </span>
+      </h3>
+      <p class="mt-[12px] font-body font-semibold text-[#FBF9D6] text-[16px] leading-[22px] tracking-[-0.2px] lg:text-[18px] lg:leading-[24px] lg:tracking-normal max-w-[560px]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">T</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">u</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">b</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">u</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">u</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">l</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">R</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">p</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">w</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">w</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">,</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span></span><span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">w</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span>
+       </span>
+      </p>
+     </div>
+     <div class="test-item-card flex flex-col items-start text-left">
+      <h3 class="suisse-title-56 text-[#FBF9D6]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">A</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span></span>
+       </span>
+      </h3>
+      <p class="mt-[12px] font-body font-semibold text-[#FBF9D6] text-[16px] leading-[22px] tracking-[-0.2px] lg:text-[18px] lg:leading-[24px] lg:tracking-normal max-w-[560px]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">A</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">A</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">u</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">j</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">c</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span></span><span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span>
+       </span>
+      </p>
+     </div>
+     <div class="test-item-card flex flex-col items-start text-left">
+      <h3 class="suisse-title-56 text-[#FBF9D6]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">P</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">c</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span>
+       </span>
+      </h3>
+      <p class="mt-[12px] font-body font-semibold text-[#FBF9D6] text-[16px] leading-[22px] tracking-[-0.2px] lg:text-[18px] lg:leading-[24px] lg:tracking-normal max-w-[560px]">
+       <span class="flex flex-wrap items-baseline">
+        <span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">D</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">y</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">p</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">n</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">g</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">r</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">1</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">8</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">–</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">2</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">2</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">°</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">C</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">T</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">d</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">o</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">w</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">t</span></span><span class="inline-flex whitespace-nowrap mr-[0.28em]"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">c</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">h</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">m</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">i</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">c</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">l</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">s</span></span><span class="inline-flex whitespace-nowrap"><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">f</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">a</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">k</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">e</span><span class="effect058-letter inline-block will-change-transform" style="transform-origin:50% 120%">.</span></span>
+       </span>
+      </p>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+
+    <!-- Section 2: Chain Comparison -->
+<section class="mwg_effect022 relative w-full bg-[#131313] border-b border-[#1E1E1E] text-[#FBF9D6] select-none py-[40px] lg:py-[56px] h-auto min-h-screen">
+ <div class="container-pinned w-full h-auto flex flex-col justify-start overflow-visible">
+  <div class="px-4 lg:px-8 w-full h-auto flex flex-col justify-start">
+   <div class="w-full mx-auto w-full mx-auto flex flex-col h-auto" style="max-width:none">
+    <div class="w-full flex flex-col lg:grid lg:grid-cols-2 gap-16 sm:gap-20 lg:gap-14 xl:gap-20 h-auto items-start">
+     <div class="flex flex-col w-full h-auto justify-start">
+      <div class="mb-6 sm:mb-8 lg:mb-[48px]">
+       <h2 class="suisse-title-56 text-[#FBF9D6]">
+        The Chain
+       </h2>
+      </div>
+      <div class="their-chain-container relative flex flex-col gap-12 sm:gap-14 lg:gap-[72px] xl:gap-[80px] py-1 h-auto">
+       <!-- Individual connection segments: bottom of each badge to top of next badge -->
+       <div class="their-segment-0 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#FBF9D6]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="their-segment-1 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#FBF9D6]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="their-segment-2 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#FBF9D6]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="their-segment-3 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#FBF9D6]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="their-segment-4 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#FBF9D6]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="their-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#5B0000] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#FBF9D6] [-webkit-text-stroke:0.5px_#FBF9D6]" style="leading-trim:both;text-edge:cap">
+          1
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Picker
+         </h3>
+        </div>
+       </div>
+       <div class="their-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#5B0000] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#FBF9D6] [-webkit-text-stroke:0.5px_#FBF9D6]" style="leading-trim:both;text-edge:cap">
+          2
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Agent
+         </h3>
+        </div>
+       </div>
+       <div class="their-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#5B0000] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#FBF9D6] [-webkit-text-stroke:0.5px_#FBF9D6]" style="leading-trim:both;text-edge:cap">
+          3
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Mandi
+         </h3>
+        </div>
+       </div>
+       <div class="their-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#5B0000] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#FBF9D6] [-webkit-text-stroke:0.5px_#FBF9D6]" style="leading-trim:both;text-edge:cap">
+          4
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Wholesaler
+         </h3>
+        </div>
+       </div>
+       <div class="their-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#5B0000] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#FBF9D6] [-webkit-text-stroke:0.5px_#FBF9D6]" style="leading-trim:both;text-edge:cap">
+          5
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Retailer
+         </h3>
+        </div>
+       </div>
+       <div class="their-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#5B0000] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#FBF9D6] [-webkit-text-stroke:0.5px_#FBF9D6]" style="leading-trim:both;text-edge:cap">
+          6
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          You
+         </h3>
+        </div>
+       </div>
+      </div>
+     </div>
+     <div class="flex flex-col w-full h-auto justify-start">
+      <div class="mb-6 sm:mb-8 lg:mb-[48px]">
+       <h2 class="suisse-title-56 text-[#FBF9D6]">
+        Ours
+       </h2>
+      </div>
+      <div class="our-chain-container relative flex flex-col gap-12 sm:gap-14 lg:gap-[72px] xl:gap-[80px] py-1 h-auto">
+       <!-- Individual connection segments: bottom of each badge to top of next badge -->
+       <div class="our-segment-0 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#F8FE03]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="our-segment-1 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#F8FE03]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="our-segment-2 absolute w-[2px] -translate-x-1/2 z-0 origin-top pointer-events-none overflow-hidden bg-[#F8FE03]" style="left:36.5px;top:0;height:0;transform:scaleY(0)"></div>
+       <div class="our-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#F8FE03] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#131313] [-webkit-text-stroke:0.5px_#131313]" style="leading-trim:both;text-edge:cap">
+          0
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Orchard
+         </h3>
+        </div>
+       </div>
+       <div class="our-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#F8FE03] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#131313] [-webkit-text-stroke:0.5px_#131313]" style="leading-trim:both;text-edge:cap">
+          1
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Our van (18°C)
+         </h3>
+        </div>
+       </div>
+       <div class="our-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#F8FE03] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#131313] [-webkit-text-stroke:0.5px_#131313]" style="leading-trim:both;text-edge:cap">
+          2
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Our ripening rooms
+         </h3>
+        </div>
+       </div>
+       <div class="our-chain-item relative z-10 flex items-center gap-4 sm:gap-5 lg:gap-6">
+        <div class="chain-badge relative flex-shrink-0 w-[73px] min-h-[64px] px-[26px] py-[16px] rounded-[6px] bg-[#F8FE03] border-[3px] border-[#FBF9D6] flex items-center justify-center gap-2 shadow-lg transition-transform will-change-transform">
+         <span class="font-['PP_Frama_Text','Suisse Intl', sans-serif,sans-serif] font-normal text-[32px] tracking-[-0.512px] leading-none whitespace-nowrap text-[#131313] [-webkit-text-stroke:0.5px_#131313]" style="leading-trim:both;text-edge:cap">
+          4
+         </span>
+        </div>
+        <div class="flex flex-col items-start text-left flex-1 min-w-0 overflow-hidden py-0.5">
+         <h3 class="chain-title font-body font-medium text-[#FBF9D6] text-[32px] leading-[32px] lg:leading-[40px] tracking-[0.128px] opacity-90 transition-opacity" style="leading-trim:both;text-edge:cap">
+          Your door.
+         </h3>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+
+    <!-- Section 3: What happens with rejected fruit -->
+<section class="rejected-section-std relative w-full bg-[#131313] border-b border-[#1E1E1E] px-4 lg:px-8 pt-[52px] sm:pt-[58px] lg:pt-[64px] pb-[60px] 2xl:pb-[4.16vw] overflow-hidden text-white">
+ <div class="w-full mx-auto">
+  <!-- ======================================================== -->
+  <!-- MOBILE VIEW (< lg): Vertical stack matching Section 3 Mobile -->
+  <!-- ======================================================== -->
+  <div class="rejected-fruit-content-mob flex lg:hidden flex-col gap-[24px] items-start w-full">
+   <!-- Mobile Headline (5 lines) -->
+   <div class="rejected-fruit-headline-mob w-full font-display font-semibold uppercase not-italic tracking-[0.8px] select-none text-[clamp(72px,28.7vw,112px)] leading-[0.8928em]">
+    <div class="overflow-hidden py-[2px]">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">WHAT</span>
+     </div>
+    </div>
+    <div class="overflow-hidden py-[2px]">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">HAPPENS</span>
+     </div>
+    </div>
+    <div class="overflow-hidden py-[2px]">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">WITH THE</span>
+     </div>
+    </div>
+    <div class="overflow-hidden py-[2px]">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">REJECTED</span>
+     </div>
+    </div>
+    <div class="overflow-hidden py-[2px]">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">FRUIT</span>
+     </div>
+    </div>
+   </div>
+
+   <!-- Mobile Image Card: 4:4 aspect ratio squircle with Section 7 headroom -->
+   <div
+    class="rejected-fruit-img-wrap curve-side relative w-full aspect-square max-w-[358px] overflow-hidden bg-black/10 shadow-2xl will-change-transform will-change-[clip-path]"
+    data-curve="side"
+   >
+    <img
+     src="/images/rejected-fruit.avif"
+     alt="Inspecting rejected fruit"
+     class="rejected-fruit-img absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-center pointer-events-none rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] rounded-br-[56px] will-change-transform"
+     loading="lazy"
+     decoding="async"
+    />
+    <div class="absolute inset-0 ring-1 ring-white/10 pointer-events-none rounded-[inherit]"></div>
+   </div>
+
+   <!-- Mobile Description Copy -->
+   <p class="rejected-fruit-desc font-body font-bold text-[15px] sm:text-[18px] leading-[19px] sm:leading-[22px] tracking-[-0.16px] text-[#FBF9D6] max-w-[358px] m-0 text-left">
+    Rejected fruit is never resold as ‘B-grade.’ It goes home with our team and to juice partners the same day. The mark means the mark.”
+   </p>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- DESKTOP VIEW (≥ lg): Exact Interlocking Section 3 Architecture -->
+  <!-- ======================================================== -->
+  <div class="rejected-fruit-content-desk hidden lg:flex flex-col gap-[7px] w-full">
+   <!-- Line 1: WHAT (Spans full content width) -->
+   <div class="w-full font-display font-semibold uppercase not-italic tracking-[0.8px] select-none text-[20.55vw] leading-[0.8108em]">
+    <div class="overflow-hidden py-1">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">WHAT</span>
+     </div>
+    </div>
+   </div>
+
+   <!-- MIDDLE ROW: HAPPENS + WITH THE (Left) & IMAGE CARD + COPY (Right) -->
+   <div class="w-full flex flex-row items-stretch justify-between gap-[32px] 2xl:gap-[4.44vw]">
+    <!-- Left Column: Middle 2 Lines -->
+    <div class="flex flex-col gap-[7px] shrink-0 font-display font-semibold uppercase not-italic tracking-[0.8px] select-none text-[20.55vw] leading-[0.8108em]">
+     <!-- Line 2: HAPPENS -->
+     <div class="overflow-hidden py-1">
+      <div class="flex flex-nowrap whitespace-nowrap justify-start">
+       <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">HAPPENS</span>
+      </div>
+     </div>
+     <!-- Line 3: WITH THE -->
+     <div class="overflow-hidden py-1">
+      <div class="flex flex-nowrap whitespace-nowrap justify-start">
+       <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">WITH THE</span>
+      </div>
+     </div>
+    </div>
+
+    <!-- Right Column: Image Card + Description Copy Underneath -->
+    <div class="flex-1 min-w-0 flex flex-col justify-between items-end">
+     <div
+      class="rejected-fruit-img-wrap curve-side relative aspect-square w-full max-w-[clamp(360px,32.6vw,620px)] overflow-hidden flex-shrink-0 shadow-2xl will-change-transform will-change-[clip-path]"
+      data-curve="side"
+     >
+      <img
+       src="/images/rejected-fruit.avif"
+       alt="Inspecting rejected fruit"
+       class="rejected-fruit-img absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-center rounded-tl-[12px] rounded-tr-[12px] rounded-bl-[12px] rounded-br-[56px] will-change-transform"
+       loading="lazy"
+       decoding="async"
+      />
+      <div class="absolute inset-0 ring-1 ring-white/10 pointer-events-none rounded-[inherit]"></div>
+     </div>
+     <p class="rejected-fruit-desc mt-4 w-full max-w-[clamp(360px,32.6vw,620px)] text-left text-[#FBF9D6] font-body font-bold text-[18px] leading-[20px] tracking-[-0.16px]">
+      Rejected fruit is never resold as ‘B-grade.’ It goes home with our team and to juice partners the same day. The mark means the mark.”
+     </p>
+    </div>
+   </div>
+
+   <!-- BOTTOM LINES: REJECTED & FRUIT -->
+   <!-- Line 4: REJECTED -->
+   <div class="w-full font-display font-semibold uppercase not-italic tracking-[0.8px] select-none text-[20.55vw] leading-[0.8108em]">
+    <div class="overflow-hidden py-1">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">REJECTED</span>
+     </div>
+    </div>
+   </div>
+
+   <!-- Line 5: FRUIT -->
+   <div class="w-full font-display font-semibold uppercase not-italic tracking-[0.8px] select-none text-[20.55vw] leading-[0.8108em]">
+    <div class="overflow-hidden py-1">
+     <div class="flex flex-nowrap whitespace-nowrap justify-start">
+      <span class="rejected-fruit-line-inner block will-change-transform rejected-fruit-gradient">FRUIT</span>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+
+    <!-- Section 4: The Promise -->
+<section class="promise-section-std relative w-full bg-[#131313] text-white pt-12 pb-16 sm:pt-16 sm:pb-20 lg:pt-20 lg:pb-24 overflow-hidden">
+ <div class="px-4 lg:px-8 w-full">
+  <div class="w-full mx-auto w-full" style="max-width:none">
+   <div class="w-full flex flex-col lg:grid lg:grid-cols-[1fr_auto] lg:items-end lg:gap-x-12 xl:gap-x-16 lg:gap-y-12 xl:gap-y-16">
+    <div class="w-full lg:flex-1 order-1 mb-6 lg:mb-0 lg:col-start-1 lg:row-start-2 self-end">
+     <h2 class="the-promise-headline select-none font-condensed font-semibold uppercase tracking-[0.8px] lg:tracking-[2.716px] whitespace-normal md:whitespace-nowrap lg:translate-y-[0.093em]">
+      THE
+      <br class="block md:hidden"/>
+      PROMISE
+     </h2>
+    </div>
+    <div class="promise-box-placeholder w-full max-w-full lg:w-[clamp(360px,33vw,620px)] aspect-[474/273] curve-side overflow-hidden bg-white shadow-xl flex-shrink-0 order-2 mb-8 lg:mb-0 lg:col-start-1 lg:row-start-1 self-start" data-curve="side">
+    </div>
+    <div class="w-full lg:w-auto lg:max-w-[480px] flex flex-col items-start flex-shrink-0 order-3 lg:col-start-2 lg:row-start-2 self-end">
+     <p class="promise-desc-p text-[#FBF9D6] font-body font-bold text-[16px] leading-[20px] tracking-[-0.16px] lg:text-[18px] lg:leading-[20px] lg:tracking-normal">
+      “If any piece in your crate isn’t right, tell us — one message, no photographs, no forms. A replacement leaves with the day’s van. This has cost us money eleven times this month. It has never cost us a member. — Crate 44, Mumbai”
+     </p>
+     <div class="promise-btn-wrap w-full flex flex-col sm:flex-row items-center gap-2 sm:gap-3 mt-[44px]">
+      <div class="w-full sm:flex-1">
+       <button class="std-btn-left bg-[#F8FE03] text-[#131313] border border-[#F8FE03] relative inline-flex items-center justify-center cursor-pointer w-full text-center px-4 py-2 font-condensed font-semibold text-[32px] leading-[34px] uppercase active:scale-[0.98] transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius] flex-shrink-0">
+        <span
+          class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+          style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+        >
+          <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            JOIN THE LIST
+          </span>
+          <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            JOIN THE LIST
+          </span>
+        </span>
+       </button>
+      </div>
+      <div class="w-full sm:flex-1">
+       <button class="std-btn-right bg-[#FBF9D6] text-[#131313] border border-[#FBF9D6] relative inline-flex items-center justify-center cursor-pointer w-full text-center px-4 py-2 font-condensed font-semibold text-[32px] leading-[34px] uppercase active:scale-[0.98] transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius] flex-shrink-0">
+        <span
+          class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+          style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+        >
+          <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            READ FAQ
+          </span>
+          <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            READ FAQ
+          </span>
+        </span>
+       </button>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</section>
+
+  <Footer showTheList={false} />
+</main>
+</Layout>
+
+<style is:global>
+  /* Color Gradients */
+  .bg-yellow-gradient {
+    background: linear-gradient(180deg, #f8fe03 0%, #e1ddec 100%) !important;
+  }
+
+  .bg-red-gradient {
+    background: linear-gradient(180deg, #5b0000 0%, #fc558d 100%) !important;
+  }
+
+  .rejected-fruit-gradient {
+    background: linear-gradient(180deg, #fbf9d6 0%, #fc558d 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+  }
+
+  /* Fluid typography scaling matching Page 1 Hero (scales continuously across 1440px, 1920px and beyond) */
+  .hero-headline {
+    color: #fbf9d6;
+    font-family: 'VVDS_Fifties', 'VVDS Fifties', sans-serif;
+    letter-spacing: 0.48px;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 600;
+  }
+  @media (max-width: 949px) {
+    .hero-headline {
+      font-size: clamp(56px, calc(3.5778vw + 68px), 88px);
+      line-height: clamp(50px, calc(3.2200vw + 58px), 74px);
+      letter-spacing: calc(0.03578vw + 0.4605px);
+    }
+  }
+  @media (min-width: 950px) and (max-width: 4096px) {
+    .hero-headline {
+      font-size: calc(12.5vw + 20px);
+      line-height: calc(10vw + 20px);
+      letter-spacing: calc(0.03814vw + 0.438px);
+    }
+  }
+
+  /* ─── Reusable Design System Style: suisse-title-56 ─── */
+  .suisse-title-56,
+  .ledger-title {
+    font-family: 'Suisse Intl', sans-serif;
+    font-weight: 600;
+    font-style: normal;
+  }
+  .suisse-title-56 span.whitespace-nowrap {
+    display: inline-flex !important;
+  }
+  .ledger-title {
+    color: #F8FE03;
+  }
+
+  .ledger-number {
+    font-family: 'VVDS_Fifties', 'VVDS Fifties', sans-serif;
+    font-weight: 600;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #F8FE03 0%, #FBF9D6 100%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+    display: inline-block;
+  }
+
+  .ledger-label {
+    font-family: 'Suisse Intl', sans-serif;
+    font-weight: 600;
+    color: #FBF9D6;
+  }
+
+  @media (max-width: 949px) {
+    .suisse-title-56,
+    .ledger-title {
+      font-size: clamp(34px, 8.5vw, 56px);
+      line-height: 1.05;
+      letter-spacing: -1.5px;
+    }
+    .ledger-number {
+      font-size: clamp(68px, calc(11.16vw + 44.3px), 138px);
+      line-height: clamp(60px, calc(9vw + 38px), 110px);
+      letter-spacing: 0.48px;
+    }
+    .ledger-label {
+      font-size: clamp(22px, calc(2.4vw + 22.6px), 38px);
+      line-height: clamp(26px, calc(2.6vw + 24.8px), 42px);
+      letter-spacing: -1.4px;
+    }
+  }
+
+  @media (min-width: 950px) and (max-width: 4096px) {
+    .suisse-title-56,
+    .ledger-title {
+      font-size: calc(3.333vw + 8px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+    .ledger-number {
+      font-size: calc(12.5vw + 20px);
+      line-height: calc(10vw + 18px);
+      letter-spacing: 0.48px;
+    }
+    .ledger-label {
+      font-size: calc(3.333vw + 8px);
+      line-height: 1.08;
+      letter-spacing: -2px;
+    }
+  }
+
+  .chain-title {
+    font-size: clamp(22px, 2.2vw, 34px) !important;
+    line-height: 1.15 !important;
+  }
+
+  .the-promise-headline {
+    font-family: 'VVDS_Fifties', 'VVDS Fifties', sans-serif;
+    text-transform: uppercase;
+    background: linear-gradient(180deg, #3ed5ff 0%, #fff 134.07%) !important;
+    -webkit-background-clip: text !important;
+    background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    color: transparent !important;
+    font-style: normal;
+    font-weight: 600;
+    font-size: clamp(68px, 24vw, 92px);
+    line-height: clamp(58px, 20vw, 76px);
+    letter-spacing: clamp(0.8px, 0.18vw, 2.7px);
+  }
+
+  @media (min-width: 768px) {
+    .the-promise-headline {
+      font-size: clamp(92px, 12vw, 130px);
+      line-height: clamp(76px, 10vw, 105px);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .the-promise-headline {
+      font-size: clamp(130px, 13.5vw, 240px);
+      line-height: clamp(105px, 11vw, 195px);
+    }
+  }
+
+  .promise-desc-p {
+    font-size: clamp(15px, 1.25vw, 19px) !important;
+    line-height: 1.25 !important;
+  }
+
+  .promise-flip-btn:hover .flip-inner {
+    transform: rotateX(90deg) !important;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import * as THREE from 'three';
+  import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+  import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  function initStandardPage() {
+    const easeLuxury = "cubic-bezier(0.31, 0.75, 0.22, 1)";
+
+    // ─── Section 0: Hero ─────────────────────────────────────
+    const heroSection = document.querySelector(".hero-section-std");
+    if (heroSection) {
+      gsap.timeline({ delay: 0.15 })
+        .fromTo(
+          heroSection.querySelectorAll(".hero-line-inner"),
+          { yPercent: 150, opacity: 0, rotate: 0.001 },
+          { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: easeLuxury, stagger: 0.0825 },
+          0
+        )
+        .fromTo(
+          heroSection.querySelectorAll(".hero-sub-line-inner"),
+          { yPercent: 150, opacity: 0, rotate: 0.001 },
+          { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: easeLuxury },
+          0.2
+        )
+        .fromTo(
+          heroSection.querySelectorAll(".hero-fruit-img"),
+          { opacity: 0, y: 100, scale: 0.94 },
+          { opacity: 1, y: 0, scale: 1, duration: 1, ease: easeLuxury },
+          0.1
+        );
+
+      initStandardDragonfruit();
+    }
+
+    // ─── Section 1: The Four Tests ───────────────────────────
+    const testsSection = document.querySelector(".tests-section-std");
+    if (testsSection) {
+      gsap.fromTo(
+        testsSection.querySelectorAll(".tests-headline-line"),
+        { y: 150, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.75,
+          stagger: 0.07,
+          ease: "cubic-bezier(0.83, 0, 0.17, 1)",
+          scrollTrigger: {
+            trigger: testsSection,
+            start: "top 80%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+
+      gsap.fromTo(
+        testsSection.querySelectorAll(".tests-placeholder-box"),
+        { opacity: 0, y: 60, scale: 0.96 },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: testsSection,
+            start: "top 75%",
+            toggleActions: "play none none none",
+            once: true,
+          },
+        }
+      );
+
+      const testsImg = testsSection.querySelector(".the-tests-img");
+      if (testsImg) {
+        gsap.fromTo(
+          testsImg,
+          { yPercent: -6 },
+          {
+            yPercent: 6,
+            ease: "none",
+            scrollTrigger: {
+              trigger: testsSection,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 0.6,
+            },
+          }
+        );
+      }
+
+      testsSection.querySelectorAll(".test-item-card").forEach((card) => {
+        const letters = card.querySelectorAll(".effect058-letter");
+        gsap.fromTo(
+          letters,
+          { rotate: -80, opacity: 0 },
+          {
+            rotate: 0,
+            opacity: 1,
+            duration: 0.45,
+            stagger: 0.008,
+            ease: "back.out(1.1)",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none none",
+              once: true,
+            },
+          }
+        );
+      });
+    }
+
+    // ─── Section 2: Chain Comparison ─────────────────────────
+    const chainSection = document.querySelector(".mwg_effect022");
+    if (chainSection) {
+      const theirContainer = chainSection.querySelector(".their-chain-container");
+      const ourContainer = chainSection.querySelector(".our-chain-container");
+
+      const updateSegments = () => {
+        if (theirContainer) {
+          const items = theirContainer.querySelectorAll(".their-chain-item");
+          for (let i = 0; i < items.length - 1; i++) {
+            const topBadge = items[i]?.querySelector(".chain-badge");
+            const botBadge = items[i + 1]?.querySelector(".chain-badge");
+            const seg = theirContainer.querySelector(`.their-segment-${i}`);
+            if (topBadge && botBadge && seg) {
+              const topItem = items[i];
+              const botItem = items[i + 1];
+              const topBadgeBottom = topItem.offsetTop + topBadge.offsetTop + topBadge.offsetHeight;
+              const botBadgeTop = botItem.offsetTop + botBadge.offsetTop;
+              const height = Math.max(0, botBadgeTop - topBadgeBottom - 2);
+              seg.style.top = topBadgeBottom + "px";
+              seg.style.height = height + "px";
+            }
+          }
+        }
+
+        if (ourContainer) {
+          const items = ourContainer.querySelectorAll(".our-chain-item");
+          for (let i = 0; i < items.length - 1; i++) {
+            const topBadge = items[i]?.querySelector(".chain-badge");
+            const botBadge = items[i + 1]?.querySelector(".chain-badge");
+            const seg = ourContainer.querySelector(`.our-segment-${i}`);
+            if (topBadge && botBadge && seg) {
+              const topItem = items[i];
+              const botItem = items[i + 1];
+              const topBadgeBottom = topItem.offsetTop + topBadge.offsetTop + topBadge.offsetHeight;
+              const botBadgeTop = botItem.offsetTop + botBadge.offsetTop;
+              const height = Math.max(0, botBadgeTop - topBadgeBottom - 2);
+              seg.style.top = topBadgeBottom + "px";
+              seg.style.height = height + "px";
+            }
+          }
+        }
+      };
+
+      updateSegments();
+      window.addEventListener("resize", updateSegments);
+      setTimeout(() => {
+        updateSegments();
+        ScrollTrigger.refresh();
+      }, 200);
+
+      const mm = gsap.matchMedia();
+      mm.add("(min-width: 1024px)", () => {
+        const theirItems = chainSection.querySelectorAll(".their-chain-item");
+        const ourItems = chainSection.querySelectorAll(".our-chain-item");
+
+        // Initial state: Step 1 / Step 0 active, steps 2+ dormant with opaque solid dimming
+        theirItems.forEach((item, idx) => {
+          const badge = item.querySelector(".chain-badge");
+          const title = item.querySelector(".chain-title");
+          if (idx === 0) {
+            gsap.set(badge, { filter: "brightness(1) saturate(1)", scale: 1 });
+            gsap.set(title, { yPercent: 0, opacity: 1 });
+          } else {
+            gsap.set(badge, { filter: "brightness(0.35) saturate(0.6)", scale: 0.94 });
+            gsap.set(title, { yPercent: 120, opacity: 0 });
+          }
+        });
+
+        ourItems.forEach((item, idx) => {
+          const badge = item.querySelector(".chain-badge");
+          const title = item.querySelector(".chain-title");
+          if (idx === 0) {
+            gsap.set(badge, { filter: "brightness(1) saturate(1)", scale: 1 });
+            gsap.set(title, { yPercent: 0, opacity: 1 });
+          } else {
+            gsap.set(badge, { filter: "brightness(0.35) saturate(0.6)", scale: 0.94 });
+            gsap.set(title, { yPercent: 120, opacity: 0 });
+          }
+        });
+
+        // Initialize all line segments at 0 height
+        for (let i = 0; i < 5; i++) {
+          gsap.set(`.their-segment-${i}`, { scaleY: 0, transformOrigin: "top center" });
+        }
+        for (let i = 0; i < 3; i++) {
+          gsap.set(`.our-segment-${i}`, { scaleY: 0, transformOrigin: "top center" });
+        }
+
+        // Natural unpinned scroll flow (desktop): flows seamlessly with steps without sticking
+        const pinTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: chainSection,
+            start: "top 60%",
+            end: "bottom 75%",
+            scrub: 0.7,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        // 1. Their Chain: 5 segments connecting 6 steps
+        for (let i = 0; i < 5; i++) {
+          const segStart = i * 2.0;
+          const segDuration = 1.8;
+          const touchTime = segStart + segDuration;
+          const nextBadge = theirItems[i + 1]?.querySelector(".chain-badge");
+          const nextTitle = theirItems[i + 1]?.querySelector(".chain-title");
+
+          // Draw line from bottom of current badge to top of next badge
+          pinTl.to(`.their-segment-${i}`, { scaleY: 1, ease: "none", duration: segDuration }, segStart);
+
+          // On touch: illuminate next badge and reveal text
+          if (nextBadge) {
+            pinTl.to(nextBadge, {
+              filter: "brightness(1) saturate(1)",
+              scale: 1.15,
+              borderColor: "#FBF9D6",
+              boxShadow: "0 0 20px rgba(251, 249, 214, 0.5)",
+              duration: 0.35,
+              ease: "power2.out",
+            }, touchTime);
+            pinTl.to(nextBadge, {
+              scale: 1,
+              boxShadow: "0 0 0px rgba(251, 249, 214, 0)",
+              duration: 0.35,
+              ease: "power2.in",
+            }, touchTime + 0.35);
+          }
+          if (nextTitle) {
+            pinTl.to(nextTitle, {
+              yPercent: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: easeLuxury,
+            }, touchTime);
+          }
+        }
+
+        // 2. Our Chain: 3 segments connecting 4 steps
+        const ourStepDuration = 3.0;
+        const ourStepInterval = 10.0 / 3;
+        for (let i = 0; i < 3; i++) {
+          const segStart = i * ourStepInterval;
+          const touchTime = segStart + ourStepDuration;
+          const nextBadge = ourItems[i + 1]?.querySelector(".chain-badge");
+          const nextTitle = ourItems[i + 1]?.querySelector(".chain-title");
+
+          // Draw line from bottom of current badge to top of next badge
+          pinTl.to(`.our-segment-${i}`, { scaleY: 1, ease: "none", duration: ourStepDuration }, segStart);
+
+          // On touch: illuminate next badge with neon gold glow and reveal text
+          if (nextBadge) {
+            pinTl.to(nextBadge, {
+              filter: "brightness(1) saturate(1)",
+              scale: 1.18,
+              boxShadow: "0 0 24px rgba(248, 254, 3, 0.8)",
+              duration: 0.35,
+              ease: "back.out(1.5)",
+            }, touchTime);
+            pinTl.to(nextBadge, {
+              scale: 1,
+              boxShadow: "0 0 8px rgba(248, 254, 3, 0.3)",
+              duration: 0.35,
+              ease: "power2.in",
+            }, touchTime + 0.35);
+          }
+          if (nextTitle) {
+            pinTl.to(nextTitle, {
+              yPercent: 0,
+              opacity: 1,
+              duration: 0.8,
+              ease: easeLuxury,
+            }, touchTime);
+          }
+        }
+      });
+
+      mm.add("(max-width: 1023px)", () => {
+        // Mobile scrubbed sequence per container with segment isolation
+        const setupMobileChain = (containerSelector, segmentPrefix, itemSelector, count) => {
+          const container = chainSection.querySelector(containerSelector);
+          if (!container) return;
+
+          const items = container.querySelectorAll(itemSelector);
+          items.forEach((item, idx) => {
+            const badge = item.querySelector(".chain-badge");
+            const title = item.querySelector(".chain-title");
+            if (idx === 0) {
+              gsap.set(badge, { filter: "brightness(1) saturate(1)", scale: 1 });
+              gsap.set(title, { yPercent: 0, opacity: 1 });
+            } else {
+              gsap.set(badge, { filter: "brightness(0.35) saturate(0.6)", scale: 0.94 });
+              gsap.set(title, { yPercent: 120, opacity: 0 });
+            }
+          });
+
+          const segCount = count - 1;
+          for (let i = 0; i < segCount; i++) {
+            gsap.set(`.${segmentPrefix}-${i}`, { scaleY: 0, transformOrigin: "top center" });
+          }
+
+          const mobTl = gsap.timeline({
+            scrollTrigger: {
+              trigger: container,
+              start: "top 65%",
+              end: "bottom 75%",
+              scrub: 0.6,
+            },
+          });
+
+          const stepInterval = 10 / segCount;
+          const drawDuration = stepInterval * 0.85;
+
+          for (let i = 0; i < segCount; i++) {
+            const segStart = i * stepInterval;
+            const touchTime = segStart + drawDuration;
+            const nextBadge = items[i + 1]?.querySelector(".chain-badge");
+            const nextTitle = items[i + 1]?.querySelector(".chain-title");
+
+            mobTl.to(`.${segmentPrefix}-${i}`, { scaleY: 1, ease: "none", duration: drawDuration }, segStart);
+
+            if (nextBadge) {
+              mobTl.to(nextBadge, {
+                filter: "brightness(1) saturate(1)",
+                scale: 1.12,
+                duration: 0.35,
+                ease: "power2.out",
+              }, touchTime);
+              mobTl.to(nextBadge, {
+                scale: 1,
+                duration: 0.35,
+                ease: "power2.in",
+              }, touchTime + 0.35);
+            }
+            if (nextTitle) {
+              mobTl.to(nextTitle, {
+                yPercent: 0,
+                opacity: 1,
+                duration: 0.7,
+                ease: easeLuxury,
+              }, touchTime);
+            }
+          }
+        };
+
+        setupMobileChain(".their-chain-container", "their-segment", ".their-chain-item", 6);
+        setupMobileChain(".our-chain-container", "our-segment", ".our-chain-item", 4);
+      });
+    }
+
+    // ─── Section 3: What happens with rejected fruit ─────────
+    const rejectedSection = document.querySelector(".rejected-section-std");
+    if (rejectedSection) {
+      const isMobile = window.innerWidth < 1024;
+      const targetLines = isMobile
+        ? rejectedSection.querySelectorAll(".rejected-fruit-content-mob .rejected-fruit-line-inner")
+        : rejectedSection.querySelectorAll(".rejected-fruit-content-desk .rejected-fruit-line-inner");
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: rejectedSection,
+          start: "top 75%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      });
+
+      tl.fromTo(
+        targetLines,
+        { yPercent: 120, opacity: 0, rotate: 0.001 },
+        { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: easeLuxury, stagger: 0.0825 },
+        0
+      );
+
+      const rejDesc = rejectedSection.querySelectorAll(".rejected-fruit-desc");
+      if (rejDesc.length > 0) {
+        tl.fromTo(
+          rejDesc,
+          { opacity: 0, y: 30 },
+          { opacity: 1, y: 0, duration: 0.9, ease: easeLuxury },
+          0.35
+        );
+      }
+
+      // Exact Section 3 Home: Effect 121 Aperture Clip-Path Shutter & Counter-Parallax
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const imgCard = isMobile
+        ? rejectedSection.querySelector(".rejected-fruit-content-mob .rejected-fruit-img-wrap")
+        : rejectedSection.querySelector(".rejected-fruit-content-desk .rejected-fruit-img-wrap");
+      const imgEl = isMobile
+        ? rejectedSection.querySelector(".rejected-fruit-content-mob .rejected-fruit-img")
+        : rejectedSection.querySelector(".rejected-fruit-content-desk .rejected-fruit-img");
+
+      if (imgCard && imgEl) {
+        const cardTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: rejectedSection,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: isTouchDevice ? 0.4 : 0.6,
+          },
+        });
+
+        // Effect 121: Aperture clip-path shutter on image card
+        const clipObj = { y: 10 };
+        cardTl.fromTo(
+          clipObj,
+          { y: 10 },
+          {
+            y: 0,
+            ease: "none",
+            duration: 3,
+            onUpdate: () => {
+              imgCard.style.clipPath = "inset(" + clipObj.y.toFixed(2) + "% 0px round 14px)";
+            },
+          }
+        )
+        .to(clipObj, {
+          y: 0,
+          ease: "none",
+          duration: 4,
+          onUpdate: () => {
+            imgCard.style.clipPath = "inset(0% 0px round 14px)";
+          },
+        })
+        .to(clipObj, {
+          y: 10,
+          ease: "none",
+          duration: 3,
+          onUpdate: () => {
+            imgCard.style.clipPath = "inset(" + clipObj.y.toFixed(2) + "% 0px round 14px)";
+          },
+        });
+
+        // Smooth vertical counter-parallax on inner image
+        cardTl.fromTo(
+          imgEl,
+          { yPercent: -10 },
+          { yPercent: 10, ease: "none", duration: 10 },
+          0
+        );
+      }
+    }
+
+    // ─── Section 4: The Promise ──────────────────────────────
+    const promiseSection = document.querySelector(".promise-section-std");
+    if (promiseSection) {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: promiseSection,
+          start: "top 80%",
+          toggleActions: "play none none none",
+          once: true,
+        },
+      });
+
+      const placeholder = promiseSection.querySelector(".promise-box-placeholder");
+      if (placeholder) {
+        tl.fromTo(placeholder, { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0);
+      }
+
+      const headline = promiseSection.querySelector(".the-promise-headline");
+      if (headline) {
+        tl.fromTo(headline, { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 0.15);
+      }
+
+      const desc = promiseSection.querySelector(".promise-desc-p");
+      if (desc) {
+        tl.fromTo(desc, { opacity: 0, y: 25 }, { opacity: 1, y: 0, duration: 0.7, ease: "power2.out" }, 0.3);
+      }
+
+      const buttons = promiseSection.querySelector(".promise-btn-wrap");
+      if (buttons) {
+        tl.fromTo(buttons, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.4);
+      }
+
+      // GSAP Corner-Morphing & Rolling Text FX for Standard Paired Buttons
+      const btnLeft = promiseSection.querySelector<HTMLElement>(".std-btn-left");
+      const btnRight = promiseSection.querySelector<HTMLElement>(".std-btn-right");
+
+      if (btnLeft) {
+        const textTop = btnLeft.querySelector<HTMLElement>(".roll-text-top");
+        const textBottom = btnLeft.querySelector<HTMLElement>(".roll-text-bottom");
+
+        gsap.set(btnLeft, {
+          borderTopLeftRadius: "28px",
+          borderBottomLeftRadius: "28px",
+          borderTopRightRadius: "28px",
+          borderBottomRightRadius: "28px",
+        });
+
+        if (textTop && textBottom) {
+          gsap.set(textTop, { yPercent: 0, filter: "blur(0px)" });
+          gsap.set(textBottom, { yPercent: 100, filter: "blur(3.5px)" });
+        }
+
+        btnLeft.addEventListener("mouseenter", () => {
+          // Left button in pair -> Morphs on RIGHT (28px 14px 14px 28px)
+          gsap.to(btnLeft, {
+            borderTopRightRadius: "14px",
+            borderBottomRightRadius: "14px",
+            borderTopLeftRadius: "28px",
+            borderBottomLeftRadius: "28px",
+            duration: 0.45,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+
+          if (textTop && textBottom) {
+            gsap.to(textTop, { yPercent: -100, filter: "blur(3.5px)", duration: 0.42, ease: "power3.out", overwrite: "auto" });
+            gsap.to(textBottom, { yPercent: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", overwrite: "auto" });
+          }
+        });
+
+        btnLeft.addEventListener("mouseleave", () => {
+          gsap.to(btnLeft, {
+            borderTopRightRadius: "28px",
+            borderBottomRightRadius: "28px",
+            borderTopLeftRadius: "28px",
+            borderBottomLeftRadius: "28px",
+            duration: 0.38,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+
+          if (textTop && textBottom) {
+            gsap.to(textTop, { yPercent: 0, filter: "blur(0px)", duration: 0.38, ease: "power3.out", overwrite: "auto" });
+            gsap.to(textBottom, { yPercent: 100, filter: "blur(3.5px)", duration: 0.38, ease: "power3.out", overwrite: "auto" });
+          }
+        });
+      }
+
+      if (btnRight) {
+        const textTop = btnRight.querySelector<HTMLElement>(".roll-text-top");
+        const textBottom = btnRight.querySelector<HTMLElement>(".roll-text-bottom");
+
+        gsap.set(btnRight, {
+          borderTopLeftRadius: "28px",
+          borderBottomLeftRadius: "28px",
+          borderTopRightRadius: "28px",
+          borderBottomRightRadius: "28px",
+        });
+
+        if (textTop && textBottom) {
+          gsap.set(textTop, { yPercent: 0, filter: "blur(0px)" });
+          gsap.set(textBottom, { yPercent: 100, filter: "blur(3.5px)" });
+        }
+
+        btnRight.addEventListener("mouseenter", () => {
+          // Right button in pair -> Morphs on LEFT (14px 28px 28px 14px)
+          gsap.to(btnRight, {
+            borderTopLeftRadius: "14px",
+            borderBottomLeftRadius: "14px",
+            borderTopRightRadius: "28px",
+            borderBottomRightRadius: "28px",
+            duration: 0.45,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+
+          if (textTop && textBottom) {
+            gsap.to(textTop, { yPercent: -100, filter: "blur(3.5px)", duration: 0.42, ease: "power3.out", overwrite: "auto" });
+            gsap.to(textBottom, { yPercent: 0, filter: "blur(0px)", duration: 0.42, ease: "power3.out", overwrite: "auto" });
+          }
+        });
+
+        btnRight.addEventListener("mouseleave", () => {
+          gsap.to(btnRight, {
+            borderTopLeftRadius: "28px",
+            borderBottomLeftRadius: "28px",
+            borderTopRightRadius: "28px",
+            borderBottomRightRadius: "28px",
+            duration: 0.38,
+            ease: "power3.out",
+            overwrite: "auto",
+          });
+
+          if (textTop && textBottom) {
+            gsap.to(textTop, { yPercent: 0, filter: "blur(0px)", duration: 0.38, ease: "power3.out", overwrite: "auto" });
+            gsap.to(textBottom, { yPercent: 100, filter: "blur(3.5px)", duration: 0.38, ease: "power3.out", overwrite: "auto" });
+          }
+        });
+      }
+    }
+  }
+
+  // ─── 3D Dragon Fruit: Native WebGL, Direct Three.js & Scroll Sync ───
+  function initStandardDragonfruit() {
+    const container = document.getElementById("standard-fruit-container");
+    if (!container) return;
+
+    // Clean up any previously attached canvases if re-run
+    container.innerHTML = "";
+
+    const width = container.clientWidth || 360;
+    const height = container.clientHeight || 360;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+    // Camera looking down from Y = 5.3 at (0,0,0) — exact 3D Studio orientation viewing the side profile
+    camera.position.set(0, 5.3, 0);
+    camera.rotation.set(-Math.PI / 2, 0, -Math.PI);
+
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: "high-performance",
+    });
+    renderer.setSize(width, height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.76;
+    renderer.domElement.style.width = "100%";
+    renderer.domElement.style.height = "100%";
+    renderer.domElement.style.display = "block";
+    renderer.domElement.style.opacity = "0";
+    renderer.domElement.style.transition = "opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1)";
+    renderer.domElement.style.pointerEvents = "auto";
+    container.appendChild(renderer.domElement);
+
+    // Studio Lighting matching exact 3D Studio specifications
+    const mainLight = new THREE.DirectionalLight(0xffffff, 1.3);
+    mainLight.position.set(5, 8, 5);
+    scene.add(mainLight);
+
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    fillLight.position.set(-5, -2, -5);
+    scene.add(fillLight);
+
+    const ambientLight = new THREE.AmbientLight(0xffe700, 0.8);
+    scene.add(ambientLight);
+
+    // PMREM & Broadway Hall HDR
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+    const rgbeLoader = new RGBELoader();
+    rgbeLoader.load(
+      "/models/dragonfruit/broadway_hall_1k.hdr",
+      (texture) => {
+        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+        scene.environment = envMap;
+        scene.environmentRotation.y = THREE.MathUtils.degToRad(266);
+        texture.dispose();
+      },
+      undefined,
+      (err) => console.warn("HDR load notice:", err)
+    );
+
+    // Optimized WebP Textures
+    const textureLoader = new THREE.TextureLoader();
+    const baseColorTex = textureLoader.load("/models/dragonfruit/dragonfruit_baseColor_opt.webp");
+    baseColorTex.colorSpace = THREE.SRGBColorSpace;
+    baseColorTex.flipY = false;
+
+    const normalTex = textureLoader.load("/models/dragonfruit/dragonfruit_normal_opt.webp");
+    normalTex.colorSpace = THREE.NoColorSpace;
+    normalTex.flipY = false;
+
+    const roughnessTex = textureLoader.load("/models/dragonfruit/dragonfruit_roughness_opt.webp");
+    roughnessTex.colorSpace = THREE.NoColorSpace;
+    roughnessTex.flipY = false;
+
+    const metalnessTex = textureLoader.load("/models/dragonfruit/dragonfruit_metalness_opt.webp");
+    metalnessTex.colorSpace = THREE.NoColorSpace;
+    metalnessTex.flipY = false;
+
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xffffff,
+      map: baseColorTex,
+      normalMap: normalTex,
+      normalScale: new THREE.Vector2(0.42, 0.42),
+      roughness: 0.71,
+      roughnessMap: roughnessTex,
+      metalness: 0.08,
+      metalnessMap: metalnessTex,
+      envMapIntensity: 5.0,
+    });
+
+    const outerGroup = new THREE.Group();
+    // Layout tilt of 18.813° matching original site
+    outerGroup.rotation.z = THREE.MathUtils.degToRad(18.813);
+
+    const innerGroup = new THREE.Group();
+    outerGroup.add(innerGroup);
+    scene.add(outerGroup);
+
+    // Base Euler angles from 3D studio controls
+    const BASE_ROT_X = THREE.MathUtils.degToRad(276.7);
+    const BASE_ROT_Y = THREE.MathUtils.degToRad(167.4);
+    const BASE_ROT_Z = THREE.MathUtils.degToRad(175.1);
+
+    innerGroup.rotation.set(BASE_ROT_X, BASE_ROT_Y, BASE_ROT_Z);
+
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load("/models/dragonfruit/dragonfruit_opt.glb", (gltf) => {
+      const object = gltf.scene;
+      object.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const mesh = child as THREE.Mesh;
+          mesh.material = material;
+          mesh.castShadow = true;
+          mesh.receiveShadow = true;
+        }
+      });
+
+      const box = new THREE.Box3().setFromObject(object);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      // 50% bigger scale (3.6 vs 2.4)
+      const scale = 3.6 / maxDim;
+
+      object.scale.setScalar(scale);
+      object.position.sub(center.multiplyScalar(scale));
+      innerGroup.add(object);
+
+      innerGroup.updateMatrixWorld(true);
+
+      updateLayout();
+
+      // Smooth direct reveal — zero glitch, zero placeholder
+      renderer.domElement.style.opacity = "1";
+    });
+
+    function updateLayout() {
+      const w = container.clientWidth || 360;
+      const h = container.clientHeight || 360;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+    }
+
+    const ro = new ResizeObserver(updateLayout);
+    ro.observe(container);
+
+    // Scroll orchestration & multi-axis floating animation
+    let isInView = true;
+    let animId = 0;
+    let time = 0;
+    let scrollRotY = 0;
+    let targetScrollRotY = 0;
+    let idleRotY = 0;
+
+    const heroSec = document.querySelector(".hero-section-std");
+    if (heroSec) {
+      ScrollTrigger.create({
+        trigger: heroSec,
+        start: "top top",
+        end: "bottom top",
+        scrub: true,
+        onUpdate: (self) => {
+          targetScrollRotY = self.progress * Math.PI * 4;
+        },
+      });
+    }
+
+    function animate() {
+      if (!isInView || document.hidden) {
+        animId = 0;
+        return;
+      }
+      animId = requestAnimationFrame(animate);
+
+      time += 0.018;
+
+      // Silky weighted momentum for scroll-driven spins
+      scrollRotY += (targetScrollRotY - scrollRotY) * 0.12;
+
+      // Gentle continuous idle spin
+      idleRotY += 0.003;
+
+      // Multi-axis floating motion:
+      // In this top-down camera projection (looking down from Y=5.3),
+      // World Z is the vertical screen axis (UP/DOWN floating bobbing)
+      const floatZ = Math.sin(time * 1.6) * 0.12;
+      // World X is the horizontal screen axis (subtle buoyant lateral drift)
+      const floatX = Math.cos(time * 1.1) * 0.04;
+      // World Y is depth breathing
+      const floatY = Math.sin(time * 1.3) * 0.03;
+
+      innerGroup.position.set(floatX, floatY, floatZ);
+
+      // Organic tilt sway + idle spin + scroll-driven spins
+      innerGroup.rotation.x = BASE_ROT_X + Math.sin(time * 0.9) * 0.045;
+      innerGroup.rotation.y = BASE_ROT_Y + idleRotY + scrollRotY;
+      innerGroup.rotation.z = BASE_ROT_Z + Math.cos(time * 0.9) * 0.035;
+
+      renderer.render(scene, camera);
+    }
+
+    function startAnimate() {
+      if (!animId) animId = requestAnimationFrame(animate);
+    }
+
+    function stopAnimate() {
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = 0;
+      }
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          isInView = e.isIntersecting;
+          if (isInView && !document.hidden) startAnimate();
+          else stopAnimate();
+        });
+      },
+      { threshold: 0.05 }
+    );
+
+    if (heroSec) observer.observe(heroSec);
+    startAnimate();
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initStandardPage);
+  } else {
+    initStandardPage();
+  }
+  document.addEventListener("astro:page-load", initStandardPage);
+</script>

@@ -1,0 +1,442 @@
+/* ─── Exact Fonts from Figma ────────────────────────────── */
+@font-face {
+  font-family: 'VVDS_Fifties';
+  src: url('/fonts/VVDS-Fifties-Cond-SBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'VVDS Fifties';
+  src: url('/fonts/VVDS-Fifties-Cond-SBold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Suisse Intl Fonts ───────────────────────────────── */
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Map 'Suisse Intl' to Suisse Intl so all legacy and inline styles render Suisse Intl */
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-Regular.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Suisse Intl';
+  src: url('/fonts/SuisseIntl-SemiBold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─── Tailwind ───────────────────────────────────────── */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Lenis smooth scroll ────────────────────────────── */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Ensure iframes never swallow scroll gestures while page is scrolling */
+body.is-scrolling iframe,
+html.lenis-scrolling iframe {
+  pointer-events: none !important;
+}
+
+/* ─── Base Styles & Custom Utilities ──────────────────── */
+:root {
+  --Color-Creme: #fbf9d6;
+  --Color-Yellow: #f8fe03;
+  --Color-Yelliow: #f8fe03;
+  --Color-Grey-Light: #e1ddec;
+  --Color-Shadow: #1e1e1e;
+  --Color-Dark: #131313;
+  --Color-Fushia: #fc558d;
+  --Color-pink-Light: #ff9cbe;
+  --Font-Display: 'VVDS_Fifties', sans-serif;
+  --Font-Body: 'Suisse Intl', sans-serif;
+  --font-condensed: 'VVDS_Fifties', sans-serif;
+  --Yellow-Gradient: linear-gradient(180deg, #f8fe03 0%, #e1ddec 100%);
+  --blue-gradient: linear-gradient(180deg, #3ed5ff 0%, #fff 134.07%);
+  --maroon-gradient: linear-gradient(180deg, #5b0000 0%, #991f48 100%);
+  --pink-linear: linear-gradient(180deg, #fbf9d6 0%, #fc558d 100%);
+  --red-2: linear-gradient(180deg, #5b0000 0%, #fc558d 100%);
+}
+
+.font-display, .font-condensed {
+  font-family: var(--Font-Display);
+}
+.font-body, .font-body {
+  font-family: var(--Font-Body);
+}
+.bg-yellow-gradient {
+  background: var(--Yellow-Gradient);
+}
+
+.FruitTiltWheel-module__VaPV9W__mwg_effect106 {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+.FruitTiltWheel-module__VaPV9W__container {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.FruitTiltWheel-module__VaPV9W__medias {
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  position: relative;
+}
+.FruitTiltWheel-module__VaPV9W__media {
+  object-fit: contain;
+  will-change: transform;
+  width: 184.8px;
+  height: 184.8px;
+  transform-style: preserve-3d;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+@media (min-width: 771px) {
+  .FruitTiltWheel-module__VaPV9W__media {
+    width: 12vw;
+    height: 12vw;
+    top: calc(50% - 6vw);
+    left: calc(50% - 6vw);
+  }
+}
+.page-module__tuSBZa__pageContainer {
+  background-color: #def4fc;
+  background-image: url("/png/Frame 1686553416.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+}
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    background-color: #131313;
+    color: #fbf9d6;
+    transition: background-color 0.25s ease-out;
+  }
+
+  body {
+    font-family: 'Suisse Intl', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: #f8fe03;
+    color: #131313;
+  }
+}
+
+/* ─── Narrative Body Typography Hierarchy ───────────────────
+   - Under 960px: 14px / 17px / -0.4px / 600 SemiBold
+   - Standard Desktop (960px - 2199px): 16px / 20px / -0.4px / 600 SemiBold
+   - Large Desktop (2200px - 2999px): 17px (+1px) / 21px / -0.4px / 600 SemiBold
+   - 4K Ultra Desktop (>= 3000px): 18px (+1px more) / 22px / -0.4px / 600 SemiBold
+───────────────────────────────────────────────────────────── */
+@media (max-width: 959px) {
+  .hero-copy,
+  #s2-copy,
+  .s5-mobile-promise,
+  .s6-bottom-col-mobile p,
+  .s7b-section .md\:hidden p,
+  .s7b-text-right p,
+  #section-9 p.font-body,
+  .the-list-para,
+  .gift-subtext {
+    font-family: 'Suisse Intl', sans-serif !important;
+    font-size: 14px !important;
+    line-height: 17px !important;
+    letter-spacing: -0.4px !important;
+    font-weight: 600 !important;
+  }
+}
+
+@media (min-width: 960px) {
+  .hero-copy.hidden.lg\:block,
+  #s2-copy,
+  .s5-promise-copy,
+  .s6-bottom-row p,
+  .s7b-text-right p,
+  #section-9 p.font-body,
+  .the-list-para,
+  .gift-subtext {
+    font-family: 'Suisse Intl', sans-serif !important;
+    font-size: 16px !important;
+    line-height: 20px !important;
+    letter-spacing: -0.4px !important;
+    font-weight: 600 !important;
+  }
+}
+
+@media (min-width: 2200px) {
+  .hero-copy.hidden.lg\:block,
+  #s2-copy,
+  .s5-promise-copy,
+  .s6-bottom-row p,
+  .s7b-text-right p,
+  #section-9 p.font-body,
+  .the-list-para,
+  .gift-subtext {
+    font-size: 17px !important;
+    line-height: 21px !important;
+    letter-spacing: -0.4px !important;
+    font-weight: 600 !important;
+  }
+}
+
+@media (min-width: 3000px) {
+  .hero-copy.hidden.lg\:block,
+  #s2-copy,
+  .s5-promise-copy,
+  .s6-bottom-row p,
+  .s7b-text-right p,
+  #section-9 p.font-body,
+  .the-list-para,
+  .gift-subtext {
+    font-size: 18px !important;
+    line-height: 22px !important;
+    letter-spacing: -0.4px !important;
+    font-weight: 600 !important;
+  }
+}
+
+/* ─── Responsive Curves System (Figma Node 1449:268 · 2053:2600 & 2053:2518) ─── */
+/* Signature Side Curve: 3 subtle anchor corners + 1 exaggerated bottom-right scoop */
+.curve-side {
+  border-radius: 8px 8px 36px 8px;
+  overflow: hidden;
+}
+@media (min-width: 640px) {
+  .curve-side {
+    border-radius: 10px 10px 48px 10px;
+  }
+}
+@media (min-width: 960px) {
+  .curve-side {
+    border-radius: 12px 12px 56px 12px;
+  }
+}
+@media (min-width: 2200px) {
+  .curve-side {
+    border-radius: 14px 14px 68px 14px;
+  }
+}
+@media (min-width: 3000px) {
+  .curve-side {
+    border-radius: 16px 16px 80px 16px;
+  }
+}
+
+/* Symmetrical Straight Curve: Uniform corners */
+.curve-straight {
+  border-radius: 8px;
+  overflow: hidden;
+}
+@media (min-width: 640px) {
+  .curve-straight {
+    border-radius: 10px;
+  }
+}
+@media (min-width: 960px) {
+  .curve-straight {
+    border-radius: 12px;
+  }
+}
+@media (min-width: 2200px) {
+  .curve-straight {
+    border-radius: 16px;
+  }
+}
+@media (min-width: 3000px) {
+  .curve-straight {
+    border-radius: 20px;
+  }
+}
+
+/* Symmetrical Button Curve: Responsive uniform corners with 60% squircle smoothing */
+.curve-btn {
+  border-radius: 4px;
+  overflow: hidden;
+}
+@media (min-width: 640px) {
+  .curve-btn {
+    border-radius: 6px;
+  }
+}
+@media (min-width: 960px) {
+  .curve-btn {
+    border-radius: 8px;
+  }
+}
+@media (min-width: 2200px) {
+  .curve-btn {
+    border-radius: 10px;
+  }
+}
+@media (min-width: 3000px) {
+  .curve-btn {
+    border-radius: 12px;
+  }
+}
+
+/* ─── Universal 3D Cube Flip Button System ─────────────────── */
+.cube-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  user-select: none;
+}
+
+.cube-btn:active {
+  transform: scale(0.97);
+}
+
+.cube-btn .flip-inner {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transform-origin: 50% 50% -25px;
+  transition: transform 0.5s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.cube-btn:hover .flip-inner,
+.cube-btn:focus-visible .flip-inner,
+.group:hover .flip-inner {
+  transform: rotateX(90deg) !important;
+}
+
+.cube-face-front {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateZ(0px);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.cube-face-bottom {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-origin: top;
+  transform: translateY(100%) rotateX(-90deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* ─── Hide iOS Safari WebKit native play button overlay ─── */
+video::-webkit-media-controls-start-playback-button,
+video::-webkit-media-controls,
+video::-webkit-media-controls-play-button {
+  display: none !important;
+  -webkit-appearance: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+

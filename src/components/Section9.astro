@@ -1,0 +1,613 @@
+---
+// src/components/Section9.astro
+// Section 9 · WHAT WE REFUSE (Smooth Spun 3D Mango with Decal Placement, Vertical Gradient & Ambient Sky Video)
+---
+
+<section
+  id="section-9"
+  class="relative w-full h-screen min-h-[640px] overflow-hidden bg-dark select-none"
+  aria-label="What We Refuse"
+>
+  <!-- LAYER 1 (BACK): Ambient Clouds Video Layer (Plays normally in background) -->
+  <div class="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+    <video
+      id="s9-video"
+      poster="/png/sky-bg.jpg"
+      class="w-full h-full object-cover object-center pointer-events-none"
+      autoplay
+      loop
+      muted
+      playsinline
+      webkit-playsinline
+      preload="auto"
+    >
+      <source src="/videos/sky_background.mp4" type="video/mp4" />
+      <source src="/videos/sky_background.webm" type="video/webm" />
+    </video>
+  </div>
+
+  <!-- LAYER 2 (MIDDLE): User-Supplied Vertical Gradient Layer (Stretched vertically across full section) -->
+  <div class="absolute inset-0 w-full h-full z-10 pointer-events-none overflow-hidden">
+    <img
+      src="/images/section9_gradient_v2.webp"
+      alt=""
+      class="w-full h-full object-fill pointer-events-none mix-blend-multiply opacity-45"
+    />
+  </div>
+
+  <!-- Smooth non-linear cinematic feathered scrim to blend seamlessly with dark section below -->
+  <div
+    class="s9-scrim-bottom absolute inset-x-0 bottom-0 h-[120px] sm:h-[150px] 2xl:h-[180px] z-10 pointer-events-none"
+    style="background: linear-gradient(to top, #131313 0%, rgba(19, 19, 19, 0.98) 12%, rgba(19, 19, 19, 0.93) 24%, rgba(19, 19, 19, 0.83) 35%, rgba(19, 19, 19, 0.69) 46%, rgba(19, 19, 19, 0.52) 56%, rgba(19, 19, 19, 0.35) 66%, rgba(19, 19, 19, 0.20) 75%, rgba(19, 19, 19, 0.09) 84%, rgba(19, 19, 19, 0.02) 93%, rgba(19, 19, 19, 0) 100%);"
+  ></div>
+
+  <!-- LAYER 3 (FRONT): 3D Mango WebGL Canvas (Clickable to place sticker, smooth spinning & scroll-aligned) -->
+  <div
+    id="s9-three-container"
+    class="absolute inset-0 w-full h-full z-20 cursor-pointer pointer-events-auto touch-pan-y"
+  ></div>
+
+  <!-- LAYER 3 (FRONT): Text Content (Strict px-[16px] and py-[24px] margins) -->
+  <div
+    class="absolute inset-0 w-full h-full z-30 pointer-events-none flex flex-col justify-between px-[16px] pt-[52px] pb-[32px] sm:pt-[58px] sm:pb-[40px] lg:py-[24px]"
+  >
+    <!-- Top-Left Headline (+20% larger size & +0.60% increased letter-spacing) -->
+    <div class="w-full max-w-[clamp(720px,78vw,2200px)]">
+      <h2
+        class="s9-headline font-display font-semibold uppercase text-creme text-[clamp(74px,27vw,120px)] min-[650px]:text-[clamp(110px,12.72vw,408px)] leading-[calc(90/115)] min-[650px]:leading-[0.82] tracking-[-0.004em] flex flex-col items-start select-none"
+      >
+        <!-- Line 1: WHAT WE -->
+        <div class="s9-mask overflow-hidden py-1">
+          <div class="s9-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="WHAT WE">
+            <span class="s9-char inline-block">W</span>
+            <span class="s9-char inline-block">H</span>
+            <span class="s9-char inline-block">A</span>
+            <span class="s9-char inline-block">T</span>
+            <span class="s9-char inline-block">&nbsp;</span>
+            <span class="s9-char inline-block">W</span>
+            <span class="s9-char inline-block">E</span>
+          </div>
+        </div>
+        <!-- Line 2: REFUSE -->
+        <div class="s9-mask overflow-hidden py-1">
+          <div class="s9-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="REFUSE">
+            <span class="s9-char inline-block">R</span>
+            <span class="s9-char inline-block">E</span>
+            <span class="s9-char inline-block">F</span>
+            <span class="s9-char inline-block">U</span>
+            <span class="s9-char inline-block">S</span>
+            <span class="s9-char inline-block">E</span>
+          </div>
+        </div>
+      </h2>
+    </div>
+
+    <!-- Bottom-Left Narrative (No helper badge text) -->
+    <div class="w-full flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <div class="w-full max-w-[440px]">
+        <p
+          class="font-body font-semibold text-[#FBF9D6] text-[14px] lg:text-[16px] leading-[17px] lg:leading-[20px] tracking-[-0.4px]"
+        >
+          This mango was flawless to look at. It tested 11°Bx; our floor is 14. It never left the table. We photograph what we refuse it’s the most honest advertising we have.”
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  import { CustomEase } from 'gsap/CustomEase';
+  import type * as ThreeTypes from 'three';
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase);
+
+  async function initSection9() {
+    const [THREE, { GLTFLoader }, { RGBELoader }, { DecalGeometry }] = await Promise.all([
+      import('three'),
+      import('three/examples/jsm/loaders/GLTFLoader.js'),
+      import('three/examples/jsm/loaders/RGBELoader.js'),
+      import('three/examples/jsm/geometries/DecalGeometry.js'),
+    ]);
+    const section = document.getElementById('section-9');
+    const container = document.getElementById('s9-three-container');
+    if (!section || !container) return;
+
+    const backgroundVideo = document.getElementById('s9-video') as HTMLVideoElement | null;
+    if (backgroundVideo) {
+      backgroundVideo.muted = true;
+      backgroundVideo.defaultMuted = true;
+      backgroundVideo.playsInline = true;
+
+      const tryPlaySky = () => {
+        if (backgroundVideo.paused) {
+          backgroundVideo.play().catch(() => {});
+        }
+      };
+      tryPlaySky();
+
+      const unlockSky = () => {
+        tryPlaySky();
+        window.removeEventListener('touchstart', unlockSky);
+        window.removeEventListener('scroll', unlockSky);
+      };
+      window.addEventListener('touchstart', unlockSky, { passive: true });
+      window.addEventListener('scroll', unlockSky, { passive: true });
+
+      const videoObserver = new IntersectionObserver((entries) => {
+        const entry = entries[0];
+        if (!entry) return;
+        if (entry.isIntersecting && !document.hidden) {
+          tryPlaySky();
+        } else {
+          backgroundVideo.pause();
+        }
+      }, { rootMargin: '100% 0px' });
+      videoObserver.observe(section);
+      document.addEventListener('visibilitychange', () => {
+        if (document.hidden) backgroundVideo.pause();
+        else {
+          const rect = section.getBoundingClientRect();
+          if (rect.bottom > -window.innerHeight && rect.top < window.innerHeight * 2) {
+            tryPlaySky();
+          }
+        }
+      });
+    }
+
+    // Headline Luxury Ripple Animation matching Section 1 Standard
+    let luxuryEase: gsap.EaseFunction;
+    try {
+      luxuryEase = CustomEase.create('luxuryS9Ripple', '0.16, 1, 0.3, 1');
+    } catch (e) {
+      luxuryEase = gsap.parseEase('power3.out');
+    }
+
+    const easeLuxury = 'cubic-bezier(0.31, 0.75, 0.22, 1)';
+
+    const lines = Array.from(section.querySelectorAll<HTMLElement>('.s9-roll-line'))
+      .filter((line) => line.getClientRects().length > 0);
+
+    gsap.set(lines, {
+      yPercent: 140,
+      opacity: 0,
+      rotate: 0.001,
+    });
+
+    const headlineTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: 'top 80%',
+        once: true,
+      },
+    });
+
+    headlineTl.to(lines, {
+      yPercent: 0,
+      opacity: 1,
+      rotate: 0,
+      duration: 1.1,
+      ease: easeLuxury,
+      stagger: 0.0825,
+    });
+
+    // -------------------------------------------------------------
+    // 1. THREE.JS SCENE & PERSPECTIVE CAMERA SETUP
+    // -------------------------------------------------------------
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      45,
+      container.clientWidth / container.clientHeight,
+      0.1,
+      1000
+    );
+    // Camera zoom 5.3 exactly matching 3D Studio
+    camera.position.set(0, 0, 5.3);
+
+    const renderer = new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true,
+      powerPreference: 'high-performance',
+    });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.76;
+    renderer.domElement.style.width = '100%';
+    renderer.domElement.style.height = '100%';
+    renderer.domElement.style.display = 'block';
+    renderer.domElement.style.pointerEvents = 'auto';
+    container.appendChild(renderer.domElement);
+
+    // Studio Lighting matching 3D studio controls
+    const mainLight = new THREE.DirectionalLight(0xffffff, 1.3);
+    mainLight.position.set(5, 8, 5);
+    scene.add(mainLight);
+
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    fillLight.position.set(-5, -2, -5);
+    scene.add(fillLight);
+
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+
+    // PMREM & HDR Environment (Studio 3 Warm)
+    const pmremGenerator = new THREE.PMREMGenerator(renderer);
+    pmremGenerator.compileEquirectangularShader();
+
+    const rgbeLoader = new RGBELoader();
+    rgbeLoader.load(
+      '/models/studio_small_09_1k.hdr',
+      (texture) => {
+        const envMap = pmremGenerator.fromEquirectangular(texture).texture;
+        scene.environment = envMap;
+        scene.environmentRotation.y = THREE.MathUtils.degToRad(266);
+        texture.dispose();
+        renderScene();
+      },
+      undefined,
+      (err) => console.warn('HDR load error:', err)
+    );
+
+    // -------------------------------------------------------------
+    // 2. TEXTURES & MASTER PBR MATERIAL
+    // -------------------------------------------------------------
+    const textureLoader = new THREE.TextureLoader();
+    let stickerTexture: ThreeTypes.Texture | null = null;
+    textureLoader.load('/models/sticker_rejected.png', (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      tex.wrapS = THREE.RepeatWrapping;
+      tex.repeat.x = -1;
+      tex.offset.x = 1;
+      tex.needsUpdate = true;
+      stickerTexture = tex;
+      tryPlaceInitialSticker();
+    });
+
+    const baseColorTex = textureLoader.load('/models/AppleMango_baseColor_opt.webp', () => renderScene());
+    baseColorTex.colorSpace = THREE.SRGBColorSpace;
+    baseColorTex.flipY = false;
+
+    const normalTex = textureLoader.load('/models/AppleMango_normal_opt.webp', () => renderScene());
+    normalTex.colorSpace = THREE.NoColorSpace;
+    normalTex.flipY = false;
+
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xfeffa8,
+      roughness: 0.49,
+      metalness: 0.22,
+      map: baseColorTex,
+      normalMap: normalTex,
+      normalScale: new THREE.Vector2(2, 2),
+      envMapIntensity: 5.0,
+    });
+
+    // -------------------------------------------------------------
+    // 3. MODEL LOADING & SIZING
+    // -------------------------------------------------------------
+    const outerGroup = new THREE.Group(); // Handles viewport layout positioning
+    const innerGroup = new THREE.Group(); // Handles rotation & floating motion
+    outerGroup.add(innerGroup);
+    scene.add(outerGroup);
+
+    let targetMesh: ThreeTypes.Mesh | null = null;
+    let initialStickerPlaced = false;
+    const decals: ThreeTypes.Mesh[] = [];
+
+    // Exact base Euler angles from 3D studio controls
+    const BASE_ROT_X = THREE.MathUtils.degToRad(8.8);
+    const BASE_ROT_Y = THREE.MathUtils.degToRad(62.2);
+    const BASE_ROT_Z = THREE.MathUtils.degToRad(6.6);
+
+    innerGroup.rotation.set(BASE_ROT_X, BASE_ROT_Y, BASE_ROT_Z);
+
+    const renderScene = () => {
+      renderer.render(scene, camera);
+    };
+
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.load('/models/mango7_opt.glb', (gltf) => {
+      const object = gltf.scene;
+
+      object.traverse((child) => {
+        if ((child as THREE.Mesh).isMesh) {
+          const mesh = child as ThreeTypes.Mesh;
+          mesh.material = material;
+          targetMesh = mesh;
+        }
+      });
+
+      // Fit and center model
+      const box = new THREE.Box3().setFromObject(object);
+      const size = box.getSize(new THREE.Vector3());
+      const center = box.getCenter(new THREE.Vector3());
+      const maxDim = Math.max(size.x, size.y, size.z) || 1;
+      const scale = 2.2 / maxDim;
+
+      object.scale.setScalar(scale);
+      object.position.sub(center.multiplyScalar(scale));
+      innerGroup.add(object);
+
+      updateModelLayout();
+      tryPlaceInitialSticker();
+      renderScene();
+    });
+
+    // -------------------------------------------------------------
+    // 4. RESPONSIVE MODEL POSITIONING (Web 77% right, Mobile center)
+    // -------------------------------------------------------------
+    function updateModelLayout() {
+      const w = container.clientWidth || 1000;
+      const h = container.clientHeight || 1000;
+      const aspect = w / h;
+
+      const vFOV = THREE.MathUtils.degToRad(camera.fov);
+      const vHeight = 2 * Math.tan(vFOV / 2) * camera.position.z;
+      const vWidth = vHeight * aspect;
+
+      if (w < 768) {
+        outerGroup.position.set(0, -0.05, 0);
+        outerGroup.scale.setScalar(0.9);
+      } else if (w < 1200) {
+        outerGroup.position.set(vWidth * 0.23, -0.05, 0);
+        outerGroup.scale.setScalar(0.96);
+      } else if (w >= 2560) {
+        outerGroup.position.set(vWidth * 0.26, -0.05, 0);
+        outerGroup.scale.setScalar(1.35);
+      } else {
+        outerGroup.position.set(vWidth * 0.26, -0.05, 0);
+        outerGroup.scale.setScalar(1.05);
+      }
+    }
+
+    // -------------------------------------------------------------
+    // 5. STICKER PLACEMENT & CLICK INTERACTION
+    // -------------------------------------------------------------
+    function placeSticker(
+      position: ThreeTypes.Vector3,
+      normal: ThreeTypes.Vector3,
+      mesh: ThreeTypes.Mesh,
+      rotationRad: number = THREE.MathUtils.degToRad(148)
+    ) {
+      if (!stickerTexture) return;
+
+      const dummy = new THREE.Object3D();
+      dummy.position.copy(position);
+
+      const n = normal.clone();
+      n.transformDirection(mesh.matrixWorld);
+
+      dummy.lookAt(dummy.position.clone().add(n));
+      dummy.rotateZ(rotationRad);
+
+      const size = new THREE.Vector3(0.7, 0.7, 0.7);
+
+      mesh.updateWorldMatrix(true, false);
+      const decalGeom = new DecalGeometry(mesh, position, dummy.rotation, size);
+
+      const inverseMatrix = new THREE.Matrix4().copy(mesh.matrixWorld).invert();
+      decalGeom.applyMatrix4(inverseMatrix);
+
+      const decalMat = new THREE.MeshStandardMaterial({
+        map: stickerTexture,
+        transparent: true,
+        depthTest: true,
+        depthWrite: false,
+        polygonOffset: true,
+        polygonOffsetFactor: -4,
+        polygonOffsetUnits: -4,
+        roughness: 0.49,
+        metalness: 0.22,
+      });
+
+      const decalMesh = new THREE.Mesh(decalGeom, decalMat);
+      mesh.add(decalMesh);
+      decals.push(decalMesh);
+      renderScene();
+    }
+
+    function tryPlaceInitialSticker() {
+      if (initialStickerPlaced || !targetMesh || !stickerTexture) return;
+      initialStickerPlaced = true;
+
+      const savedRotY = innerGroup.rotation.y;
+      innerGroup.rotation.set(BASE_ROT_X, BASE_ROT_Y, BASE_ROT_Z);
+      innerGroup.updateMatrixWorld(true);
+      targetMesh.updateMatrixWorld(true);
+
+      const ray = new THREE.Raycaster();
+      ray.set(new THREE.Vector3(0, 0, 5), new THREE.Vector3(0, 0, -1));
+
+      const intersects = ray.intersectObject(targetMesh, true);
+      if (intersects.length > 0) {
+        const hit = intersects[0];
+        placeSticker(hit.point, hit.face!.normal, targetMesh, THREE.MathUtils.degToRad(148));
+      }
+
+      innerGroup.rotation.y = savedRotY;
+      renderScene();
+    }
+
+    // Pointer Interaction: Click anywhere on mango to place sticker
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    const handleCanvasClick = (e: MouseEvent) => {
+      if (!targetMesh || !stickerTexture) return;
+
+      const rect = renderer.domElement.getBoundingClientRect();
+      mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+
+      camera.updateMatrixWorld(true);
+      targetMesh.updateMatrixWorld(true);
+
+      raycaster.setFromCamera(mouse, camera);
+      const intersects = raycaster.intersectObject(targetMesh, true);
+
+      if (intersects.length > 0) {
+        const hit = intersects.find((i) => i.object === targetMesh);
+        if (hit && hit.face) {
+          const randomRot = THREE.MathUtils.degToRad(148 + (Math.random() - 0.5) * 40);
+          placeSticker(hit.point, hit.face.normal, targetMesh, randomRot);
+        }
+      }
+    };
+
+    renderer.domElement.addEventListener('click', handleCanvasClick);
+
+    // -------------------------------------------------------------
+    // 6. SMOOTH 2-SPIN SCROLL ORCHESTRATION (SCROLL-ALIGNED)
+    // -------------------------------------------------------------
+    let isS9InView = false;
+    let animId = 0;
+    let time = 0;
+    let scrollRotY = 0;
+    let targetScrollRotY = 0;
+
+    // Smooth render loop: gentle floating sway while scroll controls exactly 2 rotations
+    function animate() {
+      if (!isS9InView || document.hidden) {
+        animId = 0;
+        return;
+      }
+      animId = requestAnimationFrame(animate);
+
+      time += 0.015;
+
+      // Smooth interpolation for scroll rotation (silky weighted momentum)
+      scrollRotY += (targetScrollRotY - scrollRotY) * 0.12;
+
+      // Gentle floating sway (feels organic and alive without spinning independently)
+      const floatY = Math.sin(time * 1.5) * 0.035;
+      innerGroup.position.y = floatY;
+
+      // Base orientation + subtle live sway + exactly 2 scroll-driven spins
+      innerGroup.rotation.y = BASE_ROT_Y + scrollRotY;
+      innerGroup.rotation.x = BASE_ROT_X + Math.sin(time * 0.8) * 0.03;
+      innerGroup.rotation.z = BASE_ROT_Z + Math.cos(time * 0.8) * 0.02;
+
+      renderScene();
+    }
+
+    const startAnimate = () => {
+      if (!animId) {
+        animId = requestAnimationFrame(animate);
+      }
+    };
+
+    const stopAnimate = () => {
+      if (animId) {
+        cancelAnimationFrame(animId);
+        animId = 0;
+      }
+    };
+
+    // IntersectionObserver: Only render when Section 9 is in/near viewport
+    const s9Observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          isS9InView = e.isIntersecting;
+          if (isS9InView && !document.hidden) {
+            startAnimate();
+          } else {
+            stopAnimate();
+          }
+        });
+      },
+      { rootMargin: '250px 0px' }
+    );
+    s9Observer.observe(section);
+
+    // ScrollTrigger: Smooth scroll-controlled spin across the viewport (Section 7 Banana logic)
+    // Flows through naturally with NO pinning/sticking
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+    ScrollTrigger.create({
+      trigger: section,
+      start: 'top bottom',
+      end: 'bottom top',
+      scrub: isTouchDevice ? 0.6 : 0.8,
+      onUpdate: (self) => {
+        // Continuous scroll-controlled rotation as section moves through the viewport
+        targetScrollRotY = self.progress * (Math.PI * 4);
+      },
+    });
+
+    // -------------------------------------------------------------
+    // 7. RESIZE & PAGE VISIBILITY HANDLER
+    // -------------------------------------------------------------
+    const handleResize = () => {
+      const w = container.clientWidth;
+      const h = container.clientHeight;
+      if (!w || !h) return;
+      camera.aspect = w / h;
+      camera.updateProjectionMatrix();
+      renderer.setSize(w, h);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      updateModelLayout();
+      renderScene();
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopAnimate();
+      } else if (isS9InView) {
+        startAnimate();
+      }
+    });
+
+    return () => {
+      stopAnimate();
+      window.removeEventListener('resize', handleResize);
+      renderer.domElement.removeEventListener('click', handleCanvasClick);
+      renderer.dispose();
+      pmremGenerator.dispose();
+      material.dispose();
+      baseColorTex.dispose();
+      normalTex.dispose();
+      if (stickerTexture) stickerTexture.dispose();
+      decals.forEach((d) => {
+        d.geometry.dispose();
+        if (Array.isArray(d.material)) d.material.forEach((m) => m.dispose());
+        else d.material.dispose();
+      });
+    };
+  }
+
+  function initSection9NearViewport() {
+    const section = document.getElementById('section-9');
+    if (!section) return;
+    let initialized = false;
+    const observer = new IntersectionObserver((entries) => {
+      if (initialized || !entries.some((entry) => entry.isIntersecting)) return;
+      initialized = true;
+      observer.disconnect();
+      void initSection9().then(() => {
+        // Safe refresh: do not cause layout jumps while user is actively scrolling
+        let scrollTimer: number | null = null
+        const onScrollCheck = () => {
+          if (scrollTimer) window.clearTimeout(scrollTimer)
+          scrollTimer = window.setTimeout(() => {
+            window.removeEventListener('scroll', onScrollCheck)
+            ScrollTrigger.refresh()
+          }, 180)
+        }
+        scrollTimer = window.setTimeout(() => {
+          window.removeEventListener('scroll', onScrollCheck)
+          ScrollTrigger.refresh()
+        }, 180)
+        window.addEventListener('scroll', onScrollCheck, { passive: true })
+      });
+    }, { rootMargin: '150% 0px' });
+    observer.observe(section);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSection9NearViewport, { once: true });
+  } else {
+    initSection9NearViewport();
+  }
+</script>

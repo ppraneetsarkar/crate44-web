@@ -1,0 +1,838 @@
+---
+// src/components/Header.astro
+// Exact MadeWithGSAP style navigation (https://madewithgsap.com/)
+// Desktop: Figma Node 2113:5703 (MENU Pill + Floating Expanded Navigation Card)
+// Mobile: Compact circular button with smooth morphing hamburger-to-cross lines
+
+const navLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'The Edit', href: '/the-edit' },
+  { name: 'The Origins', href: '/the-origin' },
+  { name: 'The Standard', href: '/the-standard' },
+  { name: 'The House', href: '/the-house' },
+  { name: 'Gifting', href: '/gifting' },
+  { name: 'Join The List', href: '/join-the-list' },
+  { name: 'FAQ', href: '/faq' },
+]
+
+// Desktop navigation links hierarchy
+const desktopNavLinks = [
+  { name: 'Home', href: '/' },
+  { name: 'The Edit', href: '/the-edit' },
+  { name: 'The Origins', href: '/the-origin' },
+  { name: 'The Standard', href: '/the-standard' },
+  { name: 'The House', href: '/the-house' },
+  { name: 'Gifting', href: '/gifting' },
+  { name: 'Join The List', href: '/join-the-list' },
+  { name: 'FAQ', href: '/faq' },
+]
+---
+
+<!-- Main Fixed Header (Strict 16px Top Gap on Mobile & Web) -->
+<header
+  id="site-header"
+  style="opacity: 0; transform: translateY(-100%);"
+  class="fixed top-0 left-0 w-full z-50 pointer-events-none pt-[16px] px-4 md:px-6 lg:px-[25px] flex items-center justify-between will-change-transform"
+>
+  <!-- Left: Crate 44 Logo (Standalone Vector SVG, No Container, 2x Scale, 0px Top Whitespace) -->
+  <div class="pointer-events-auto flex items-center">
+    <a
+      href="/"
+      class="link-logo roll group inline-flex items-center"
+      aria-label="Crate 44 Home"
+    >
+      <span class="overflow-hidden block h-[46px] md:h-[50px]">
+        <span class="translate flex flex-col">
+          <span class="flex items-center h-[46px] md:h-[50px]">
+            <img
+              src="/images/logo/crate44-logo.svg"
+              alt="CRATE 44"
+              width="70"
+              height="50"
+              class="h-[46px] md:h-[50px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+          </span>
+          <span class="flex items-center h-[46px] md:h-[50px]">
+            <img
+              src="/images/logo/crate44-logo.svg"
+              alt="CRATE 44"
+              width="70"
+              height="50"
+              class="h-[46px] md:h-[50px] w-auto object-contain transition-transform duration-300 group-hover:scale-105"
+            />
+          </span>
+        </span>
+      </span>
+    </a>
+  </div>
+
+  <!-- Right: Desktop Navigation + JOIN CTA -->
+  <div class="header-right hidden lg:flex items-center gap-[10px] pointer-events-auto">
+    <!-- JOIN Button (Text Only, VVDS Fifties Font & Crate 44 Yellow, No drop shadow, GSAP Corner Morph & Feathered Motion-Blur Roll) -->
+    <a
+      href="/#the-list"
+      class="cta-join bg-[#f8fe03] text-[#131313] h-[50px] px-[28px] rounded-full flex items-center justify-center font-display font-semibold text-[28px] leading-[30px] uppercase border border-[#f8fe03] transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius]"
+    >
+      <span
+        class="roll-fx-container relative block h-[30px] leading-[30px] overflow-hidden select-none"
+        style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+      >
+        <span class="roll-text-top block h-[30px] leading-[30px] whitespace-nowrap will-change-[transform,filter]">
+          JOIN
+        </span>
+        <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[30px] leading-[30px] whitespace-nowrap will-change-[transform,filter]">
+          JOIN
+        </span>
+      </span>
+    </a>
+
+    <!-- Desktop MENU Trigger Pill (Figma Node 2113:5679) -->
+    <button
+      id="desk-menu-btn"
+      type="button"
+      class="h-[50px] pl-[26px] pr-[22px] rounded-full bg-[#fbf9d6] text-[#212121] flex items-center gap-[14px] cursor-pointer transition-[filter,transform] duration-300 hover:brightness-105 active:scale-95 relative select-none border border-black/5 will-change-[border-radius]"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <span
+        class="menu-roll-fx relative block h-[26px] leading-[26px] overflow-hidden select-none font-display font-semibold text-[26px] uppercase tracking-[0.8px] text-[#212121]"
+        style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+      >
+        <span class="menu-roll-top block h-[26px] leading-[26px] whitespace-nowrap will-change-[transform,filter]">
+          MENU
+        </span>
+        <span class="menu-roll-bottom absolute inset-0 flex items-center justify-center h-[26px] leading-[26px] whitespace-nowrap will-change-[transform,filter]">
+          MENU
+        </span>
+      </span>
+      <!-- 3-line morphing hamburger to X icon -->
+      <div class="relative w-[24px] h-[16px] flex flex-col justify-between items-start pointer-events-none">
+        <span id="desk-line-1" class="block w-[24px] h-[2.5px] bg-[#131313] rounded-full origin-center will-change-transform"></span>
+        <span id="desk-line-2" class="block w-[16px] h-[2.5px] bg-[#131313] rounded-full origin-center will-change-transform"></span>
+        <span id="desk-line-3" class="block w-[24px] h-[2.5px] bg-[#131313] rounded-full origin-center will-change-transform"></span>
+      </div>
+    </button>
+  </div>
+
+  <!-- Mobile Controls (< lg) -->
+  <div class="nav-mob flex lg:hidden items-center gap-[8px] pointer-events-auto">
+    <!-- Mobile JOIN Button (Text Only, No drop shadow) -->
+    <a
+      href="/#the-list"
+      class="bg-[#f8fe03] text-[#131313] h-[46px] px-[22px] rounded-full flex items-center justify-center font-display font-semibold text-[26px] leading-[28px] uppercase active:scale-95 transition-transform"
+    >
+      JOIN
+    </a>
+
+    <!-- Mobile Menu Toggle Button (Strictly circular with morphing lines) -->
+    <button
+      id="mob-menu-btn"
+      type="button"
+      class="w-[46px] h-[46px] rounded-full bg-[#f3f3f3] text-[#0A0A0B] flex items-center justify-center cursor-pointer active:scale-95 transition-transform relative select-none"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <div class="relative w-[18px] h-[10px] flex flex-col justify-between items-center pointer-events-none">
+        <span id="mob-line-1" class="block w-[18px] h-[2px] bg-[#0A0A0B] rounded-full origin-center will-change-transform"></span>
+        <span id="mob-line-2" class="block w-[18px] h-[2px] bg-[#0A0A0B] rounded-full origin-center will-change-transform"></span>
+      </div>
+    </button>
+  </div>
+</header>
+
+<!-- Desktop Navigation Backdrop -->
+<div
+  id="desk-backdrop"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 opacity-0 pointer-events-none transition-opacity duration-300 hidden lg:block"
+></div>
+
+<!-- Desktop Navigation Card (Figma Node 2113:5919 / 2113:5873) -->
+<div
+  id="desk-drawer"
+  class="fixed top-[76px] right-[25px] w-[360px] z-50 bg-[#FBF9D6] rounded-[24px] px-[16px] py-[8px] shadow-2xl flex flex-col opacity-0 pointer-events-none hidden lg:flex will-change-[transform,opacity,filter]"
+  style="transform-origin: top right;"
+>
+  <nav class="flex flex-col w-full">
+    {
+      desktopNavLinks.map((item) => (
+        <a
+          href={item.href}
+          class="desk-link group py-[12px] text-[#131313] font-['Suisse_Intl',sans-serif] font-medium text-[24px] leading-[34px] tracking-[-0.8px] flex items-center border-b border-[#131313]/10 last:border-b-0 cursor-pointer"
+        >
+          <!-- Feathered Motion-Blur Rolling Text Container -->
+          <span
+            class="desk-roll-fx relative block h-[34px] leading-[34px] overflow-hidden select-none"
+            style="mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+          >
+            <span class="desk-roll-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+              {item.name}
+            </span>
+            <span class="desk-roll-bottom absolute inset-0 flex items-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+              {item.name}
+            </span>
+          </span>
+        </a>
+      ))
+    }
+  </nav>
+</div>
+
+<!-- Mobile Navigation Backdrop -->
+<div
+  id="mob-backdrop"
+  class="fixed inset-0 bg-black/60 backdrop-blur-md z-40 opacity-0 pointer-events-none transition-opacity duration-300 lg:hidden"
+></div>
+
+<!-- Mobile Navigation Card & WhatsApp CTA Container (strictly for mobile) -->
+<div
+  id="mob-drawer"
+  class="fixed bottom-[20px] left-4 right-4 max-w-[400px] mx-auto z-40 flex flex-col gap-[12px] max-h-[calc(100svh-40px)] opacity-0 pointer-events-none will-change-[opacity,filter] lg:hidden"
+>
+  <!-- Main Creme Navigation Card -->
+  <div class="w-full bg-[#FBF9D6] rounded-[24px] px-[16px] py-[8px] shadow-2xl flex flex-col overflow-y-auto">
+    <nav class="flex flex-col w-full">
+      {
+        navLinks.map((item) => (
+          <a
+            href={item.href}
+            class="mob-link group py-[12px] text-[#131313] font-['Suisse_Intl',sans-serif] font-medium text-[24px] leading-[34px] tracking-[-0.8px] flex items-center border-b border-[#131313]/10 last:border-b-0 cursor-pointer"
+          >
+            <!-- Feathered Motion-Blur Rolling Text Container -->
+            <span
+              class="mob-roll-fx relative block h-[34px] leading-[34px] overflow-hidden select-none"
+              style="mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="mob-roll-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                {item.name}
+              </span>
+              <span class="mob-roll-bottom absolute inset-0 flex items-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                {item.name}
+              </span>
+            </span>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+
+  <!-- Outside the Card & Under the Card: Dark WhatsApp CTA with 12px padding (No stroke, No logo, matching CTA typography) -->
+  <a
+    id="mob-whatsapp-cta"
+    href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20connect%20with%20the%20House"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="w-full bg-[#131313] text-[#FBF9D6] rounded-full py-[12px] px-[20px] shadow-2xl flex items-center justify-center cursor-pointer active:scale-[0.98] transition-transform select-none"
+  >
+    <!-- Feathered Motion-Blur Rolling Text Container -->
+    <span
+      class="mob-wa-roll-fx relative block h-[28px] leading-[28px] overflow-hidden select-none font-display font-semibold text-[26px] uppercase tracking-[0.5px]"
+      style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+    >
+      <span class="mob-wa-roll-top block h-[28px] leading-[28px] whitespace-nowrap will-change-[transform,filter]">
+        LETS TALK ON WHATSAPP
+      </span>
+      <span class="mob-wa-roll-bottom absolute inset-0 flex items-center justify-center h-[28px] leading-[28px] whitespace-nowrap will-change-[transform,filter]">
+        LETS TALK ON WHATSAPP
+      </span>
+    </span>
+  </a>
+</div>
+
+<style is:global>
+  /* MadeWithGSAP Hover Roll Effect */
+  .roll {
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .roll > span {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .roll .translate {
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
+  }
+  .roll:hover .translate,
+  .roll:focus-visible .translate {
+    transform: translateY(-50%);
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+
+  function initHeader() {
+    const header = document.getElementById('site-header')
+    const deskBtn = document.getElementById('desk-menu-btn')
+    const deskDrawer = document.getElementById('desk-drawer')
+    const deskBackdrop = document.getElementById('desk-backdrop')
+    const deskLine1 = document.getElementById('desk-line-1')
+    const deskLine2 = document.getElementById('desk-line-2')
+    const deskLine3 = document.getElementById('desk-line-3')
+    const deskLinks = document.querySelectorAll('.desk-link')
+
+    const mobBtn = document.getElementById('mob-menu-btn')
+    const mobDrawer = document.getElementById('mob-drawer')
+    const mobBackdrop = document.getElementById('mob-backdrop')
+    const mobLine1 = document.getElementById('mob-line-1')
+    const mobLine2 = document.getElementById('mob-line-2')
+    const mobLinks = document.querySelectorAll('.mob-link, .mob-link-join')
+
+    if (!header) return
+
+    // 1. MadeWithGSAP Arrival Slide-down Animation
+    gsap.fromTo(
+      header,
+      { y: '-100%', opacity: 0 },
+      {
+        y: '0%',
+        opacity: 1,
+        duration: 0.9,
+        ease: 'power4.out',
+        delay: 0.15
+      }
+    )
+
+    // 2. Directional Scroll: Slides UP (hides) on scroll down, reveals on scroll up / cursor reverse
+    let isHeaderVisible = true
+    let lastScrollY = window.scrollY
+    let headerRafId = 0
+
+    function setHeaderVisible(visible: boolean) {
+      if (isHeaderVisible === visible) return
+      isHeaderVisible = visible
+
+      if (visible) {
+        gsap.to(header, {
+          y: '0%',
+          opacity: 1,
+          duration: 0.35,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        })
+      } else {
+        gsap.to(header, {
+          y: '-120%',
+          opacity: 0,
+          duration: 0.35,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        })
+      }
+    }
+
+    function handleScroll(currentY: number) {
+      if (isMobOpen || isDeskOpen) {
+        setHeaderVisible(true)
+        lastScrollY = currentY
+        return
+      }
+
+      const diff = currentY - lastScrollY
+
+      // Always visible at the very top of the page
+      if (currentY <= 24) {
+        setHeaderVisible(true)
+      } else if (diff > 8) {
+        // Scrolling DOWN -> Slides up out of screen (hides)
+        setHeaderVisible(false)
+      } else if (diff < -8) {
+        // Scrolling UP / cursor reverse -> Slides back down into view
+        setHeaderVisible(true)
+      }
+
+      lastScrollY = currentY
+    }
+
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (headerRafId) return
+        headerRafId = window.requestAnimationFrame(() => {
+          headerRafId = 0
+          handleScroll(window.scrollY)
+        })
+      },
+      { passive: true }
+    )
+
+    if ((window as any).__lenis) {
+      ;(window as any).__lenis.on('scroll', (e: any) => {
+        const y = typeof e?.scroll === 'number' ? e.scroll : window.scrollY
+        handleScroll(y)
+      })
+    }
+
+    // Cursor move near top of viewport reveals navbar
+    window.addEventListener(
+      'mousemove',
+      (e) => {
+        if (e.clientY <= 60 && !isHeaderVisible) {
+          setHeaderVisible(true)
+        }
+      },
+      { passive: true }
+    )
+
+    // 3. GSAP Corner-Morphing & Rolling Text FX on Desktop JOIN Button (Solo Button: Morphs on LEFT)
+    const ctaJoinBtn = header.querySelector<HTMLElement>('.cta-join')
+    if (ctaJoinBtn) {
+      const textTop = ctaJoinBtn.querySelector<HTMLElement>('.roll-text-top')
+      const textBottom = ctaJoinBtn.querySelector<HTMLElement>('.roll-text-bottom')
+
+      gsap.set(ctaJoinBtn, {
+        borderTopLeftRadius: '25px',
+        borderBottomLeftRadius: '25px',
+        borderTopRightRadius: '25px',
+        borderBottomRightRadius: '25px'
+      })
+
+      if (textTop && textBottom) {
+        gsap.set(textTop, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(textBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+      }
+
+      ctaJoinBtn.addEventListener('mouseenter', () => {
+        // 1. Morph corner on LEFT
+        gsap.to(ctaJoinBtn, {
+          borderTopLeftRadius: '12px',
+          borderBottomLeftRadius: '12px',
+          borderTopRightRadius: '25px',
+          borderBottomRightRadius: '25px',
+          duration: 0.45,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        })
+
+        // 2. Rolling Text FX with motion blur & gradient mask (like rolling-button-fx)
+        if (textTop && textBottom) {
+          gsap.to(textTop, {
+            yPercent: -100,
+            filter: 'blur(3.5px)',
+            duration: 0.42,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(textBottom, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.42,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        }
+      })
+
+      ctaJoinBtn.addEventListener('mouseleave', () => {
+        // 1. Restore symmetric pill corners
+        gsap.to(ctaJoinBtn, {
+          borderTopLeftRadius: '25px',
+          borderBottomLeftRadius: '25px',
+          borderTopRightRadius: '25px',
+          borderBottomRightRadius: '25px',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        })
+
+        // 2. Restore initial text positions & crisp focus
+        if (textTop && textBottom) {
+          gsap.to(textTop, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(textBottom, {
+            yPercent: 100,
+            filter: 'blur(3.5px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        }
+      })
+    }
+
+    // 4. GSAP Dual-Sided Corner-Morphing & Rolling Text FX on Desktop MENU Button
+    if (deskBtn) {
+      const menuTextTop = deskBtn.querySelector<HTMLElement>('.menu-roll-top')
+      const menuTextBottom = deskBtn.querySelector<HTMLElement>('.menu-roll-bottom')
+
+      gsap.set(deskBtn, {
+        borderTopLeftRadius: '25px',
+        borderBottomLeftRadius: '25px',
+        borderTopRightRadius: '25px',
+        borderBottomRightRadius: '25px'
+      })
+
+      if (menuTextTop && menuTextBottom) {
+        gsap.set(menuTextTop, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(menuTextBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+      }
+
+      deskBtn.addEventListener('mouseenter', () => {
+        // Dual-sided corner morph
+        gsap.to(deskBtn, {
+          borderTopLeftRadius: '12px',
+          borderBottomLeftRadius: '12px',
+          borderTopRightRadius: '12px',
+          borderBottomRightRadius: '12px',
+          duration: 0.42,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        })
+
+        // Rolling text with motion blur
+        if (menuTextTop && menuTextBottom) {
+          gsap.to(menuTextTop, {
+            yPercent: -100,
+            filter: 'blur(3.5px)',
+            duration: 0.42,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(menuTextBottom, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.42,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        }
+      })
+
+      deskBtn.addEventListener('mouseleave', () => {
+        // Restore pill corners
+        gsap.to(deskBtn, {
+          borderTopLeftRadius: '25px',
+          borderBottomLeftRadius: '25px',
+          borderTopRightRadius: '25px',
+          borderBottomRightRadius: '25px',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto'
+        })
+
+        // Restore text focus
+        if (menuTextTop && menuTextBottom) {
+          gsap.to(menuTextTop, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(menuTextBottom, {
+            yPercent: 100,
+            filter: 'blur(3.5px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        }
+      })
+    }
+
+    // 5. Desktop Menu Toggle (Figma Node 2113:5703)
+    let isDeskOpen = false
+
+    function toggleDeskMenu(open?: boolean) {
+      isDeskOpen = typeof open === 'boolean' ? open : !isDeskOpen
+      deskBtn?.setAttribute('aria-expanded', String(isDeskOpen))
+
+      if (isDeskOpen) {
+        window.dispatchEvent(new Event('crate44:nav-open'))
+        deskDrawer?.classList.remove('opacity-0', 'pointer-events-none')
+        deskDrawer?.classList.add('opacity-100', 'pointer-events-auto')
+
+        deskBackdrop?.classList.remove('opacity-0', 'pointer-events-none')
+        deskBackdrop?.classList.add('opacity-100', 'pointer-events-auto')
+
+        // GSAP smooth stationary feathered motion-blur entrance on click (0px movement)
+        if (deskDrawer) {
+          gsap.fromTo(
+            deskDrawer,
+            { opacity: 0, filter: 'blur(10px)' },
+            { opacity: 1, filter: 'blur(0px)', duration: 0.35, ease: 'power2.out', overwrite: 'auto' }
+          )
+        }
+
+        // 3-line hamburger to X morph (unaltered)
+        if (deskLine1 && deskLine2 && deskLine3) {
+          gsap.to(deskLine1, { y: 6.75, rotate: 45, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(deskLine2, { opacity: 0, scaleX: 0, duration: 0.22, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(deskLine3, { y: -6.75, rotate: -45, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })
+        }
+      } else {
+        window.dispatchEvent(new Event('crate44:nav-closed'))
+        deskBackdrop?.classList.remove('opacity-100', 'pointer-events-auto')
+        deskBackdrop?.classList.add('opacity-0', 'pointer-events-none')
+
+        // GSAP smooth stationary feathered motion-blur exit on close (0px movement)
+        if (deskDrawer) {
+          gsap.to(deskDrawer, {
+            opacity: 0,
+            filter: 'blur(10px)',
+            duration: 0.28,
+            ease: 'power2.in',
+            overwrite: 'auto',
+            onComplete: () => {
+              deskDrawer?.classList.remove('opacity-100', 'pointer-events-auto')
+              deskDrawer?.classList.add('opacity-0', 'pointer-events-none')
+              gsap.set(deskDrawer, { filter: 'blur(0px)' })
+            }
+          })
+        }
+
+        // X to 3-line hamburger morph (unaltered)
+        if (deskLine1 && deskLine2 && deskLine3) {
+          gsap.to(deskLine1, { y: 0, rotate: 0, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(deskLine2, { opacity: 1, scaleX: 1, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(deskLine3, { y: 0, rotate: 0, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })
+        }
+      }
+    }
+
+    deskBtn?.addEventListener('click', () => toggleDeskMenu())
+    deskBackdrop?.addEventListener('click', () => toggleDeskMenu(false))
+    deskLinks.forEach((link) => {
+      link.addEventListener('click', () => toggleDeskMenu(false))
+
+      // Feathered Motion-Blur Rolling Text Effect on hover
+      const topText = link.querySelector<HTMLElement>('.desk-roll-top')
+      const bottomText = link.querySelector<HTMLElement>('.desk-roll-bottom')
+      if (topText && bottomText) {
+        gsap.set(topText, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(bottomText, { yPercent: 100, filter: 'blur(3.5px)' })
+
+        link.addEventListener('mouseenter', () => {
+          gsap.to(topText, {
+            yPercent: -100,
+            filter: 'blur(3.5px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(bottomText, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        })
+
+        link.addEventListener('mouseleave', () => {
+          gsap.to(topText, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.35,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(bottomText, {
+            yPercent: 100,
+            filter: 'blur(3.5px)',
+            duration: 0.35,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        })
+      }
+    })
+
+    // 5. Mobile Menu Toggle (Stationary Creme Card)
+    let isMobOpen = false
+
+    function toggleMobMenu(open?: boolean) {
+      isMobOpen = typeof open === 'boolean' ? open : !isMobOpen
+      mobBtn?.setAttribute('aria-expanded', String(isMobOpen))
+
+      if (isMobOpen) {
+        window.dispatchEvent(new Event('crate44:nav-open'))
+        mobDrawer?.classList.remove('opacity-0', 'pointer-events-none')
+        mobDrawer?.classList.add('opacity-100', 'pointer-events-auto')
+
+        mobBackdrop?.classList.remove('opacity-0', 'pointer-events-none')
+        mobBackdrop?.classList.add('opacity-100', 'pointer-events-auto')
+
+        // GSAP smooth stationary feathered motion-blur entrance on click (0px movement)
+        if (mobDrawer) {
+          gsap.fromTo(
+            mobDrawer,
+            { opacity: 0, filter: 'blur(10px)' },
+            { opacity: 1, filter: 'blur(0px)', duration: 0.35, ease: 'power2.out', overwrite: 'auto' }
+          )
+        }
+
+        // Smooth morph 2 lines into X
+        if (mobLine1 && mobLine2) {
+          gsap.to(mobLine1, { y: 4, rotate: 45, duration: 0.32, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(mobLine2, { y: -4, rotate: -45, duration: 0.32, ease: 'power3.out', overwrite: 'auto' })
+        }
+      } else {
+        window.dispatchEvent(new Event('crate44:nav-closed'))
+        mobBackdrop?.classList.remove('opacity-100', 'pointer-events-auto')
+        mobBackdrop?.classList.add('opacity-0', 'pointer-events-none')
+
+        // GSAP smooth stationary feathered motion-blur exit on close (0px movement)
+        if (mobDrawer) {
+          gsap.to(mobDrawer, {
+            opacity: 0,
+            filter: 'blur(10px)',
+            duration: 0.28,
+            ease: 'power2.in',
+            overwrite: 'auto',
+            onComplete: () => {
+              mobDrawer?.classList.remove('opacity-100', 'pointer-events-auto')
+              mobDrawer?.classList.add('opacity-0', 'pointer-events-none')
+              gsap.set(mobDrawer, { filter: 'blur(0px)' })
+            }
+          })
+        }
+
+        // Smooth morph back to hamburger lines
+        if (mobLine1 && mobLine2) {
+          gsap.to(mobLine1, { y: 0, rotate: 0, duration: 0.32, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(mobLine2, { y: 0, rotate: 0, duration: 0.32, ease: 'power3.out', overwrite: 'auto' })
+        }
+      }
+    }
+
+    mobBtn?.addEventListener('click', () => toggleMobMenu())
+    mobBackdrop?.addEventListener('click', () => toggleMobMenu(false))
+
+    // Smooth navigation for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href')
+        if (!href || href === '#') return
+        const target = document.querySelector(href)
+        if (target) {
+          e.preventDefault()
+          toggleDeskMenu(false)
+          toggleMobMenu(false)
+          target.scrollIntoView({ behavior: 'smooth' })
+        }
+      })
+    })
+
+    mobLinks.forEach((link) => {
+      link.addEventListener('click', () => toggleMobMenu(false))
+
+      // Feathered Motion-Blur Rolling Text Effect on hover/touch
+      const topText = link.querySelector<HTMLElement>('.mob-roll-top')
+      const bottomText = link.querySelector<HTMLElement>('.mob-roll-bottom')
+      if (topText && bottomText) {
+        gsap.set(topText, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(bottomText, { yPercent: 100, filter: 'blur(3.5px)' })
+
+        link.addEventListener('mouseenter', () => {
+          gsap.to(topText, {
+            yPercent: -100,
+            filter: 'blur(3.5px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(bottomText, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        })
+
+        link.addEventListener('mouseleave', () => {
+          gsap.to(topText, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.35,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(bottomText, {
+            yPercent: 100,
+            filter: 'blur(3.5px)',
+            duration: 0.35,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        })
+      }
+    })
+
+    // Mobile WhatsApp CTA Rolling Text & Interaction
+    const mobWaCta = document.getElementById('mob-whatsapp-cta')
+    if (mobWaCta) {
+      const waTop = mobWaCta.querySelector<HTMLElement>('.mob-wa-roll-top')
+      const waBottom = mobWaCta.querySelector<HTMLElement>('.mob-wa-roll-bottom')
+      if (waTop && waBottom) {
+        gsap.set(waTop, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(waBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+
+        mobWaCta.addEventListener('mouseenter', () => {
+          gsap.to(waTop, {
+            yPercent: -100,
+            filter: 'blur(3.5px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(waBottom, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.38,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        })
+
+        mobWaCta.addEventListener('mouseleave', () => {
+          gsap.to(waTop, {
+            yPercent: 0,
+            filter: 'blur(0px)',
+            duration: 0.35,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+          gsap.to(waBottom, {
+            yPercent: 100,
+            filter: 'blur(3.5px)',
+            duration: 0.35,
+            ease: 'power3.out',
+            overwrite: 'auto'
+          })
+        })
+      }
+
+      mobWaCta.addEventListener('click', () => {
+        toggleMobMenu(false)
+      })
+    }
+
+    // ESC closes either menu
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        if (isDeskOpen) toggleDeskMenu(false)
+        if (isMobOpen) toggleMobMenu(false)
+      }
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeader)
+  } else {
+    initHeader()
+  }
+  document.addEventListener('astro:page-load', initHeader)
+</script>

@@ -1,0 +1,899 @@
+---
+// src/pages/the-edit.astro
+// Exact implementation ported from https://crate44.in/the-edit
+// Section 1: 3-Layer Background (Top Gradient + Centered Clouds with mix-blend-screen + Bottom Gradient)
+// Part A: "THE EDIT" & FruitTiltWheel 3D circular interaction
+// Part B: "WEEK OF [MARCH 4]" & ProductCards-style Pink Cards with 3D models & 3D cube-flip CTAs
+// Section 2: "THIS WEEK'S LEDGER" & "EVERY TUESDAY FRUITS RETURN" Marquee Ribbon
+// Footer: Global Footer without "The list is small on purpose" (showTheList={false})
+
+import Layout from '../layouts/Layout.astro'
+import Footer from '../components/Footer.astro'
+import CrateStamp from '../components/CrateStamp.astro'
+
+const fruits = [
+  {
+    id: 'ratnagiri-orange-1',
+    titleLine1: 'RATNAGIRI',
+    titleLine2: 'ORANGE',
+    price: '4.2K',
+    unit: '/DZ',
+    modelUrl: '/3d-fruits/dapoli%20mango.html',
+    tag: '[PICKED TUESDAY · RIPE THURSDAY · WINDOW ~36 HOURS]',
+    showMarquee: true,
+  },
+  {
+    id: 'alphonso-mango-1',
+    titleLine1: 'RATNAGIRI',
+    titleLine2: 'ORANGE',
+    price: '400',
+    unit: '',
+    modelUrl: '/3d-fruits/Egyptian%20Orange.html',
+    tag: '[PICKED TUESDAY · RIPE THURSDAY · WINDOW ~36 HOURS]',
+    showMarquee: false,
+  },
+  {
+    id: 'nagpur-orange-1',
+    titleLine1: 'RATNAGIRI',
+    titleLine2: 'ORANGE',
+    price: '400',
+    unit: '',
+    modelUrl: '/3d-fruits/Egyptian%20Orange.html',
+    tag: '[PICKED TUESDAY · RIPE THURSDAY · WINDOW ~36 HOURS]',
+    showMarquee: false,
+  },
+  {
+    id: 'dutch-strawberry-1',
+    titleLine1: 'RATNAGIRI',
+    titleLine2: 'ORANGE',
+    price: '400',
+    unit: '',
+    modelUrl: '/3d-fruits/Egyptian%20Orange.html',
+    tag: '[PICKED TUESDAY · RIPE THURSDAY · WINDOW ~36 HOURS]',
+    showMarquee: false,
+  },
+]
+
+// 3D HTML Assets from Google Drive (Nagpur Orange, Kiwi, Durian, Passion Fruit, Pomegranate, Watermelon)
+// Durian and Orange positions switched; Durian & Watermelon scaled +150% more; other fruits scaled +50%
+const wheel3DModels = [
+  {
+    name: 'Nagpur Orange',
+    src: '/3d-fruits/page2/ngp%20orange.html',
+    sizeClass: 'w-[230px] h-[230px] lg:w-[270px] lg:h-[270px]',
+  },
+  {
+    name: 'Kiwi',
+    src: '/3d-fruits/page2/kiwi.html',
+    sizeClass: 'w-[230px] h-[230px] lg:w-[270px] lg:h-[270px]',
+  },
+  {
+    name: 'Durian',
+    src: '/3d-fruits/page2/diruain.html',
+    sizeClass: 'w-[380px] h-[380px] lg:w-[450px] lg:h-[450px]',
+  },
+  {
+    name: 'Passion Fruit',
+    src: '/3d-fruits/page2/passion%20fruit.html',
+    sizeClass: 'w-[230px] h-[230px] lg:w-[270px] lg:h-[270px]',
+  },
+  {
+    name: 'Pomegranate',
+    src: '/3d-fruits/page2/pomegranate.html',
+    sizeClass: 'w-[230px] h-[230px] lg:w-[270px] lg:h-[270px]',
+  },
+  {
+    name: 'Watermelon',
+    src: '/3d-fruits/page2/Watermenlon.html',
+    sizeClass: 'w-[380px] h-[380px] lg:w-[450px] lg:h-[450px]',
+  },
+]
+---
+
+<Layout title="The Edit | Crate 44 — The Seasonal Fruit List">
+  <main class="page-module__tuSBZa__pageContainer relative w-full overflow-x-clip bg-white selection:bg-[#F8FE03] selection:text-black">
+    <!-- ============================================================== -->
+    <!-- SECTION 1: 3-LAYER CLOUD & GRADIENT BACKGROUND                 -->
+    <!-- Part A: "THE EDIT" & FruitTiltWheel                            -->
+    <!-- Part B: "WEEK OF [MARCH 4]" & ProductCards-style Pink Cards   -->
+    <!-- ============================================================== -->
+    <section id="the-edit-hero-section" class="relative w-full overflow-hidden pt-[140px] sm:pt-[170px] lg:pt-[200px] pb-[80px] lg:pb-[120px]">
+      <!-- 3-LAYER BACKGROUND STACK (Identical for Desktop & Mobile) -->
+      <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <!-- Layer 1: Top Gradient Layer (Figma 1941:2462 / 1941:2456) -->
+        <div
+          class="absolute inset-0 w-full h-full"
+          style="background: linear-gradient(180deg, #00C8FF 0%, #FFFFFF 84.205%);"
+        ></div>
+
+        <!-- Layer 2: Cloud Image Layer (Figma 1941:2463 / 1941:2455 - Always centered & fitted with mix-blend-screen) -->
+        <img
+          src="/clouds/cloud-web.png"
+          alt="Clouds"
+          class="hidden md:block absolute inset-0 w-full h-full object-contain object-center mix-blend-screen pointer-events-none"
+        />
+        <img
+          src="/clouds/cloud-mobile.png"
+          alt="Clouds"
+          class="block md:hidden absolute inset-0 w-full h-full object-contain object-center mix-blend-screen pointer-events-none"
+        />
+
+        <!-- Layer 3: Bottom Gradient Layer (Figma 1941:2461 / 1941:2457) -->
+        <div
+          class="absolute inset-0 w-full h-full"
+          style="background: linear-gradient(180deg, rgba(255, 255, 255, 0) 73.309%, #FFFFFF 100%);"
+        ></div>
+      </div>
+
+      <!-- Content Container: Full width with strictly fixed 16px side margins on all screens up to 4K -->
+      <div class="px-[16px] w-full mx-auto relative z-10 flex flex-col items-center">
+        <!-- ──────────────────────────────────────────────────────────── -->
+        <!-- PART A: HERO TITLE "THE EDIT"                                -->
+        <!-- ──────────────────────────────────────────────────────────── -->
+        <div class="w-full flex justify-center mb-6 sm:mb-10 lg:mb-12">
+          <h1 class="m-0 p-0 text-center w-full flex flex-col items-center">
+            <!-- Mobile Heading (300px - 650px): Stacked 2 lines (THE / EDIT) matching Image 1 -->
+            <div class="flex flex-col items-center min-[650px]:hidden w-full select-none">
+              <span class="block overflow-hidden pb-[0.04em]">
+                <span
+                  class="edit-hero-heading flex flex-nowrap whitespace-nowrap justify-center uppercase font-display font-semibold text-[clamp(130px,58vw,360px)] leading-[0.82] tracking-[0.8px] text-[#F8FE03] drop-shadow-sm"
+                  style="font-family: 'VVDS Fifties', sans-serif;"
+                  data-line="THE"
+                >
+                  <span class="edit-hero-char inline-block will-change-transform">T</span>
+                  <span class="edit-hero-char inline-block will-change-transform">H</span>
+                  <span class="edit-hero-char inline-block will-change-transform">E</span>
+                </span>
+              </span>
+              <span class="block overflow-hidden pb-[0.04em]">
+                <span
+                  class="edit-hero-heading flex flex-nowrap whitespace-nowrap justify-center uppercase font-display font-semibold text-[clamp(130px,58vw,360px)] leading-[0.82] tracking-[0.8px] text-[#F8FE03] drop-shadow-sm"
+                  style="font-family: 'VVDS Fifties', sans-serif;"
+                  data-line="EDIT"
+                >
+                  <span class="edit-hero-char inline-block will-change-transform">E</span>
+                  <span class="edit-hero-char inline-block will-change-transform">D</span>
+                  <span class="edit-hero-char inline-block will-change-transform">I</span>
+                  <span class="edit-hero-char inline-block will-change-transform">T</span>
+                </span>
+              </span>
+            </div>
+
+            <!-- Desktop Heading (>= 650px): Single-line "THE EDIT" unchanged -->
+            <div class="hidden min-[650px]:block w-full select-none">
+              <span class="block overflow-hidden pb-[0.08em]">
+                <span
+                  class="edit-hero-heading flex flex-nowrap whitespace-nowrap justify-center uppercase font-display font-semibold text-[130px] leading-[108px] md:text-[200px] md:leading-[162px] lg:text-[260px] lg:leading-[210px] 2xl:text-[296px] 2xl:leading-[240px] tracking-[0.8px] text-[#F8FE03] drop-shadow-sm"
+                  style="font-family: 'VVDS Fifties', sans-serif;"
+                  data-line="THE EDIT"
+                >
+                  <span class="edit-hero-char inline-block will-change-transform">T</span>
+                  <span class="edit-hero-char inline-block will-change-transform">H</span>
+                  <span class="edit-hero-char inline-block will-change-transform">E</span>
+                  <span class="edit-hero-char inline-block will-change-transform">&nbsp;</span>
+                  <span class="edit-hero-char inline-block will-change-transform">E</span>
+                  <span class="edit-hero-char inline-block will-change-transform">D</span>
+                  <span class="edit-hero-char inline-block will-change-transform">I</span>
+                  <span class="edit-hero-char inline-block will-change-transform">T</span>
+                </span>
+              </span>
+            </div>
+          </h1>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────── -->
+        <!-- PART A: 3D CIRCULAR FRUIT TILT WHEEL (Made With GSAP 106)   -->
+        <!-- 100% Borderless, Transparent Floating 3D Fruits in the Sky   -->
+        <!-- ──────────────────────────────────────────────────────────── -->
+        <div
+          id="tilt-wheel-section"
+          class="FruitTiltWheel-module__VaPV9W__mwg_effect106 w-full flex items-center justify-center relative mt-[-20px] sm:mt-[-40px] lg:mt-[-60px] mb-[20px]"
+          style="perspective: 100vw;"
+        >
+          <div class="FruitTiltWheel-module__VaPV9W__container relative flex items-center justify-center w-full h-[680px] lg:h-[780px]">
+            <div
+              id="tilt-medias"
+              class="FruitTiltWheel-module__VaPV9W__medias relative w-full h-full"
+              style="transform-style: preserve-3d; transform: translate3d(0vw, 0vw, -26vw) rotateX(70deg) rotateY(-20deg) rotateZ(0deg);"
+            >
+              {
+                wheel3DModels.map((model, idx) => (
+                  <div
+                    class={`fruit-wheel-item FruitTiltWheel-module__VaPV9W__media absolute ${model.sizeClass} select-none flex items-center justify-center pointer-events-auto cursor-pointer transition-transform duration-300 ease-out hover:scale-125 will-change-transform`}
+                    data-index={idx}
+                  >
+                    <iframe
+                      src={model.src}
+                      title={model.name}
+                      class="fruit-wheel-iframe w-full h-full border-none select-none pointer-events-none scale-[1.18]"
+                      style="background: transparent;"
+                      allow="xr-spatial-tracking; autoplay; fullscreen"
+                      loading="eager"
+                    />
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────── -->
+        <!-- PART B: "WEEK OF [MARCH 4]" HEADLINE (Figma 1949:2570)       -->
+        <!-- ──────────────────────────────────────────────────────────── -->
+        <div id="cards-section" class="w-full flex flex-col items-center py-[64px] gap-[64px]">
+          <h2 class="m-0 p-0 text-center w-full flex flex-col items-center select-none font-display font-semibold">
+            <span class="block overflow-hidden pb-[0.05em]">
+              <span
+                class="week-heading flex flex-nowrap whitespace-nowrap justify-center uppercase text-[clamp(58px,19.2vw,125px)] leading-[0.86] min-[650px]:text-[96px] min-[650px]:leading-[84px] md:text-[130px] md:leading-[110px] lg:text-[180px] lg:leading-[150px] 2xl:text-[200px] 2xl:leading-[162px] tracking-[0.48px]"
+                style="background: linear-gradient(180deg, #5B0000 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                data-line="WEEK"
+              >
+                <span class="week-heading-char inline-block will-change-transform">W</span>
+                <span class="week-heading-char inline-block will-change-transform">E</span>
+                <span class="week-heading-char inline-block will-change-transform">E</span>
+                <span class="week-heading-char inline-block will-change-transform">K</span>
+              </span>
+            </span>
+            <span class="block overflow-hidden pb-[0.05em]">
+              <span
+                class="week-heading flex flex-nowrap whitespace-nowrap justify-center uppercase text-[clamp(58px,19.2vw,125px)] leading-[0.86] min-[650px]:text-[96px] min-[650px]:leading-[84px] md:text-[130px] md:leading-[110px] lg:text-[180px] lg:leading-[150px] 2xl:text-[200px] 2xl:leading-[162px] tracking-[0.48px]"
+                style="background: linear-gradient(180deg, #5B0000 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                data-line="OF [MARCH 4]"
+              >
+                <span class="week-heading-char inline-block will-change-transform">O</span>
+                <span class="week-heading-char inline-block will-change-transform">F</span>
+                <span class="week-heading-char inline-block will-change-transform">&nbsp;</span>
+                <span class="week-heading-char inline-block will-change-transform">[</span>
+                <span class="week-heading-char inline-block will-change-transform">M</span>
+                <span class="week-heading-char inline-block will-change-transform">A</span>
+                <span class="week-heading-char inline-block will-change-transform">R</span>
+                <span class="week-heading-char inline-block will-change-transform">C</span>
+                <span class="week-heading-char inline-block will-change-transform">H</span>
+                <span class="week-heading-char inline-block will-change-transform">&nbsp;</span>
+                <span class="week-heading-char inline-block will-change-transform">4</span>
+                <span class="week-heading-char inline-block will-change-transform">]</span>
+              </span>
+            </span>
+          </h2>
+
+          <!-- ──────────────────────────────────────────────────────────── -->
+          <!-- PART B: FRUIT CARDS (Middle Card Anatomy from Homepage)      -->
+          <!-- Color: Pink #FC558D, Margin: px-[16px], Gap: 12px            -->
+          <!-- ──────────────────────────────────────────────────────────── -->
+          <div
+            class="cards-row-anim self-stretch w-full max-w-full flex flex-row overflow-x-auto overflow-y-visible snap-x snap-mandatory gap-[12px] justify-start pl-0 pr-[16px] py-4 items-center [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+          >
+            {
+              fruits.map((fruit) => (
+                <div
+                  class="fruit-card-anim group shrink-0 snap-start card-inner relative flex flex-col select-none overflow-hidden w-[260px] sm:w-[320px] md:w-[360px] lg:w-[462px] h-[340px] sm:h-[400px] md:h-[440px] lg:h-[566px] rounded-[12px] border-[4px] lg:border-[6px] border-[#FC558D] border-solid transition-all duration-300 cursor-pointer"
+                  data-fruit-id={fruit.id}
+                  style="max-width: calc(100vw - 32px); box-shadow: 0 0 44px 0 rgba(0, 0, 0, 0.01);"
+                >
+                  <!-- Frosted Background Layer: Activates smoothly on hover -->
+                  <div
+                    class="card-blur-overlay absolute inset-0 rounded-[12px] overflow-hidden -z-10 pointer-events-none transition-opacity duration-300 opacity-0 group-hover:opacity-100"
+                  >
+                    <div
+                      class="w-full h-full"
+                      style="background-image:url('/images/section-4-bg.avif');background-size:cover;background-position:center;filter:blur(9px);transform:scale(1.2);opacity:0.35"
+                    />
+                    <div class="absolute inset-0 bg-[rgba(255,255,255,0.18)] backdrop-blur-[6px]" />
+                  </div>
+
+                  <!-- Top-Left: Fruit Name (Figma Spacing: left 11px, top 10px from stroke edge) -->
+                  <div
+                    class="absolute left-[8px] sm:left-[11px] top-[7px] sm:top-[10px] z-10 uppercase text-left font-display font-semibold text-[32px] sm:text-[40px] md:text-[44px] lg:text-[56px] leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]"
+                    style="color: #FC558D;"
+                  >
+                    <p class="m-0 leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]">{fruit.titleLine1}</p>
+                    <p class="m-0 leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]">{fruit.titleLine2}</p>
+                  </div>
+
+                  <!-- Top-Right: Price Badge (Figma Node 1838:2042 / 1949:2684) -->
+                  <div
+                    class="card-price-badge absolute z-10 uppercase flex items-baseline justify-center tracking-tight select-none font-display font-semibold -top-[4px] lg:-top-[5.5px] -right-[4px] lg:-right-[6px] pt-[8px] sm:pt-[10px] lg:pt-[12px] pb-[9px] sm:pb-[11px] lg:pb-[13px] pl-[10px] sm:pl-[12px] lg:pl-[15px] pr-[14px] sm:pr-[18px] lg:pr-[24px] rounded-bl-[16px] sm:rounded-bl-[19px] rounded-br-[3px] lg:rounded-br-[4px] rounded-tr-[16px] bg-[#FC558D] text-[#FBF9D6] text-center text-[34px] sm:text-[40px] md:text-[44px] lg:text-[56px] leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px] gap-[3px] lg:gap-[4px]"
+                  >
+                    <svg
+                      width="25"
+                      height="40"
+                      viewBox="0 0 25 40"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="shrink-0 self-center w-[16px] sm:w-[20px] lg:w-[25px] h-[26px] sm:h-[32px] lg:h-[40px]"
+                    >
+                      <path
+                        d="M10.304 39.984L0 22.064V18.536H2.576C4.144 18.536 5.50667 18.3493 6.664 17.976C7.82133 17.6027 8.75467 17.024 9.464 16.24C10.2106 15.4187 10.696 14.4107 10.92 13.216H0V9.296H10.864C10.64 8.13867 10.2106 7.168 9.576 6.38401C8.94133 5.6 8.10133 5.00267 7.056 4.59201C6.01067 4.144 4.74133 3.92 3.248 3.92H0V0H24.472V3.92H15.008C15.7546 4.62934 16.352 5.43201 16.8 6.32801C17.2853 7.18667 17.6026 8.17601 17.752 9.296H24.472V13.216H17.864C17.528 15.9413 16.464 18.088 14.672 19.656C12.9173 21.1867 10.6213 22.1947 7.784 22.68L18.648 39.984H10.304Z"
+                        fill="#FBF9D6"
+                      />
+                    </svg>
+                    <span>{fruit.price}</span>
+                    {fruit.unit && (
+                      <span class="text-[#FBF9D6] uppercase font-display font-semibold text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] ml-0.5">
+                        {fruit.unit}
+                      </span>
+                    )}
+                  </div>
+
+                  <!-- Center 3D Model Frame: Kept Empty as requested -->
+                  <div class="card-model-wrap flex-1 w-full pointer-events-none"></div>
+
+                  <!-- Order Now / Request via WhatsApp CTA Button (GPU transform animation) -->
+                  <!-- Static: bottom-[18px]/bottom-[37px] | Hover: translates up by 32px -->
+                  <div
+                    class="card-btn-wrap absolute left-0 w-full flex justify-center px-[10px] z-10 bottom-[18px] sm:bottom-[26px] lg:bottom-[37px] will-change-transform transform-gpu transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-[32px]"
+                  >
+                    <a
+                      href={`https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20order%20${encodeURIComponent(fruit.titleLine1 + ' ' + fruit.titleLine2)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="card-order-btn group/btn relative inline-block cursor-pointer font-display font-semibold text-[24px] sm:text-[28px] lg:text-[32px] leading-[34px] uppercase px-4 py-1.5 transition-all duration-300 active:scale-95"
+                      style="perspective: 1000px;"
+                      data-node-id="1949:2687"
+                    >
+                      <div class="invisible opacity-0 pointer-events-none flex items-center justify-center">
+                        REQUEST VIA WHATSAPP
+                      </div>
+                      <div
+                        class="flip-inner absolute inset-0 w-full h-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover/btn:[transform:rotateX(90deg)]"
+                        style="transform-style: preserve-3d; transform-origin: 50% 50% -23px;"
+                      >
+                        <!-- Front Face: Pink with Creme Text -->
+                        <div
+                          class="absolute inset-0 w-full h-full flex items-center justify-center rounded-[8px] border bg-[#FC558D] text-[#FBF9D6] border-[#FC558D]"
+                          style="transform: translateZ(0px); backface-visibility: hidden;"
+                        >
+                          REQUEST VIA WHATSAPP
+                        </div>
+                        <!-- Flipped Face: Dark Charcoal with Pink Text -->
+                        <div
+                          class="absolute inset-0 w-full h-full flex items-center justify-center rounded-[8px] border bg-[#131313] text-[#FC558D] border-[#FC558D]"
+                          style="transform-origin: top; transform: translateY(100%) rotateX(-90deg); backface-visibility: hidden;"
+                        >
+                          REQUEST VIA WHATSAPP
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+
+                  <!-- Bottom Ribbon Strip: Appears on Hover (Figma Node 1949:2680) -->
+                  <div
+                    class="card-marquee-wrap inline-flex justify-center items-center absolute z-20 select-none -bottom-[4px] lg:-bottom-[6.5px] -left-[4px] lg:-left-[6px] -right-[4px] lg:-right-[6px] h-[28px] sm:h-[32px] lg:h-[34px] py-[6px] lg:py-[8px] px-[8px] bg-[#FC558D] text-[#FBF9D6] transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] opacity-0 translate-y-full pointer-events-none group-hover:opacity-100 group-hover:translate-y-0"
+                  >
+                    <div class="w-full relative overflow-hidden flex items-center justify-center">
+                      <span class="font-mono text-[8px] sm:text-[10px] md:text-[11px] font-bold tracking-[2px] sm:tracking-[2.75px] uppercase whitespace-nowrap text-[#FBF9D6]">
+                        {fruit.tag}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 2: THIS WEEK'S LEDGER & MARQUEE RIBBON                 -->
+    <!-- Fetched directly from https://crate44.in/the-edit              -->
+    <!-- ============================================================== -->
+    <section
+      id="ledger-section"
+      class="relative w-full py-[64px] overflow-hidden select-none"
+      style="background: linear-gradient(180deg, #FFFFFF 0%, #F8FE03 73.58%);"
+    >
+      <!-- Content Container: Full width with strictly fixed 16px side margins on all screens up to 4K -->
+      <div class="px-[16px] relative z-10 w-full mx-auto">
+        <div class="w-full mx-auto flex flex-col md:flex-row justify-between items-start md:items-end gap-10 md:gap-8">
+          <!-- Left: Big Ledger Headline -->
+          <div class="w-full md:w-auto flex flex-col items-start">
+            <h2 class="m-0 p-0 flex flex-col items-start font-display font-semibold select-none">
+              <span class="block overflow-hidden pb-[0.06em]">
+                <span
+                  class="ledger-title-line flex flex-nowrap whitespace-nowrap justify-start will-change-transform text-[clamp(92px,30vw,180px)] leading-[0.84] min-[650px]:text-[112px] min-[650px]:leading-[100px] md:text-[clamp(112px,calc(-2px+14.84vw),150px)] lg:text-[clamp(150px,calc(27px+12.02vw),200px)] 2xl:text-[200px] md:leading-[clamp(100px,calc(10px+11.72vw),130px)] lg:leading-[clamp(130px,calc(51px+7.69vw),162px)] 2xl:leading-[162px] tracking-[0.8px] lg:tracking-[0.48px] uppercase"
+                  style="background: linear-gradient(180deg, #FC558D 0%, #5B0000 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="THIS"
+                >
+                  <span class="ledger-title-char inline-block will-change-transform">T</span>
+                  <span class="ledger-title-char inline-block will-change-transform">H</span>
+                  <span class="ledger-title-char inline-block will-change-transform">I</span>
+                  <span class="ledger-title-char inline-block will-change-transform">S</span>
+                </span>
+              </span>
+              <span class="block overflow-hidden pb-[0.06em]">
+                <span
+                  class="ledger-title-line flex flex-nowrap whitespace-nowrap justify-start will-change-transform text-[clamp(92px,30vw,180px)] leading-[0.84] min-[650px]:text-[112px] min-[650px]:leading-[100px] md:text-[clamp(112px,calc(-2px+14.84vw),150px)] lg:text-[clamp(150px,calc(27px+12.02vw),200px)] 2xl:text-[200px] md:leading-[clamp(100px,calc(10px+11.72vw),130px)] lg:leading-[clamp(130px,calc(51px+7.69vw),162px)] 2xl:leading-[162px] tracking-[0.8px] lg:tracking-[0.48px] uppercase"
+                  style="background: linear-gradient(180deg, #FC558D 0%, #5B0000 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="WEEK'S"
+                >
+                  <span class="ledger-title-char inline-block will-change-transform">W</span>
+                  <span class="ledger-title-char inline-block will-change-transform">E</span>
+                  <span class="ledger-title-char inline-block will-change-transform">E</span>
+                  <span class="ledger-title-char inline-block will-change-transform">K</span>
+                  <span class="ledger-title-char inline-block will-change-transform">'</span>
+                  <span class="ledger-title-char inline-block will-change-transform">S</span>
+                </span>
+              </span>
+              <span class="block overflow-hidden pb-[0.06em]">
+                <span
+                  class="ledger-title-line flex flex-nowrap whitespace-nowrap justify-start will-change-transform text-[clamp(92px,30vw,180px)] leading-[0.84] min-[650px]:text-[112px] min-[650px]:leading-[100px] md:text-[clamp(112px,calc(-2px+14.84vw),150px)] lg:text-[clamp(150px,calc(27px+12.02vw),200px)] 2xl:text-[200px] md:leading-[clamp(100px,calc(10px+11.72vw),130px)] lg:leading-[clamp(130px,calc(51px+7.69vw),162px)] 2xl:leading-[162px] tracking-[0.8px] lg:tracking-[0.48px] uppercase"
+                  style="background: linear-gradient(180deg, #FC558D 0%, #5B0000 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="LEDGER"
+                >
+                  <span class="ledger-title-char inline-block will-change-transform">L</span>
+                  <span class="ledger-title-char inline-block will-change-transform">E</span>
+                  <span class="ledger-title-char inline-block will-change-transform">D</span>
+                  <span class="ledger-title-char inline-block will-change-transform">G</span>
+                  <span class="ledger-title-char inline-block will-change-transform">E</span>
+                  <span class="ledger-title-char inline-block will-change-transform">R</span>
+                </span>
+              </span>
+            </h2>
+          </div>
+
+          <!-- Right: Metrics Counts (7 fruits, 11 sold out) -->
+          <div class="w-full md:w-auto flex flex-row items-end gap-16 sm:gap-14 lg:gap-24 mt-8 min-[650px]:mt-0 lg:mr-[8%] xl:mr-[12%]">
+            <!-- Metric 1: 7 fruits -->
+            <div class="flex flex-col items-start">
+              <div class="flex items-baseline select-none">
+                <span class="block overflow-hidden pb-[0.08em]">
+                  <span
+                    class="block font-display font-semibold text-[clamp(88px,26vw,130px)] leading-[0.85] min-[650px]:text-[112px] min-[650px]:leading-[100px] md:text-[clamp(112px,calc(-2px+14.84vw),150px)] lg:text-[clamp(150px,calc(27px+12.02vw),200px)] 2xl:text-[200px] md:leading-[clamp(100px,calc(10px+11.72vw),130px)] lg:leading-[clamp(130px,calc(51px+7.69vw),162px)] 2xl:leading-[162px] tracking-[0.8px] lg:tracking-[0.48px] uppercase"
+                    style="background: linear-gradient(180deg, #FC558D 0%, #5B0000 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    7
+                  </span>
+                </span>
+              </div>
+              <div class="mt-[4px] lg:mt-[8px]">
+                <span
+                  class="font-body font-bold text-[clamp(22px,6.2vw,30px)] leading-[24px] sm:text-[28px] sm:leading-[30px] md:text-[clamp(24px,calc(-24px+6.25vw),40px)] lg:text-[clamp(40px,calc(-19px+5.77vw),64px)] 2xl:text-[64px] text-[#941E32] tracking-[-0.15px]"
+                >
+                  Fruits
+                </span>
+              </div>
+            </div>
+
+            <!-- Metric 2: 11 sold out -->
+            <div class="flex flex-col items-start">
+              <div class="flex items-baseline select-none">
+                <span class="block overflow-hidden pb-[0.08em]">
+                  <span
+                    class="block font-display font-semibold text-[clamp(88px,26vw,130px)] leading-[0.85] min-[650px]:text-[112px] min-[650px]:leading-[100px] md:text-[clamp(112px,calc(-2px+14.84vw),150px)] lg:text-[clamp(150px,calc(27px+12.02vw),200px)] 2xl:text-[200px] md:leading-[clamp(100px,calc(10px+11.72vw),130px)] lg:leading-[clamp(130px,calc(51px+7.69vw),162px)] 2xl:leading-[162px] tracking-[0.8px] lg:tracking-[0.48px] uppercase"
+                    style="background: linear-gradient(180deg, #FC558D 0%, #5B0000 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    11
+                  </span>
+                </span>
+              </div>
+              <div class="mt-[4px] lg:mt-[8px]">
+                <span
+                  class="font-body font-bold text-[clamp(22px,6.2vw,30px)] leading-[24px] sm:text-[28px] sm:leading-[30px] md:text-[clamp(24px,calc(-24px+6.25vw),40px)] lg:text-[clamp(40px,calc(-19px+5.77vw),64px)] 2xl:text-[64px] text-[#941E32] tracking-[-0.15px]"
+                >
+                  Sold out
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ──────────────────────────────────────────────────────────── -->
+    <!-- SECTION 2 PART B: "EVERY TUESDAY FRUITS RETURN" MARQUEE      -->
+    <!-- ──────────────────────────────────────────────────────────── -->
+    <section class="w-full bg-[#131313] py-[18px] sm:py-[24px] md:py-[32px] overflow-hidden border-t-[3px] border-[#1E1E1E] select-none pointer-events-none">
+      <div class="marquee-track flex whitespace-nowrap items-center pointer-events-none">
+        <!-- Repeated units for infinite smooth scroll -->
+        {
+          Array.from({ length: 4 }).map(() => (
+            <div class="flex items-center shrink-0 gap-[24px] sm:gap-[36px] md:gap-[50px] pr-[24px] sm:pr-[36px] md:pr-[50px]">
+              <span
+                class="uppercase font-display font-semibold text-[44px] leading-[44px] sm:text-[70px] sm:leading-[70px] md:text-[96px] md:leading-[90px] lg:text-[112px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.5px #FBF9D6;"
+              >
+                EVERY TUESDAY
+              </span>
+
+              <!-- Crate 44 Apple Stamp Logo in #FBF9D6 -->
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[44px] h-[44px] sm:w-[68px] sm:h-[68px] md:w-[90px] md:h-[90px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+
+              <span
+                class="uppercase font-display font-semibold text-[44px] leading-[44px] sm:text-[70px] sm:leading-[70px] md:text-[96px] md:leading-[90px] lg:text-[112px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.5px #FBF9D6;"
+              >
+                FRUITS RETURN
+              </span>
+
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[44px] h-[44px] sm:w-[68px] sm:h-[68px] md:w-[90px] md:h-[90px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+
+  <!-- ============================================================== -->
+  <!-- FOOTER: Global Footer ONLY (no "The list is small on purpose") -->
+  <!-- ============================================================== -->
+  <Footer showTheList={false} />
+</Layout>
+
+<style>
+  /* FruitTiltWheel Module Styles (Tutorial 106 & crate44.in) */
+  .FruitTiltWheel-module__VaPV9W__mwg_effect106 {
+    overflow: visible;
+  }
+  .FruitTiltWheel-module__VaPV9W__container {
+    transform-style: preserve-3d;
+  }
+  .FruitTiltWheel-module__VaPV9W__medias {
+    transform-style: preserve-3d;
+  }
+  .FruitTiltWheel-module__VaPV9W__media {
+    transform-style: preserve-3d;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+
+  /* 3D Cube Flip CTA Button */
+  .flip-btn:hover .flip-inner,
+  .card-order-btn:hover .flip-inner {
+    transform: rotateX(90deg);
+  }
+
+  /* Bottom card window marquee strip */
+  @keyframes cardFooterMarquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  .card-footer-marquee {
+    display: flex;
+    width: max-content;
+    animation: cardFooterMarquee 8s linear infinite;
+  }
+
+  /* Infinite Ledger Marquee Ribbon */
+  @keyframes returnMarquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: returnMarquee 18s linear infinite;
+    pointer-events: none;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  function initTheEdit() {
+    // 1. 3D Fruit Tilt Wheel (Made With GSAP Tutorial 106 & crate44.in exact logic)
+    const wheelSection = document.getElementById('tilt-wheel-section')
+    const mediasContainer = document.getElementById('tilt-medias')
+    const mediaEls = document.querySelectorAll<HTMLElement>('.fruit-wheel-item')
+    const iframes = document.querySelectorAll<HTMLIFrameElement>('.fruit-wheel-iframe')
+
+    if (wheelSection && mediasContainer && mediaEls.length > 0) {
+      const angles = Array.from({ length: mediaEls.length }, (_, i) => (i / mediaEls.length) * Math.PI * 2)
+      let d = 12
+
+      function calcDims() {
+        const rawW = window.innerWidth
+        const h = window.innerHeight
+        // For screen widths <= 770px (from 300px to 700px), lock the wheel calculation base to 770px
+        // so it appears at the exact same visual scale and size as it does at 770px.
+        // For screen widths > 770px, retain existing dynamic viewport scaling.
+        const w = rawW <= 770 ? 770 : rawW
+        const scale = d / 12
+        return {
+          rawW,
+          w,
+          h,
+          scale,
+          radiusDivisor: 3 / scale,
+          minDivisor: 3 / scale,
+          wheelRadiusFactor: 0.12 / scale,
+          translateZ_px: -26 * (w / 100) * scale,
+          perspective_px: w * scale,
+        }
+      }
+
+      let dims = calcDims()
+
+      let c = {
+        rotateX: 70,
+        rotateY: -20,
+        rotateZ: 0,
+        translateX: 0,
+        translateY: 0,
+      }
+      let m = { value: 0 } // gentle drift
+      let f = { value: 0 } // scroll spin offset
+      let u = { value: 0 } // perspective warp factor
+
+      function updateTransform() {
+        const { translateX, translateY, rotateX, rotateY, rotateZ } = c
+        const { translateZ_px } = dims
+        mediasContainer!.style.transform = `translate3d(${translateX}vw, ${translateY}vw, ${translateZ_px}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`
+        mediaEls.forEach((el) => {
+          gsap.set(el, {
+            rotationX: -rotateX,
+            rotationY: -rotateY,
+            rotation: -rotateZ,
+          })
+        })
+      }
+
+      function updatePositions() {
+        const { w, radiusDivisor, minDivisor, wheelRadiusFactor, perspective_px } = dims
+        wheelSection!.style.perspective = `${perspective_px * (1 + 0.3 * u.value)}px`
+        const currentAngle = m.value + f.value
+        const radius = w / Math.max(minDivisor, radiusDivisor - u.value * wheelRadiusFactor)
+        mediaEls.forEach((item, idx) => {
+          const angle = currentAngle + angles[idx]
+          gsap.set(item, {
+            xPercent: -50,
+            yPercent: -50,
+            x: Math.sin(angle) * radius,
+            y: Math.cos(angle) * radius,
+          })
+        })
+      }
+
+      const animEase = { duration: 0.8, ease: 'power3' }
+      const quickRotateX = gsap.quickTo(c, 'rotateX', animEase)
+      const quickRotateY = gsap.quickTo(c, 'rotateY', animEase)
+      const quickRotateZ = gsap.quickTo(c, 'rotateZ', { ...animEase, onUpdate: updateTransform })
+      const quickPersp = gsap.quickTo(u, 'value', { duration: 1.3, ease: 'power2.out', onUpdate: updatePositions })
+      const quickSpin = gsap.quickTo(f, 'value', { duration: 0.5, ease: 'power2', onUpdate: updatePositions })
+
+      // Interactive Mouse Cursor Tilt Tracking (Tutorial 106)
+      function handlePointerMove(clientX: number, clientY: number) {
+        const { rawW, h } = dims
+        quickRotateY((clientX / rawW) * 50 - 25)
+        quickRotateX((clientY / h) * 40 - 20 + 70)
+        quickRotateZ(-((clientX / rawW) * 10) + 5)
+      }
+
+      window.addEventListener('mousemove', (e) => handlePointerMove(e.clientX, e.clientY), { passive: true })
+      window.addEventListener(
+        'touchmove',
+        (e) => {
+          if (e.touches && e.touches[0]) {
+            handlePointerMove(e.touches[0].clientX, e.touches[0].clientY)
+          }
+        },
+        { passive: true }
+      )
+
+      dims = calcDims()
+      updateTransform()
+      updatePositions()
+
+      window.addEventListener('resize', () => {
+        dims = calcDims()
+        updateTransform()
+        updatePositions()
+      })
+
+      // ScrollTrigger: Whole circular path and each individual 3D fruit model spin in sync with scroll
+      let currentModelYaw = 0
+      ScrollTrigger.create({
+        trigger: '#the-edit-hero-section',
+        start: 'top top',
+        endTrigger: '#cards-section',
+        end: 'bottom bottom',
+        scrub: 1.25,
+        onUpdate: (self) => {
+          // Whole circular path spins in sync with scroll
+          quickSpin(self.progress * Math.PI * 4)
+          quickPersp(self.progress * 0.5)
+
+          // Each individual 3D fruit model spins on its axis with scroll
+          currentModelYaw = self.progress * 720
+          iframes.forEach((ifr) => {
+            try {
+              const win = ifr.contentWindow as any
+              if (win && win.ControlsAPI) {
+                win.ControlsAPI.set('yaw', currentModelYaw)
+              }
+            } catch (e) {}
+          })
+        },
+      })
+
+      // Forward wheel events from inside iframes to ensure scroll never gets stuck
+      iframes.forEach((ifr) => {
+        ifr.addEventListener('load', () => {
+          try {
+            const win = ifr.contentWindow as any
+            if (win && win.ControlsAPI) {
+              win.ControlsAPI.set('yaw', currentModelYaw)
+            }
+            win?.addEventListener(
+              'wheel',
+              (e: WheelEvent) => {
+                window.dispatchEvent(
+                  new WheelEvent('wheel', {
+                    deltaX: e.deltaX,
+                    deltaY: e.deltaY,
+                    deltaMode: e.deltaMode,
+                    clientX: e.clientX,
+                    clientY: e.clientY,
+                    bubbles: true,
+                    cancelable: true,
+                  })
+                )
+              },
+              { passive: true }
+            )
+          } catch (e) {}
+        })
+      })
+    }
+
+    let luxuryEase: gsap.EaseFunction
+    try {
+      luxuryEase = CustomEase.create('luxuryEditRipple', '0.16, 1, 0.3, 1')
+    } catch (e) {
+      luxuryEase = gsap.parseEase('power3.out')
+    }
+
+    // A. "THE EDIT" Hero Headline Character Ripple
+    const editHeroLines = document.querySelectorAll<HTMLElement>('.edit-hero-heading')
+    const editHeroChars = document.querySelectorAll<HTMLElement>('.edit-hero-char')
+
+    gsap.set(editHeroChars, {
+      yPercent: 115,
+      opacity: 0,
+      filter: 'blur(5px)',
+    })
+
+    const editHeroTl = gsap.timeline({ delay: 0.1 })
+    editHeroLines.forEach((line) => {
+      if (line.offsetParent === null) return
+      const lineChars = Array.from(line.querySelectorAll<HTMLElement>('.edit-hero-char'))
+      const centerIdx = (lineChars.length - 1) / 2
+
+      lineChars.forEach((char, charIdx) => {
+        const distFromCenter = Math.abs(charIdx - centerIdx)
+        const waveDelay = distFromCenter * 0.024
+
+        editHeroTl.to(
+          char,
+          {
+            yPercent: 0,
+            opacity: 1,
+            filter: 'blur(0px)',
+            duration: 1.6,
+            ease: luxuryEase,
+          },
+          waveDelay
+        )
+      })
+    })
+
+    // B. "WEEK OF [MARCH 4]" & Fruit Cards Animation
+    const weekLines = document.querySelectorAll<HTMLElement>('.week-heading')
+    const weekChars = document.querySelectorAll<HTMLElement>('.week-heading-char')
+    const cards = document.querySelectorAll<HTMLElement>('.fruit-card-anim')
+
+    gsap.set(weekChars, {
+      yPercent: 115,
+      opacity: 0,
+      filter: 'blur(5px)',
+    })
+    cards.forEach((c) => gsap.set(c, { opacity: 0, x: 50 }))
+
+    const weekTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#cards-section',
+        start: 'top 80%',
+        once: true,
+      },
+    })
+
+    weekLines.forEach((line, lineIndex) => {
+      const lineChars = Array.from(line.querySelectorAll<HTMLElement>('.week-heading-char'))
+      const centerIdx = (lineChars.length - 1) / 2
+      const lineStartDelay = lineIndex * 0.095
+
+      lineChars.forEach((char, charIdx) => {
+        const distFromCenter = Math.abs(charIdx - centerIdx)
+        const waveDelay = lineStartDelay + (distFromCenter * 0.024)
+
+        weekTl.to(
+          char,
+          {
+            yPercent: 0,
+            opacity: 1,
+            filter: 'blur(0px)',
+            duration: 1.6,
+            ease: luxuryEase,
+          },
+          waveDelay
+        )
+      })
+    })
+
+    weekTl.to(
+      cards,
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1.2,
+        stagger: 0.12,
+        ease: luxuryEase,
+      },
+      0.35
+    )
+
+    // C. "THIS WEEK'S LEDGER" Headline Character Ripple
+    const ledgerLines = document.querySelectorAll<HTMLElement>('.ledger-title-line')
+    const ledgerChars = document.querySelectorAll<HTMLElement>('.ledger-title-char')
+
+    gsap.set(ledgerChars, {
+      yPercent: 115,
+      opacity: 0,
+      filter: 'blur(5px)',
+    })
+
+    const ledgerTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '#ledger-section',
+        start: 'top 80%',
+        once: true,
+      },
+    })
+
+    ledgerLines.forEach((line, lineIndex) => {
+      const lineChars = Array.from(line.querySelectorAll<HTMLElement>('.ledger-title-char'))
+      const centerIdx = (lineChars.length - 1) / 2
+      const lineStartDelay = lineIndex * 0.095
+
+      lineChars.forEach((char, charIdx) => {
+        const distFromCenter = Math.abs(charIdx - centerIdx)
+        const waveDelay = lineStartDelay + (distFromCenter * 0.024)
+
+        ledgerTl.to(
+          char,
+          {
+            yPercent: 0,
+            opacity: 1,
+            filter: 'blur(0px)',
+            duration: 1.6,
+            ease: luxuryEase,
+          },
+          waveDelay
+        )
+      })
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheEdit)
+  } else {
+    initTheEdit()
+  }
+</script>

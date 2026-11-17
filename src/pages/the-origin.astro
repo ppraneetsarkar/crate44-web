@@ -1,0 +1,715 @@
+---
+// src/pages/the-origin.astro
+// Exact implementation of Figma Node 1953:2976 & 1817:3463 ("The Origin")
+// Section 1: Hero ("THE ORIGIN") with sky/meadow backdrop and luxury center-outward ripple animation
+// Section 2: Interactive Fruit Grid (MadeWithGSAP Effect 119) with 29 Sourced Fruits from Google Drive
+// Inner View: 3D Bottle Cylinder Flip (MadeWithGSAP Effect 126 / Tutorial 126)
+// Fixed font size & letter spacing across all fruits, fixed 16px padding, pure 3D cylinder rotation
+
+import Layout from '../layouts/Layout.astro'
+import Footer from '../components/Footer.astro'
+
+export interface TypographyVariant {
+  name: string
+  topGradient: string
+  bottomGradient: string
+}
+
+// Exactly 5 Typography Variations from Figma Node 1954:3031
+// Upper text = Linear Gradient Color A -> Color B
+// Bottom text = Exact opposite Linear Gradient Color B -> Color A
+export const TYPOGRAPHY_VARIANTS: Record<string, TypographyVariant> = {
+  // Var 1: Creme -> Fuchsia (Figma 1954:3017 'pink')
+  pinkCreme: {
+    name: 'pink-creme',
+    topGradient: 'linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%)',
+    bottomGradient: 'linear-gradient(180deg, #FC558D 0%, #FBF9D6 100%)',
+  },
+  // Var 2: Fuchsia -> Maroon (Figma 1954:3015 'red')
+  fuchsiaMaroon: {
+    name: 'fuchsia-maroon',
+    topGradient: 'linear-gradient(180deg, #FC558D 0%, #5B0000 100%)',
+    bottomGradient: 'linear-gradient(180deg, #5B0000 0%, #FC558D 100%)',
+  },
+  // Var 3: Grey-Light -> Yellow (Figma 1954:3010 'yellow')
+  greyYellow: {
+    name: 'grey-yellow',
+    topGradient: 'linear-gradient(180deg, #E1DDEC 0%, #F8FE03 100%)',
+    bottomGradient: 'linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%)',
+  },
+  // Var 4: White -> Sky Blue (Figma 1954:3009 'Blue')
+  whiteSkyBlue: {
+    name: 'white-skyblue',
+    topGradient: 'linear-gradient(180deg, #FFFFFF 0%, #3ED5FF 100%)',
+    bottomGradient: 'linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 100%)',
+  },
+  // Var 5: Yellow -> Sky Blue (Figma 1954:3021 'grade')
+  yellowSkyBlue: {
+    name: 'yellow-skyblue',
+    topGradient: 'linear-gradient(180deg, #F8FE03 0%, #3ED5FF 100%)',
+    bottomGradient: 'linear-gradient(180deg, #3ED5FF 0%, #F8FE03 100%)',
+  },
+}
+
+export interface OriginFruit {
+  id: string
+  name: string
+  country: string
+  img: string
+  variant: TypographyVariant
+}
+
+// 29 Sourced Fruits complemented by 5 distinct typography variations
+const originFruits: OriginFruit[] = [
+  { id: 'avocado', name: 'Avocado', country: 'Tanzania', img: '/images/origin/fruits/Avocado Tanzania Tanzania_converted.avif', variant: TYPOGRAPHY_VARIANTS.yellowSkyBlue },
+  { id: 'blue-grape', name: 'Blue Grape', country: 'India', img: '/images/origin/fruits/Blue grape India.avif', variant: TYPOGRAPHY_VARIANTS.whiteSkyBlue },
+  { id: 'cantaloupe-melon', name: 'Cantaloupe Melon', country: 'Spain', img: '/images/origin/fruits/Cantaloupe Melon Spain.avif', variant: TYPOGRAPHY_VARIANTS.pinkCreme },
+  { id: 'cherry', name: 'Cherry', country: 'Australia', img: '/images/origin/fruits/Cherry  Australia, Chile, USA.avif', variant: TYPOGRAPHY_VARIANTS.fuchsiaMaroon },
+  { id: 'dapoli-mango', name: 'Dapoli Mango', country: 'India', img: '/images/origin/fruits/Dapoli mango India.avif', variant: TYPOGRAPHY_VARIANTS.greyYellow },
+  { id: 'donut-peach', name: 'Donut Peach', country: 'Spain', img: '/images/origin/fruits/Donut Peach Spain.avif', variant: TYPOGRAPHY_VARIANTS.pinkCreme },
+  { id: 'dutch-strawberry', name: 'Dutch Strawberry', country: 'Spain', img: '/images/origin/fruits/Dutch Strawberry Spain.avif', variant: TYPOGRAPHY_VARIANTS.pinkCreme },
+  { id: 'fig', name: 'Fig', country: 'Egypt', img: '/images/origin/fruits/Fig Egypt.avif', variant: TYPOGRAPHY_VARIANTS.fuchsiaMaroon },
+  { id: 'flash-gala-apple', name: 'Flash Gala Apple', country: 'South Africa', img: '/images/origin/fruits/Flash Gala Apple South Africa.avif', variant: TYPOGRAPHY_VARIANTS.pinkCreme },
+  { id: 'galia-melon', name: 'Galia Melon', country: 'Spain', img: '/images/origin/fruits/GALIA MELON SPAIN.avif', variant: TYPOGRAPHY_VARIANTS.yellowSkyBlue },
+  { id: 'honey-dew-melon', name: 'Honey Dew Melon', country: 'Spain', img: '/images/origin/fruits/Honey Dew Melon Spain.avif', variant: TYPOGRAPHY_VARIANTS.yellowSkyBlue },
+  { id: 'jumbo-blueberry', name: 'Jumbo Blueberry', country: 'Peru', img: '/images/origin/fruits/Jumbo blueberry Peru.avif', variant: TYPOGRAPHY_VARIANTS.whiteSkyBlue },
+  { id: 'korean-beauty-pear', name: 'Korean Beauty Pear', country: 'Peru', img: '/images/origin/fruits/Korean Beauty Pear Peru.avif', variant: TYPOGRAPHY_VARIANTS.greyYellow },
+  { id: 'lychee', name: 'Lychee', country: 'India', img: '/images/origin/fruits/Lychee India.avif', variant: TYPOGRAPHY_VARIANTS.pinkCreme },
+  { id: 'mangosteen', name: 'Mangosteen', country: 'Thailand', img: '/images/origin/fruits/Mangosteen Thailand_converted.avif', variant: TYPOGRAPHY_VARIANTS.fuchsiaMaroon },
+  { id: 'mini-mandarin', name: 'Mini Mandarin', country: 'China', img: '/images/origin/fruits/Mini Mandarin China_converted.avif', variant: TYPOGRAPHY_VARIANTS.greyYellow },
+  { id: 'orange', name: 'Orange', country: 'Egypt', img: '/images/origin/fruits/Orange Egypt_converted.avif', variant: TYPOGRAPHY_VARIANTS.greyYellow },
+  { id: 'piel-de-sapo', name: 'Piel de Sapo', country: 'Spain', img: '/images/origin/fruits/Piel de Sapo  Spain_converted.avif', variant: TYPOGRAPHY_VARIANTS.yellowSkyBlue },
+  { id: 'plum', name: 'Plum', country: 'South Africa', img: '/images/origin/fruits/Plum South Africa South Africa_converted.avif', variant: TYPOGRAPHY_VARIANTS.fuchsiaMaroon },
+  { id: 'queen-apple', name: 'Queen Apple', country: 'New Zealand', img: '/images/origin/fruits/Queen Apple New Zealand_converted.avif', variant: TYPOGRAPHY_VARIANTS.fuchsiaMaroon },
+  { id: 'red-grape', name: 'Red Grape', country: 'India', img: '/images/origin/fruits/Red grape India_converted.avif', variant: TYPOGRAPHY_VARIANTS.fuchsiaMaroon },
+  { id: 'royal-beauty', name: 'Royal Beauty', country: 'New Zealand', img: '/images/origin/fruits/Royal beauty New Zealand_converted.avif', variant: TYPOGRAPHY_VARIANTS.pinkCreme },
+  { id: 'royal-gala', name: 'Royal Gala', country: 'New Zealand', img: '/images/origin/fruits/Royal Gala_New Zealand.avif', variant: TYPOGRAPHY_VARIANTS.pinkCreme },
+  { id: 'santa-claus-melon', name: 'Santa Claus Melon', country: 'Spain', img: '/images/origin/fruits/Santa Claus melon Spain_converted.avif', variant: TYPOGRAPHY_VARIANTS.yellowSkyBlue },
+  { id: 'seedless-mandarin', name: 'Seedless Mandarin', country: 'South Africa', img: '/images/origin/fruits/Seedless Mandrin South Africa_converted.avif', variant: TYPOGRAPHY_VARIANTS.greyYellow },
+  { id: 'washington-apple', name: 'Washington Apple', country: 'USA', img: '/images/origin/fruits/Washington Apple USA_converted.avif', variant: TYPOGRAPHY_VARIANTS.fuchsiaMaroon },
+  { id: 'white-grapes', name: 'White Grapes', country: 'India', img: '/images/origin/fruits/White Grapes India_converted.avif', variant: TYPOGRAPHY_VARIANTS.yellowSkyBlue },
+  { id: 'yellow-pitahaya', name: 'Yellow Pitahaya', country: 'Ecuador', img: '/images/origin/fruits/Yellow Pithaya  Ecuador_converted.avif', variant: TYPOGRAPHY_VARIANTS.greyYellow },
+  { id: 'yellow-plum', name: 'Yellow Plum', country: 'Africa', img: '/images/origin/fruits/Yellow Plum Africa_converted.avif', variant: TYPOGRAPHY_VARIANTS.greyYellow },
+]
+---
+
+<Layout title="The Origin | Crate 44 — Sourced Globally, Graded in Mumbai">
+  <main class="min-h-screen w-full overflow-x-clip bg-[#131313] selection:bg-[#F8FE03] selection:text-black">
+    <!-- ============================================================== -->
+    <!-- SECTION 1: HERO — THE ORIGIN (Figma Node 1953:2976 & 1762:1795)-->
+    <!-- ============================================================== -->
+    <section class="relative w-full min-h-[85vh] lg:min-h-[920px] flex flex-col items-center justify-center overflow-hidden pt-[140px] sm:pt-[180px] lg:pt-[208px] pb-24 lg:pb-32">
+      <!-- Background Meadow Image + Bottom Vignette Fade to #131313 -->
+      <div class="absolute inset-0 pointer-events-none select-none z-0">
+        <picture>
+          <img
+            src="/images/origin/hero_field.png"
+            alt="Field background"
+            class="w-full h-full object-cover object-center"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+        <!-- Seamless fade to #131313 -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[rgba(19,19,19,0.1)] to-[#131313] to-[92%]"></div>
+      </div>
+
+      <!-- Giant Headline: THE ORIGIN (scooped up by 48px) -->
+      <div class="relative z-10 w-full px-4 lg:px-8 max-w-[1920px] mx-auto flex flex-col items-center justify-center text-center">
+        <h1 class="origin-hero-headline -translate-y-[48px] select-none flex flex-col items-center justify-center text-center uppercase font-display font-semibold m-0 p-0">
+          <!-- Line 1: THE -->
+          <div class="origin-mask overflow-hidden py-1 w-full flex justify-center">
+            <div
+              class="origin-line flex flex-nowrap whitespace-nowrap justify-center text-[clamp(80px,18.5vw,296px)] leading-[0.81] tracking-[0.8px]"
+              data-line="THE"
+            >
+              <span class="origin-char inline-block will-change-transform">T</span>
+              <span class="origin-char inline-block will-change-transform">H</span>
+              <span class="origin-char inline-block will-change-transform">E</span>
+            </div>
+          </div>
+
+          <!-- Line 2: ORIGIN -->
+          <div class="origin-mask overflow-hidden py-1 w-full flex justify-center">
+            <div
+              class="origin-line flex flex-nowrap whitespace-nowrap justify-center text-[clamp(80px,18.5vw,296px)] leading-[0.81] tracking-[0.8px]"
+              data-line="ORIGIN"
+            >
+              <span class="origin-char inline-block will-change-transform">O</span>
+              <span class="origin-char inline-block will-change-transform">R</span>
+              <span class="origin-char inline-block will-change-transform">I</span>
+              <span class="origin-char inline-block will-change-transform">G</span>
+              <span class="origin-char inline-block will-change-transform">I</span>
+              <span class="origin-char inline-block will-change-transform">N</span>
+            </div>
+          </div>
+        </h1>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 2: THE GRID (Effect 119 - Figma Node 1817:3702)         -->
+    <!-- Columns: 3 col (<800px), 4-6 col (800-1920px), 7-8 col (1920px+)-->
+    <!-- Font scale: 3 col -> 11px | 4 to 6 col -> 12px | 7 to 8 col -> 14px -->
+    <!-- ============================================================== -->
+    <section id="origin-grid-section" class="relative w-full bg-[#131313] px-3 sm:px-6 lg:px-8 pt-8 pb-24 sm:pb-32 lg:pb-40">
+      <div class="w-full max-w-[1440px] min-[1500px]:max-w-[1840px] min-[1920px]:max-w-[2240px] min-[2300px]:max-w-[2640px] min-[2700px]:max-w-[3000px] mx-auto">
+        <div
+          id="origin-grid"
+          class="grid grid-cols-3 min-[800px]:grid-cols-4 min-[1200px]:grid-cols-5 min-[1500px]:grid-cols-6 min-[1920px]:grid-cols-7 min-[2300px]:grid-cols-8 min-[2700px]:grid-cols-9 gap-x-2 sm:gap-x-5 min-[800px]:gap-x-7 min-[1200px]:gap-x-[48px] min-[1500px]:gap-x-[52px] gap-y-6 sm:gap-y-9 min-[800px]:gap-y-11 min-[1200px]:gap-y-[56px] justify-items-center"
+        >
+          {
+            originFruits.map((fruit, index) => (
+              <div
+                class="origin-grid-card group flex flex-col items-center justify-start cursor-pointer select-none py-1 sm:py-2 transition-transform duration-300 ease-out"
+                data-fruit-index={index}
+                data-fruit-name={fruit.name}
+                data-fruit-country={fruit.country}
+                data-fruit-img={fruit.img}
+              >
+                <!-- Fruit Cutout - Pure Cutout Photo, No Circular Disc, No Border, No Vignette -->
+                <div class="relative flex items-center justify-center p-0 m-0 w-[100px] h-[100px] min-[400px]:w-[114px] min-[400px]:h-[114px] sm:w-[136px] sm:h-[136px] min-[800px]:w-[154px] min-[800px]:h-[154px] min-[1200px]:w-[172px] min-[1200px]:h-[172px] min-[1500px]:w-[188px] min-[1500px]:h-[188px] min-[1920px]:w-[204px] min-[1920px]:h-[204px] min-[2300px]:w-[220px] min-[2300px]:h-[220px]">
+                  <img
+                    src={fruit.img}
+                    alt={fruit.name}
+                    class="w-full h-full object-contain pointer-events-none select-none transition-transform duration-300 ease-out group-hover:scale-110"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+
+                <!-- Label: 11px (3 cols <800px), 12px (4 to 6 cols 800-1920px), 14px (7 to 8 cols 1920px+) -->
+                <span class="origin-card-label mt-2.5 sm:mt-3 font-sans font-normal tracking-[0.02em] uppercase text-white/90 text-center transition-colors duration-200 group-hover:text-white max-w-[105px] sm:max-w-[130px] min-[800px]:max-w-[150px] min-[1200px]:max-w-[170px] min-[1920px]:max-w-[200px] text-[11px] leading-[13px] min-[800px]:text-[12px] min-[800px]:leading-[15px] min-[1920px]:text-[14px] min-[1920px]:leading-[18px]">
+                  {fruit.name}
+                </span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- INNER VIEW MODAL: 3D BOTTLE CYLINDER FLIP (Effect 126)          -->
+    <!-- Top & bottom padding fixed at 16px. Constant font size & spacing-->
+    <!-- Pure 3D cylinder flip: text turns along bottle curvature        -->
+    <!-- ============================================================== -->
+    <div
+      id="fruit-modal"
+      class="fixed inset-0 z-40 bg-[#131313] flex flex-col justify-between items-center overflow-hidden transition-opacity duration-400 opacity-0 pointer-events-none select-none py-[16px]"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Fruit Origin Detail View"
+    >
+      <!-- TOP LAYER: 3D Bottle Cylinder Drum (Fruit Names) -->
+      <!-- Fixed 16px top padding, constant font size & letter spacing -->
+      <div class="relative z-20 w-full pt-[16px] flex items-center justify-center text-center pointer-events-none" style="perspective: 1200px;">
+        <div id="text-top-container" class="relative w-full h-[140px] sm:h-[190px] lg:h-[250px] flex items-center justify-center" style="transform-style: preserve-3d;">
+          {
+            originFruits.map((fruit, i) => (
+              <div
+                class="text-top-item absolute will-change-transform flex items-center justify-center select-none pointer-events-none px-4"
+                data-index={i}
+                style="transform-style: preserve-3d; backface-visibility: hidden; -webkit-backface-visibility: hidden;"
+              >
+                <h2
+                  class="font-display font-semibold uppercase text-[clamp(44px,9vw,190px)] leading-[0.95] tracking-[0.8px] text-center whitespace-nowrap"
+                  style={`background: ${fruit.variant.topGradient}; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.25));`}
+                >
+                  {fruit.name}
+                </h2>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- CENTER LAYER: 3D Stage with Exact Spacing & Zero Overlap -->
+      <div class="relative z-10 w-full flex-1 flex items-center justify-center overflow-hidden my-auto min-h-[250px] sm:min-h-[350px] lg:min-h-[460px]">
+        <!-- Left & Right Edge Vignette Layers -->
+        <div class="absolute inset-y-0 left-0 w-[20vw] max-w-[460px] bg-gradient-to-r from-[#131313] via-[#131313]/90 to-transparent pointer-events-none z-30"></div>
+        <div class="absolute inset-y-0 right-0 w-[20vw] max-w-[460px] bg-gradient-to-l from-[#131313] via-[#131313]/90 to-transparent pointer-events-none z-30"></div>
+
+        <!-- 3D Ring Container -->
+        <div
+          id="cylinder-container"
+          class="relative w-full h-full flex items-center justify-center cursor-grab active:cursor-grabbing"
+        >
+          <!-- Fruit Items injected / controlled by GSAP -->
+          {
+            originFruits.map((fruit, i) => (
+              <div
+                class="cylinder-item absolute select-none cursor-pointer will-change-transform flex items-center justify-center"
+                data-index={i}
+              >
+                <img
+                  src={fruit.img}
+                  alt={fruit.name}
+                  class="w-full h-full object-contain pointer-events-none select-none"
+                  loading="eager"
+                />
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- BOTTOM LAYER: 3D Bottle Cylinder Drum (Origin Countries) + Mobile WhatsApp CTA -->
+      <!-- Fixed 16px bottom padding, constant font size & letter spacing -->
+      <div class="relative z-20 w-full pb-[16px] flex flex-col items-center justify-center text-center">
+        <!-- Country Ring: 3D Cylinder Stage -->
+        <div class="relative w-full flex items-center justify-center pointer-events-none" style="perspective: 1200px;">
+          <div id="text-bottom-container" class="relative w-full h-[120px] sm:h-[160px] lg:h-[220px] flex items-center justify-center" style="transform-style: preserve-3d;">
+            {
+              originFruits.map((fruit, i) => (
+                <div
+                  class="text-bottom-item absolute will-change-transform flex items-center justify-center select-none pointer-events-none px-4"
+                  data-index={i}
+                  style="transform-style: preserve-3d; backface-visibility: hidden; -webkit-backface-visibility: hidden;"
+                >
+                  <h2
+                    class="font-display font-semibold uppercase text-[clamp(42px,8.5vw,180px)] leading-[0.95] tracking-[0.8px] text-center pointer-events-none whitespace-nowrap"
+                    style={`background: ${fruit.variant.bottomGradient}; background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.25));`}
+                  >
+                    {fruit.country}
+                  </h2>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Mobile WhatsApp Pill CTA Button (Figma Node 1803:2890 / Component 18) -->
+        <a
+          id="modal-whatsapp-cta"
+          href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20know%20more%20about%20Lychee%20from%20India"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pointer-events-auto mt-2 sm:mt-4 flex md:hidden items-center justify-center gap-[18px] w-full max-w-[380px] h-[52px] rounded-[8px] bg-[#F8FE03] hover:bg-[#EFF402] border border-[#1E1E1E] text-[#131313] font-display font-semibold text-[24px] sm:text-[32px] leading-[34px] uppercase tracking-normal shadow-lg transition-transform active:scale-95"
+        >
+          <!-- WhatsApp Icon -->
+          <svg class="w-[26px] h-[26px] fill-current shrink-0" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.634.072-1.849-.433-.999-.414-1.636-1.427-1.686-1.493-.05-.067-.404-.537-.404-1.024 0-.486.257-.726.347-.824.091-.099.199-.124.266-.124.066 0 .133 0 .19.004.062.003.144-.023.226.172.083.197.283.693.308.744.025.05.042.11.008.177-.034.067-.05.11-.1.17-.05.059-.104.133-.149.178-.05.05-.102.105-.044.205.058.099.258.427.553.69.38.338.701.443.8.493.099.05.158.042.217-.025.058-.067.249-.29.316-.39.067-.099.133-.083.225-.05.091.033.582.274.682.324.099.05.166.075.19.116.025.042.025.241-.119.646z" />
+          </svg>
+          <span>LETS TALK ON WHATSAPP</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Global Footer (without "The list is small on purpose") -->
+    <Footer showTheList={false} />
+  </main>
+</Layout>
+
+<style>
+  .origin-char {
+    background: linear-gradient(180deg, #F8FE03 0%, #FBF9D6 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0px 0px 4px rgba(178, 178, 178, 0.35));
+  }
+  .cylinder-item {
+    top: 50%;
+    left: 50%;
+    margin-top: calc(-1 * var(--item-size, 460px) / 2);
+    margin-left: calc(-1 * var(--item-size, 460px) / 2);
+    width: var(--item-size, 460px);
+    height: var(--item-size, 460px);
+  }
+  .text-top-item,
+  .text-bottom-item {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transform-origin: center center;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    display: none;
+    opacity: 0;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  const luxuryEase = CustomEase.create('luxuryEaseCustom', '0.16, 1, 0.3, 1')
+
+  // Fruit Data Interface
+  interface FruitItem {
+    name: string
+    country: string
+    img: string
+  }
+
+  function initTheOrigin() {
+    // ─────────────────────────────────────────────────────────────
+    // 1. SECTION 1 HERO ANIMATION (Site-wide Standard)
+    // ─────────────────────────────────────────────────────────────
+    const heroLines = Array.from(document.querySelectorAll<HTMLElement>('.origin-line'))
+    const heroChars = Array.from(document.querySelectorAll<HTMLElement>('.origin-char'))
+
+    if (heroChars.length > 0) {
+      gsap.set(heroChars, {
+        yPercent: 115,
+        opacity: 0,
+        filter: 'blur(5px)',
+      })
+
+      const heroTl = gsap.timeline({ delay: 0.2 })
+
+      heroLines.forEach((line, lineIndex) => {
+        const chars = Array.from(line.querySelectorAll<HTMLElement>('.origin-char'))
+        const centerIdx = (chars.length - 1) / 2
+        const lineStartDelay = lineIndex * 0.095
+
+        chars.forEach((char, charIdx) => {
+          const distFromCenter = Math.abs(charIdx - centerIdx)
+          const waveDelay = lineStartDelay + (distFromCenter * 0.024)
+
+          heroTl.to(
+            char,
+            {
+              yPercent: 0,
+              opacity: 1,
+              filter: 'blur(0px)',
+              duration: 1.6,
+              ease: luxuryEase,
+            },
+            waveDelay
+          )
+        })
+      })
+    }
+
+    // ─────────────────────────────────────────────────────────────
+    // 2. SECTION 2 GRID INTERACTION (MadeWithGSAP Effect 119)
+    // ─────────────────────────────────────────────────────────────
+    const gridCards = Array.from(document.querySelectorAll<HTMLElement>('.origin-grid-card'))
+    const fruitsData: FruitItem[] = gridCards.map((card) => ({
+      name: card.dataset.fruitName || '',
+      country: card.dataset.fruitCountry || '',
+      img: card.dataset.fruitImg || '',
+    }))
+
+    // Hover effect: gentle magnetic scaling and neighboring dimming
+    gridCards.forEach((card) => {
+      card.addEventListener('mouseenter', () => {
+        gridCards.forEach((other) => {
+          if (other !== card) {
+            gsap.to(other, { opacity: 0.7, duration: 0.3, ease: 'power2.out' })
+          }
+        })
+      })
+
+      card.addEventListener('mouseleave', () => {
+        gridCards.forEach((other) => {
+          gsap.to(other, { opacity: 1, duration: 0.4, ease: 'power2.out' })
+        })
+      })
+    })
+
+    // ─────────────────────────────────────────────────────────────
+    // 3. INNER DETAIL MODAL: 3D BOTTLE CYLINDER FLIP (Effect 126)
+    // ─────────────────────────────────────────────────────────────
+    const modal = document.getElementById('fruit-modal')
+    const modalWhatsappCta = document.getElementById('modal-whatsapp-cta') as HTMLAnchorElement | null
+    const cylinderContainer = document.getElementById('cylinder-container')
+    const cylinderItems = Array.from(document.querySelectorAll<HTMLElement>('.cylinder-item'))
+    const textTopItems = Array.from(document.querySelectorAll<HTMLElement>('.text-top-item'))
+    const textBottomItems = Array.from(document.querySelectorAll<HTMLElement>('.text-bottom-item'))
+
+    let currentIndex = 0
+    let isModalOpen = false
+    const totalItems = fruitsData.length
+
+    const cylinderState = {
+      progress: 0,
+    }
+
+    function renderCylinder() {
+      const isMobile = window.innerWidth < 768
+      const winWidth = window.innerWidth
+      const itemSize = isMobile
+        ? Math.min(320, Math.max(220, winWidth * 0.72))
+        : Math.min(508, Math.max(340, winWidth * 0.28))
+
+      cylinderContainer?.style.setProperty('--item-size', `${itemSize}px`)
+
+      const currentProgress = cylinderState.progress
+
+      // 1. Render 3D Fruit Items (Media Ring)
+      cylinderItems.forEach((el, i) => {
+        let diff = i - currentProgress
+
+        // Wrap around circular index diff
+        while (diff > totalItems / 2) diff -= totalItems
+        while (diff < -totalItems / 2) diff += totalItems
+
+        const sign = Math.sign(diff)
+        const a = Math.abs(diff)
+
+        if (isMobile) {
+          // Mobile: 3 visible items with clean horizontal gap, no overlapping
+          if (a > 1.3) {
+            el.style.display = 'none'
+            el.style.opacity = '0'
+            return
+          }
+
+          const baseSpacing = winWidth * 0.52
+          const x = sign * a * baseSpacing
+          const y = Math.min(1, a) * 20
+          const scale = a <= 1 ? 1.0 - a * (1.0 - 0.45) : Math.max(0.1, 0.45 - (a - 1) * 0.3)
+          const opacity = a <= 1 ? 1.0 - a * 0.2 : Math.max(0, 0.8 - (a - 1) * 1.8)
+          const zIndex = Math.round((2 - a) * 50)
+
+          el.style.display = 'flex'
+          el.style.zIndex = `${zIndex}`
+          el.style.opacity = `${opacity}`
+          el.style.transform = `translate3d(${x}px, ${y}px, 0px) scale(${scale})`
+        } else {
+          // Desktop: 5 visible items with exact ~70-90px gap, zero overlapping
+          if (a > 2.4) {
+            el.style.display = 'none'
+            el.style.opacity = '0'
+            return
+          }
+
+          const baseSpacing = Math.min(480, Math.max(340, winWidth * 0.27))
+          let x = 0
+          if (a <= 1) {
+            x = sign * a * baseSpacing
+          } else {
+            x = sign * (baseSpacing + (a - 1) * baseSpacing * 0.75)
+          }
+
+          const y = Math.min(2, a) * 28
+          let scale = 1.0
+          if (a <= 1) {
+            scale = 1.0 - a * (1.0 - 0.48)
+          } else {
+            scale = 0.48 - (a - 1) * (0.48 - 0.28)
+          }
+
+          let opacity = 1.0
+          if (a <= 1) {
+            opacity = 1.0 - a * 0.08
+          } else {
+            opacity = 0.92 - (a - 1) * 0.35
+          }
+          if (a > 2) {
+            opacity = Math.max(0, opacity - (a - 2) * 1.2)
+          }
+
+          const zIndex = Math.round((3 - a) * 50)
+
+          el.style.display = 'flex'
+          el.style.zIndex = `${zIndex}`
+          el.style.opacity = `${opacity}`
+          el.style.transform = `translate3d(${x}px, ${y}px, 0px) scale(${scale})`
+        }
+      })
+
+      // 2. Render 3D Bottle Cylinder Flip (Effect 126)
+      // The text is wrapped on the surface of a rotating cylinder (like a Coke bottle label).
+      // When turning the bottle, the text rotates around the bottle's vertical axis,
+      // curving into 3D depth, while the next text turns in from the other side.
+      // Constant font size, constant letter spacing across all fruits.
+      const bottleRadius = isMobile
+        ? Math.min(520, Math.max(340, winWidth * 0.8))
+        : Math.min(850, Math.max(550, winWidth * 0.52))
+      // 90 degree bottle flip per fruit transition
+      const stepAngle = 90
+
+      const renderBottleDrum = (items: HTMLElement[]) => {
+        items.forEach((el, i) => {
+          let diff = i - currentProgress
+          while (diff > totalItems / 2) diff -= totalItems
+          while (diff < -totalItems / 2) diff += totalItems
+
+          const a = Math.abs(diff)
+
+          // Only the front and immediately transitioning faces of the bottle are active
+          if (a >= 0.98) {
+            el.style.display = 'none'
+            el.style.opacity = '0'
+            return
+          }
+
+          const thetaDeg = diff * stepAngle
+          const thetaRad = (thetaDeg * Math.PI) / 180
+
+          // True 3D Cylindrical coordinates on the bottle surface
+          const x = bottleRadius * Math.sin(thetaRad)
+          const z = bottleRadius * (Math.cos(thetaRad) - 1) // 0 at front center, recedes into depth
+          const rotateY = thetaDeg // rotates along the bottle curvature tangent
+
+          // Smooth opacity: 1.0 at front face, fading to 0 as it turns around the side of the bottle
+          const opacity = Math.max(0, Math.cos(thetaRad))
+          const zIndex = Math.round((1.5 - a) * 100)
+
+          el.style.display = 'flex'
+          el.style.zIndex = `${zIndex}`
+          el.style.opacity = `${opacity}`
+          el.style.transform = `translate3d(calc(-50% + ${x}px), -50%, ${z}px) rotateY(${rotateY}deg)`
+        })
+      }
+
+      renderBottleDrum(textTopItems)
+      renderBottleDrum(textBottomItems)
+
+      // 3. Update WhatsApp CTA Link dynamically to match active centered fruit
+      const activeIdx = ((Math.round(currentProgress) % totalItems) + totalItems) % totalItems
+      const activeFruit = fruitsData[activeIdx]
+      if (modalWhatsappCta && activeFruit) {
+        const text = encodeURIComponent(`Hi Crate44, I would like to know more about ${activeFruit.name} from ${activeFruit.country}.`)
+        modalWhatsappCta.href = `https://wa.me/?text=${text}`
+      }
+    }
+
+    function goToIndex(idx: number, duration: number = 0.7) {
+      currentIndex = ((Math.round(idx) % totalItems) + totalItems) % totalItems
+
+      gsap.to(cylinderState, {
+        progress: idx,
+        duration,
+        ease: 'power3.out',
+        onUpdate: renderCylinder,
+      })
+    }
+
+    function openModal(startIndex: number) {
+      if (!modal) return
+      isModalOpen = true
+      currentIndex = startIndex
+      cylinderState.progress = startIndex
+
+      renderCylinder()
+
+      modal.classList.remove('pointer-events-none', 'opacity-0')
+      modal.classList.add('pointer-events-auto', 'opacity-100')
+
+      document.body.style.overflow = 'hidden'
+
+      gsap.fromTo(
+        [cylinderContainer, '#text-top-container', '#text-bottom-container'],
+        { scale: 0.95, opacity: 0 },
+        { scale: 1, opacity: 1, duration: 0.45, ease: 'power3.out', stagger: 0.03 }
+      )
+    }
+
+    function closeModal() {
+      if (!modal) return
+      isModalOpen = false
+
+      modal.classList.remove('pointer-events-auto', 'opacity-100')
+      modal.classList.add('pointer-events-none', 'opacity-0')
+
+      document.body.style.overflow = ''
+    }
+
+    // Grid Card Click Handlers
+    gridCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const idx = parseInt(card.dataset.fruitIndex || '0', 10)
+        openModal(idx)
+      })
+    })
+
+    // Flanking Fruit Click in Cylinder
+    cylinderItems.forEach((item) => {
+      item.addEventListener('click', (e) => {
+        if (hasDragged) return
+        e.stopPropagation()
+        const clickedIdx = parseInt(item.dataset.index || '0', 10)
+        let diff = clickedIdx - cylinderState.progress
+        while (diff > totalItems / 2) diff -= totalItems
+        while (diff < -totalItems / 2) diff += totalItems
+        goToIndex(cylinderState.progress + diff)
+      })
+    })
+
+    // Clicking anywhere on modal backdrop/background closes the modal (unless dragged)
+    modal?.addEventListener('click', (e) => {
+      if (hasDragged) return
+      const target = e.target as HTMLElement
+      if (target.closest('#modal-whatsapp-cta')) return
+      if (target.closest('.cylinder-item')) return
+      closeModal()
+    })
+
+    // Keyboard support
+    window.addEventListener('keydown', (e) => {
+      if (!isModalOpen) return
+      if (e.key === 'Escape') closeModal()
+      if (e.key === 'ArrowLeft') goToIndex(cylinderState.progress - 1)
+      if (e.key === 'ArrowRight') goToIndex(cylinderState.progress + 1)
+    })
+
+    // Drag / Touch Swipe gesture handling
+    let isDragging = false
+    let hasDragged = false
+    let startX = 0
+    let startProgress = 0
+
+    function onPointerDown(e: MouseEvent | TouchEvent) {
+      if (!isModalOpen) return
+      const target = e.target as HTMLElement
+      if (target.closest('#modal-whatsapp-cta')) return
+
+      isDragging = true
+      hasDragged = false
+      startX = 'touches' in e ? e.touches[0].clientX : e.clientX
+      startProgress = cylinderState.progress
+      gsap.killTweensOf(cylinderState)
+    }
+
+    function onPointerMove(e: MouseEvent | TouchEvent) {
+      if (!isDragging) return
+      const currentX = 'touches' in e ? e.touches[0].clientX : e.clientX
+      const deltaX = currentX - startX
+      if (Math.abs(deltaX) > 6) {
+        hasDragged = true
+      }
+      const sensitivity = window.innerWidth < 768 ? 0.005 : 0.003
+      cylinderState.progress = startProgress - (deltaX * sensitivity)
+      renderCylinder()
+    }
+
+    function onPointerUp() {
+      if (!isDragging) return
+      isDragging = false
+      const target = Math.round(cylinderState.progress)
+      goToIndex(target, 0.5)
+      setTimeout(() => {
+        hasDragged = false
+      }, 50)
+    }
+
+    cylinderContainer?.addEventListener('mousedown', onPointerDown)
+    window.addEventListener('mousemove', onPointerMove)
+    window.addEventListener('mouseup', onPointerUp)
+
+    cylinderContainer?.addEventListener('touchstart', onPointerDown, { passive: true })
+    window.addEventListener('touchmove', onPointerMove, { passive: true })
+    window.addEventListener('touchend', onPointerUp)
+
+    // Window Resize handling
+    // Apply the mobile fruit-ring layout before the first paint. Without this,
+    // the markup's 460px fallback leaves every fruit stacked at the center.
+    if (window.matchMedia('(max-width: 499px)').matches) renderCylinder()
+    window.addEventListener('resize', renderCylinder)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTheOrigin)
+  } else {
+    initTheOrigin()
+  }
+  document.addEventListener('astro:page-load', initTheOrigin)
+</script>

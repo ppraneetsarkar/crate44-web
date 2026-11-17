@@ -1,0 +1,377 @@
+---
+// src/components/page2/Section1PartA_Circular.astro
+// Page 2 · Section 1 Part A: "THE EDIT" & 3D Circular Fruit Interaction (GSAP Effect 106)
+// Figma Node: 1897:2083 / 1897:2302
+// Follows exact design tokens, typography, and card framing from Page 1
+
+import CrateStamp from '../CrateStamp.astro'
+
+const fruits = [
+  {
+    name: "DURIAN",
+    origin: "MONTHONG · THAILAND",
+    subtitle: "Tree-ripened · Peak Brix",
+    src: "/3d-fruits/page2/diruain.html",
+    tag: "RARE LOT",
+    price: "3,800"
+  },
+  {
+    name: "KIWI",
+    origin: "ZESPRI GOLD · NZ",
+    subtitle: "Cold Run Air Freight",
+    src: "/3d-fruits/page2/kiwi.html",
+    tag: "GOLDEN SWEET",
+    price: "1,200"
+  },
+  {
+    name: "NAGPUR ORANGE",
+    origin: "VIDARBHA MANDARIN",
+    subtitle: "Cluster Harvested",
+    src: "/3d-fruits/page2/ngp orange.html",
+    tag: "IN SEASON",
+    price: "420"
+  },
+  {
+    name: "PASSION FRUIT",
+    origin: "COORG ESTATE",
+    subtitle: "Crinkled Skin Sweetness",
+    src: "/3d-fruits/page2/passion fruit.html",
+    tag: "PRIME BRIX",
+    price: "950"
+  },
+  {
+    name: "POMEGRANATE",
+    origin: "BHAGWA RUBY",
+    subtitle: "Deep Red Arils",
+    src: "/3d-fruits/page2/pomegranate.html",
+    tag: "SOLD OUT",
+    price: "1,400"
+  },
+  {
+    name: "WATERMELON",
+    origin: "SUGAR BABY",
+    subtitle: "Field Vine Sweetness",
+    src: "/3d-fruits/page2/Watermenlon.html",
+    tag: "SOLD OUT",
+    price: "850"
+  }
+]
+---
+
+<section
+  id="the-edit-hero"
+  class="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden bg-dark text-creme select-none"
+  data-node-id="1897:2083"
+>
+  <!-- Atmospheric Cloud Layer with Parallax -->
+  <div
+    id="hero-cloud-layer"
+    aria-hidden="true"
+    class="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden opacity-30 mix-blend-screen scale-105 will-change-transform transform-gpu"
+  >
+    <img
+      src="/assets/page2/cloud-bg.avif"
+      alt="Atmospheric Clouds"
+      class="w-full h-full object-cover object-center filter blur-[0.5px]"
+      loading="eager"
+    />
+  </div>
+
+  <!-- Exact Figma Vignette & Gradient Overlays -->
+  <div
+    class="absolute inset-0 pointer-events-none z-[1]"
+    style="background: radial-gradient(circle at 50% 45%, rgba(248, 254, 3, 0.05) 0%, rgba(19, 19, 19, 0.6) 65%, #131313 100%);"
+  ></div>
+  <div
+    class="absolute bottom-0 left-0 right-0 h-48 pointer-events-none z-[2]"
+    style="background: linear-gradient(180deg, transparent 0%, #131313 100%);"
+  ></div>
+
+  <!-- Header Navigation: Matches Page 1 Typography & Brand Guidelines -->
+  <header class="relative z-30 w-full px-[16px] sm:px-[24px] lg:px-[32px] pt-[20px] pb-[16px] flex items-center justify-between border-b border-white/10 backdrop-blur-md bg-dark/40">
+    <a href="/" class="flex items-center gap-3 group">
+      <span class="font-display font-semibold text-2xl sm:text-3xl tracking-wider text-creme group-hover:text-yellow transition-colors">
+        CRATE 44
+      </span>
+      <span class="text-[10px] tracking-widest font-mono uppercase px-2 py-0.5 rounded bg-white/10 text-yellow border border-yellow/20">
+        MUMBAI
+      </span>
+    </a>
+
+    <!-- Nav Links (Desktop) -->
+    <nav class="hidden md:flex items-center gap-8 text-[12px] uppercase font-mono tracking-[0.22em] text-creme/75">
+      <a href="/the-edit" class="text-yellow border-b-2 border-yellow pb-0.5 font-bold">THE EDIT</a>
+      <a href="/#section-2" class="hover:text-creme transition-colors">THE STANDARD</a>
+      <a href="/#section-6" class="hover:text-creme transition-colors">ORIGINS</a>
+      <a href="/#section-7" class="hover:text-creme transition-colors">GIFTING</a>
+      <a href="/#section-3" class="hover:text-creme transition-colors">THE HOUSE</a>
+    </nav>
+
+    <!-- Top Right Action matching Page 1 Hero Button style -->
+    <div class="flex items-center gap-3">
+      <a
+        href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20join%20the%20list"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="bg-yellow border border-yellow flex items-center justify-center px-4 py-2 rounded-[8px] transition-transform duration-200 hover:scale-[1.03] active:scale-[0.97]"
+      >
+        <span class="font-display font-semibold text-xs sm:text-sm leading-none text-dark uppercase tracking-wider">
+          JOIN THE LIST
+        </span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Title & Headline Bar using Page 1 text-fluid-hero scaling -->
+  <div class="relative z-20 w-full text-center pt-6 sm:pt-8 px-[16px]">
+    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-yellow/30 bg-yellow/10 mb-2">
+      <span class="w-1.5 h-1.5 rounded-full bg-yellow animate-ping"></span>
+      <span class="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.25em] text-yellow font-bold">
+        WEEKLY LIVE EDIT · 3D ORBIT
+      </span>
+    </div>
+    
+    <h1 class="font-display uppercase not-italic text-creme break-words tracking-[0] select-none text-fluid-hero drop-shadow-[0_12px_40px_rgba(0,0,0,0.85)]">
+      THE EDIT
+    </h1>
+
+    <p class="font-body font-bold text-xs sm:text-base text-creme/70 max-w-xl mx-auto mt-2 tracking-tight">
+      Six fruits at their uncompromised harvest peak. Drag or scroll to orbit the crates.
+    </p>
+  </div>
+
+  <!-- 3D Circular Ring Stage (MadeWithGSAP Effect 106) -->
+  <div
+    id="wheel-stage-container"
+    class="relative z-20 flex-1 w-full flex items-center justify-center my-auto min-h-[460px] sm:min-h-[540px] md:min-h-[620px] overflow-visible cursor-grab active:cursor-grabbing"
+    style="perspective: 1400px; -webkit-perspective: 1400px;"
+  >
+    <!-- Pivot Ring Parent Wrapper for 3D Transform -->
+    <div
+      id="wheel-pivot"
+      class="relative w-[280px] sm:w-[340px] md:w-[400px] h-[360px] sm:h-[420px] md:h-[480px] flex items-center justify-center will-change-transform transform-gpu"
+      style="transform-style: preserve-3d; -webkit-transform-style: preserve-3d; transform: rotateX(-5deg) rotateY(0deg);"
+    >
+      {fruits.map((fruit, idx) => (
+        <div
+          class="wheel-card-slot absolute flex flex-col items-center will-change-transform transform-gpu"
+          data-slot-index={idx}
+          style="transform-style: preserve-3d; -webkit-transform-style: preserve-3d;"
+        >
+          <!-- Card Frame with exact Page 1 cornering & yellow stroke (Node 1838:2040) -->
+          <div
+            class="card-inner relative flex flex-col select-none overflow-hidden w-[240px] sm:w-[300px] md:w-[340px] h-[320px] sm:h-[390px] md:h-[440px] rounded-[10px] sm:rounded-[12px] border-[3px] sm:border-[4px] md:border-[5px] border-[#F8FE03] border-solid bg-[#131313]/90 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.85)]"
+            style="backface-visibility: hidden; -webkit-backface-visibility: hidden;"
+          >
+            <!-- Top-Left: Fruit Name & Origin -->
+            <div class="absolute left-[9px] top-[9px] z-10 uppercase text-left font-display font-semibold text-[26px] sm:text-[34px] md:text-[40px] leading-[26px] sm:leading-[32px] md:leading-[38px] text-[#F8FE03]">
+              <p class="m-0 leading-tight">{fruit.name}</p>
+              <span class="font-mono text-[8px] sm:text-[9px] tracking-[0.2em] text-creme/80 block mt-0.5">
+                {fruit.origin}
+              </span>
+            </div>
+
+            <!-- Top-Right: Price Badge with Page 1 SVG Rupee Glyph -->
+            <div
+              class="card-price-badge absolute z-10 uppercase flex items-baseline justify-center tracking-tight select-none font-display font-semibold -top-[3px] -right-[3px] pt-[6px] sm:pt-[8px] pb-[7px] sm:pb-[9px] pl-[8px] sm:pl-[10px] pr-[12px] sm:pr-[16px] rounded-bl-[16px] sm:rounded-bl-[22px] rounded-br-[3px] rounded-tr-[16px] sm:rounded-tr-[22px] bg-[#F8FE03] text-[#131313] text-center text-[24px] sm:text-[32px] md:text-[38px] leading-none gap-[2px]"
+            >
+              <svg
+                width="18"
+                height="28"
+                viewBox="0 0 25 40"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="shrink-0 self-center w-[12px] sm:w-[16px] h-[18px] sm:h-[26px]"
+              >
+                <path
+                  d="M10.304 39.984L0 22.064V18.536H2.576C4.144 18.536 5.50667 18.3493 6.664 17.976C7.82133 17.6027 8.75467 17.024 9.464 16.24C10.2106 15.4187 10.696 14.4107 10.92 13.216H0V9.296H10.864C10.64 8.13867 10.2106 7.168 9.576 6.38401C8.94133 5.6 8.10133 5.00267 7.056 4.59201C6.01067 4.144 4.74133 3.92 3.248 3.92H0V0H24.472V3.92H15.008C15.7546 4.62934 16.352 5.43201 16.8 6.32801C17.2853 7.18667 17.6026 8.17601 17.752 9.296H24.472V13.216H17.864C17.528 15.9413 16.464 18.088 14.672 19.656C12.9173 21.1867 10.6213 22.1947 7.784 22.68L18.648 39.984H10.304Z"
+                  fill="#131313"
+                />
+              </svg>
+              <span>{fruit.price}</span>
+            </div>
+
+            <!-- Card Center: Embedded 3D Canvas / Fruit Viewer -->
+            <div class="relative w-full flex-1 flex items-center justify-center my-1 overflow-visible pointer-events-none">
+              <iframe
+                src={fruit.src}
+                title={`${fruit.name} 3D Model`}
+                class="w-full h-full border-none select-none scale-[1.12] pointer-events-auto"
+                style="background: transparent;"
+                allow="xr-spatial-tracking; autoplay; fullscreen"
+                loading="lazy"
+              ></iframe>
+            </div>
+
+            <!-- Bottom Marquee Ribbon matching Page 1 ProductCards -->
+            <div
+              class="card-marquee-wrap inline-flex justify-center items-center absolute z-20 pointer-events-none select-none -bottom-[2px] -left-[2px] -right-[2px] h-[24px] sm:h-[28px] py-[4px] px-[6px] bg-[#F8FE03] text-[#131313]"
+            >
+              <div class="w-full relative overflow-hidden flex items-center justify-center">
+                <span class="font-mono text-[8px] sm:text-[9px] font-bold tracking-[2.5px] uppercase truncate">
+                  {fruit.subtitle} · {fruit.tag}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Orbit Floor Center Ring Glow with Crate Stamp -->
+    <div
+      aria-hidden="true"
+      class="absolute w-[450px] sm:w-[620px] h-[450px] sm:h-[620px] rounded-full pointer-events-none -z-10 opacity-25 flex items-center justify-center"
+      style="transform: rotateX(85deg) translateZ(-160px); background: radial-gradient(circle, rgba(248, 254, 3, 0.35) 0%, rgba(248, 254, 3, 0.05) 50%, transparent 70%); border: 1.5px dashed rgba(248, 254, 3, 0.4);"
+    >
+      <CrateStamp class="w-28 h-28 opacity-40 text-yellow" />
+    </div>
+  </div>
+
+  <!-- Bottom Bar: Status + Quick Scroll Navigation -->
+  <div class="relative z-30 w-full px-[16px] sm:px-[24px] pb-[16px] flex items-center justify-between text-[11px] font-mono tracking-widest uppercase text-creme/60">
+    <div class="flex items-center gap-2">
+      <span class="inline-block w-2 h-2 rounded-full bg-yellow animate-pulse"></span>
+      <span>SCROLL SPEED CONTROLS 3D SPIN</span>
+    </div>
+    <div class="hidden sm:flex items-center gap-2">
+      <span>← DRAG HORIZONTALLY TO ROTATE →</span>
+    </div>
+    <a href="#weekly-cards-section" class="flex items-center gap-1.5 text-yellow hover:underline cursor-pointer">
+      <span>VIEW FULL EDIT CARDS</span>
+      <span>↓</span>
+    </a>
+  </div>
+</section>
+
+<!-- Dynamic Font Scaling Rules for Hero matching Page 1 -->
+<style>
+  .text-fluid-hero {
+    font-size: clamp(56px, 18vw, 92px);
+    line-height: 0.81em;
+  }
+  @media (min-width: 951px) {
+    .text-fluid-hero {
+      font-size: clamp(120px, 12vw, 240px);
+      line-height: 0.81em;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  function initCircularInteraction() {
+    const stage = document.getElementById('wheel-stage-container')
+    const pivot = document.getElementById('wheel-pivot')
+    const slots = document.querySelectorAll('.wheel-card-slot')
+    if (!stage || !pivot || slots.length === 0) return
+
+    const totalSlots = slots.length
+    const anglePerSlot = 360 / totalSlots
+
+    function getRadius() {
+      const width = window.innerWidth
+      if (width < 640) return 260
+      if (width < 1024) return 380
+      return 490
+    }
+
+    let radius = getRadius()
+
+    function positionSlots() {
+      radius = getRadius()
+      slots.forEach((slot, i) => {
+        const phi = i * anglePerSlot
+        ;(slot as HTMLElement).style.transform = `rotateY(${phi}deg) translateZ(${radius}px)`
+      })
+    }
+
+    positionSlots()
+    window.addEventListener('resize', positionSlots)
+
+    // Motion State
+    let currentRotationY = 0
+    let targetRotationY = 0
+    let currentTiltX = -5
+    let targetTiltX = -5
+    let currentTiltY = 0
+    let targetTiltY = 0
+    let isDragging = false
+    let startX = 0
+    let dragVelocity = 0
+
+    // Spin speed aligned with page scroll speed
+    let lastScrollY = window.scrollY
+    let scrollVelocity = 0
+
+    window.addEventListener('scroll', () => {
+      const delta = window.scrollY - lastScrollY
+      lastScrollY = window.scrollY
+      scrollVelocity = delta * 0.15
+      targetRotationY -= scrollVelocity
+    }, { passive: true })
+
+    // Cursor 3D Pivot (Effect 106)
+    window.addEventListener('pointermove', (e) => {
+      if (isDragging) return
+      const rect = stage.getBoundingClientRect()
+      const centerX = rect.left + rect.width / 2
+      const centerY = rect.top + rect.height / 2
+
+      const normX = (e.clientX - centerX) / (rect.width / 2)
+      const normY = (e.clientY - centerY) / (rect.height / 2)
+
+      targetTiltY = gsap.utils.clamp(-14, 14, normX * 12)
+      targetTiltX = gsap.utils.clamp(-18, 10, -normY * 10 - 5)
+    })
+
+    // Drag / Touch Horizontal Spin
+    stage.addEventListener('pointerdown', (e) => {
+      isDragging = true
+      startX = e.clientX
+      stage.style.cursor = 'grabbing'
+    })
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return
+      const dx = e.clientX - startX
+      startX = e.clientX
+      dragVelocity = dx * 0.4
+      targetRotationY += dragVelocity
+    })
+
+    window.addEventListener('pointerup', () => {
+      isDragging = false
+      stage.style.cursor = 'grab'
+    })
+
+    // Animation Loop with smooth Lerp & Idle Spin
+    function updateLoop() {
+      if (!isDragging && Math.abs(scrollVelocity) < 0.2) {
+        targetRotationY -= 0.12
+      }
+
+      currentRotationY += (targetRotationY - currentRotationY) * 0.08
+      currentTiltX += (targetTiltX - currentTiltX) * 0.08
+      currentTiltY += (targetTiltY - currentTiltY) * 0.08
+
+      scrollVelocity *= 0.9
+
+      pivot.style.transform = `rotateX(${currentTiltX.toFixed(2)}deg) rotateY(${(currentRotationY + currentTiltY).toFixed(2)}deg)`
+
+      requestAnimationFrame(updateLoop)
+    }
+
+    updateLoop()
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCircularInteraction)
+  } else {
+    initCircularInteraction()
+  }
+</script>

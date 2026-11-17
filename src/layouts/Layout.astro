@@ -1,0 +1,534 @@
+---
+// src/layouts/Layout.astro
+import '../styles/global.css'
+import 'lenis/dist/lenis.css'
+import Header from '../components/Header.astro'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const {
+  title = 'Crate44 — Perfect or it never leaves the crate',
+  description = 'Ultra-premium fruit sourced, ripened and graded by hand in Mumbai. Delivered at its exact moment, over WhatsApp.',
+} = Astro.props
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" id="meta-theme-color" content="#131313" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+
+    <script is:inline>
+      (() => {
+        const metaTheme = document.getElementById('meta-theme-color')
+        let lastColor = ''
+
+        const applyTheme = (color) => {
+          if (!color || color === lastColor) return
+          lastColor = color
+          if (metaTheme) metaTheme.setAttribute('content', color)
+          document.documentElement.style.backgroundColor = color
+        }
+
+        const updateThemeOnScroll = () => {
+          const vh = window.innerHeight || 800
+          const s6 = document.getElementById('section-6')
+          const s5 = document.getElementById('section-5')
+
+          if (s6) {
+            const r6 = s6.getBoundingClientRect()
+            if (r6.top < vh * 0.5 && r6.bottom > vh * 0.1) {
+              applyTheme('#F8FE03')
+              return
+            }
+          }
+
+          if (s5) {
+            const r5 = s5.getBoundingClientRect()
+            if (r5.top < vh * 0.6 && r5.bottom > vh * 0.1) {
+              applyTheme('#FDFEFF')
+              return
+            }
+          }
+
+          applyTheme('#131313')
+        }
+
+        let ticking = false
+        const onScroll = () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              updateThemeOnScroll()
+              ticking = false
+            })
+            ticking = true
+          }
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true })
+        window.addEventListener('resize', onScroll, { passive: true })
+        document.addEventListener('DOMContentLoaded', updateThemeOnScroll)
+      })()
+    </script>
+
+    <script is:inline>
+      try { window.__crate44Cms = JSON.parse(localStorage.getItem('crate44.fruit-cms.v1.published') || 'null') } catch { window.__crate44Cms = null }
+    </script>
+
+    <style is:inline>
+      /* ═══════════════════════════════════════════════════════════════════
+         MODE 1: ALL PORTRAIT / VERTICAL FORM FACTORS
+         (All Mobiles, Folded Screens, AND Tablets in Portrait up to 1100px)
+         ═══════════════════════════════════════════════════════════════════ */
+      @media (max-width: 1023px), (orientation: portrait) and (max-width: 1100px) {
+        /* Specific section switchers for Mode 1 (Portrait) */
+        .s2-headline-mob {
+          display: block !important;
+        }
+        .s2-headline-desk {
+          display: none !important;
+        }
+
+        /* Section 6 (Where it comes from) Mode 1 Stacked flow */
+        #section-6,
+        html[data-mobile-static-copy] #section-6 {
+          height: auto !important;
+          min-height: 0 !important;
+          padding-top: 52px !important;
+          padding-bottom: 48px !important;
+        }
+        #section-6 .s6-main-content > .hidden.lg\:flex,
+        html[data-mobile-static-copy] #section-6 .s6-main-content > .hidden.lg\:flex {
+          display: none !important;
+        }
+        #section-6 .s6-main-content > .lg\:hidden,
+        html[data-mobile-static-copy] #section-6 .s6-main-content > .lg\:hidden {
+          display: flex !important;
+        }
+
+        /* Fluid 1:1 squircle cards: 358px on phone, smoothly scales up to 560px on Folded & Tablet */
+        .s6-image-card-mob,
+        .s5-mobile-proof-image,
+        #s2-image-card,
+        .the-list-image-card,
+        html[data-mobile-static-copy] .s6-image-card-mob,
+        html[data-mobile-static-copy] .s5-mobile-proof-image,
+        html[data-mobile-static-copy] #s2-image-card,
+        html[data-mobile-static-copy] .the-list-image-card {
+          width: 100% !important;
+          max-width: 100% !important;
+          aspect-ratio: 1 / 1 !important;
+          margin-inline: auto !important;
+        }
+        html[data-mobile-static-copy] #site-header {
+          top: 0 !important;
+        }
+        html[data-mobile-static-copy] #mobile-bottom-bar {
+          bottom: max(24px, env(safe-area-inset-bottom)) !important;
+        }
+
+        html[data-mobile-static-copy] #section-2 .s2-char,
+        html[data-mobile-static-copy] #section-2 #s2-copy,
+        html[data-mobile-static-copy] #section-3 .s3-roll-line,
+        html[data-mobile-static-copy] #section-3 #s3-btn-mob,
+        html[data-mobile-static-copy] #section-6 .s6-char,
+        html[data-mobile-static-copy] #section-6 .s6-bottom-col-mobile,
+        html[data-mobile-static-copy] #section-9 .s9-char,
+        html[data-mobile-static-copy] #the-list .the-list-char,
+        html[data-mobile-static-copy] #the-list .the-list-para,
+        html[data-mobile-static-copy] #the-list .the-list-btn,
+        html[data-mobile-static-copy] footer .footer-fruit-char,
+        html[data-mobile-static-copy] footer .footer-fruit-btn,
+        html[data-mobile-static-copy] footer .footer-fruit-subheading,
+        html[data-mobile-static-copy] footer .footer-text-slide,
+        html[data-mobile-static-copy] footer .footer-crate-title {
+          transform: none !important;
+          opacity: 1 !important;
+          filter: none !important;
+        }
+
+        /* Static mobile headings no longer need the reveal masks that were
+           clipping their glyph tops and bottoms after the reveal is suppressed. */
+        html[data-mobile-static-copy] #section-2 .s2-mask,
+        html[data-mobile-static-copy] #section-3 .s3-mask,
+        html[data-mobile-static-copy] #section-6 .s6-mask,
+        html[data-mobile-static-copy] #section-9 .s9-mask {
+          overflow: visible !important;
+          padding-block: 0 !important;
+        }
+
+        /* Match the phone Figma frame: proof points flow in document order. */
+        html[data-mobile-static-copy] #section-5 {
+          height: auto !important;
+          min-height: 0 !important;
+          overflow: visible !important;
+        }
+        html[data-mobile-static-copy] #section-5 .s5-desktop-layout {
+          display: none !important;
+        }
+        html[data-mobile-static-copy] #section-5 .s5-mobile-layout {
+          display: flex !important;
+          gap: 24px;
+          padding-top: 24px;
+          padding-bottom: 40px;
+        }
+        html[data-mobile-static-copy] #section-5 .s5-mobile-proof {
+          gap: 16px;
+        }
+        html[data-mobile-static-copy] #section-5 .s5-mobile-proof-image {
+          width: min(100%, clamp(358px, 75vw, 560px)) !important;
+          max-width: 560px !important;
+          aspect-ratio: 1 / 1 !important;
+          overflow: hidden !important;
+        }
+        html[data-mobile-static-copy] #section-5 .s5-mobile-proof-photo {
+          display: block;
+        }
+        html[data-mobile-static-copy] #section-5 .s5-mobile-promise {
+          margin-top: 8px;
+        }
+
+        /* Let the full hero content determine height on short mobile screens. */
+        html[data-mobile-static-copy] #hero-section {
+          min-height: 100svh;
+          height: auto !important;
+          padding-top: max(calc(env(safe-area-inset-top) + 112px), 124px) !important;
+        }
+        html[data-mobile-static-copy] #hero-section > .relative.z-10 {
+          height: auto !important;
+          min-height: calc(100svh - 148px);
+        }
+        html[data-mobile-static-copy] #s7-stage-how {
+          height: 100svh !important;
+          min-height: 100svh !important;
+          max-height: none !important;
+        }
+        html[data-mobile-static-copy] #section-8 {
+          min-height: 100svh !important;
+        }
+        html[data-mobile-static-copy] #section-9 {
+          height: 100svh !important;
+          min-height: 100svh !important;
+        }
+        html[data-mobile-static-copy] .footer-parallax-card {
+          min-height: 100svh !important;
+        }
+        html[data-mobile-static-copy] #s7-banana-stage {
+          width: min(82vw, 380px);
+          height: min(86svh, 720px);
+        }
+        html[data-mobile-static-copy] #s7-banana-canvas {
+          filter: none !important;
+        }
+        html[data-mobile-static-copy] #s7-banana-stage .s7-banana-shadow-layer,
+        html[data-mobile-static-copy] #s7-banana-stage .s7-banana-ambient-glow {
+          display: none !important;
+        }
+        html[data-mobile-static-copy] .hero-section-std,
+        html[data-mobile-static-copy] #gifting-hero {
+          height: auto !important;
+          min-height: 100svh !important;
+          max-height: none !important;
+          overflow: visible !important;
+        }
+        html[data-mobile-static-copy] .hero-section-std {
+          padding-top: 124px !important;
+        }
+
+        html[data-mobile-static-copy] #faq-page h2 {
+          font-size: clamp(40px, 12vw, 52px) !important;
+          line-height: 0.98 !important;
+          margin-bottom: 40px !important;
+        }
+
+        /* Reveal text on these pages can wrap instead of being cut at the edge. */
+        html[data-mobile-static-copy] #the-edit-hero-section .edit-hero-heading,
+        html[data-mobile-static-copy] #gifting-hero .gift-hero-line,
+        html[data-mobile-static-copy] .join-hero-line,
+        html[data-mobile-static-copy] .receive-line,
+        html[data-mobile-static-copy] .ask-line,
+        html[data-mobile-static-copy] .numbers-line,
+        html[data-mobile-static-copy] .house-heading-line {
+          max-width: 100%;
+        }
+      }
+
+      /* ═══════════════════════════════════════════════════════════════════
+         MODE 2: TABLET LANDSCAPE HEIGHT GUARD
+         (Tablets rotated horizontally with limited vertical height <= 850px)
+         ═══════════════════════════════════════════════════════════════════ */
+      @media (orientation: landscape) and (max-height: 850px) {
+        .s6-image-card,
+        #s2-image-card,
+        .the-list-image-card {
+          max-height: 48vh !important;
+          max-width: 48vh !important;
+        }
+        .s6-roll-line {
+          font-size: min(10vw, 12vh) !important;
+          line-height: 0.82 !important;
+        }
+        #section-6 {
+          min-height: 100svh !important;
+          padding-top: 36px !important;
+          padding-bottom: 36px !important;
+        }
+      }
+    </style>
+
+    <!-- Preload fonts -->
+    <link rel="preload" as="font" href="/fonts/VVDS-Fifties-Cond-SBold.otf" type="font/otf" crossorigin />
+    <link rel="preload" as="font" href="/fonts/SuisseIntl-Regular.ttf" type="font/ttf" crossorigin />
+    <link rel="preload" as="font" href="/fonts/SuisseIntl-SemiBold.ttf" type="font/ttf" crossorigin />
+
+    <script is:inline>
+      (() => {
+        const navigation = performance.getEntriesByType('navigation')[0]
+        if (navigation?.type !== 'reload') return
+
+        // Prevent the browser restoring the old scroll position on a reload.
+        history.scrollRestoration = 'manual'
+        const resetToTop = () => {
+          window.scrollTo(0, 0)
+          window.__lenis?.scrollTo(0, { immediate: true, force: true })
+          requestAnimationFrame(() => window.scrollTo(0, 0))
+        }
+        document.addEventListener('DOMContentLoaded', resetToTop, { once: true })
+        window.addEventListener('pageshow', resetToTop, { once: true })
+      })()
+    </script>
+
+  </head>
+
+  <body class="bg-[#131313] text-[#fbf9d6]">
+    <Header />
+    <slot />
+
+    <script is:inline>
+      (() => {
+        const mobile = window.matchMedia('(max-width: 1023px), (orientation: portrait) and (max-width: 1100px)')
+        const root = document.documentElement
+        const fitGroups = [
+          ['#hero-headline', '.roll-line'],
+          ['.s2-headline-mob', '.s2-roll-line'],
+          ['.s3-headline-mob', '.s3-roll-line'],
+          ['.s6-headline-mobile', '.s6-roll-line'],
+          ['.s9-headline', '.s9-roll-line'],
+          ['#gifting-hero', '.gift-hero-line'],
+          ['#the-edit-hero-section', '.edit-hero-heading'],
+          ['main', '.join-hero-line'],
+          ['main', '.receive-line'],
+          ['main', '.ask-line'],
+          ['main', '.numbers-line'],
+          ['main', '.house-heading-line'],
+          ['#the-list', '.the-list-reveal-line'],
+          ['.footer-parallax-card', '.footer-fruit-reveal-line'],
+          ['.s7b-mobile-title', '.whitespace-nowrap'],
+        ]
+
+        const fitLineGroup = (group, lines) => {
+          const visibleLines = lines.filter((line) => line.getClientRects().length > 0)
+          if (!visibleLines.length) return
+          const available = group.clientWidth
+          const widest = Math.max(...visibleLines.map((line) => line.scrollWidth))
+          if (!available || !widest || widest <= available) return
+          const ratio = available / widest
+          visibleLines.forEach((line) => {
+            const baseSize = parseFloat(getComputedStyle(line).fontSize)
+            if (!baseSize) return
+            line.style.fontSize = `${baseSize * ratio}px`
+            line.dataset.mobileFitSize = 'true'
+          })
+        }
+
+        const fitText = () => {
+          root.toggleAttribute('data-mobile-static-copy', mobile.matches)
+          document.querySelectorAll('[data-mobile-fit-size]').forEach((el) => {
+            el.style.removeProperty('font-size')
+            el.removeAttribute('data-mobile-fit-size')
+          })
+          if (!mobile.matches) return
+
+          fitGroups.forEach(([groupSelector, lineSelector]) => {
+            document.querySelectorAll(groupSelector).forEach((group) => {
+              fitLineGroup(group, [...group.querySelectorAll(lineSelector)])
+            })
+          })
+
+          document.querySelectorAll('h1, h2, h3, h4').forEach((heading) => {
+            const lines = [...heading.querySelectorAll('.whitespace-nowrap, [class*="flex-nowrap"]')]
+            if (!lines.length) return
+            fitLineGroup(heading, lines)
+          })
+
+          document.querySelectorAll('#section-8 .s8-quote-mobile').forEach((quote) => {
+            const lines = [...quote.querySelectorAll('.s8-quote-line')]
+            const available = quote.clientWidth
+            const widest = Math.max(0, ...lines.map((line) => line.scrollWidth))
+            const sample = quote.querySelector('.s8-char-mob')
+            const baseSize = sample ? parseFloat(getComputedStyle(sample).fontSize) : 0
+            if (!available || !widest || !baseSize || widest <= available) return
+            const fittedSize = `${baseSize * available / widest}px`
+            quote.querySelectorAll('.s8-char-mob').forEach((char) => {
+              char.style.setProperty('font-size', fittedSize, 'important')
+              char.dataset.mobileFitSize = 'true'
+            })
+          })
+        }
+
+        fitText()
+        document.fonts?.ready.then(fitText)
+        window.addEventListener('resize', fitText, { passive: true })
+        mobile.addEventListener?.('change', fitText)
+      })()
+    </script>
+
+    <script is:inline>
+      (() => {
+        const cms = window.__crate44Cms
+        if (!cms || !Array.isArray(cms.products)) return
+        const products = cms.products
+        const nameParts = (name) => {
+          const words = String(name || 'Fruit').trim().split(/\s+/)
+          const first = words.shift() || 'Fruit'
+          return [first, words.join(' ') || first]
+        }
+        const updateCard = (card, product, edit = false) => {
+          const [line1, line2] = nameParts(product.name)
+          const ps = card.querySelectorAll(edit ? '.fruit-card-anim > div.absolute p' : '.card-inner > div.absolute p')
+          if (ps.length >= 2) { ps[0].textContent = line1; ps[1].textContent = line2 }
+          const price = card.querySelector('.card-price-badge span')
+          if (price) price.textContent = product.price || '—'
+          const frame = card.querySelector(edit ? '.card-model-wrap iframe' : '.card-iframe')
+          if (frame && product.modelUrl) {
+            if (edit) { frame.src = product.modelUrl; frame.className = 'w-full h-full border-none select-none pointer-events-none scale-[1.18]' }
+            else frame.dataset.src = product.modelUrl
+          }
+          const action = card.querySelector('.card-order-btn')
+          if (action) {
+            const label = product.inStock ? (edit ? 'REQUEST VIA WHATSAPP' : 'ORDER NOW') : 'OUT OF STOCK'
+            const faces = action.querySelectorAll('.invisible, .flip-inner > div, .card-order-btn > div > div')
+            faces.forEach((face) => { if (face.textContent.trim()) face.textContent = label })
+            action.href = product.inStock ? `https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20order%20${encodeURIComponent(product.name)}` : '#'
+          }
+          card.dataset.fruitId = product.id
+        }
+        const stage = document.querySelector('#cards-stage')
+        if (stage) {
+          const wrappers = [...stage.querySelectorAll('.card-wrapper')]
+          const template = wrappers[0]
+          if (template) {
+            const active = products.filter(p => p.id === 'tanzania-avocado-1').slice(0, 1)
+            wrappers.forEach(w => w.remove())
+            active.forEach((product, index) => {
+              const card = template.cloneNode(true)
+              updateCard(card, product)
+              card.querySelector('.card-iframe')?.setAttribute('title', `${product.name} 3D Model`)
+              card.dataset.index = String(index)
+              stage.append(card)
+            })
+          }
+        }
+        const row = document.querySelector('.cards-row-anim')
+        if (row) {
+          const cards = [...row.querySelectorAll('.fruit-card-anim')]
+          const template = cards[0]
+          if (template) {
+            const active = products.filter(p => p.edit).slice(0, Number(cms.editLimit) || products.length)
+            cards.forEach(c => c.remove())
+            active.forEach(product => {
+              const card = template.cloneNode(true)
+              updateCard(card, product, true)
+              let frame = card.querySelector('.card-model-wrap iframe')
+              if (!frame) {
+                frame = document.createElement('iframe')
+                frame.className = 'w-full h-full border-none select-none pointer-events-none scale-[1.18]'
+                frame.setAttribute('allow', 'xr-spatial-tracking; autoplay; fullscreen')
+                card.querySelector('.card-model-wrap').append(frame)
+              }
+              frame.src = product.modelUrl
+              row.append(card)
+            })
+          }
+        }
+        if (cms.heading) {
+          const lines = document.querySelectorAll('.week-heading')
+          if (lines.length > 1) {
+            const words = cms.heading.trim().split(/\s+/)
+            const first = words.length > 2 ? words.slice(0, 2).join(' ') : words[0]
+            lines[0].textContent = first
+            lines[1].textContent = words.slice(first.split(/\s+/).length).join(' ') || (words.length > 1 ? words[1] : '')
+          }
+        }
+      })()
+    </script>
+
+    <!-- Lenis + GSAP ScrollTrigger loop -->
+    <script>
+      import { gsap } from 'gsap'
+      import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+      gsap.registerPlugin(ScrollTrigger)
+      // Mobile browser chrome changes viewport height while a finger scrolls.
+      // Keep those height-only changes from forcing a page-wide trigger refresh.
+      ScrollTrigger.config({ ignoreMobileResize: true })
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+      const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+
+      if (isTouchDevice) {
+        // On touch devices, leave scrolling entirely to the browser compositor.
+        // Iframes already have pointer-events: none on touch, so no body class thrashing is needed.
+      } else {
+        const { default: Lenis } = await import('lenis')
+        const lenis = new Lenis({
+          // Keep wheel movement calm while letting Lenis catch up promptly.
+          lerp: prefersReducedMotion ? 1 : 0.09,
+          wheelMultiplier: prefersReducedMotion ? 1 : 0.82,
+          touchMultiplier: 1,
+          smoothWheel: true,
+          syncTouch: false,
+          anchors: true,
+        })
+
+        let scrollTimer: number | null = null
+        lenis.on('scroll', () => {
+          ScrollTrigger.update()
+          document.body.classList.add('is-scrolling')
+          if (scrollTimer) clearTimeout(scrollTimer)
+          scrollTimer = window.setTimeout(() => {
+            document.body.classList.remove('is-scrolling')
+          }, 120)
+        })
+
+        gsap.ticker.add((time) => {
+          lenis.raf(time * 1000)
+        })
+
+        // Disable GSAP lag smoothing to avoid Lenis scroll jumps after a stall.
+        gsap.ticker.lagSmoothing(0)
+
+        ;(window as any).__lenis = lenis
+        window.dispatchEvent(new CustomEvent('lenis:ready', { detail: lenis }))
+      }
+    </script>
+    <script>
+      import '../scripts/page-transition'
+      import { initSquircleCurves } from '../scripts/squircle'
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSquircleCurves)
+      } else {
+        initSquircleCurves()
+      }
+    </script>
+  </body>
+</html>

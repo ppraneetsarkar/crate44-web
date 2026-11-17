@@ -1,0 +1,461 @@
+---
+// src/components/Section3.astro
+// Exact 1:1 Implementation of Figma Node 1570:3684 (Section 3 · We replaced)
+// Desktop: Node 1570:3039 (1440px -> 1920px -> 4K)
+// Mobile: Node 1601:386 (390px)
+// True Fluid System: Proportional typography with strictly fixed 16px side margins
+---
+
+<section
+  id="section-3"
+  class="relative w-full bg-[#131313] text-dark px-[16px] pt-[52px] sm:pt-[58px] lg:pt-[64px] pb-[120px] sm:pb-[180px] lg:pb-[60px] 2xl:pb-[4.16vw] overflow-hidden"
+  data-node-id="1570:3684"
+>
+  <!-- Content Container: Full width with strictly fixed 16px side margins across all displays up to 4K -->
+  <div class="w-full mx-auto">
+
+    <!-- ======================================================== -->
+    <!-- MOBILE VIEW (< xl / Node 1601:386): Vertical stack with 24px gap -->
+    <!-- ======================================================== -->
+    <div class="flex lg:hidden flex-col gap-[24px] items-start w-full">
+      <!-- Mobile Headline (5 lines - Node 1601:387) -->
+      <div
+        class="s3-headline-mob w-full font-display uppercase not-italic tracking-[0.8px] select-none text-fluid-s3-mob"
+        data-node-id="1601:387"
+      >
+        <!-- Line 1: WE -->
+        <div class="s3-mask overflow-hidden py-[2px]">
+          <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="WE">
+            <span class="s3-char inline-block text-gradient-s3">W</span>
+            <span class="s3-char inline-block text-gradient-s3">E</span>
+          </div>
+        </div>
+
+        <!-- Line 2: REPLACED -->
+        <div class="s3-mask overflow-hidden py-[2px]">
+          <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="REPLACED">
+            <span class="s3-char inline-block text-gradient-s3">R</span>
+            <span class="s3-char inline-block text-gradient-s3">E</span>
+            <span class="s3-char inline-block text-gradient-s3">P</span>
+            <span class="s3-char inline-block text-gradient-s3">L</span>
+            <span class="s3-char inline-block text-gradient-s3">A</span>
+            <span class="s3-char inline-block text-gradient-s3">C</span>
+            <span class="s3-char inline-block text-gradient-s3">E</span>
+            <span class="s3-char inline-block text-gradient-s3">D</span>
+          </div>
+        </div>
+
+        <!-- Line 3: SIX HANDS -->
+        <div class="s3-mask overflow-hidden py-[2px]">
+          <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="SIX HANDS">
+            <span class="s3-char inline-block text-gradient-s3">S</span>
+            <span class="s3-char inline-block text-gradient-s3">I</span>
+            <span class="s3-char inline-block text-gradient-s3">X</span>
+            <span class="s3-char inline-block text-gradient-s3">&nbsp;</span>
+            <span class="s3-char inline-block text-gradient-s3">H</span>
+            <span class="s3-char inline-block text-gradient-s3">A</span>
+            <span class="s3-char inline-block text-gradient-s3">N</span>
+            <span class="s3-char inline-block text-gradient-s3">D</span>
+            <span class="s3-char inline-block text-gradient-s3">S</span>
+          </div>
+        </div>
+
+        <!-- Line 4: WITH ONE -->
+        <div class="s3-mask overflow-hidden py-[2px]">
+          <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="WITH ONE">
+            <span class="s3-char inline-block text-gradient-s3">W</span>
+            <span class="s3-char inline-block text-gradient-s3">I</span>
+            <span class="s3-char inline-block text-gradient-s3">T</span>
+            <span class="s3-char inline-block text-gradient-s3">H</span>
+            <span class="s3-char inline-block text-gradient-s3">&nbsp;</span>
+            <span class="s3-char inline-block text-gradient-s3">O</span>
+            <span class="s3-char inline-block text-gradient-s3">N</span>
+            <span class="s3-char inline-block text-gradient-s3">E</span>
+          </div>
+        </div>
+
+        <!-- Line 5: NAME. -->
+        <div class="s3-mask overflow-hidden py-[2px]">
+          <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="NAME.">
+            <span class="s3-char inline-block text-gradient-s3">N</span>
+            <span class="s3-char inline-block text-gradient-s3">A</span>
+            <span class="s3-char inline-block text-gradient-s3">M</span>
+            <span class="s3-char inline-block text-gradient-s3">E</span>
+            <span class="s3-char inline-block text-gradient-s3">.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Image Card (Node 1601:393): 4:4 aspect ratio (aspect-square) with Section 7 headroom -->
+      <div
+        id="s3-image-card-mob"
+        class="curve-side relative w-full aspect-square overflow-hidden bg-[#1a1a1a] will-change-transform will-change-[clip-path]"
+        data-curve="side"
+        data-node-id="1601:393"
+      >
+        <img
+          id="s3-image-mob"
+          src="/images/section-3.avif"
+          alt="We replaced six hands with one name"
+          class="absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-[center_35%] pointer-events-none will-change-transform"
+        />
+        <div class="absolute inset-0 ring-1 ring-black/10 pointer-events-none rounded-[inherit]"></div>
+      </div>
+
+      <!-- Mobile Button (Node 1601:394) -->
+      <div class="w-full sm:max-w-[358px]">
+        <a
+          href="#standard"
+          id="s3-btn-mob"
+          class="s3-btn-morph bg-yellow text-dark relative inline-flex items-center justify-center w-full h-[52px] sm:h-[56px] font-display font-semibold text-[32px] leading-[34px] uppercase select-none flex-shrink-0 border border-yellow transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius]"
+          data-node-id="1601:394"
+        >
+          <span
+            class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+            style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+          >
+            <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+              HOW THE STANDARD WORKS
+            </span>
+            <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+              HOW THE STANDARD WORKS
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+
+    <!-- ======================================================== -->
+    <!-- DESKTOP VIEW (≥ xl / Node 2113:5678) -->
+    <!-- ======================================================== -->
+    <div
+      class="s3-content-desk hidden lg:flex flex-col gap-[7px] w-full"
+      data-node-id="2113:5657"
+    >
+      <!-- Line 1: WE REPLACED (Spans full content width) -->
+      <div
+        class="s3-headline-desk-line1 w-full font-display uppercase not-italic tracking-[0.8px] select-none text-[20.55vw] leading-[0.8108em]"
+        data-node-id="2113:5658"
+      >
+        <div class="s3-mask overflow-hidden py-1">
+          <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="WE REPLACED">
+            <span class="s3-char inline-block text-gradient-s3">WE REPLACED</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- MIDDLE ROW: SIX HANDS + WITH ONE (Left) & IMAGE CARD (Right) -->
+      <div class="w-full flex flex-row items-stretch justify-between gap-[32px] 2xl:gap-[4.44vw]">
+        <!-- Left Column: The 2 Middle Lines -->
+        <div class="flex flex-col gap-[7px] shrink-0 font-display uppercase not-italic tracking-[0.8px] select-none text-[20.55vw] leading-[0.8108em]">
+          <!-- Line 2: SIX HANDS -->
+          <div class="s3-mask overflow-hidden py-1">
+            <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="SIX HANDS">
+              <span class="s3-char inline-block text-gradient-s3">SIX HANDS</span>
+            </div>
+          </div>
+          <!-- Line 3: WITH ONE -->
+          <div class="s3-mask overflow-hidden py-1">
+            <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="WITH ONE">
+              <span class="s3-char inline-block text-gradient-s3">WITH ONE</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Image Card (Height 100% locked to Left Column, Aspect Ratio 385/465 preserved) -->
+        <div class="flex-1 min-w-0 flex justify-end items-stretch">
+          <div
+            id="s3-image-card-desk"
+            class="curve-side relative h-full aspect-[385/465] max-w-full overflow-hidden will-change-transform will-change-[clip-path]"
+            data-curve="side"
+            data-node-id="2113:5661"
+          >
+            <img
+              id="s3-image-desk"
+              src="/images/section-3.avif"
+              alt="We replaced six hands with one name"
+              class="absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-center pointer-events-none will-change-transform"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW: NAME. (Left) & CTA Button (Right - stacked to bottom right) -->
+      <div class="w-full flex flex-row items-end justify-between gap-[32px]">
+        <!-- Line 4: NAME. -->
+        <div class="shrink-0 font-display uppercase not-italic tracking-[0.8px] select-none text-[20.55vw] leading-[0.8108em]">
+          <div class="s3-mask overflow-hidden py-1">
+            <div class="s3-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="NAME.">
+              <span class="s3-char inline-block text-gradient-s3">NAME.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- CTA Button (Fixed standard size, stacked to bottom right) -->
+        <div class="flex-1 min-w-0 flex justify-end items-end pb-[6px]">
+          <a
+            href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20see%20the%20full%20edit"
+            target="_blank"
+            rel="noopener noreferrer"
+            id="s3-btn-desk"
+            class="s3-btn-morph bg-yellow text-dark relative inline-flex items-center justify-center w-full max-w-[385px] h-[56px] px-[24px] font-display font-semibold text-[32px] leading-[34px] uppercase select-none flex-shrink-0 border border-yellow transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius]"
+            data-node-id="2113:5664"
+          >
+            <span
+              class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                SEE THE FULL EDIT
+              </span>
+              <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                SEE THE FULL EDIT
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Section 3 Styling & Dynamic Fluid Typography -->
+<style>
+  .bg-gradient-s3 {
+    background: #131313;
+  }
+
+  .text-gradient-s3 {
+    background: linear-gradient(180deg, #3ED5FF 0%, white 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  /* Mobile: scales fluidly with viewport, exact 90px line-height at 115px font size (90/115 ratio = ~0.7826em) auto-scaling */
+  .text-fluid-s3-mob {
+    font-size: clamp(72px, 29.5vw, 120px);
+    line-height: calc(90 / 115);
+  }
+
+  /* Desktop (≥1280px): scales proportionally (296px at 1440px canvas = 20.55vw) */
+  @media (min-width: 951px) {
+  }
+</style>
+
+<!-- Scripts: Scroll-linked upward text movement with the existing Section 3 styling -->
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  let luxuryEase: gsap.EaseFunction
+  try {
+    luxuryEase = CustomEase.create('luxuryS3Fluid', '0.16, 1, 0.3, 1')
+  } catch (e) {
+    luxuryEase = gsap.parseEase('power3.out')
+  }
+
+  function setupSection3() {
+    // Match the actual `lg` layout switch in tailwind.config.mjs (950px).
+    const isMobile = window.innerWidth < 950
+    const triggerTarget = isMobile
+      ? document.querySelector('.s3-headline-mob')
+      : document.querySelector('.s3-headline-desk-line1')
+
+    if (!triggerTarget) return
+
+    const activeContainer = isMobile
+      ? document.querySelector('.s3-headline-mob')
+      : document.querySelector('.s3-content-desk')
+
+    if (!activeContainer) return
+
+    const lines = activeContainer.querySelectorAll<HTMLElement>('.s3-roll-line')
+    const imgCard = isMobile
+      ? document.getElementById('s3-image-card-mob')
+      : document.getElementById('s3-image-card-desk')
+    const btn = isMobile
+      ? document.getElementById('s3-btn-mob')
+      : document.getElementById('s3-btn-desk')
+    const imgEl = isMobile
+      ? document.getElementById('s3-image-mob')
+      : document.getElementById('s3-image-desk')
+
+    // Reveal one complete line at a time, with each reveal directly tied to
+    // scroll progress. Completed lines remain visible while the next line moves.
+    gsap.set(lines, { yPercent: 115, opacity: 0 })
+
+    const textReveal = gsap.timeline({
+      scrollTrigger: {
+        trigger: activeContainer,
+        start: 'top 85%',
+        end: () => `+=${activeContainer.clientHeight + window.innerHeight * 0.5}`,
+        scrub: true,
+        invalidateOnRefresh: true,
+      },
+    })
+
+    textReveal.to(lines, {
+      yPercent: 0,
+      opacity: 1,
+      ease: 'none',
+      duration: 1,
+      stagger: 1,
+    })
+
+    if (imgCard) {
+      gsap.set(imgCard, { opacity: 0, y: 40 })
+    }
+
+    if (btn) {
+      gsap.set(btn, { opacity: 1, y: 0 })
+    }
+
+    const mediaTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: triggerTarget,
+        start: 'top 70%',
+        once: true,
+      },
+    })
+
+    if (imgCard) {
+      mediaTl.to(imgCard, {
+        opacity: 1,
+        y: 0,
+        duration: 1.3,
+        ease: luxuryEase,
+      }, 0.25)
+    }
+
+    if (btn) {
+      mediaTl.to(btn, {
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: luxuryEase,
+      }, 0.4)
+    }
+
+    if (imgCard && imgEl) {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      const cardTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#section-3',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: isTouchDevice ? 0.4 : 0.6,
+        },
+      })
+
+      // Effect 121: Aperture clip-path shutter on image card
+      const clipObj = { y: 10 }
+      cardTl.fromTo(
+        clipObj,
+        { y: 10 },
+        {
+          y: 0,
+          ease: 'none',
+          duration: 3,
+          onUpdate: () => {
+            imgCard.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+          },
+        }
+      )
+      .to(clipObj, {
+        y: 0,
+        ease: 'none',
+        duration: 4,
+        onUpdate: () => {
+          imgCard.style.clipPath = 'inset(0% 0px round 14px)'
+        },
+      })
+      .to(clipObj, {
+        y: 10,
+        ease: 'none',
+        duration: 3,
+        onUpdate: () => {
+          imgCard.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+        },
+      })
+
+      // Smooth vertical counter-parallax on inner image
+      cardTl.fromTo(
+        imgEl,
+        { yPercent: -6 },
+        { yPercent: 6, ease: 'none', duration: 10 },
+        0
+      )
+    }
+  }
+
+  setTimeout(() => {
+    setupSection3()
+    ScrollTrigger.refresh()
+
+    // GSAP Corner-Morphing & Rolling Text FX for Section 3 Solo Buttons
+    document.querySelectorAll<HTMLElement>('.s3-btn-morph').forEach((btn) => {
+      const textTop = btn.querySelector<HTMLElement>('.roll-text-top')
+      const textBottom = btn.querySelector<HTMLElement>('.roll-text-bottom')
+
+      gsap.set(btn, {
+        borderTopLeftRadius: '28px',
+        borderBottomLeftRadius: '28px',
+        borderTopRightRadius: '28px',
+        borderBottomRightRadius: '28px',
+      })
+
+      if (textTop && textBottom) {
+        gsap.set(textTop, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(textBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+      }
+
+      btn.addEventListener('mouseenter', () => {
+        // Solo button -> Morphs on LEFT (14px 28px 28px 14px)
+        gsap.to(btn, {
+          borderTopLeftRadius: '14px',
+          borderBottomLeftRadius: '14px',
+          borderTopRightRadius: '28px',
+          borderBottomRightRadius: '28px',
+          duration: 0.45,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: -100, filter: 'blur(3.5px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          borderTopLeftRadius: '28px',
+          borderBottomLeftRadius: '28px',
+          borderTopRightRadius: '28px',
+          borderBottomRightRadius: '28px',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: 0, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 100, filter: 'blur(3.5px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+    })
+  }, 150)
+
+  let lastTriggerWidth = window.innerWidth
+  window.addEventListener('resize', () => {
+    if (window.innerWidth === lastTriggerWidth) return
+    lastTriggerWidth = window.innerWidth
+    ScrollTrigger.refresh()
+  }, { passive: true })
+</script>

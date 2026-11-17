@@ -1,0 +1,310 @@
+---
+// src/components/Section4.astro
+// Exact 1:1 Implementation from https://crate44.in/
+// Dual-angle ribbons (+1.813deg and -4.184deg) with Crate44 stamps
+// Infinite smooth drift (0.38px/frame) with physics-based scroll velocity acceleration
+import CrateStamp from './CrateStamp.astro'
+
+const marqueeItems = [
+  'THIS WEEK',
+  'THIS WEEK',
+  'THIS WEEK',
+  'THIS WEEK',
+  'THIS WEEK',
+  'THIS WEEK',
+]
+---
+
+<div
+  id="section-4"
+  class="relative w-full overflow-x-clip overflow-y-visible select-none pointer-events-none h-[210px] sm:h-[260px] md:h-[300px] lg:h-[clamp(340px,16vw,560px)]"
+>
+  <!-- Ribbon 1: rotate(0.813deg) -->
+  <div
+    class="absolute w-[160vw] -left-[30vw] top-[6%] sm:top-[12%] lg:top-[28%] bg-[#131313] py-[16px] sm:py-[22px] md:py-[26px] lg:py-[32px] px-[24px] lg:px-[40px] z-10 origin-center will-change-transform transform-gpu"
+    style="transform: rotate(0.813deg) translateZ(0); -webkit-transform: rotate(0.813deg) translateZ(0); border: 3px solid #1E1E1E;"
+  >
+    <div
+      id="marquee-track-1"
+      class="flex flex-row items-center whitespace-nowrap will-change-transform select-none"
+      style="transform: translate3d(0, 0, 0);"
+    >
+      <!-- Unit 1 (Measured for looping width) -->
+      <div id="marquee-unit-1" class="flex flex-row items-center shrink-0">
+        {
+          marqueeItems.map((text, i) => (
+            <div
+              class="flex flex-row items-center shrink-0 gap-[32px] sm:gap-[44px] lg:gap-[60px] pr-[32px] sm:pr-[44px] lg:pr-[60px]"
+            >
+              <span
+                class="font-display font-semibold uppercase text-center shrink-0 text-[60px] lg:text-[112px] leading-[76px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.59px #FBF9D6;"
+              >
+                {text}
+              </span>
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[56px] h-[56px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Unit 2 -->
+      <div class="flex flex-row items-center shrink-0" aria-hidden="true">
+        {
+          marqueeItems.map((text, i) => (
+            <div
+              class="flex flex-row items-center shrink-0 gap-[32px] sm:gap-[44px] lg:gap-[60px] pr-[32px] sm:pr-[44px] lg:pr-[60px]"
+            >
+              <span
+                class="font-display font-semibold uppercase text-center shrink-0 text-[60px] lg:text-[112px] leading-[76px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.59px #FBF9D6;"
+              >
+                {text}
+              </span>
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[56px] h-[56px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Unit 3 -->
+      <div class="flex flex-row items-center shrink-0" aria-hidden="true">
+        {
+          marqueeItems.map((text, i) => (
+            <div
+              class="flex flex-row items-center shrink-0 gap-[32px] sm:gap-[44px] lg:gap-[60px] pr-[32px] sm:pr-[44px] lg:pr-[60px]"
+            >
+              <span
+                class="font-display font-semibold uppercase text-center shrink-0 text-[60px] lg:text-[112px] leading-[76px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.59px #FBF9D6;"
+              >
+                {text}
+              </span>
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[56px] h-[56px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- Ribbon 2: rotate(-3.184deg) -->
+  <div
+    class="absolute w-[160vw] -left-[30vw] top-[35%] sm:top-[28%] lg:top-[25%] bg-[#131313] py-[16px] sm:py-[22px] md:py-[26px] lg:py-[32px] px-[24px] lg:px-[40px] z-20 origin-center will-change-transform transform-gpu"
+    style="transform: rotate(-3.184deg) translateZ(0); -webkit-transform: rotate(-3.184deg) translateZ(0); border: 3px solid #1E1E1E;"
+  >
+    <div
+      id="marquee-track-2"
+      class="flex flex-row items-center whitespace-nowrap will-change-transform select-none"
+      style="transform: translate3d(0, 0, 0);"
+    >
+      <!-- Unit 1 (Measured for looping width) -->
+      <div id="marquee-unit-2" class="flex flex-row items-center shrink-0">
+        {
+          marqueeItems.map((text, i) => (
+            <div
+              class="flex flex-row items-center shrink-0 gap-[32px] sm:gap-[44px] lg:gap-[60px] pr-[32px] sm:pr-[44px] lg:pr-[60px]"
+            >
+              <span
+                class="font-display font-semibold uppercase text-center shrink-0 text-[60px] lg:text-[112px] leading-[76px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.59px #FBF9D6;"
+              >
+                {text}
+              </span>
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[56px] h-[56px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Unit 2 -->
+      <div class="flex flex-row items-center shrink-0" aria-hidden="true">
+        {
+          marqueeItems.map((text, i) => (
+            <div
+              class="flex flex-row items-center shrink-0 gap-[32px] sm:gap-[44px] lg:gap-[60px] pr-[32px] sm:pr-[44px] lg:pr-[60px]"
+            >
+              <span
+                class="font-display font-semibold uppercase text-center shrink-0 text-[60px] lg:text-[112px] leading-[76px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.59px #FBF9D6;"
+              >
+                {text}
+              </span>
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[56px] h-[56px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Unit 3 -->
+      <div class="flex flex-row items-center shrink-0" aria-hidden="true">
+        {
+          marqueeItems.map((text, i) => (
+            <div
+              class="flex flex-row items-center shrink-0 gap-[32px] sm:gap-[44px] lg:gap-[60px] pr-[32px] sm:pr-[44px] lg:pr-[60px]"
+            >
+              <span
+                class="font-display font-semibold uppercase text-center shrink-0 text-[60px] lg:text-[112px] leading-[76px] lg:leading-[100px] tracking-[0.8px] text-[#FBF9D6]"
+                style="-webkit-text-stroke: 0.59px #FBF9D6;"
+              >
+                {text}
+              </span>
+              <div class="shrink-0 flex items-center justify-center">
+                <CrateStamp class="w-[56px] h-[56px] lg:w-[106px] lg:h-[106px]" />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initMarquee() {
+    const marqueeSection = document.getElementById('section-4')
+    const track1 = document.getElementById('marquee-track-1')
+    const unit1 = document.getElementById('marquee-unit-1')
+    const track2 = document.getElementById('marquee-track-2')
+    const unit2 = document.getElementById('marquee-unit-2')
+
+    if (!track1 || !unit1 || !track2 || !unit2 || !marqueeSection) return
+
+    let pos1 = 0
+    let pos2 = 0
+    let scrollDelta = 0
+    let currentSpeed = 0.42
+    let lastScrollY = window.scrollY
+    let isVisible = false
+    let rafId: number | null = null
+    let lastFrameTime = performance.now()
+
+    // Cache widths to prevent layout thrashing
+    let w1 = unit1.offsetWidth
+    let w2 = unit2.offsetWidth
+
+    const updateWidths = () => {
+      w1 = unit1.offsetWidth
+      w2 = unit2.offsetWidth
+    }
+    const onResize = () => {
+      updateWidths()
+      if (window.matchMedia('(max-width: 499px)').matches) {
+        if (rafId) cancelAnimationFrame(rafId)
+        rafId = null
+        track1.style.transform = 'translate3d(0, 0, 0)'
+        track2.style.transform = 'translate3d(0, 0, 0)'
+      } else if (isVisible && !rafId) {
+        lastFrameTime = performance.now()
+        rafId = requestAnimationFrame(loop)
+      }
+    }
+    window.addEventListener('resize', onResize, { passive: true })
+
+    const onScroll = () => {
+      if (!isVisible) return
+      const curY = window.scrollY
+      const delta = curY - lastScrollY
+      lastScrollY = curY
+      scrollDelta = Math.min(Math.max(0.18 * delta, -3), 3)
+    }
+
+    const onLenis = (e: any) => {
+      if (!isVisible) return
+      if (typeof e?.velocity === 'number') {
+        scrollDelta = Math.min(Math.max(0.15 * e.velocity, -3), 3)
+      }
+    }
+
+    if ((window as any).__lenis) {
+      ;(window as any).__lenis.on('scroll', onLenis)
+    } else {
+      window.addEventListener('scroll', onScroll, { passive: true })
+      window.addEventListener('lenis:ready', ((e: CustomEvent) => {
+        window.removeEventListener('scroll', onScroll)
+        e.detail?.on('scroll', onLenis)
+      }) as EventListener, { once: true })
+    }
+
+    const loop = (now: number) => {
+      if (!isVisible) return
+      if (window.matchMedia('(max-width: 499px)').matches) {
+        track1.style.transform = 'translate3d(0, 0, 0)'
+        track2.style.transform = 'translate3d(0, 0, 0)'
+        rafId = null
+        return
+      }
+
+      // Normalized to 60fps frame delta for consistent speed on 60Hz and 120Hz ProMotion screens
+      const dt = Math.min((now - lastFrameTime) / 16.667, 2.5)
+      lastFrameTime = now
+
+      // Smooth clamped target speed
+      const targetSpeed = 0.42 + Math.min(Math.max(scrollDelta, -2.5), 2.5)
+      currentSpeed += (targetSpeed - currentSpeed) * (1 - Math.exp(-6 * (dt / 60)))
+      scrollDelta *= Math.pow(0.92, dt)
+
+      pos1 -= currentSpeed * dt
+      pos2 += currentSpeed * dt
+
+      if (w1 <= 0) w1 = unit1.offsetWidth
+      if (w2 <= 0) w2 = unit2.offsetWidth
+
+      // Seamless leftward drift: wraps invisibly at unit 1 boundary
+      if (w1 > 0) {
+        const offset1 = -((-pos1) % w1)
+        track1.style.transform = `translate3d(${offset1.toFixed(2)}px, 0, 0)`
+      }
+
+      // Seamless rightward drift: wraps invisibly at unit 2 boundary
+      if (w2 > 0) {
+        const offset2 = (pos2 % w2) - w2
+        track2.style.transform = `translate3d(${offset2.toFixed(2)}px, 0, 0)`
+      }
+
+      rafId = requestAnimationFrame(loop)
+    }
+
+    // Only run loop when the marquee is within viewport
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            isVisible = true
+            lastScrollY = window.scrollY
+            lastFrameTime = performance.now()
+            if (w1 <= 0 || w2 <= 0) updateWidths()
+            if (!rafId) {
+              rafId = requestAnimationFrame(loop)
+            }
+          } else {
+            isVisible = false
+            if (rafId) {
+              cancelAnimationFrame(rafId)
+              rafId = null
+            }
+          }
+        })
+      },
+      { rootMargin: '40px 0px' }
+    )
+
+    observer.observe(marqueeSection)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initMarquee)
+  } else {
+    initMarquee()
+  }
+</script>

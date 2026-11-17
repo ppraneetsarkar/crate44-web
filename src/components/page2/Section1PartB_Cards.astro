@@ -1,0 +1,397 @@
+---
+// src/components/page2/Section1PartB_Cards.astro
+// Page 2 · Section 1 Part B: "Week of [March 4]" Headline + Fruit Cards
+// MadeWithGSAP Effect 089 (Jelly Headline Motion)
+// MadeWithGSAP Tutorial 087 (Interactive Card Stacking & 3D Tilt)
+// Strictly follows Page 1 card frame cornering, 3D flip button, price badge, and marquee ribbon
+
+import CrateStamp from '../CrateStamp.astro'
+
+const editFruits = [
+  {
+    id: "alphonso-ratnagiri",
+    titleLine1: "DEVGAD",
+    titleLine2: "ALPHONSO",
+    origin: "RATNAGIRI · ORCHARD 12",
+    windowText: "PICKED TUESDAY · RIPE THURSDAY · WINDOW ~36 HOURS",
+    price: "4,200",
+    unit: "the dozen",
+    serving: "Serve at room temperature. Cut the cheeks, spoon, silence.",
+    modelUrl: "/3d-fruits/page2/dapoli mango.html",
+    inStock: true
+  },
+  {
+    id: "durian-monthong",
+    titleLine1: "THAILAND",
+    titleLine2: "DURIAN",
+    origin: "MONTHONG · TREE-RIPENED",
+    windowText: "TREE-RIPENED · HARVEST WINDOW ~24 HOURS",
+    price: "3,800",
+    unit: "each",
+    serving: "Open along sutures. Custardy, rich, and intensely fragrant.",
+    modelUrl: "/3d-fruits/page2/diruain.html",
+    inStock: true
+  },
+  {
+    id: "kiwi-gold",
+    titleLine1: "ZESPRI",
+    titleLine2: "GOLD KIWI",
+    origin: "BAY OF PLENTY · NEW ZEALAND",
+    windowText: "COLD RUN AIR FREIGHT · VIBRANT AROMA · PRIME HARVEST",
+    price: "1,200",
+    unit: "pack of 4",
+    serving: "Slight thumb give. Halve crosswise and scoop with a spoon.",
+    modelUrl: "/3d-fruits/page2/kiwi.html",
+    inStock: true
+  },
+  {
+    id: "passion-fruit-coorg",
+    titleLine1: "COORG",
+    titleLine2: "PASSION FRUIT",
+    origin: "WESTERN GHATS · HIGH ALTITUDE",
+    windowText: "CRINKLED SKIN · OPTIMAL SWEET-TART BRIX",
+    price: "950",
+    unit: "box of 6",
+    serving: "Wrinkled skin marks max sugar. Spoon pure or drizzle over curd.",
+    modelUrl: "/3d-fruits/page2/passion fruit.html",
+    inStock: true
+  },
+  {
+    id: "pomegranate-bhagwa",
+    titleLine1: "BHAGWA",
+    titleLine2: "POMEGRANATE",
+    origin: "SOLAPUR · RUBY LOT",
+    windowText: "DEEP RED ARILS · SOFT SEED · WINDOW ~48 HOURS",
+    price: "1,400",
+    unit: "box of 4",
+    serving: "Submerge in bowl of water to release deep crimson pearls.",
+    modelUrl: "/3d-fruits/page2/pomegranate.html",
+    inStock: false,
+    soldOutTime: "Finished 11:40 a.m. Tuesday"
+  },
+  {
+    id: "watermelon-sugar-baby",
+    titleLine1: "SUGAR BABY",
+    titleLine2: "WATERMELON",
+    origin: "ORGANIC VINE · MAHARASHTRA",
+    windowText: "DENSE FIELD VINE · 13°Bx SWEETNESS FLOOR",
+    price: "850",
+    unit: "each",
+    serving: "Chill 2 hours before slicing. Enjoy the crisp central heart.",
+    modelUrl: "/3d-fruits/page2/Watermenlon.html",
+    inStock: false,
+    soldOutTime: "Finished 09:15 a.m. Tuesday"
+  }
+]
+---
+
+<section
+  id="weekly-cards-section"
+  class="relative w-full py-20 px-[16px] sm:px-[24px] lg:px-[32px] bg-dark text-creme overflow-hidden border-t border-white/10"
+>
+  <style>
+    @keyframes cardMarqueeAnim {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .card-marquee-scroll {
+      display: inline-flex;
+      white-space: nowrap;
+      animation: cardMarqueeAnim 12s linear infinite;
+    }
+  </style>
+
+  <!-- Ambient Glow Background -->
+  <div
+    class="absolute top-0 left-1/2 -translate-x-1/2 w-[80vw] h-[400px] pointer-events-none -z-0 opacity-20"
+    style="background: radial-gradient(ellipse at 50% 0%, rgba(248, 254, 3, 0.25) 0%, transparent 70%);"
+  ></div>
+
+  <!-- Header Block: Jelly Headline (MadeWithGSAP Effect 089) -->
+  <div class="max-w-6xl mx-auto text-center mb-16 relative z-10">
+    <div class="inline-flex items-center gap-3 px-4 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-6">
+      <span class="w-2 h-2 rounded-full bg-yellow animate-pulse"></span>
+      <span class="font-mono text-xs uppercase tracking-[0.25em] text-creme/90 font-medium">
+        7 FRUITS · 2 SOLD OUT · NEXT EDIT TUESDAY 7 A.M.
+      </span>
+    </div>
+
+    <!-- Jelly Motion Headline Target (Effect 089) -->
+    <div id="jelly-headline-wrapper" class="overflow-hidden py-4 select-none">
+      <h2
+        id="jelly-headline"
+        class="font-display uppercase text-5xl sm:text-7xl md:text-8xl lg:text-[104px] leading-[0.92] tracking-tight text-creme will-change-transform transform-gpu"
+        style="transform-origin: center center;"
+      >
+        WEEK OF MARCH 4
+      </h2>
+    </div>
+
+    <!-- Curator's Note from Copy Spec -->
+    <p class="font-body italic text-base sm:text-xl md:text-2xl text-yellow/90 max-w-2xl mx-auto mt-4 font-normal">
+      “A short edit. The grapes didn't convince us; the figs absolutely did.”
+    </p>
+  </div>
+
+  <!-- Cards Grid (MadeWithGSAP Tutorial 087: 3D Tilt & Staggered Reveal) -->
+  <div
+    id="cards-grid"
+    class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10 relative z-10"
+  >
+    {editFruits.map((fruit, idx) => (
+      <div
+        class="edit-card-item relative group flex flex-col justify-between rounded-[12px] border-[4px] lg:border-[5px] transition-all duration-300 transform-gpu overflow-hidden will-change-transform"
+        class:list={[
+          fruit.inStock
+            ? "border-[#F8FE03] bg-gradient-to-b from-[#181818] via-[#141414] to-[#0c0c0c] hover:shadow-[0_15px_45px_rgba(248,254,3,0.18)]"
+            : "border-white/20 bg-[#121212] opacity-85"
+        ]}
+        data-card-index={idx}
+        style="perspective: 1000px;"
+      >
+        <!-- Card Top Bar: Fruit Title + Exact Page 1 Price Badge -->
+        <div class="relative p-5 pb-2 flex items-start justify-between z-20">
+          <div>
+            <div class="font-display font-semibold text-[28px] sm:text-[34px] leading-tight uppercase text-[#F8FE03]">
+              <p class="m-0">{fruit.titleLine1}</p>
+              <p class="m-0">{fruit.titleLine2}</p>
+            </div>
+            <span class="font-mono text-[9px] tracking-[0.2em] uppercase text-creme/70 block mt-1">
+              {fruit.origin}
+            </span>
+          </div>
+
+          <!-- Exact Page 1 Price Badge (Figma Node 1838:2042 geometry) -->
+          <div
+            class="card-price-badge absolute z-10 uppercase flex items-baseline justify-center tracking-tight select-none font-display font-semibold -top-[5px] -right-[5px] pt-[8px] pb-[9px] pl-[12px] pr-[18px] rounded-bl-[24px] rounded-br-[4px] rounded-tr-[24px] bg-[#F8FE03] text-[#131313] text-center text-[34px] sm:text-[38px] leading-none gap-[3px]"
+          >
+            <svg
+              width="20"
+              height="32"
+              viewBox="0 0 25 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="shrink-0 self-center w-[16px] h-[26px]"
+            >
+              <path
+                d="M10.304 39.984L0 22.064V18.536H2.576C4.144 18.536 5.50667 18.3493 6.664 17.976C7.82133 17.6027 8.75467 17.024 9.464 16.24C10.2106 15.4187 10.696 14.4107 10.92 13.216H0V9.296H10.864C10.64 8.13867 10.2106 7.168 9.576 6.38401C8.94133 5.6 8.10133 5.00267 7.056 4.59201C6.01067 4.144 4.74133 3.92 3.248 3.92H0V0H24.472V3.92H15.008C15.7546 4.62934 16.352 5.43201 16.8 6.32801C17.2853 7.18667 17.6026 8.17601 17.752 9.296H24.472V13.216H17.864C17.528 15.9413 16.464 18.088 14.672 19.656C12.9173 21.1867 10.6213 22.1947 7.784 22.68L18.648 39.984H10.304Z"
+                fill="#131313"
+              />
+            </svg>
+            <span>{fruit.price}</span>
+          </div>
+        </div>
+
+        <!-- 3D Interactive Model Embed in Card Center -->
+        <div class="relative w-full h-[250px] sm:h-[280px] flex items-center justify-center my-1 overflow-visible">
+          <!-- Sold out overlay stamp if applicable -->
+          {!fruit.inStock && (
+            <div class="absolute z-20 inset-0 flex flex-col items-center justify-center backdrop-blur-sm bg-black/50 pointer-events-none">
+              <div class="rotate-[-6deg] px-5 py-2 rounded-md border-2 border-red-500/90 bg-red-950/90 text-red-300 font-display text-2xl uppercase tracking-widest shadow-2xl flex items-center gap-2">
+                <CrateStamp class="w-7 h-7 text-red-400" />
+                <span>SOLD OUT</span>
+              </div>
+              <span class="mt-2 font-mono text-[11px] uppercase tracking-wider text-white/80">
+                {fruit.soldOutTime}
+              </span>
+            </div>
+          )}
+
+          <iframe
+            src={fruit.modelUrl}
+            title={`${fruit.titleLine1} ${fruit.titleLine2} 3D Preview`}
+            class="w-full h-full border-none select-none pointer-events-auto scale-110"
+            style="background: transparent;"
+            loading="lazy"
+          ></iframe>
+        </div>
+
+        <!-- Ripening / Harvest Window Strip with Marquee effect -->
+        <div class="card-marquee-wrap relative overflow-hidden h-[30px] bg-[#F8FE03] text-[#131313] flex items-center px-2">
+          <div class="card-marquee-scroll">
+            <span class="pr-6 font-mono text-[9px] font-bold tracking-[2.5px] uppercase">
+              {fruit.windowText}
+            </span>
+            <span class="pr-6 font-mono text-[9px] font-bold tracking-[2.5px] uppercase">
+              {fruit.windowText}
+            </span>
+          </div>
+        </div>
+
+        <!-- Serving Instructions Note + Exact Page 1 3D Flip Button -->
+        <div class="p-5 pt-4 flex flex-col justify-between flex-1 z-20">
+          <p class="font-body text-xs sm:text-sm text-creme/75 leading-relaxed mb-4">
+            {fruit.serving}
+          </p>
+
+          <!-- 3D Flip Button matching Page 1 Node 1861:2854 -->
+          <div class="w-full flex justify-center mt-auto">
+            <a
+              href={
+                fruit.inStock
+                  ? `https://wa.me/?text=Hello%20%E2%80%94%20I%E2%80%99d%20like%20${encodeURIComponent(fruit.titleLine1 + ' ' + fruit.titleLine2 + ', ' + fruit.price + ' ' + fruit.unit)},%20from%20this%20week%E2%80%99s%20edit.`
+                  : `https://wa.me/?text=Hello%20%E2%80%94%20I%E2%80%99d%20like%20to%20ask%20about%20next%20week%E2%80%99s%20edit%20for%20${encodeURIComponent(fruit.titleLine1 + ' ' + fruit.titleLine2)}.`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group relative inline-block w-full cursor-pointer font-display font-semibold text-[22px] sm:text-[26px] leading-[30px] uppercase text-center transition-all duration-300"
+              style="perspective: 1000px; height: 46px;"
+            >
+              <div class="invisible opacity-0 pointer-events-none flex items-center justify-center h-full">
+                {fruit.inStock ? 'REQUEST VIA WHATSAPP' : 'ASK ABOUT NEXT WEEK'}
+              </div>
+              <div
+                class="absolute inset-0 w-full h-full transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:[transform:rotateX(90deg)]"
+                style="transform-style: preserve-3d; transform-origin: 50% 50% -23px;"
+              >
+                <!-- Front face -->
+                <div
+                  class={`absolute inset-0 w-full h-full flex items-center justify-center rounded-[8px] border ${fruit.inStock ? 'bg-[#F8FE03] text-[#131313] border-[#F8FE03]' : 'bg-[#FBF9D6] text-[#5B0000] border-[#FBF9D6]'}`}
+                  style="transform:translateZ(0px);backface-visibility:hidden"
+                >
+                  {fruit.inStock ? 'REQUEST VIA WHATSAPP' : 'ASK ABOUT NEXT WEEK'}
+                </div>
+                <!-- Back face (Rotates into view) -->
+                <div
+                  class={`absolute inset-0 w-full h-full flex items-center justify-center rounded-[8px] border ${fruit.inStock ? 'bg-[#131313] text-[#F8FE03] border-[#F8FE03]' : 'bg-[#5B0000] text-[#FBF9D6] border-[#5B0000]'}`}
+                  style="transform-origin:top;transform:translateY(100%) rotateX(-90deg);backface-visibility:hidden"
+                >
+                  {fruit.inStock ? 'REQUEST VIA WHATSAPP' : 'ASK ABOUT NEXT WEEK'}
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Bottom Strip: What's Coming Next with Crate Stamp -->
+  <div class="max-w-5xl mx-auto mt-20 p-6 sm:p-8 rounded-[12px] border-2 border-white/10 bg-white/5 backdrop-blur-md flex flex-col sm:flex-row items-center justify-between gap-6 text-center sm:text-left">
+    <div class="flex items-center gap-4">
+      <CrateStamp class="w-12 h-12 text-yellow shrink-0 hidden sm:block" />
+      <div>
+        <span class="font-mono text-[10px] uppercase tracking-[0.25em] text-yellow block">COMING SOON</span>
+        <h4 class="font-display text-2xl sm:text-3xl uppercase tracking-wide text-creme mt-0.5">
+          WHAT'S ARRIVING NEXT WEEK
+        </h4>
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center justify-center sm:justify-end gap-3 text-xs font-mono uppercase tracking-widest text-creme/75">
+      <div class="px-4 py-2 rounded-lg bg-black/60 border border-white/15">
+        SITAPHAL — OPENS ~SEPT 9
+      </div>
+      <div class="px-4 py-2 rounded-lg bg-black/60 border border-white/15">
+        FIGS — RETURNS THURSDAY
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  // 1. Effect 089: Jelly headline motion on scroll
+  function initJellyHeadline() {
+    const headline = document.getElementById('jelly-headline')
+    if (!headline) return
+
+    let lastY = window.scrollY
+    const skewSetter = gsap.quickSetter(headline, 'skewX', 'deg')
+    const scaleYSetter = gsap.quickSetter(headline, 'scaleY')
+
+    let timer: number
+
+    window.addEventListener('scroll', () => {
+      const currentY = window.scrollY
+      const deltaY = currentY - lastY
+      lastY = currentY
+
+      const velocity = gsap.utils.clamp(-22, 22, deltaY * 0.45)
+      const scaleComp = gsap.utils.clamp(0.92, 1.08, 1 - Math.abs(velocity) * 0.005)
+
+      skewSetter(velocity)
+      scaleYSetter(scaleComp)
+
+      clearTimeout(timer)
+      timer = window.setTimeout(() => {
+        gsap.to(headline, {
+          skewX: 0,
+          scaleY: 1,
+          duration: 0.7,
+          ease: 'elastic.out(1.2, 0.3)',
+          overwrite: true
+        })
+      }, 50)
+    }, { passive: true })
+  }
+
+  // 2. Tutorial 087: 3D Card Interactive Tilt & Staggered Reveal
+  function initCardsMotion() {
+    const cards = document.querySelectorAll('.edit-card-item')
+    if (cards.length === 0) return
+
+    gsap.from(cards, {
+      scrollTrigger: {
+        trigger: '#cards-grid',
+        start: 'top 82%',
+        toggleActions: 'play none none none'
+      },
+      y: 70,
+      opacity: 0,
+      stagger: 0.12,
+      duration: 1.0,
+      ease: 'power3.out'
+    })
+
+    cards.forEach((card) => {
+      const el = card as HTMLElement
+
+      el.addEventListener('pointermove', (e) => {
+        const rect = el.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+
+        const xNorm = (x / rect.width) * 2 - 1
+        const yNorm = (y / rect.height) * 2 - 1
+
+        const tiltX = -yNorm * 6
+        const tiltY = xNorm * 6
+
+        gsap.to(el, {
+          rotateX: tiltX,
+          rotateY: tiltY,
+          duration: 0.35,
+          ease: 'power2.out',
+          transformPerspective: 900
+        })
+      })
+
+      el.addEventListener('pointerleave', () => {
+        gsap.to(el, {
+          rotateX: 0,
+          rotateY: 0,
+          duration: 0.6,
+          ease: 'elastic.out(1, 0.4)'
+        })
+      })
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      initJellyHeadline()
+      initCardsMotion()
+    })
+  } else {
+    initJellyHeadline()
+    initCardsMotion()
+  }
+</script>

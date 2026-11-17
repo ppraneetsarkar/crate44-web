@@ -1,0 +1,832 @@
+---
+// src/pages/faq.astro
+// Exact 1:1 replica of https://crate44.in/faq
+import Layout from '../layouts/Layout.astro'
+import Footer from '../components/Footer.astro'
+
+const faqItems = [{'id': 0, 'q_desktop': 'Why is it so<br class="hidden lg:inline"/> expensive?', 'q_mobile': 'Why is it so expensive?', 'part1': 'The world built its fruit for trucks. We built ours for the last two feet of the journey: the hand, the mouth, the moment.', 'part2': 'Crate 44. The fruit house of India.'}, {'id': 1, 'q_desktop': 'Where<br class="hidden lg:inline"/> do you deliver?', 'q_mobile': 'Where do you deliver?', 'part1': 'We deliver across major cities in India.', 'part2': 'Ensuring the fruit reaches you within 36 hours of harvest.'}, {'id': 2, 'q_desktop': 'Why is everything<br class="hidden lg:inline"/> always selling out?', 'q_mobile': 'Why is everything always selling out?', 'part1': 'Our fruit is grown in limited quantities, picked only when perfectly ripe.', 'part2': 'Quality over quantity.'}, {'id': 3, 'q_desktop': 'Is your<br class="hidden lg:inline"/> fruit organic?', 'q_mobile': 'Is your fruit organic?', 'part1': 'We follow natural farming practices to ensure the best taste and health.', 'part2': 'Focusing on the soil and the fruit.'}, {'id': 4, 'q_desktop': 'Do you<br class="hidden lg:inline"/> use chemicals to ripen?', 'q_mobile': 'Do you use chemicals to ripen?', 'part1': 'Never. Our fruit is ripened naturally, on the tree and in the crate.', 'part2': 'Without any artificial chemicals.'}, {'id': 5, 'q_desktop': 'What if<br class="hidden lg:inline"/> something in my crate<br class="hidden lg:inline"/> isn\'t good?', 'q_mobile': "What if something in my crate isn't good?", 'part1': "We take full responsibility. Reach out to us and we'll make it right.", 'part2': 'No questions asked.'}, {'id': 6, 'q_desktop': 'How<br class="hidden lg:inline"/> do I order?', 'q_mobile': 'How do I order?', 'part1': 'Join our waitlist or keep an eye on our drops.', 'part2': 'We sell exclusively through our website.'}]
+---
+
+<Layout title="FAQ | Crate 44 — Ultra-premium fruit">
+  <main id="faq-page" class="min-h-screen bg-black text-white w-full overflow-x-clip selection:bg-[#FBF9D6] selection:text-zinc-950">
+    <section class="w-full bg-[#131313] pt-[140px] md:pt-[160px] pb-[100px] relative">
+      <div class="px-4">
+        <div class="w-full mx-auto" style="max-width: none;">
+          
+          <!-- ======================================================== -->
+          <!-- DESKTOP VIEW (hidden lg:flex)                            -->
+          <!-- ======================================================== -->
+          <div class="hidden lg:flex w-full flex-col relative">
+            <h2
+              class="mb-[80px] text-[#FBF9D6] font-bold text-[56px] leading-[64px] tracking-[-0.358px] md:text-[clamp(48px,4.44vw,64px)] md:leading-normal md:tracking-[-0.64px] overflow-hidden block select-none"
+              style='font-family: "Suisse Intl", sans-serif;'
+            >
+              <span class="faq-title-inner block will-change-transform">FAQ</span>
+            </h2>
+
+            <div class="w-full flex flex-row relative">
+              <!-- Left Column: Questions List -->
+              <div class="w-full lg:w-5/12 flex flex-col relative z-10 pb-[280px]">
+                <div style="display: flex; width: 457px; max-width: 100%; flex-direction: column; align-items: flex-start; gap: 48px;">
+                  <div
+                    class="faq-q-desktop cursor-pointer transition-colors duration-300 block overflow-hidden select-none"
+                    data-index="0"
+                    style='color: var(--Color-Creme, #FBF9D6); font-family: var(--Font-Body, "Suisse Intl"); font-size: clamp(32px, 2.77vw, 40px); font-style: normal; font-weight: 700; line-height: clamp(38px, 3.33vw, 48px); letter-spacing: -0.4px;'
+                  >
+                    <div class="faq-question-inner block will-change-transform">
+                      Why is it so<br class="hidden lg:inline"/> expensive?
+                    </div>
+                  </div>
+                  <div
+                    class="faq-q-desktop cursor-pointer transition-colors duration-300 block overflow-hidden select-none"
+                    data-index="1"
+                    style='color: var(--Color-Grey-Dark, #464646); font-family: var(--Font-Body, "Suisse Intl"); font-size: clamp(32px, 2.77vw, 40px); font-style: normal; font-weight: 700; line-height: clamp(38px, 3.33vw, 48px); letter-spacing: -0.4px;'
+                  >
+                    <div class="faq-question-inner block will-change-transform">
+                      Where<br class="hidden lg:inline"/> do you deliver?
+                    </div>
+                  </div>
+                  <div
+                    class="faq-q-desktop cursor-pointer transition-colors duration-300 block overflow-hidden select-none"
+                    data-index="2"
+                    style='color: var(--Color-Grey-Dark, #464646); font-family: var(--Font-Body, "Suisse Intl"); font-size: clamp(32px, 2.77vw, 40px); font-style: normal; font-weight: 700; line-height: clamp(38px, 3.33vw, 48px); letter-spacing: -0.4px;'
+                  >
+                    <div class="faq-question-inner block will-change-transform">
+                      Why is everything<br class="hidden lg:inline"/> always selling out?
+                    </div>
+                  </div>
+                  <div
+                    class="faq-q-desktop cursor-pointer transition-colors duration-300 block overflow-hidden select-none"
+                    data-index="3"
+                    style='color: var(--Color-Grey-Dark, #464646); font-family: var(--Font-Body, "Suisse Intl"); font-size: clamp(32px, 2.77vw, 40px); font-style: normal; font-weight: 700; line-height: clamp(38px, 3.33vw, 48px); letter-spacing: -0.4px;'
+                  >
+                    <div class="faq-question-inner block will-change-transform">
+                      Is your<br class="hidden lg:inline"/> fruit organic?
+                    </div>
+                  </div>
+                  <div
+                    class="faq-q-desktop cursor-pointer transition-colors duration-300 block overflow-hidden select-none"
+                    data-index="4"
+                    style='color: var(--Color-Grey-Dark, #464646); font-family: var(--Font-Body, "Suisse Intl"); font-size: clamp(32px, 2.77vw, 40px); font-style: normal; font-weight: 700; line-height: clamp(38px, 3.33vw, 48px); letter-spacing: -0.4px;'
+                  >
+                    <div class="faq-question-inner block will-change-transform">
+                      Do you<br class="hidden lg:inline"/> use chemicals to ripen?
+                    </div>
+                  </div>
+                  <div
+                    class="faq-q-desktop cursor-pointer transition-colors duration-300 block overflow-hidden select-none"
+                    data-index="5"
+                    style='color: var(--Color-Grey-Dark, #464646); font-family: var(--Font-Body, "Suisse Intl"); font-size: clamp(32px, 2.77vw, 40px); font-style: normal; font-weight: 700; line-height: clamp(38px, 3.33vw, 48px); letter-spacing: -0.4px;'
+                  >
+                    <div class="faq-question-inner block will-change-transform">
+                      What if<br class="hidden lg:inline"/> something in my crate<br class="hidden lg:inline"/> isn't good?
+                    </div>
+                  </div>
+                  <div
+                    class="faq-q-desktop cursor-pointer transition-colors duration-300 block overflow-hidden select-none"
+                    data-index="6"
+                    style='color: var(--Color-Grey-Dark, #464646); font-family: var(--Font-Body, "Suisse Intl"); font-size: clamp(32px, 2.77vw, 40px); font-style: normal; font-weight: 700; line-height: clamp(38px, 3.33vw, 48px); letter-spacing: -0.4px;'
+                  >
+                    <div class="faq-question-inner block will-change-transform">
+                      How<br class="hidden lg:inline"/> do I order?
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Right Column: Sticky Dynamic Answer Display -->
+              <div class="w-full lg:w-7/12 relative">
+                <div class="lg:sticky lg:top-[120px] flex flex-col gap-6" id="faq-answers-stage">
+                  <div class="faq-answer-pane  flex flex-col gap-6 select-none" data-answer-index="0">
+                    <div class="flex flex-col">
+                      <div style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">The</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">world</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">built</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">its</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">fruit</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">for</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">trucks.</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">We</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">built</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">ours</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">for</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">last</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">two</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">feet</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">of</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">journey:</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">hand,</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">mouth,</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">moment.</span></span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <div style='font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Crate</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">44.</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">The</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">fruit</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">house</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">of</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">India.</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq-answer-pane hidden flex flex-col gap-6 select-none" data-answer-index="1">
+                    <div class="flex flex-col">
+                      <div style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">We</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">deliver</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">across</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">major</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">cities</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">in</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">India.</span></span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <div style='font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Ensuring</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">fruit</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">reaches</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">you</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">within</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">36</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">hours</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">of</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">harvest.</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq-answer-pane hidden flex flex-col gap-6 select-none" data-answer-index="2">
+                    <div class="flex flex-col">
+                      <div style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">Our</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">fruit</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">is</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">grown</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">in</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">limited</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">quantities,</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">picked</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">only</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">when</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">perfectly</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">ripe.</span></span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <div style='font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Quality</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">over</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">quantity.</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq-answer-pane hidden flex flex-col gap-6 select-none" data-answer-index="3">
+                    <div class="flex flex-col">
+                      <div style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">We</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">follow</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">natural</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">farming</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">practices</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">to</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">ensure</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">best</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">taste</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">and</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">health.</span></span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <div style='font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Focusing</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">on</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">soil</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">and</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">fruit.</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq-answer-pane hidden flex flex-col gap-6 select-none" data-answer-index="4">
+                    <div class="flex flex-col">
+                      <div style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">Never.</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">Our</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">fruit</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">is</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">ripened</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">naturally,</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">on</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">tree</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">and</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">in</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">crate.</span></span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <div style='font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Without</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">any</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">artificial</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">chemicals.</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq-answer-pane hidden flex flex-col gap-6 select-none" data-answer-index="5">
+                    <div class="flex flex-col">
+                      <div style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">We</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">take</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">full</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">responsibility.</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">Reach</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">out</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">to</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">us</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">and</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">we'll</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">make</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">it</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">right.</span></span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <div style='font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">No</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">questions</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">asked.</span></span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="faq-answer-pane hidden flex flex-col gap-6 select-none" data-answer-index="6">
+                    <div class="flex flex-col">
+                      <div style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">Join</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">our</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">waitlist</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">or</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">keep</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">an</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">eye</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">on</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">our</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform">drops.</span></span>
+                      </div>
+                    </div>
+                    <div class="flex flex-col mt-4">
+                      <div style='font-family: "Suisse Intl", sans-serif; font-size: clamp(48px, 5vw, 72px); font-style: normal; font-weight: 700; line-height: 1; letter-spacing: -2.405px;'>
+                        <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">We</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">sell</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">exclusively</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">through</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">our</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">website.</span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ======================================================== -->
+          <!-- MOBILE VIEW (flex lg:hidden)                             -->
+          <!-- ======================================================== -->
+          <div class="flex lg:hidden w-full flex-col relative">
+            <h2
+              class="mb-8 text-[#FBF9D6] font-bold text-[56px] leading-[64px] tracking-[-0.358px] md:text-[64px] md:leading-normal md:tracking-[-0.64px] overflow-hidden block select-none"
+              style='font-family: "Suisse Intl", sans-serif;'
+            >
+              <span class="faq-title-inner block will-change-transform">FAQ</span>
+            </h2>
+
+            <div class="flex flex-col w-full gap-[37px] md:gap-[48px]">
+              <div class="faq-mob-item flex flex-col" data-mob-index="0">
+                <button
+                  type="button"
+                  class="faq-mob-btn w-full flex justify-between items-center text-left gap-4 cursor-pointer select-none"
+                >
+                  <div
+                    class="faq-mob-question text-[24px] md:text-[40px] leading-[24px] md:leading-[40px] tracking-[-0.154px] md:tracking-[-0.2px] transition-colors duration-300 overflow-hidden block"
+                    style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                  >
+                    <span class="faq-question-inner block will-change-transform">
+                      Why is it so expensive?
+                    </span>
+                  </div>
+                  <div
+                    class="faq-mob-icon relative w-[20px] h-[20px] flex-shrink-0 flex items-center justify-center transition-colors duration-300"
+                    style='color: #FBF9D6;'
+                  >
+                    <!-- Plus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-90 opacity-0 scale-50"
+                    >
+                      <path d="M12.5 1.25H7.5V7.5H1.25V12.5H7.5V18.75H12.5V12.5H18.75V7.5H12.5V1.25Z" fill="currentColor" />
+                    </svg>
+                    <!-- Minus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100"
+                    >
+                      <path d="M1.25 12.5V7.5H18.75V12.5H1.25Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div
+                  class="faq-mob-content grid transition-all duration-500 ease-in-out"
+                  style="grid-template-rows: 1fr; margin-top: 24px; opacity: 1;"
+                >
+                  <div class="overflow-hidden flex flex-col gap-4">
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      The world built its fruit for trucks. We built ours for the last two feet of the journey: the hand, the mouth, the moment.
+                    </div>
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Crate</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">44.</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">The</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">fruit</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">house</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">of</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">India.</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="faq-mob-item flex flex-col" data-mob-index="1">
+                <button
+                  type="button"
+                  class="faq-mob-btn w-full flex justify-between items-center text-left gap-4 cursor-pointer select-none"
+                >
+                  <div
+                    class="faq-mob-question text-[24px] md:text-[40px] leading-[24px] md:leading-[40px] tracking-[-0.154px] md:tracking-[-0.2px] transition-colors duration-300 overflow-hidden block"
+                    style='color: #464646; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                  >
+                    <span class="faq-question-inner block will-change-transform">
+                      Where do you deliver?
+                    </span>
+                  </div>
+                  <div
+                    class="faq-mob-icon relative w-[20px] h-[20px] flex-shrink-0 flex items-center justify-center transition-colors duration-300"
+                    style='color: #464646;'
+                  >
+                    <!-- Plus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100"
+                    >
+                      <path d="M12.5 1.25H7.5V7.5H1.25V12.5H7.5V18.75H12.5V12.5H18.75V7.5H12.5V1.25Z" fill="currentColor" />
+                    </svg>
+                    <!-- Minus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50"
+                    >
+                      <path d="M1.25 12.5V7.5H18.75V12.5H1.25Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div
+                  class="faq-mob-content grid transition-all duration-500 ease-in-out"
+                  style="grid-template-rows: 0fr; margin-top: 0px; opacity: 0;"
+                >
+                  <div class="overflow-hidden flex flex-col gap-4">
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      We deliver across major cities in India.
+                    </div>
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Ensuring</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">fruit</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">reaches</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">you</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">within</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">36</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">hours</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">of</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">harvest.</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="faq-mob-item flex flex-col" data-mob-index="2">
+                <button
+                  type="button"
+                  class="faq-mob-btn w-full flex justify-between items-center text-left gap-4 cursor-pointer select-none"
+                >
+                  <div
+                    class="faq-mob-question text-[24px] md:text-[40px] leading-[24px] md:leading-[40px] tracking-[-0.154px] md:tracking-[-0.2px] transition-colors duration-300 overflow-hidden block"
+                    style='color: #464646; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                  >
+                    <span class="faq-question-inner block will-change-transform">
+                      Why is everything always selling out?
+                    </span>
+                  </div>
+                  <div
+                    class="faq-mob-icon relative w-[20px] h-[20px] flex-shrink-0 flex items-center justify-center transition-colors duration-300"
+                    style='color: #464646;'
+                  >
+                    <!-- Plus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100"
+                    >
+                      <path d="M12.5 1.25H7.5V7.5H1.25V12.5H7.5V18.75H12.5V12.5H18.75V7.5H12.5V1.25Z" fill="currentColor" />
+                    </svg>
+                    <!-- Minus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50"
+                    >
+                      <path d="M1.25 12.5V7.5H18.75V12.5H1.25Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div
+                  class="faq-mob-content grid transition-all duration-500 ease-in-out"
+                  style="grid-template-rows: 0fr; margin-top: 0px; opacity: 0;"
+                >
+                  <div class="overflow-hidden flex flex-col gap-4">
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      Our fruit is grown in limited quantities, picked only when perfectly ripe.
+                    </div>
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Quality</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">over</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">quantity.</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="faq-mob-item flex flex-col" data-mob-index="3">
+                <button
+                  type="button"
+                  class="faq-mob-btn w-full flex justify-between items-center text-left gap-4 cursor-pointer select-none"
+                >
+                  <div
+                    class="faq-mob-question text-[24px] md:text-[40px] leading-[24px] md:leading-[40px] tracking-[-0.154px] md:tracking-[-0.2px] transition-colors duration-300 overflow-hidden block"
+                    style='color: #464646; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                  >
+                    <span class="faq-question-inner block will-change-transform">
+                      Is your fruit organic?
+                    </span>
+                  </div>
+                  <div
+                    class="faq-mob-icon relative w-[20px] h-[20px] flex-shrink-0 flex items-center justify-center transition-colors duration-300"
+                    style='color: #464646;'
+                  >
+                    <!-- Plus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100"
+                    >
+                      <path d="M12.5 1.25H7.5V7.5H1.25V12.5H7.5V18.75H12.5V12.5H18.75V7.5H12.5V1.25Z" fill="currentColor" />
+                    </svg>
+                    <!-- Minus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50"
+                    >
+                      <path d="M1.25 12.5V7.5H18.75V12.5H1.25Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div
+                  class="faq-mob-content grid transition-all duration-500 ease-in-out"
+                  style="grid-template-rows: 0fr; margin-top: 0px; opacity: 0;"
+                >
+                  <div class="overflow-hidden flex flex-col gap-4">
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      We follow natural farming practices to ensure the best taste and health.
+                    </div>
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Focusing</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">on</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">soil</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">and</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">the</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">fruit.</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="faq-mob-item flex flex-col" data-mob-index="4">
+                <button
+                  type="button"
+                  class="faq-mob-btn w-full flex justify-between items-center text-left gap-4 cursor-pointer select-none"
+                >
+                  <div
+                    class="faq-mob-question text-[24px] md:text-[40px] leading-[24px] md:leading-[40px] tracking-[-0.154px] md:tracking-[-0.2px] transition-colors duration-300 overflow-hidden block"
+                    style='color: #464646; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                  >
+                    <span class="faq-question-inner block will-change-transform">
+                      Do you use chemicals to ripen?
+                    </span>
+                  </div>
+                  <div
+                    class="faq-mob-icon relative w-[20px] h-[20px] flex-shrink-0 flex items-center justify-center transition-colors duration-300"
+                    style='color: #464646;'
+                  >
+                    <!-- Plus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100"
+                    >
+                      <path d="M12.5 1.25H7.5V7.5H1.25V12.5H7.5V18.75H12.5V12.5H18.75V7.5H12.5V1.25Z" fill="currentColor" />
+                    </svg>
+                    <!-- Minus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50"
+                    >
+                      <path d="M1.25 12.5V7.5H18.75V12.5H1.25Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div
+                  class="faq-mob-content grid transition-all duration-500 ease-in-out"
+                  style="grid-template-rows: 0fr; margin-top: 0px; opacity: 0;"
+                >
+                  <div class="overflow-hidden flex flex-col gap-4">
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      Never. Our fruit is ripened naturally, on the tree and in the crate.
+                    </div>
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Without</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">any</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">artificial</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">chemicals.</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="faq-mob-item flex flex-col" data-mob-index="5">
+                <button
+                  type="button"
+                  class="faq-mob-btn w-full flex justify-between items-center text-left gap-4 cursor-pointer select-none"
+                >
+                  <div
+                    class="faq-mob-question text-[24px] md:text-[40px] leading-[24px] md:leading-[40px] tracking-[-0.154px] md:tracking-[-0.2px] transition-colors duration-300 overflow-hidden block"
+                    style='color: #464646; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                  >
+                    <span class="faq-question-inner block will-change-transform">
+                      What if something in my crate isn't good?
+                    </span>
+                  </div>
+                  <div
+                    class="faq-mob-icon relative w-[20px] h-[20px] flex-shrink-0 flex items-center justify-center transition-colors duration-300"
+                    style='color: #464646;'
+                  >
+                    <!-- Plus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100"
+                    >
+                      <path d="M12.5 1.25H7.5V7.5H1.25V12.5H7.5V18.75H12.5V12.5H18.75V7.5H12.5V1.25Z" fill="currentColor" />
+                    </svg>
+                    <!-- Minus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50"
+                    >
+                      <path d="M1.25 12.5V7.5H18.75V12.5H1.25Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div
+                  class="faq-mob-content grid transition-all duration-500 ease-in-out"
+                  style="grid-template-rows: 0fr; margin-top: 0px; opacity: 0;"
+                >
+                  <div class="overflow-hidden flex flex-col gap-4">
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      We take full responsibility. Reach out to us and we'll make it right.
+                    </div>
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">No</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">questions</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">asked.</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="faq-mob-item flex flex-col" data-mob-index="6">
+                <button
+                  type="button"
+                  class="faq-mob-btn w-full flex justify-between items-center text-left gap-4 cursor-pointer select-none"
+                >
+                  <div
+                    class="faq-mob-question text-[24px] md:text-[40px] leading-[24px] md:leading-[40px] tracking-[-0.154px] md:tracking-[-0.2px] transition-colors duration-300 overflow-hidden block"
+                    style='color: #464646; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                  >
+                    <span class="faq-question-inner block will-change-transform">
+                      How do I order?
+                    </span>
+                  </div>
+                  <div
+                    class="faq-mob-icon relative w-[20px] h-[20px] flex-shrink-0 flex items-center justify-center transition-colors duration-300"
+                    style='color: #464646;'
+                  >
+                    <!-- Plus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100"
+                    >
+                      <path d="M12.5 1.25H7.5V7.5H1.25V12.5H7.5V18.75H12.5V12.5H18.75V7.5H12.5V1.25Z" fill="currentColor" />
+                    </svg>
+                    <!-- Minus Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      class="faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50"
+                    >
+                      <path d="M1.25 12.5V7.5H18.75V12.5H1.25Z" fill="currentColor" />
+                    </svg>
+                  </div>
+                </button>
+
+                <div
+                  class="faq-mob-content grid transition-all duration-500 ease-in-out"
+                  style="grid-template-rows: 0fr; margin-top: 0px; opacity: 0;"
+                >
+                  <div class="overflow-hidden flex flex-col gap-4">
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='color: #FBF9D6; font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      Join our waitlist or keep an eye on our drops.
+                    </div>
+                    <div
+                      class="text-[32px] md:text-[40px] leading-[32px] md:leading-[40px] tracking-[0.128px] md:tracking-[0.16px]"
+                      style='font-family: "Suisse Intl", sans-serif; font-style: normal; font-weight: 700;'
+                    >
+                      <span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">We</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">sell</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">exclusively</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">through</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">our</span></span><span class="relative overflow-hidden inline-block mr-[0.28em] my-[-0.14em] align-top"><span class="answer-word block py-[0.14em] will-change-transform" style="background: linear-gradient(180deg, #FBF9D6 53.05%, #FF76FF 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">website.</span></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  import { gsap } from 'gsap'
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // -------------------------------------------------------------------------
+    // 1. Initial Entrance Animation (exact timing & easing from crate44.in)
+    // -------------------------------------------------------------------------
+    const initTl = gsap.timeline({ delay: 0.15 })
+    
+    initTl.fromTo(
+      '.faq-title-inner',
+      { yPercent: 150, opacity: 0, rotate: 0.001 },
+      { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: 'cubic-bezier(0.31, 0.75, 0.22, 1)' },
+      0
+    ).fromTo(
+      '.faq-question-inner',
+      { yPercent: 150, opacity: 0, rotate: 0.001 },
+      { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: 'cubic-bezier(0.31, 0.75, 0.22, 1)', stagger: 0.05 },
+      0.1
+    )
+
+    // Also animate the initial active desktop answer words
+    const initialPane = document.querySelector('.faq-answer-pane[data-answer-index="0"]')
+    if (initialPane) {
+      const initialWords = initialPane.querySelectorAll('.answer-word')
+      initTl.fromTo(
+        initialWords,
+        { yPercent: 150, opacity: 0, rotate: 0.001 },
+        { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: 'cubic-bezier(0.31, 0.75, 0.22, 1)', stagger: 0.015 },
+        0.2
+      )
+    }
+
+    // -------------------------------------------------------------------------
+    // 2. Desktop Question Switcher & Scroll Tracking
+    // -------------------------------------------------------------------------
+    const qElements = document.querySelectorAll<HTMLElement>('.faq-q-desktop')
+    const answerPanes = document.querySelectorAll<HTMLElement>('.faq-answer-pane')
+    
+    let activeScrollIndex = 0
+    let hoveredIndex: number | null = null
+    let currentRenderedIndex = 0
+
+    function switchAnswer(targetIndex: number) {
+      if (targetIndex === currentRenderedIndex && !answerPanes[targetIndex].classList.contains('hidden')) {
+        return
+      }
+      currentRenderedIndex = targetIndex
+
+      // Update question text colors
+      qElements.forEach((el, idx) => {
+        if (idx === targetIndex) {
+          el.style.color = 'var(--Color-Creme, #FBF9D6)'
+        } else {
+          el.style.color = 'var(--Color-Grey-Dark, #464646)'
+        }
+      })
+
+      // Hide all panes, show target pane
+      answerPanes.forEach((pane) => {
+        const pIdx = parseInt(pane.getAttribute('data-answer-index') || '-1', 10)
+        if (pIdx === targetIndex) {
+          pane.classList.remove('hidden')
+          // Animate words in target pane
+          const words = pane.querySelectorAll('.answer-word')
+          gsap.fromTo(
+            words,
+            { yPercent: 150, opacity: 0, rotate: 0.001 },
+            { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: 'cubic-bezier(0.31, 0.75, 0.22, 1)', stagger: 0.015 }
+          )
+        } else {
+          pane.classList.add('hidden')
+        }
+      })
+    }
+
+    qElements.forEach((el) => {
+      const idx = parseInt(el.getAttribute('data-index') || '0', 10)
+
+      el.addEventListener('mouseenter', () => {
+        hoveredIndex = idx
+        switchAnswer(idx)
+      })
+
+      el.addEventListener('mouseleave', () => {
+        hoveredIndex = null
+        switchAnswer(activeScrollIndex)
+      })
+
+      el.addEventListener('click', () => {
+        activeScrollIndex = idx
+        switchAnswer(idx)
+      })
+    })
+
+    // Scroll listener matching live site math
+    const handleScroll = () => {
+      if (window.innerWidth < 1024) return
+      if (hoveredIndex !== null) return
+
+      let closestIdx = 0
+      let minDistance = Infinity
+
+      qElements.forEach((el, idx) => {
+        const rect = el.getBoundingClientRect()
+        if (rect.width === 0 && rect.height === 0) return
+        const dist = Math.abs(rect.top - 120)
+        if (rect.top < 270 && dist < minDistance) {
+          minDistance = dist
+          closestIdx = idx
+        }
+      })
+
+      if (closestIdx !== activeScrollIndex) {
+        activeScrollIndex = closestIdx
+        switchAnswer(activeScrollIndex)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+
+    // -------------------------------------------------------------------------
+    // 3. Mobile Accordion Logic
+    // -------------------------------------------------------------------------
+    const mobItems = document.querySelectorAll<HTMLElement>('.faq-mob-item')
+    let currentOpenMobIdx: number | null = 0 // first item open by default
+
+    mobItems.forEach((item) => {
+      const idx = parseInt(item.getAttribute('data-mob-index') || '0', 10)
+      const btn = item.querySelector<HTMLButtonElement>('.faq-mob-btn')
+      const questionEl = item.querySelector<HTMLElement>('.faq-mob-question')
+      const iconWrap = item.querySelector<HTMLElement>('.faq-mob-icon')
+      const plusSvg = item.querySelector<SVGElement>('.faq-icon-plus')
+      const minusSvg = item.querySelector<SVGElement>('.faq-icon-minus')
+      const contentEl = item.querySelector<HTMLElement>('.faq-mob-content')
+
+      btn?.addEventListener('click', () => {
+        const isOpen = currentOpenMobIdx === idx
+
+        // Close currently open if different
+        if (!isOpen) {
+          mobItems.forEach((other) => {
+            const oContent = other.querySelector<HTMLElement>('.faq-mob-content')
+            const oQuestion = other.querySelector<HTMLElement>('.faq-mob-question')
+            const oIcon = other.querySelector<HTMLElement>('.faq-mob-icon')
+            const oPlus = other.querySelector<SVGElement>('.faq-icon-plus')
+            const oMinus = other.querySelector<SVGElement>('.faq-icon-minus')
+
+            if (oContent) {
+              oContent.style.gridTemplateRows = '0fr'
+              oContent.style.marginTop = '0px'
+              oContent.style.opacity = '0'
+            }
+            if (oQuestion) oQuestion.style.color = '#464646'
+            if (oIcon) oIcon.style.color = '#464646'
+            if (oPlus) oPlus.setAttribute('class', 'faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100')
+            if (oMinus) oMinus.setAttribute('class', 'faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50')
+          })
+
+          // Open clicked
+          currentOpenMobIdx = idx
+          if (contentEl) {
+            contentEl.style.gridTemplateRows = '1fr'
+            contentEl.style.marginTop = '24px'
+            contentEl.style.opacity = '1'
+          }
+          if (questionEl) questionEl.style.color = '#FBF9D6'
+          if (iconWrap) iconWrap.style.color = '#FBF9D6'
+          if (plusSvg) plusSvg.setAttribute('class', 'faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-90 opacity-0 scale-50')
+          if (minusSvg) minusSvg.setAttribute('class', 'faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100')
+        } else {
+          // Toggle close current
+          currentOpenMobIdx = null
+          if (contentEl) {
+            contentEl.style.gridTemplateRows = '0fr'
+            contentEl.style.marginTop = '0px'
+            contentEl.style.opacity = '0'
+          }
+          if (questionEl) questionEl.style.color = '#464646'
+          if (iconWrap) iconWrap.style.color = '#464646'
+          if (plusSvg) plusSvg.setAttribute('class', 'faq-icon-plus absolute inset-0 transition-all duration-300 ease-in-out rotate-0 opacity-100 scale-100')
+          if (minusSvg) minusSvg.setAttribute('class', 'faq-icon-minus absolute inset-0 transition-all duration-300 ease-in-out -rotate-90 opacity-0 scale-50')
+        }
+      })
+    })
+  })
+</script>

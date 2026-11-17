@@ -1,0 +1,447 @@
+---
+// src/pages/gifting.astro
+// Exact implementation ported from https://crate44.in/gifting
+// Mobile responsiveness fixed, guaranteed visibility, and unified fonts
+
+import Layout from '../layouts/Layout.astro'
+import Footer from '../components/Footer.astro'
+
+const crateCards = [
+  {
+    titleLine1: 'THE EDIT',
+    titleLine2: 'CRATE',
+    img: '/webp/edit-crate.webp',
+    desc: "This week's best, arranged.",
+    price: 'From ₹6,500.',
+  },
+  {
+    titleLine1: 'THE SEASON',
+    titleLine2: 'CRATE',
+    img: '/webp/season-crate.webp',
+    desc: 'One grower. One peak. Twelve units.',
+    price: 'From ₹4,500.',
+  },
+  {
+    titleLine1: 'THE HOUSE',
+    titleLine2: 'CRATE',
+    img: '/webp/house-crate.webp',
+    desc: 'The weekly foundation for households.',
+    price: 'From ₹8,500.',
+  },
+]
+---
+
+<Layout title="The Gift Crate | Crate 44 — FruitSite">
+  <main class="min-h-screen w-full overflow-x-clip bg-black selection:bg-[#F8FE03] selection:text-black">
+    <!-- Section 1: Hero — THE GIFT CRATE -->
+    <section
+      id="gifting-hero"
+      class="relative w-full max-h-[956px] min-h-[100dvh] md:h-[917px] overflow-hidden flex flex-col justify-between pt-[130px] sm:pt-[140px] pb-0 bg-black"
+    >
+      <!-- Background Hero Visual (Frame 1686553617) -->
+      <div class="absolute inset-0 pointer-events-none select-none z-0">
+        <picture>
+          <img
+            src="/images/gifting-hero.avif"
+            alt="The Gift Crate"
+            class="w-full h-full object-cover object-bottom pointer-events-none"
+            loading="eager"
+            decoding="async"
+          />
+        </picture>
+        <!-- Seamless fade to Section 2 (#111111) -->
+        <div class="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#111111] to-transparent pointer-events-none"></div>
+      </div>
+
+      <div class="px-4 lg:px-8 relative z-10 w-full flex-1 flex flex-col items-center justify-start text-center">
+        <div class="w-full mx-auto flex flex-col items-center justify-start">
+          <div class="w-full flex flex-col items-center text-center">
+            <h1 class="m-0 p-0 text-center w-full">
+              <!-- Desktop Headline -->
+              <div class="hidden md:flex flex-col items-center">
+                <span class="block overflow-hidden pb-[0.08em]">
+                  <span
+                    class="gift-hero-line flex flex-nowrap whitespace-nowrap justify-center will-change-transform uppercase font-display font-semibold text-[140px] leading-[115px] lg:text-[200px] lg:leading-[162px] tracking-[2.8px]"
+                    style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                    data-line="THE GIFT"
+                  >
+                    <span class="gift-hero-char inline-block will-change-transform">T</span>
+                    <span class="gift-hero-char inline-block will-change-transform">H</span>
+                    <span class="gift-hero-char inline-block will-change-transform">E</span>
+                    <span class="gift-hero-char inline-block will-change-transform">&nbsp;</span>
+                    <span class="gift-hero-char inline-block will-change-transform">G</span>
+                    <span class="gift-hero-char inline-block will-change-transform">I</span>
+                    <span class="gift-hero-char inline-block will-change-transform">F</span>
+                    <span class="gift-hero-char inline-block will-change-transform">T</span>
+                  </span>
+                </span>
+                <span class="block overflow-hidden pb-[0.08em]">
+                  <span
+                    class="gift-hero-line flex flex-nowrap whitespace-nowrap justify-center will-change-transform uppercase font-display font-semibold text-[140px] leading-[115px] lg:text-[200px] lg:leading-[162px] tracking-[2.8px]"
+                    style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                    data-line="CRATE"
+                  >
+                    <span class="gift-hero-char inline-block will-change-transform">C</span>
+                    <span class="gift-hero-char inline-block will-change-transform">R</span>
+                    <span class="gift-hero-char inline-block will-change-transform">A</span>
+                    <span class="gift-hero-char inline-block will-change-transform">T</span>
+                    <span class="gift-hero-char inline-block will-change-transform">E</span>
+                  </span>
+                </span>
+              </div>
+
+              <!-- Mobile Headline -->
+              <div class="flex md:hidden flex-col items-center">
+                <span class="block overflow-hidden pb-[0.05em]">
+                  <span
+                    class="gift-hero-line flex flex-nowrap whitespace-nowrap justify-center will-change-transform uppercase font-display font-semibold text-[80px] sm:text-[100px] leading-[72px] sm:leading-[90px] tracking-[0.8px]"
+                    style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                    data-line="THE"
+                  >
+                    <span class="gift-hero-char inline-block will-change-transform">T</span>
+                    <span class="gift-hero-char inline-block will-change-transform">H</span>
+                    <span class="gift-hero-char inline-block will-change-transform">E</span>
+                  </span>
+                </span>
+                <span class="block overflow-hidden pb-[0.05em]">
+                  <span
+                    class="gift-hero-line flex flex-nowrap whitespace-nowrap justify-center will-change-transform uppercase font-display font-semibold text-[80px] sm:text-[100px] leading-[72px] sm:leading-[90px] tracking-[0.8px]"
+                    style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                    data-line="GIFT"
+                  >
+                    <span class="gift-hero-char inline-block will-change-transform">G</span>
+                    <span class="gift-hero-char inline-block will-change-transform">I</span>
+                    <span class="gift-hero-char inline-block will-change-transform">F</span>
+                    <span class="gift-hero-char inline-block will-change-transform">T</span>
+                  </span>
+                </span>
+                <span class="block overflow-hidden pb-[0.05em]">
+                  <span
+                    class="gift-hero-line flex flex-nowrap whitespace-nowrap justify-center will-change-transform uppercase font-display font-semibold text-[80px] sm:text-[100px] leading-[72px] sm:leading-[90px] tracking-[0.8px]"
+                    style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                    data-line="CRATE"
+                  >
+                    <span class="gift-hero-char inline-block will-change-transform">C</span>
+                    <span class="gift-hero-char inline-block will-change-transform">R</span>
+                    <span class="gift-hero-char inline-block will-change-transform">A</span>
+                    <span class="gift-hero-char inline-block will-change-transform">T</span>
+                    <span class="gift-hero-char inline-block will-change-transform">E</span>
+                  </span>
+                </span>
+              </div>
+            </h1>
+
+            <div class="mt-[12px] sm:mt-[20px] overflow-hidden">
+              <p
+                class="gift-subtext will-change-transform m-0 text-creme text-center font-body text-[14px] sm:text-[16px] font-semibold leading-[17px] sm:leading-[20px] tracking-[-0.4px]"
+              >
+                Crates for houses you respect.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom spacing container: allows the fruit arrangement in the background to breathe -->
+      <div class="relative z-0 w-full h-[180px] sm:h-[220px] md:h-[280px] lg:h-[340px] pointer-events-none" aria-hidden="true"></div>
+    </section>
+
+    <!-- Section 2: Three Crate Cards Grid -->
+    <section class="w-full bg-[#111111] py-[50px] sm:py-[60px] lg:py-[80px] overflow-hidden">
+      <div class="px-4 lg:px-8 w-full">
+        <div class="w-full mx-auto flex flex-col">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-[36px] md:gap-[24px] lg:gap-[32px] w-full">
+            {
+              crateCards.map((crate) => (
+                <div class="crate-card flex flex-col w-full will-change-transform transition-all">
+                  <!-- Crate Image -->
+                  <div class="relative w-full aspect-square rounded-[12px] overflow-hidden select-none bg-[#181818]">
+                    <img
+                      alt={crate.titleLine1 + ' ' + crate.titleLine2}
+                      class="object-cover w-full h-full"
+                      src={crate.img}
+                      loading="lazy"
+                    />
+                  </div>
+
+                  <!-- Card Title -->
+                  <h2 class="mt-[18px] sm:mt-[22px] md:mt-[24px] mb-[8px] md:mb-[12px] flex flex-col p-0 uppercase select-none">
+                    <span class="block overflow-hidden pb-[0.05em]">
+                      <span class="gift-card-title-line flex flex-nowrap whitespace-nowrap text-[#FBF9D6] font-display text-[44px] sm:text-[52px] md:text-[68px] lg:text-[84px] xl:text-[96px] 2xl:text-[112px] font-semibold leading-[42px] sm:leading-[50px] md:leading-[64px] lg:leading-[80px] xl:leading-[90px] 2xl:leading-[100px] tracking-[0.8px] uppercase">
+                        {crate.titleLine1.split('').map((c) => (
+                          <span class="gift-card-char inline-block will-change-transform">{c === ' ' ? '\u00A0' : c}</span>
+                        ))}
+                      </span>
+                    </span>
+                    <span class="block overflow-hidden pb-[0.05em]">
+                      <span class="gift-card-title-line flex flex-nowrap whitespace-nowrap text-[#FBF9D6] font-display text-[44px] sm:text-[52px] md:text-[68px] lg:text-[84px] xl:text-[96px] 2xl:text-[112px] font-semibold leading-[42px] sm:leading-[50px] md:leading-[64px] lg:leading-[80px] xl:leading-[90px] 2xl:leading-[100px] tracking-[0.8px] uppercase">
+                        {crate.titleLine2.split('').map((c) => (
+                          <span class="gift-card-char inline-block will-change-transform">{c === ' ' ? '\u00A0' : c}</span>
+                        ))}
+                      </span>
+                    </span>
+                  </h2>
+
+                  <!-- Description & Price -->
+                  <div class="w-full">
+                    <p class="m-0 font-body text-[#FBF9D6] text-[16px] sm:text-[18px] font-medium leading-[22px]">
+                      <span>{crate.desc} </span>
+                      <span class="font-bold">{crate.price}</span>
+                    </p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: The Note (Hand-written, never printed) -->
+    <section class="w-full bg-[#111111] py-[50px] sm:py-[60px] lg:py-[80px] overflow-hidden">
+      <div class="px-4 lg:px-8 w-full">
+        <div class="w-full mx-auto flex flex-col lg:flex-row items-center justify-between gap-[32px] lg:gap-[64px]">
+          <!-- Interactive Note Canvas / Card -->
+          <div class="w-full lg:w-[50%] flex justify-center items-center order-1 lg:order-2">
+            <div
+              id="note-canvas-container"
+              class="relative w-full max-w-[480px] lg:max-w-[602px] h-[360px] sm:h-[440px] md:h-[540px] lg:h-[612px] flex items-center justify-center select-none"
+            >
+              <img
+                src="/webp/note-card.webp"
+                alt="Hand-written Crate 44 Note Card"
+                class="w-full h-auto max-h-full object-contain filter drop-shadow-[0_20px_40px_rgba(252,85,141,0.25)] hover:scale-105 transition-transform duration-500 ease-out"
+              />
+            </div>
+          </div>
+
+          <!-- Text Copy -->
+          <div class="w-full lg:w-[50%] flex flex-col items-start justify-start order-2 lg:order-1 mt-4 lg:mt-0">
+            <span class="note-text-elem mb-4 sm:mb-8 block text-[#FBF9D6] font-body text-[14px] sm:text-[16px] font-medium leading-[20px]">
+              The Note
+            </span>
+            <h2 class="note-text-elem m-0">
+              <span
+                class="block text-[#FBF9D6] font-body text-[32px] sm:text-[42px] md:text-[50px] lg:text-[56px] font-bold leading-[38px] sm:leading-[50px] md:leading-[60px] lg:leading-[64px] tracking-[-0.358px]"
+              >
+                Hand-written, never printed<br />
+                Twelve words carry better<br />
+                than two hundred
+              </span>
+            </h2>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 4: FOR FIRMS AND FAMILIES WITH LISTS -->
+    <section class="w-full bg-[#111111] py-[50px] sm:py-[60px] lg:py-[80px] overflow-hidden">
+      <div class="px-4 lg:px-8 w-full">
+        <div class="w-full mx-auto flex flex-col">
+          <div class="w-full mb-[16px] lg:mb-[24px]">
+            <span class="firms-anim-elem block text-[#FBF9D6] font-body text-[14px] sm:text-[16px] font-medium leading-[20px]">
+              Corporate & weddings
+            </span>
+          </div>
+
+          <!-- Giant Headline -->
+          <div id="firms-heading" class="w-full mb-[32px] lg:mb-[56px] flex flex-col items-start overflow-hidden select-none">
+            <h2 class="m-0 p-0 w-full uppercase flex flex-col">
+              <span class="block overflow-hidden pb-[0.05em]">
+                <span
+                  class="gift-firms-line flex flex-nowrap whitespace-nowrap uppercase font-display text-[72px] sm:text-[100px] md:text-[140px] lg:text-[180px] 2xl:text-[200px] font-semibold leading-[64px] sm:leading-[90px] md:leading-[120px] lg:leading-[150px] 2xl:leading-[161.2px] tracking-[0.8px]"
+                  style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="FOR FIRMS AND"
+                >
+                  <span class="gift-firms-char inline-block will-change-transform">F</span>
+                  <span class="gift-firms-char inline-block will-change-transform">O</span>
+                  <span class="gift-firms-char inline-block will-change-transform">R</span>
+                  <span class="gift-firms-char inline-block will-change-transform">&nbsp;</span>
+                  <span class="gift-firms-char inline-block will-change-transform">F</span>
+                  <span class="gift-firms-char inline-block will-change-transform">I</span>
+                  <span class="gift-firms-char inline-block will-change-transform">R</span>
+                  <span class="gift-firms-char inline-block will-change-transform">M</span>
+                  <span class="gift-firms-char inline-block will-change-transform">S</span>
+                  <span class="gift-firms-char inline-block will-change-transform">&nbsp;</span>
+                  <span class="gift-firms-char inline-block will-change-transform">A</span>
+                  <span class="gift-firms-char inline-block will-change-transform">N</span>
+                  <span class="gift-firms-char inline-block will-change-transform">D</span>
+                </span>
+              </span>
+              <span class="block overflow-hidden pb-[0.05em]">
+                <span
+                  class="gift-firms-line flex flex-nowrap whitespace-nowrap uppercase font-display text-[72px] sm:text-[100px] md:text-[140px] lg:text-[180px] 2xl:text-[200px] font-semibold leading-[64px] sm:leading-[90px] md:leading-[120px] lg:leading-[150px] 2xl:leading-[161.2px] tracking-[0.8px]"
+                  style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="FAMILIES WITH LISTS."
+                >
+                  <span class="gift-firms-char inline-block will-change-transform">F</span>
+                  <span class="gift-firms-char inline-block will-change-transform">A</span>
+                  <span class="gift-firms-char inline-block will-change-transform">M</span>
+                  <span class="gift-firms-char inline-block will-change-transform">I</span>
+                  <span class="gift-firms-char inline-block will-change-transform">L</span>
+                  <span class="gift-firms-char inline-block will-change-transform">I</span>
+                  <span class="gift-firms-char inline-block will-change-transform">E</span>
+                  <span class="gift-firms-char inline-block will-change-transform">S</span>
+                  <span class="gift-firms-char inline-block will-change-transform">&nbsp;</span>
+                  <span class="gift-firms-char inline-block will-change-transform">W</span>
+                  <span class="gift-firms-char inline-block will-change-transform">I</span>
+                  <span class="gift-firms-char inline-block will-change-transform">T</span>
+                  <span class="gift-firms-char inline-block will-change-transform">H</span>
+                  <span class="gift-firms-char inline-block will-change-transform">&nbsp;</span>
+                  <span class="gift-firms-char inline-block will-change-transform">L</span>
+                  <span class="gift-firms-char inline-block will-change-transform">I</span>
+                  <span class="gift-firms-char inline-block will-change-transform">S</span>
+                  <span class="gift-firms-char inline-block will-change-transform">T</span>
+                  <span class="gift-firms-char inline-block will-change-transform">S</span>
+                  <span class="gift-firms-char inline-block will-change-transform">.</span>
+                </span>
+              </span>
+            </h2>
+          </div>
+
+          <!-- Bottom Columns -->
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-y-[32px] gap-x-[64px] w-full">
+            <div class="w-full flex flex-col justify-end">
+              <p class="firms-anim-elem m-0">
+                <span
+                  class="font-body text-[24px] sm:text-[28px] lg:text-[32px] font-bold leading-[30px] sm:leading-[34px] lg:leading-[38px] tracking-[-0.32px]"
+                  style="background: linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                >
+                  Fifty crates or five hundred same table, same standard, one contact.
+                </span>
+              </p>
+            </div>
+
+            <div class="w-full flex flex-col justify-start">
+              <span class="firms-anim-elem block text-[#FBF9D6] font-body text-[14px] sm:text-[16px] font-medium leading-[20px] mb-2 sm:mb-4">
+                The Honest Rules
+              </span>
+              <p class="firms-anim-elem m-0 text-[#FF9CBE] font-body text-[26px] sm:text-[34px] md:text-[42px] lg:text-[50px] font-bold leading-[32px] sm:leading-[42px] md:leading-[52px] lg:leading-[60px] tracking-[-0.358px]">
+                We deliver in Mumbai. We need 48 hours for gift crates. And we won't ship what won't survive shipping — if your date falls badly for a fruit, we'll tell you and propose better.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Footer -->
+    <Footer />
+  </main>
+</Layout>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  const luxuryEase = CustomEase.create('luxuryEaseCustom', '0.16, 1, 0.3, 1')
+
+  function animateHeadingLines(
+    linesSelector: string,
+    charSelector: string,
+    triggerElement?: HTMLElement | string | null,
+    delay: number = 0
+  ) {
+    const lines = Array.from(document.querySelectorAll<HTMLElement>(linesSelector))
+    if (!lines.length) return
+
+    const allChars = lines.flatMap((l) => Array.from(l.querySelectorAll<HTMLElement>(charSelector)))
+    if (!allChars.length) return
+
+    gsap.set(allChars, {
+      yPercent: 115,
+      opacity: 0,
+      filter: 'blur(5px)',
+    })
+
+    const tlConfig: gsap.TimelineVars = {}
+    if (triggerElement) {
+      tlConfig.scrollTrigger = {
+        trigger: triggerElement,
+        start: 'top 85%',
+        once: true,
+      }
+    } else {
+      tlConfig.delay = delay
+    }
+
+    const tl = gsap.timeline(tlConfig)
+
+    lines.forEach((line, lineIndex) => {
+      const chars = Array.from(line.querySelectorAll<HTMLElement>(charSelector))
+      const centerIdx = (chars.length - 1) / 2
+      const lineStartDelay = lineIndex * 0.095
+
+      chars.forEach((char, charIdx) => {
+        const distFromCenter = Math.abs(charIdx - centerIdx)
+        const waveDelay = lineStartDelay + (distFromCenter * 0.024)
+
+        tl.to(
+          char,
+          {
+            yPercent: 0,
+            opacity: 1,
+            filter: 'blur(0px)',
+            duration: 1.6,
+            ease: luxuryEase,
+          },
+          waveDelay
+        )
+      })
+    })
+  }
+
+  function initGifting() {
+    // 1. Hero: "THE GIFT CRATE" animates on page load
+    animateHeadingLines('.gift-hero-line', '.gift-hero-char', null, 0.15)
+
+    // 2. Section 2: Cards titles on scroll
+    animateHeadingLines('.gift-card-title-line', '.gift-card-char', '.crate-card')
+
+    // 3. Section 4: "FOR FIRMS AND FAMILIES WITH LISTS." on scroll
+    animateHeadingLines('.gift-firms-line', '.gift-firms-char', '#firms-heading')
+
+    const cards = document.querySelectorAll('.crate-card')
+    const noteElems = document.querySelectorAll('.note-text-elem')
+    const firmElems = document.querySelectorAll('.firms-anim-elem')
+
+    // Always ensure elements are visible by default on all devices
+    cards.forEach((c) => gsap.set(c, { opacity: 1, y: 0 }))
+    noteElems.forEach((n) => gsap.set(n, { opacity: 1, y: 0 }))
+    firmElems.forEach((f) => gsap.set(f, { opacity: 1, y: 0 }))
+
+    if (window.innerWidth >= 1024) {
+      if (noteElems.length > 0) {
+        ScrollTrigger.create({
+          trigger: noteElems[0],
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            gsap.from(noteElems, { opacity: 0, y: 30, duration: 0.8, stagger: 0.1, ease: 'power3.out' })
+          },
+        })
+      }
+
+      if (firmElems.length > 0) {
+        ScrollTrigger.create({
+          trigger: firmElems[0],
+          start: 'top 85%',
+          once: true,
+          onEnter: () => {
+            gsap.from(firmElems, { opacity: 0, y: 30, duration: 0.8, stagger: 0.08, ease: 'power3.out' })
+          },
+        })
+      }
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initGifting)
+  } else {
+    initGifting()
+  }
+  document.addEventListener('astro:page-load', initGifting)
+</script>

@@ -1,0 +1,373 @@
+---
+// src/components/Section2.astro
+// Exact 1:1 Implementation of Figma Node 1574:5148 (Desktop) & Node 1601:397 (Mobile)
+// Dynamic Responsive Breakpoints: mob (1601:397) -> 1440 -> 1920 -> 4K (2543)
+// True Fluid System: Proportional scaling so as screen increases, text increases continuously
+---
+
+<section
+  id="section-2"
+  class="relative w-full bg-dark text-creme px-[16px] pt-[105px] pb-[48px] sm:pt-[115px] sm:pb-[56px] lg:py-[80px] overflow-hidden"
+  data-node-id="1574:5148"
+>
+  <!-- Content Container: Full width with strictly fixed 16px side margins on all screens up to 4K -->
+  <div class="w-full mx-auto flex flex-col lg:flex-row gap-[20px] lg:gap-[44px] items-start justify-between">
+
+    <!-- MOBILE-ONLY HEADLINE (Exact 4 lines matching Figma Node 1601:397 / 1601:398) -->
+    <div
+      class="s2-headline-mob block lg:hidden w-full font-display uppercase not-italic tracking-[0] select-none text-fluid-s2-mob"
+      data-node-id="1601:398"
+    >
+      <!-- Line 1: SIX HANDS -->
+      <div class="s2-mask overflow-hidden py-[2px]">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="SIX HANDS">
+          <span class="s2-char inline-block text-gradient-s2">S</span>
+          <span class="s2-char inline-block text-gradient-s2">I</span>
+          <span class="s2-char inline-block text-gradient-s2">X</span>
+          <span class="s2-char inline-block text-gradient-s2">&nbsp;</span>
+          <span class="s2-char inline-block text-gradient-s2">H</span>
+          <span class="s2-char inline-block text-gradient-s2">A</span>
+          <span class="s2-char inline-block text-gradient-s2">N</span>
+          <span class="s2-char inline-block text-gradient-s2">D</span>
+          <span class="s2-char inline-block text-gradient-s2">S</span>
+        </div>
+      </div>
+
+      <!-- Line 2: TOUCH YOUR -->
+      <div class="s2-mask overflow-hidden py-[2px]">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="TOUCH YOUR">
+          <span class="s2-char inline-block text-gradient-s2">T</span>
+          <span class="s2-char inline-block text-gradient-s2">O</span>
+          <span class="s2-char inline-block text-gradient-s2">U</span>
+          <span class="s2-char inline-block text-gradient-s2">C</span>
+          <span class="s2-char inline-block text-gradient-s2">H</span>
+          <span class="s2-char inline-block text-gradient-s2">&nbsp;</span>
+          <span class="s2-char inline-block text-gradient-s2">Y</span>
+          <span class="s2-char inline-block text-gradient-s2">O</span>
+          <span class="s2-char inline-block text-gradient-s2">U</span>
+          <span class="s2-char inline-block text-gradient-s2">R</span>
+        </div>
+      </div>
+
+      <!-- Line 3: FRUIT BEFORE -->
+      <div class="s2-mask overflow-hidden py-[2px]">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="FRUIT BEFORE">
+          <span class="s2-char inline-block text-gradient-s2">F</span>
+          <span class="s2-char inline-block text-gradient-s2">R</span>
+          <span class="s2-char inline-block text-gradient-s2">U</span>
+          <span class="s2-char inline-block text-gradient-s2">I</span>
+          <span class="s2-char inline-block text-gradient-s2">T</span>
+          <span class="s2-char inline-block text-gradient-s2">&nbsp;</span>
+          <span class="s2-char inline-block text-gradient-s2">B</span>
+          <span class="s2-char inline-block text-gradient-s2">E</span>
+          <span class="s2-char inline-block text-gradient-s2">F</span>
+          <span class="s2-char inline-block text-gradient-s2">O</span>
+          <span class="s2-char inline-block text-gradient-s2">R</span>
+          <span class="s2-char inline-block text-gradient-s2">E</span>
+        </div>
+      </div>
+
+      <!-- Line 4: YOU DO. -->
+      <div class="s2-mask overflow-hidden py-[2px]">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="YOU DO.">
+          <span class="s2-char inline-block text-gradient-s2">Y</span>
+          <span class="s2-char inline-block text-gradient-s2">O</span>
+          <span class="s2-char inline-block text-gradient-s2">U</span>
+          <span class="s2-char inline-block text-gradient-s2">&nbsp;</span>
+          <span class="s2-char inline-block text-gradient-s2">D</span>
+          <span class="s2-char inline-block text-gradient-s2">O</span>
+          <span class="s2-char inline-block text-gradient-s2">.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- LEFT COLUMN (Image Card + Paragraph - Node 1601:399 & 1601:400) -->
+    <div
+      class="w-full lg:flex-[1_0_0] flex flex-col gap-[20px] lg:gap-[48px] items-start"
+      data-node-id="1574:5163"
+    >
+      <!-- Section 2 Image Card: 1:1 aspect ratio square with Section 7 headroom -->
+      <div
+        id="s2-image-card"
+        class="curve-side relative w-full aspect-square overflow-hidden bg-[#1a1a1a] will-change-transform will-change-[clip-path]"
+        data-curve="side"
+        data-node-id="1601:399"
+      >
+        <img
+          id="s2-image"
+          src="/images/section-2.avif"
+          alt="Six hands touch your Fruit"
+          class="absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover object-center pointer-events-none will-change-transform"
+        />
+        <div class="absolute inset-0 ring-1 ring-white/10 pointer-events-none rounded-[inherit]"></div>
+      </div>
+
+      <!-- Section 2 Paragraph Text (Suisse Intl: 14px/17px mobile, 16px/20px desktop, 600 weight, -0.4px) -->
+      <div class="w-full flex flex-col items-start" data-node-id="1601:400">
+        <p
+          id="s2-copy"
+          class="font-body font-semibold text-[14px] lg:text-[16px] leading-[17px] lg:leading-[20px] tracking-[-0.4px] text-creme w-full max-w-[540px] whitespace-pre-wrap break-words will-change-transform"
+          data-node-id="1601:402"
+        >
+          The picker, paid by volume, picks early early survives trucks. The agent buys by the tonne and never tastes the lot. The mandi keeps it overnight on open tarmac. The wholesaler ripens it with what’s fast, not what’s right. The retailer stacks it by the kilo. And you. You get what survived, not what was possible.
+        </p>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN (DESKTOP-ONLY HEADLINE - Node 1574:5154) -->
+    <!-- Grows continuously with viewport width (13.89vw) up to 1920px and 4K without wrapping -->
+    <div
+      class="s2-headline-desk hidden lg:block flex-[1_0_0] w-full font-display uppercase not-italic tracking-[0.48px] select-none text-fluid-s2-desk"
+      data-node-id="1574:5154"
+      data-dev-fix-annotations="this is the responsive section if the canvas is more than 1920"
+    >
+      <!-- Line 1: Six hands -->
+      <div class="s2-mask overflow-hidden py-1">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="Six hands">
+          <span class="s2-char inline-block text-gradient-s2">S</span>
+          <span class="s2-char inline-block text-gradient-s2">i</span>
+          <span class="s2-char inline-block text-gradient-s2">x</span>
+          <span class="s2-char inline-block text-gradient-s2">&nbsp;</span>
+          <span class="s2-char inline-block text-gradient-s2">h</span>
+          <span class="s2-char inline-block text-gradient-s2">a</span>
+          <span class="s2-char inline-block text-gradient-s2">n</span>
+          <span class="s2-char inline-block text-gradient-s2">d</span>
+          <span class="s2-char inline-block text-gradient-s2">s</span>
+        </div>
+      </div>
+
+      <!-- Line 2: touch -->
+      <div class="s2-mask overflow-hidden py-1">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="touch">
+          <span class="s2-char inline-block text-gradient-s2">t</span>
+          <span class="s2-char inline-block text-gradient-s2">o</span>
+          <span class="s2-char inline-block text-gradient-s2">u</span>
+          <span class="s2-char inline-block text-gradient-s2">c</span>
+          <span class="s2-char inline-block text-gradient-s2">h</span>
+        </div>
+      </div>
+
+      <!-- Line 3: your -->
+      <div class="s2-mask overflow-hidden py-1">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="your">
+          <span class="s2-char inline-block text-gradient-s2">y</span>
+          <span class="s2-char inline-block text-gradient-s2">o</span>
+          <span class="s2-char inline-block text-gradient-s2">u</span>
+          <span class="s2-char inline-block text-gradient-s2">r</span>
+        </div>
+      </div>
+
+      <!-- Line 4: Fruit -->
+      <div class="s2-mask overflow-hidden py-1">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="Fruit">
+          <span class="s2-char inline-block text-gradient-s2">F</span>
+          <span class="s2-char inline-block text-gradient-s2">r</span>
+          <span class="s2-char inline-block text-gradient-s2">u</span>
+          <span class="s2-char inline-block text-gradient-s2">i</span>
+          <span class="s2-char inline-block text-gradient-s2">t</span>
+        </div>
+      </div>
+
+      <!-- Line 5: before -->
+      <div class="s2-mask overflow-hidden py-1">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="before">
+          <span class="s2-char inline-block text-gradient-s2">b</span>
+          <span class="s2-char inline-block text-gradient-s2">e</span>
+          <span class="s2-char inline-block text-gradient-s2">f</span>
+          <span class="s2-char inline-block text-gradient-s2">o</span>
+          <span class="s2-char inline-block text-gradient-s2">r</span>
+          <span class="s2-char inline-block text-gradient-s2">e</span>
+        </div>
+      </div>
+
+      <!-- Line 6: you do. -->
+      <div class="s2-mask overflow-hidden py-1">
+        <div class="s2-roll-line flex flex-nowrap whitespace-nowrap justify-start" data-line="you do.">
+          <span class="s2-char inline-block text-gradient-s2">y</span>
+          <span class="s2-char inline-block text-gradient-s2">o</span>
+          <span class="s2-char inline-block text-gradient-s2">u</span>
+          <span class="s2-char inline-block text-gradient-s2">&nbsp;</span>
+          <span class="s2-char inline-block text-gradient-s2">d</span>
+          <span class="s2-char inline-block text-gradient-s2">o</span>
+          <span class="s2-char inline-block text-gradient-s2">.</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- True Dynamic Fluid Typography for Section 2 -->
+<style>
+  .text-gradient-s2 {
+    background: linear-gradient(180deg, #f8fe03 0%, #e1ddec 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+  }
+
+  /* Mobile: scales fluidly with viewport, exact 80.5px line-height at 95.55px font size (80.5/95.55 ratio = ~0.8425em) auto-scaling */
+  .text-fluid-s2-mob {
+    font-size: clamp(64px, 24.5vw, 100px);
+    line-height: calc(80.5 / 95.55);
+  }
+
+  /* Desktop (≥1280px): scales directly with screen width (13.89vw) */
+  /* 1280px screen -> 178px */
+  /* 1440px screen -> 200px (Figma exact) */
+  /* 1920px screen -> 266px */
+  /* 2560px screen -> 355px */
+  @media (min-width: 951px) {
+    .text-fluid-s2-desk {
+      font-size: clamp(160px, 13.89vw, 360px);
+      line-height: 0.81em;
+    }
+  }
+</style>
+
+<!-- Scripts: Exact Same Smooth Animation as Section 1, Triggered on Headline in View -->
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  let luxuryEase: gsap.EaseFunction
+  try {
+    luxuryEase = CustomEase.create('luxuryS2FluidPro', '0.16, 1, 0.3, 1')
+  } catch (e) {
+    luxuryEase = gsap.parseEase('power3.out')
+  }
+
+  function setupScrollTrigger() {
+    const isMobile = window.innerWidth < 950
+    const activeHeadline = isMobile 
+      ? document.querySelector('.s2-headline-mob') 
+      : document.querySelector('.s2-headline-desk')
+
+    if (!activeHeadline) return
+
+    const lines = activeHeadline.querySelectorAll<HTMLElement>('.s2-roll-line')
+    const s2Copy = document.getElementById('s2-copy')
+    const s2ImageCard = document.getElementById('s2-image-card')
+    const s2Image = document.getElementById('s2-image')
+
+    const easeLuxury = 'cubic-bezier(0.31, 0.75, 0.22, 1)'
+
+    gsap.set(lines, {
+      yPercent: 140,
+      opacity: 0,
+      rotate: 0.001,
+    })
+
+    if (s2Copy) {
+      gsap.set(s2Copy, { opacity: 0, y: 30 })
+    }
+
+    if (s2ImageCard) {
+      gsap.set(s2ImageCard, { opacity: 0, y: 40 })
+    }
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: activeHeadline,
+        start: 'top 70%',
+        once: true,
+      },
+    })
+
+    tl.to(lines, {
+      yPercent: 0,
+      opacity: 1,
+      rotate: 0,
+      duration: 1.1,
+      ease: easeLuxury,
+      stagger: 0.0825,
+    }, 0)
+
+    if (s2ImageCard) {
+      tl.to(s2ImageCard, {
+        opacity: 1,
+        y: 0,
+        duration: 1.1,
+        ease: easeLuxury,
+      }, 0.2)
+    }
+
+    if (s2Copy) {
+      tl.to(s2Copy, {
+        opacity: 1,
+        y: 0,
+        duration: 1.0,
+        ease: easeLuxury,
+      }, 0.3)
+    }
+
+    if (s2ImageCard && s2Image) {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      const isMobile = window.matchMedia('(max-width: 639px)').matches
+      const cardTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: '#section-2',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: isTouchDevice ? 0.4 : 0.6,
+        },
+      })
+
+      if (!isMobile) {
+        // Effect 121: Aperture clip-path shutter on desktop image card
+        const clipObj = { y: 10 }
+        cardTl.fromTo(
+          clipObj,
+          { y: 10 },
+          {
+            y: 0,
+            ease: 'none',
+            duration: 3,
+            onUpdate: () => {
+              s2ImageCard.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+            },
+          }
+        )
+        .to(clipObj, {
+          y: 0,
+          ease: 'none',
+          duration: 4,
+          onUpdate: () => {
+            s2ImageCard.style.clipPath = 'inset(0% 0px round 14px)'
+          },
+        })
+        .to(clipObj, {
+          y: 10,
+          ease: 'none',
+          duration: 3,
+          onUpdate: () => {
+            s2ImageCard.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+          },
+        })
+      }
+
+      // Smooth vertical counter-parallax on inner image
+      cardTl.fromTo(
+        s2Image,
+        { yPercent: -6 },
+        { yPercent: 6, ease: 'none', duration: 10 },
+        0
+      )
+    }
+  }
+
+  setTimeout(() => {
+    setupScrollTrigger()
+    ScrollTrigger.refresh()
+  }, 150)
+
+  let lastTriggerWidth = window.innerWidth
+  window.addEventListener('resize', () => {
+    if (window.innerWidth === lastTriggerWidth) return
+    lastTriggerWidth = window.innerWidth
+    ScrollTrigger.refresh()
+  }, { passive: true })
+</script>

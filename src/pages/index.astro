@@ -1,0 +1,54 @@
+---
+// src/pages/index.astro
+import Layout from '../layouts/Layout.astro'
+import Hero from '../components/Hero.astro'
+import Section2 from '../components/Section2.astro'
+import Section3 from '../components/Section3.astro'
+import Section4 from '../components/Section4.astro'
+import ProductCards from '../components/ProductCards.astro'
+import Section5 from '../components/Section5.astro'
+import Section7 from '../components/Section7.astro'
+import Section8 from '../components/Section8.astro'
+import Section9 from '../components/Section9.astro'
+import Footer from '../components/Footer.astro'
+import ThreeCanvas from '../components/ThreeCanvas.astro'
+---
+
+<Layout title="Crate44 — Perfect or it never leaves the crate">
+  <!-- Subtle Three.js interactive canvas overlay -->
+  <ThreeCanvas />
+
+  <main class="relative z-10 w-full bg-dark">
+    <!-- Section 1 · opening (Node 1574:5012) -->
+    <Hero />
+
+    <!-- Section 2 · Six hand (Node 1574:5148) -->
+    <Section2 />
+
+    <!-- Section 3 · We replaced (Node 1838:2073) -->
+    <Section3 />
+
+    <!-- "THIS WEEK" Crossing Ribbons (Node 1838:2085) · In between Section 3 & Section 4 -->
+    <div class="relative z-30 w-full -mt-[105px] sm:-mt-[130px] md:-mt-[150px] lg:-mt-0 -mb-[105px] sm:-mb-[130px] md:-mb-[150px] lg:-mb-[170px] pointer-events-none">
+      <Section4 />
+    </div>
+
+    <!-- Section 4 · 3D Product Carousel (Node 1838:2084 / 1838:2621) -->
+    <ProductCards />
+
+    <!-- Section 5 · Proof in numbers / Grading State Machine (Node 1873:2052) -->
+    <Section5 />
+
+    <!-- Section 6 · Where it comes from + Section 7 · 3D Banana Reveal & Wave Stage -->
+    <Section7 />
+
+    <!-- Section 9 · WHAT WE REFUSE (Interactive 3D Mango, Decal Stickers, Vignette & Scrubbable Sky Video) -->
+    <Section9 />
+
+    <!-- Section 8 · Feedback / Testimonials with MadeWithGSAP Effect 118 Floaty Letters Reveal -->
+    <Section8 />
+
+    <!-- Section 10 & Global Footer: "THE LIST" & Fruit Parallax Footer -->
+    <Footer />
+  </main>
+</Layout>

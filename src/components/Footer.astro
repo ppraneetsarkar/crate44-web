@@ -1,0 +1,1243 @@
+---
+// src/components/Footer.astro
+// Exact implementation of "THE LIST IS SMALL ON PURPOSE" section & Global Footer from crate44.in
+
+interface Props {
+  showTheList?: boolean
+}
+
+const { showTheList = true } = Astro.props
+---
+
+<!-- ============================================================== -->
+<!-- 1. SECTION: THE LIST IS SMALL ON PURPOSE (#the-list)           -->
+<!-- ============================================================== -->
+{showTheList && (
+<section
+  id="the-list"
+  class="relative w-full min-h-screen bg-[#131313] flex items-center py-[56px] lg:py-[64px] overflow-hidden"
+  style="--x: 50%; --y: 50%;"
+  aria-label="The List"
+>
+  <!-- ============================================================== -->
+  <!-- DESKTOP / WEB LAYOUT (hidden lg:flex) - 2-COLUMN STRUCTURE     -->
+  <!-- ============================================================== -->
+  <div class="hidden lg:flex px-4 lg:px-8 w-full relative z-10">
+    <div class="w-full mx-auto h-full flex flex-row items-end justify-between gap-8">
+      <!-- Left Column: Split Heading & Centered Parallax Image -->
+      <div class="flex flex-col items-start w-auto">
+        <!-- Top Text Block -->
+        <div class="top-text-block w-full will-change-transform z-10">
+          <h2
+            class="flex flex-col items-start uppercase text-[clamp(60px,13.88vw,200px)] leading-[0.81] tracking-[0.48px] font-display font-semibold"
+          >
+            <div class="overflow-hidden pb-1">
+              <span
+                class="the-list-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform"
+                style="background-image: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                data-line="THE LIST"
+              >
+                <span class="the-list-char inline-block">T</span>
+                <span class="the-list-char inline-block">H</span>
+                <span class="the-list-char inline-block">E</span>
+                <span class="the-list-char inline-block">&nbsp;</span>
+                <span class="the-list-char inline-block">L</span>
+                <span class="the-list-char inline-block">I</span>
+                <span class="the-list-char inline-block">S</span>
+                <span class="the-list-char inline-block">T</span>
+              </span>
+            </div>
+          </h2>
+        </div>
+
+        <!-- Parallax Aperture Image Container (Desktop: aspect-[474/273]) -->
+        <div class="the-list-image-container relative w-full max-w-[474px] my-4 lg:my-11 z-0">
+          <div
+            class="curve-straight relative w-full aspect-[474/273] overflow-hidden shadow-2xl shrink-0 the-list-image-card will-change-[clip-path]"
+            data-curve="straight"
+          >
+            <img
+              src="/images/the-list/the-list-stall.webp"
+              alt="Premium Produce"
+              class="the-list-image-photo absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover block will-change-transform transition-transform duration-700 ease-out hover:scale-105"
+              loading="lazy"
+              decoding="async"
+              draggable="false"
+            />
+            <!-- Subtle gradient blend overlay to smooth into #131313 -->
+            <div
+              class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#131313]/35 via-transparent to-[#131313]/20"
+            ></div>
+            <div class="absolute inset-0 pointer-events-none rounded-[inherit] ring-1 ring-inset ring-white/10"></div>
+          </div>
+        </div>
+
+        <!-- Bottom Text Block -->
+        <div class="bottom-text-block w-full will-change-transform z-10">
+          <h2
+            class="flex flex-col items-start uppercase text-[clamp(60px,13.88vw,200px)] leading-[0.81] tracking-[0.48px] font-display font-semibold"
+          >
+            <div class="overflow-hidden pb-1">
+              <span
+                class="the-list-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform"
+                style="background-image: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                data-line="IS SMALL"
+              >
+                <span class="the-list-char inline-block">I</span>
+                <span class="the-list-char inline-block">S</span>
+                <span class="the-list-char inline-block">&nbsp;</span>
+                <span class="the-list-char inline-block">S</span>
+                <span class="the-list-char inline-block">M</span>
+                <span class="the-list-char inline-block">A</span>
+                <span class="the-list-char inline-block">L</span>
+                <span class="the-list-char inline-block">L</span>
+              </span>
+            </div>
+            <div class="overflow-hidden pb-1">
+              <span
+                class="the-list-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform"
+                style="background-image: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                data-line="ON PURPOSE"
+              >
+                <span class="the-list-char inline-block">O</span>
+                <span class="the-list-char inline-block">N</span>
+                <span class="the-list-char inline-block">&nbsp;</span>
+                <span class="the-list-char inline-block">P</span>
+                <span class="the-list-char inline-block">U</span>
+                <span class="the-list-char inline-block">R</span>
+                <span class="the-list-char inline-block">P</span>
+                <span class="the-list-char inline-block">O</span>
+                <span class="the-list-char inline-block">S</span>
+                <span class="the-list-char inline-block">E</span>
+              </span>
+            </div>
+          </h2>
+        </div>
+      </div>
+
+      <!-- Right Column: Paragraph & 3D Flip Perspective Button -->
+      <div class="flex flex-col items-start gap-8 w-[380px] shrink-0">
+        <p
+          class="the-list-para will-change-transform text-[16px] leading-[20px] tracking-[-0.4px] text-[#FBF9D6] font-body font-semibold max-w-[343px]"
+        >
+          We serve a limited number of Mumbai households each season it's the only way the standard survives. If the list is full, we'll tell you honestly and hold your place.
+        </p>
+        <div class="the-list-btn will-change-transform shrink-0 w-max">
+          <a
+            href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20join%20the%20list"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-btn-morph bg-[#F8FE03] text-[#131313] border border-[#F8FE03] rounded-full relative inline-flex items-center justify-center text-center uppercase font-display font-semibold text-[32px] leading-[34px] px-6 md:px-8 py-2 active:scale-95 flex-shrink-0 transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius]"
+          >
+            <span
+              class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                JOIN THE LIST
+              </span>
+              <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                JOIN THE LIST
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MOBILE LAYOUT (lg:hidden) - EXACT SECTION 6 ARCHITECTURE        -->
+  <!-- ============================================================== -->
+  <div class="lg:hidden flex flex-col w-full items-start px-4 z-10">
+    
+    <!-- 1. TOP: Giant Headline (Scaled to margins edge-to-edge to widest line 'ON PURPOSE') -->
+    <div class="the-list-headline-mobile w-full flex flex-col items-start select-none mb-6">
+      <!-- Line 1: THE LIST -->
+      <div class="the-list-mask overflow-hidden py-1 w-full">
+        <div
+          class="the-list-reveal-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(64px,24vw,100px)] leading-[calc(90/115)] tracking-[-0.004em] text-left"
+          data-line="THE LIST"
+          style="background-image: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+        >
+          <span class="the-list-char inline-block">T</span>
+          <span class="the-list-char inline-block">H</span>
+          <span class="the-list-char inline-block">E</span>
+          <span class="the-list-char inline-block">&nbsp;</span>
+          <span class="the-list-char inline-block">L</span>
+          <span class="the-list-char inline-block">I</span>
+          <span class="the-list-char inline-block">S</span>
+          <span class="the-list-char inline-block">T</span>
+        </div>
+      </div>
+
+      <!-- Line 2: IS SMALL -->
+      <div class="the-list-mask overflow-hidden py-1 w-full">
+        <div
+          class="the-list-reveal-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(64px,24vw,100px)] leading-[calc(90/115)] tracking-[-0.004em] text-left"
+          data-line="IS SMALL"
+          style="background-image: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+        >
+          <span class="the-list-char inline-block">I</span>
+          <span class="the-list-char inline-block">S</span>
+          <span class="the-list-char inline-block">&nbsp;</span>
+          <span class="the-list-char inline-block">S</span>
+          <span class="the-list-char inline-block">M</span>
+          <span class="the-list-char inline-block">A</span>
+          <span class="the-list-char inline-block">L</span>
+          <span class="the-list-char inline-block">L</span>
+        </div>
+      </div>
+
+      <!-- Line 3: ON PURPOSE -->
+      <div class="the-list-mask overflow-hidden py-1 w-full">
+        <div
+          class="the-list-reveal-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(64px,24vw,100px)] leading-[calc(90/115)] tracking-[-0.004em] text-left"
+          data-line="ON PURPOSE"
+          style="background-image: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+        >
+          <span class="the-list-char inline-block">O</span>
+          <span class="the-list-char inline-block">N</span>
+          <span class="the-list-char inline-block">&nbsp;</span>
+          <span class="the-list-char inline-block">P</span>
+          <span class="the-list-char inline-block">U</span>
+          <span class="the-list-char inline-block">R</span>
+          <span class="the-list-char inline-block">P</span>
+          <span class="the-list-char inline-block">O</span>
+          <span class="the-list-char inline-block">S</span>
+          <span class="the-list-char inline-block">E</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MIDDLE: Image Card (Center, Strictly 4:4 / 1:1 square ratio matching Section 6 mobile) -->
+    <div class="the-list-image-col-mobile relative w-full mb-6 flex items-center justify-center">
+      <div
+        class="the-list-image-card-mob group relative w-full aspect-square max-w-[440px] overflow-hidden bg-white/5 border border-white/5 shadow-md will-change-[clip-path]"
+      >
+        <picture>
+          <source srcset="/images/the-list/the-list-stall.webp" type="image/webp" />
+          <img
+            src="/images/the-list/the-list-stall.webp"
+            alt="Crate44 stall"
+            class="the-list-image-photo-mob absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover block will-change-transform transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        </picture>
+        <div
+          class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#131313]/35 via-transparent to-[#131313]/20"
+        ></div>
+        <div class="absolute inset-0 pointer-events-none rounded-[inherit] ring-1 ring-inset ring-white/10"></div>
+      </div>
+    </div>
+
+    <!-- 3. BOTTOM: Subtext & Button (Stacked vertically, hugging closely) -->
+    <div class="the-list-bottom-col-mobile w-full flex flex-col items-start text-left gap-4 pb-8">
+      <!-- Subtext (Suisse Intl: 14px, 17px line-height, 600 weight, -0.4px kerning) -->
+      <p
+        class="the-list-para font-body font-semibold text-[14px] leading-[17px] tracking-[-0.4px] text-white max-w-[340px] m-0 text-left"
+      >
+        We serve a limited number of Mumbai households each season it's the only way the standard survives. If the list is full, we'll tell you honestly and hold your place.
+      </p>
+
+      <!-- Button: JOIN THE LIST Mobile (Solo Button: Morphs on LEFT) -->
+      <div class="the-list-btn will-change-transform shrink-0 w-max">
+        <a
+          href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20join%20the%20list"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-btn-morph bg-[#F8FE03] text-[#131313] border border-[#F8FE03] rounded-full relative inline-flex items-center justify-center cursor-pointer font-display font-semibold text-[28px] sm:text-[32px] leading-[28px] sm:leading-[32px] uppercase px-[20px] h-[48px] sm:h-[52px] active:scale-95 flex-shrink-0 transition-[background-color,filter] duration-300 hover:brightness-110 will-change-[border-radius]"
+        >
+          <span
+            class="roll-fx-container relative block h-[32px] leading-[32px] overflow-hidden select-none"
+            style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+          >
+            <span class="roll-text-top block h-[32px] leading-[32px] whitespace-nowrap will-change-[transform,filter]">
+              JOIN THE LIST
+            </span>
+            <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[32px] leading-[32px] whitespace-nowrap will-change-[transform,filter]">
+              JOIN THE LIST
+            </span>
+          </span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- LAYER B: Masked Flashlight Reveal State (Desktop only >= 1024px: hidden on mobile) -->
+  <div
+    aria-hidden="true"
+    class="the-list-hover-layer hidden lg:flex absolute inset-0 z-20 pointer-events-none items-center py-[56px] lg:py-[64px]"
+    style="-webkit-mask-image: radial-gradient(circle 350px at var(--x) var(--y), black 0%, black 50%, rgba(0,0,0,0.5) 75%, transparent 100%); mask-image: radial-gradient(circle 350px at var(--x) var(--y), black 0%, black 50%, rgba(0,0,0,0.5) 75%, transparent 100%);"
+  >
+    <div class="px-4 lg:px-8 w-full relative z-20 h-full flex items-center">
+      <div class="w-full mx-auto h-full flex flex-row items-end justify-between gap-8">
+        <div class="flex flex-col items-start w-auto">
+          <div class="top-text-block w-full will-change-transform z-10">
+            <h2
+              class="flex flex-col items-start uppercase text-[clamp(60px,13.88vw,200px)] leading-[0.81] tracking-[0.48px] font-display font-semibold"
+            >
+              <div class="overflow-hidden pb-1">
+                <span
+                  class="the-list-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform"
+                  style="background-image: linear-gradient(180deg, #F8FE03 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="THE LIST"
+                >
+                  <span class="the-list-char inline-block">T</span>
+                  <span class="the-list-char inline-block">H</span>
+                  <span class="the-list-char inline-block">E</span>
+                  <span class="the-list-char inline-block">&nbsp;</span>
+                  <span class="the-list-char inline-block">L</span>
+                  <span class="the-list-char inline-block">I</span>
+                  <span class="the-list-char inline-block">S</span>
+                  <span class="the-list-char inline-block">T</span>
+                </span>
+              </div>
+            </h2>
+          </div>
+
+          <div class="the-list-image-container relative w-full max-w-[474px] my-4 lg:my-11 z-0">
+            <div
+              class="curve-straight relative w-full aspect-[474/273] overflow-hidden shadow-2xl shrink-0 the-list-image-card will-change-[clip-path]"
+              data-curve="straight"
+            >
+              <img
+                src="/images/the-list/the-list-stall-hover.webp"
+                alt="Premium Produce"
+                class="the-list-image-photo absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover block will-change-transform transition-transform duration-700 ease-out filter brightness-[1.05] saturate-[1.12]"
+                loading="lazy"
+                decoding="async"
+                draggable="false"
+              />
+              <!-- Golden sunlight gradient highlight for hover flashlight state -->
+              <div
+                class="pointer-events-none absolute inset-0 bg-gradient-to-tr from-[#F8FE03]/15 via-transparent to-white/10 mix-blend-overlay"
+              ></div>
+              <!-- Subtle gradient blend overlay to smooth into #131313 -->
+              <div
+                class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#131313]/35 via-transparent to-[#131313]/20"
+              ></div>
+              <div class="absolute inset-0 pointer-events-none rounded-[inherit] ring-1 ring-inset ring-white/10"></div>
+            </div>
+          </div>
+
+          <div class="bottom-text-block w-full will-change-transform z-10">
+            <h2
+              class="flex flex-col items-start uppercase text-[clamp(60px,13.88vw,200px)] leading-[0.81] tracking-[0.48px] font-display font-semibold"
+            >
+              <div class="overflow-hidden pb-1">
+                <span
+                  class="the-list-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform"
+                  style="background-image: linear-gradient(180deg, #F8FE03 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="IS SMALL"
+                >
+                  <span class="the-list-char inline-block">I</span>
+                  <span class="the-list-char inline-block">S</span>
+                  <span class="the-list-char inline-block">&nbsp;</span>
+                  <span class="the-list-char inline-block">S</span>
+                  <span class="the-list-char inline-block">M</span>
+                  <span class="the-list-char inline-block">A</span>
+                  <span class="the-list-char inline-block">L</span>
+                  <span class="the-list-char inline-block">L</span>
+                </span>
+              </div>
+              <div class="overflow-hidden pb-1">
+                <span
+                  class="the-list-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform"
+                  style="background-image: linear-gradient(180deg, #F8FE03 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  data-line="ON PURPOSE"
+                >
+                  <span class="the-list-char inline-block">O</span>
+                  <span class="the-list-char inline-block">N</span>
+                  <span class="the-list-char inline-block">&nbsp;</span>
+                  <span class="the-list-char inline-block">P</span>
+                  <span class="the-list-char inline-block">U</span>
+                  <span class="the-list-char inline-block">R</span>
+                  <span class="the-list-char inline-block">P</span>
+                  <span class="the-list-char inline-block">O</span>
+                  <span class="the-list-char inline-block">S</span>
+                  <span class="the-list-char inline-block">E</span>
+                </span>
+              </div>
+            </h2>
+          </div>
+        </div>
+
+        <div class="flex flex-col items-start gap-8 w-[380px] shrink-0">
+          <p
+            class="the-list-para will-change-transform text-[16px] leading-[20px] tracking-[-0.4px] text-[#F8FE03] font-body font-semibold max-w-[343px]"
+          >
+            We serve a limited number of Mumbai households each season it's the only way the standard survives. If the list is full, we'll tell you honestly and hold your place.
+          </p>
+          <div class="the-list-btn will-change-transform shrink-0 w-max opacity-0 invisible pointer-events-none">
+            <button
+              class="relative inline-block text-center uppercase font-display font-semibold text-[32px] leading-[34px] px-4 md:px-8 py-2"
+            >
+              JOIN THE LIST
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+)}
+
+<!-- ============================================================== -->
+<!-- 2. GLOBAL FOOTER (<footer>)                                    -->
+<!-- ============================================================== -->
+<footer class="w-full bg-[#131313] mt-auto flex flex-col" aria-label="Site Footer">
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <!-- MOBILE FOOTER: Fruit Parallax Card (<768px)                   -->
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <div
+    class="footer-parallax-card flex md:hidden flex-col justify-start items-start pt-[100px] pb-[30px] w-full relative overflow-hidden bg-[#131313] min-h-[540px]"
+  >
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <div
+        class="footer-parallax-bg absolute -top-[15%] left-0 w-full h-[130%] bg-cover bg-center will-change-transform"
+        style="background-image: url('/images/footer/footer-bg.webp'); background-repeat: no-repeat;"
+      ></div>
+      <div
+        class="absolute inset-0 z-[1]"
+        style="background: linear-gradient(180deg, #131313 0%, rgba(10, 10, 10, 0.51) 48%, #131313 96%, #131313 100%); box-shadow: inset 0 12px 36px 0 #131313, inset 0 -12px 36px 0 #131313;"
+      ></div>
+    </div>
+    <div class="px-4 z-10 w-full">
+      <div class="w-full mx-auto">
+        <h2 class="m-0 p-0 flex flex-col items-start z-10 w-full">
+          <span class="block overflow-hidden pb-[0.08em]">
+            <span
+              class="footer-fruit-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform text-left font-display font-semibold text-[clamp(56px,18vw,92px)] min-[650px]:text-[92px] leading-[76px] uppercase"
+              style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+              data-line="THE FRUIT"
+            >
+              <span class="footer-fruit-char inline-block">T</span>
+              <span class="footer-fruit-char inline-block">H</span>
+              <span class="footer-fruit-char inline-block">E</span>
+              <span class="footer-fruit-char inline-block">&nbsp;</span>
+              <span class="footer-fruit-char inline-block">F</span>
+              <span class="footer-fruit-char inline-block">R</span>
+              <span class="footer-fruit-char inline-block">U</span>
+              <span class="footer-fruit-char inline-block">I</span>
+              <span class="footer-fruit-char inline-block">T</span>
+            </span>
+          </span>
+          <span class="block overflow-hidden pb-[0.08em]">
+            <span
+              class="footer-fruit-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform text-left font-display font-semibold text-[clamp(56px,18vw,92px)] min-[650px]:text-[92px] leading-[76px] uppercase"
+              style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+              data-line="HOUSE OF"
+            >
+              <span class="footer-fruit-char inline-block">H</span>
+              <span class="footer-fruit-char inline-block">O</span>
+              <span class="footer-fruit-char inline-block">U</span>
+              <span class="footer-fruit-char inline-block">S</span>
+              <span class="footer-fruit-char inline-block">E</span>
+              <span class="footer-fruit-char inline-block">&nbsp;</span>
+              <span class="footer-fruit-char inline-block">O</span>
+              <span class="footer-fruit-char inline-block">F</span>
+            </span>
+          </span>
+          <span class="block overflow-hidden pb-[0.08em]">
+            <span
+              class="footer-fruit-reveal-line flex flex-nowrap whitespace-nowrap will-change-transform text-left font-display font-semibold text-[clamp(56px,18vw,92px)] min-[650px]:text-[92px] leading-[76px] uppercase"
+              style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+              data-line="INDIA"
+            >
+              <span class="footer-fruit-char inline-block">I</span>
+              <span class="footer-fruit-char inline-block">N</span>
+              <span class="footer-fruit-char inline-block">D</span>
+              <span class="footer-fruit-char inline-block">I</span>
+              <span class="footer-fruit-char inline-block">A</span>
+            </span>
+          </span>
+        </h2>
+        <div class="footer-fruit-btn z-10 mt-[64px]">
+          <a
+            href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20join%20the%20list"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-btn-morph bg-[#F8FE03] text-[#131313] border border-[#F8FE03] relative inline-flex items-center justify-center gap-[8px] px-[20px] py-[8px] font-display font-semibold text-[32px] leading-[34px] uppercase active:scale-[0.98] transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius] flex-shrink-0"
+          >
+            <span
+              class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                JOIN THE LIST
+              </span>
+              <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                JOIN THE LIST
+              </span>
+            </span>
+          </a>
+        </div>
+        <p
+          class="footer-fruit-subheading mt-[18px] z-10 text-left font-body font-medium text-[11px] uppercase tracking-[-0.11px] text-[#FBF9D6]"
+        >
+          "THE HOUSE IS OPEN TUE–SUN, 7 A.M.–7 P.M."
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <!-- MOBILE FOOTER: Links & CRATE 44 Brand (<768px)                -->
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <div class="px-4 flex md:hidden flex-col items-start self-stretch pt-[40px] w-full">
+    <div class="w-full mx-auto">
+      <div class="w-full flex flex-col gap-[8px]">
+        {
+          [
+            { title: 'THE STANDARD', href: '/#section-2' },
+            { title: 'GIFTING', href: '/#section-4' },
+            { title: 'THE EDIT', href: '/the-edit' },
+            { title: 'THE HOUSE', href: '/#section-6' },
+            { title: 'THE ORIGINS', href: '/#section-7' },
+          ].map((item) => (
+            <a
+              class="footer-roll-link block uppercase tracking-[0.5px] cursor-pointer overflow-hidden font-display text-[56px] font-semibold leading-[52px] text-[#FBF9D6]"
+              href={item.href}
+            >
+              <span
+                class="footer-roll-fx relative block overflow-hidden"
+                style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+              >
+                <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                  {item.title}
+                </span>
+                <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                  {item.title}
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="w-full flex flex-col gap-[8px] pt-[24px] pb-[16px] border-t border-[#1E1E1E] mt-[32px]">
+        <a
+          class="footer-roll-link overflow-hidden font-display text-[24px] font-semibold uppercase text-[#3ED5FF]"
+          href="mailto:write@crate44.com"
+        >
+          <span
+            class="footer-roll-fx relative block overflow-hidden"
+            style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+          >
+            <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+              WRITE@CRATE44.COM
+            </span>
+            <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+              WRITE@CRATE44.COM
+            </span>
+          </span>
+        </a>
+        <div class="w-full flex flex-row justify-between items-center">
+          <a
+            class="footer-roll-link overflow-hidden font-display text-[24px] font-semibold uppercase text-[#3ED5FF]"
+            href="https://wa.me/?text=Hi%20Crate44"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span
+              class="footer-roll-fx relative block overflow-hidden"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                MESSAGE US ON WHATSAPP
+              </span>
+              <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                MESSAGE US ON WHATSAPP
+              </span>
+            </span>
+          </a>
+          <a
+            class="footer-roll-link overflow-hidden font-display text-[24px] font-semibold uppercase text-[#3ED5FF]"
+            href="https://instagram.com/crate44"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span
+              class="footer-roll-fx relative block overflow-hidden"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                INSTAGRM
+              </span>
+              <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                INSTAGRM
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Mobile CRATE 44 Massive Scale Reveal -->
+      <div class="footer-crate-title-wrap w-[calc(100%+2rem)] -mx-4 mt-[16px] mb-[16px] flex flex-col will-change-[margin]">
+        <h1
+          class="footer-crate-title m-0 p-0 uppercase text-left will-change-transform select-none font-display font-semibold text-[48vw] leading-[0.82em]"
+          style="background: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform-origin: top left;"
+        >
+          CRATE<br />44
+        </h1>
+      </div>
+
+      <div class="w-full flex flex-row justify-between items-center border-t border-[#1E1E1E] py-[20px] text-[#FBF9D6]">
+        {
+          ['FAQ', 'Privacy', 'Terms', 'Refunds'].map((legal) => (
+            <a
+              class="footer-roll-link overflow-hidden font-body text-[12px] font-medium leading-[20px] text-[#FBF9D6]"
+              href="#"
+            >
+              <span
+                class="footer-roll-fx relative block overflow-hidden"
+                style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+              >
+                <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                  {legal}
+                </span>
+                <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                  {legal}
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <!-- DESKTOP FOOTER: Fruit Parallax Card (>=768px)                 -->
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <div
+    class="footer-parallax-card w-full hidden md:flex flex-col justify-center items-center gap-[24px] relative overflow-hidden bg-[#131313] py-[60px] min-h-[800px]"
+  >
+    <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+      <div
+        class="footer-parallax-bg absolute -top-[15%] left-0 w-full h-[130%] bg-cover bg-center will-change-transform"
+        style="background-image: url('/images/footer/footer-bg.webp'); background-repeat: no-repeat;"
+      ></div>
+      <div
+        class="absolute inset-0 z-[1]"
+        style="background: linear-gradient(180deg, #131313 0%, rgba(10, 10, 10, 0.51) 48%, #131313 96%, #131313 100%); box-shadow: inset 0 12px 36px 0 #131313, inset 0 -12px 36px 0 #131313;"
+      ></div>
+    </div>
+
+    <!-- Desktop Title Lines: THE FRUIT / HOUSE OF INDIA -->
+    <h2 class="m-0 p-0 flex flex-col items-center justify-center z-10">
+      <span class="block overflow-hidden pb-[0.08em]">
+        <span
+          class="footer-fruit-reveal-line block will-change-transform text-[60px] leading-[50px] md:text-[clamp(80px,8vw,112px)] md:leading-[clamp(70px,7.5vw,100px)] lg:text-[112px] lg:leading-[100px] font-display font-semibold uppercase tracking-[0.8px] text-center"
+          style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+        >
+          THE FRUIT
+        </span>
+      </span>
+      <span class="block overflow-hidden pb-[0.08em]">
+        <span
+          class="footer-fruit-reveal-line block will-change-transform text-[60px] leading-[50px] md:text-[clamp(80px,8vw,112px)] md:leading-[clamp(70px,7.5vw,100px)] lg:text-[112px] lg:leading-[100px] font-display font-semibold uppercase tracking-[0.8px] text-center"
+          style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+        >
+          HOUSE OF INDIA
+        </span>
+      </span>
+    </h2>
+
+    <div class="footer-fruit-btn z-10 mt-[20px]">
+      <a
+        href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20join%20the%20list"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer-btn-morph bg-[#F8FE03] text-[#131313] border border-[#F8FE03] relative inline-flex items-center justify-center gap-[8px] px-[20px] py-[8px] font-display font-semibold text-[32px] leading-[34px] uppercase active:scale-[0.98] transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius] flex-shrink-0"
+      >
+        <span
+          class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+          style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+        >
+          <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            JOIN THE LIST
+          </span>
+          <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            JOIN THE LIST
+          </span>
+        </span>
+      </a>
+    </div>
+
+    <p
+      class="footer-fruit-subheading mt-[60px] lg:mt-[100px] z-10 font-body font-medium text-[16px] leading-[20px] tracking-[-0.16px] uppercase text-[#FBF9D6] text-center"
+    >
+      "THE HOUSE IS OPEN TUE–SUN, 7 A.M.–7 P.M."
+    </p>
+  </div>
+
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <!-- DESKTOP FOOTER: Links, Scale-Up CRATE44 & Contact (>=768px)   -->
+  <!-- ──────────────────────────────────────────────────────────── -->
+  <div class="px-4 hidden md:flex flex-col items-start self-stretch pt-[40px] md:pt-[60px] w-full">
+    <div class="w-full mx-auto">
+      <!-- Nav Links Row -->
+      <div
+        class="w-full border-y-[2px] border-[#1E1E1E] py-[24px] md:py-[32px] flex flex-row items-center justify-between"
+      >
+        {
+          [
+            { title: 'THE STANDARD', href: '/#section-2' },
+            { title: 'GIFTING', href: '/#section-4' },
+            { title: 'THE EDIT', href: '/the-edit' },
+            { title: 'THE HOUSE', href: '/#section-6' },
+            { title: 'THE ORIGINS', href: '/#section-7' },
+          ].map((item) => (
+            <a
+              class="footer-roll-link uppercase tracking-[0.5px] cursor-pointer overflow-hidden font-display text-[clamp(24px,3.4vw,56px)] leading-[52px] font-semibold text-[#FBF9D6]"
+              href={item.href}
+            >
+              <span
+                class="footer-roll-fx relative block overflow-hidden"
+                style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+              >
+                <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                  {item.title}
+                </span>
+                <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                  {item.title}
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Massive CRATE44 Brand Headline (36vw) with Scroll-Scrubbed Vertical Scaling -->
+      <div class="footer-crate-title-wrap w-[calc(100%+2rem)] -mx-4 mt-6 md:mt-[40px] mb-6 md:mb-[40px] flex flex-col overflow-hidden">
+        <div class="w-full flex justify-center items-center select-none">
+          <h1
+            class="footer-crate-title w-full text-center m-0 p-0 uppercase will-change-transform select-none font-display text-[36vw] leading-[0.86em] tracking-[0.01em] font-semibold"
+            style="background: linear-gradient(180deg, #3ED5FF 0%, #FFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; transform-origin: top center;"
+          >
+            CRATE44
+          </h1>
+        </div>
+
+        <!-- Contact Links Row -->
+        <div
+          class="w-full flex flex-col md:flex-row justify-between items-center md:items-start gap-4 md:gap-0 mt-[20px] md:mt-[32px] px-4"
+        >
+          <a
+            class="footer-roll-link overflow-hidden font-display text-[32px] font-semibold leading-[34px] uppercase text-[#CEF4FF]"
+            href="mailto:write@crate44.com"
+          >
+            <span
+              class="footer-roll-fx relative block overflow-hidden"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                WRITE@CRATE44.COM
+              </span>
+              <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                WRITE@CRATE44.COM
+              </span>
+            </span>
+          </a>
+          <a
+            class="footer-roll-link overflow-hidden font-display text-[32px] font-semibold leading-[34px] uppercase text-[#CEF4FF]"
+            href="https://instagram.com/crate44"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span
+              class="footer-roll-fx relative block overflow-hidden"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                INSTAGRM
+              </span>
+              <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                INSTAGRM
+              </span>
+            </span>
+          </a>
+          <a
+            class="footer-roll-link overflow-hidden font-display text-[32px] font-semibold leading-[34px] uppercase text-[#CEF4FF]"
+            href="https://wa.me/?text=Hi%20Crate44"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span
+              class="footer-roll-fx relative block overflow-hidden"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                MESSAGE US ON WHATSAPP
+              </span>
+              <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                MESSAGE US ON WHATSAPP
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Legal Links Bottom Row -->
+      <div
+        class="w-full flex flex-row justify-between items-center font-body text-[12px] md:text-[16px] uppercase border-t border-[#1E1E1E] py-[20px] text-[#FBF9D6]"
+      >
+        {
+          ['FAQ', 'Privacy', 'Terms', 'Refunds'].map((legal) => (
+            <a
+              class="footer-roll-link overflow-hidden text-[#FBF9D6]"
+              href="#"
+            >
+              <span
+                class="footer-roll-fx relative block overflow-hidden"
+                style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+              >
+                <span class="footer-roll-top block whitespace-nowrap will-change-[transform,filter]">
+                  {legal}
+                </span>
+                <span class="footer-roll-bottom absolute inset-0 flex items-center whitespace-nowrap will-change-[transform,filter]">
+                  {legal}
+                </span>
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ──────────────────────────────────────────────────────────── -->
+<!-- STYLES: Footer Typography & Effects                          -->
+<!-- ──────────────────────────────────────────────────────────── -->
+<style>
+  .footer-roll-fx {
+    mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);
+    -webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);
+  }
+</style>
+
+<!-- ──────────────────────────────────────────────────────────── -->
+<!-- CLIENT SCRIPT: GSAP ScrollTrigger, Parallax & Flashlight     -->
+<!-- ──────────────────────────────────────────────────────────── -->
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  function initFooterAndList() {
+    let luxuryEase: gsap.EaseFunction
+    try {
+      luxuryEase = CustomEase.create('luxuryFooterRipple', '0.16, 1, 0.3, 1')
+    } catch (e) {
+      luxuryEase = gsap.parseEase('power3.out')
+    }
+
+    // -----------------------------------------------------------
+    // 1. THE LIST SECTION (#the-list)
+    // -----------------------------------------------------------
+    const theList = document.getElementById('the-list')
+    if (theList) {
+      const revealLines = Array.from(theList.querySelectorAll<HTMLElement>('.the-list-reveal-line'))
+        .filter((line) => line.getClientRects().length > 0)
+      const chars = revealLines.flatMap((line) => Array.from(line.querySelectorAll<HTMLElement>('.the-list-char')))
+      // Mobile uses pure squircle geometry without the rectangular inset clip-path override
+      const imageCards = theList.querySelectorAll<HTMLElement>('.the-list-image-card')
+      const imagePhotos = theList.querySelectorAll<HTMLElement>('.the-list-image-photo, .the-list-image-photo-mob')
+      const paras = theList.querySelectorAll<HTMLElement>('.the-list-para')
+      const btns = theList.querySelectorAll<HTMLElement>('.the-list-btn')
+      const imgCols = theList.querySelectorAll<HTMLElement>('.the-list-image-container, .the-list-image-col-mobile')
+      const bottomRows = theList.querySelectorAll<HTMLElement>('.the-list-bottom-col-mobile')
+
+      // Effect 121: MadeWithGSAP Aperture shutter + inner parallax on The List image cards
+      if (imageCards.length > 0 && imagePhotos.length > 0) {
+        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+        const cardTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: theList,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: isTouchDevice ? 0.4 : 0.6,
+          },
+        })
+
+        const clipObj = { y: 10 }
+        cardTl.fromTo(
+          clipObj,
+          { y: 10 },
+          {
+            y: 0,
+            ease: 'none',
+            duration: 3,
+            onUpdate: () => {
+              imageCards.forEach((c) => {
+                c.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+              })
+            },
+          }
+        )
+        .to(clipObj, {
+          y: 0,
+          ease: 'none',
+          duration: 4,
+          onUpdate: () => {
+            imageCards.forEach((c) => {
+              c.style.clipPath = 'inset(0% 0px round 14px)'
+            })
+          },
+        })
+        .to(clipObj, {
+          y: 10,
+          ease: 'none',
+          duration: 3,
+          onUpdate: () => {
+            imageCards.forEach((c) => {
+              c.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+            })
+          },
+        })
+
+        imagePhotos.forEach((photo) => {
+          cardTl.fromTo(
+            photo,
+            { yPercent: -6 },
+            { yPercent: 6, ease: 'none', duration: 10 },
+            0
+          )
+        })
+      }
+
+      // Mode 1 (Portrait) uses static copy. Avoid starting the reveal offscreen,
+      // where the section's overflow boundary can crop the heading during entry.
+      if (window.matchMedia('(max-width: 1023px), (orientation: portrait) and (max-width: 1100px)').matches || document.documentElement.hasAttribute('data-mobile-static-copy')) {
+        gsap.set(chars, { clearProps: 'transform,opacity,filter' })
+        gsap.set(imgCols, { clearProps: 'transform,opacity' })
+        gsap.set(bottomRows, { clearProps: 'transform,opacity' })
+      } else {
+        // Desktop scroll reveal matching Section 1 Standard
+        gsap.set(chars, {
+          yPercent: 115,
+          opacity: 0,
+          filter: 'blur(5px)',
+        })
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: theList,
+            start: 'top 75%',
+            toggleActions: 'play none none none',
+            once: true,
+          },
+        })
+
+        const uniqueLines = Array.from(new Set(revealLines.map((line) => line.getAttribute('data-line'))))
+        uniqueLines.forEach((lineKey, lineIndex) => {
+          const matchingLines = revealLines.filter((line) => line.getAttribute('data-line') === lineKey)
+          matchingLines.forEach(line => {
+            const lineChars = Array.from(line.querySelectorAll<HTMLElement>('.the-list-char'))
+            const lineStartDelay = lineIndex * 0.095
+
+            tl.to(
+              lineChars,
+              {
+                yPercent: 0,
+                opacity: 1,
+                filter: 'blur(0px)',
+                duration: 1.6,
+                ease: luxuryEase,
+                stagger: { each: 0.024, from: 'center' },
+              },
+              lineStartDelay
+            )
+          })
+        })
+
+        if (paras.length > 0) {
+          tl.fromTo(paras, { y: '40px', opacity: 0 }, { y: '0px', opacity: 1, ease: 'power2.out', duration: 1 }, 0.44)
+        }
+        if (btns.length > 0) {
+          tl.fromTo(btns, { y: '60px', opacity: 0.1 }, { y: '0px', opacity: 1, ease: 'power2.out', duration: 1 }, 0.66)
+        }
+      }
+
+      // Flashlight cursor tracking effect (Desktop only >= 1024px)
+      theList.addEventListener('mousemove', (e) => {
+        if (window.innerWidth < 1024) return
+        const rect = theList.getBoundingClientRect()
+        const x = e.clientX - rect.left
+        const y = e.clientY - rect.top
+        gsap.to(theList, { '--x': `${x}px`, '--y': `${y}px`, duration: 0.25, ease: 'power2.out', overwrite: 'auto' })
+      })
+    }
+
+    // -----------------------------------------------------------
+    // 2. FOOTER SECTION (<footer>)
+    // -----------------------------------------------------------
+    const footer = document.querySelector('footer')
+    if (footer) {
+      const isDesktop = window.innerWidth >= 768
+
+      // Fruit Parallax Card background image scrub
+      footer.querySelectorAll<HTMLElement>('.footer-parallax-card').forEach((card) => {
+        if (card.offsetParent === null) return
+        const bg = card.querySelector<HTMLElement>('.footer-parallax-bg')
+        if (bg) {
+          gsap.fromTo(
+            bg,
+            { yPercent: -8 },
+            {
+              yPercent: 8,
+              ease: 'none',
+              scrollTrigger: {
+                trigger: card,
+                start: 'top bottom',
+                end: 'bottom top',
+                scrub: ScrollTrigger.isTouch ? true : 0.6,
+              },
+            }
+          )
+        }
+
+        const lines = card.querySelectorAll<HTMLElement>('.footer-fruit-reveal-line')
+        const chars = card.querySelectorAll<HTMLElement>('.footer-fruit-char')
+        const btn = card.querySelector<HTMLElement>('.footer-fruit-btn')
+        const sub = card.querySelector<HTMLElement>('.footer-fruit-subheading')
+
+        // Initial state matching Section 1 Standard
+        gsap.set(chars, {
+          yPercent: 115,
+          opacity: 0,
+          filter: 'blur(5px)',
+        })
+        if (btn) gsap.set(btn, { opacity: 0, y: 25 })
+        if (sub) gsap.set(sub, { opacity: 0, y: 15 })
+
+        const fruitTl = gsap.timeline({
+          scrollTrigger: {
+            trigger: card,
+            start: 'top 80%',
+            once: true,
+          },
+        })
+
+        lines.forEach((line, lineIndex) => {
+          const lineChars = Array.from(line.querySelectorAll<HTMLElement>('.footer-fruit-char'))
+          const centerIdx = (lineChars.length - 1) / 2
+          const lineStartDelay = lineIndex * 0.095
+
+          lineChars.forEach((char, charIdx) => {
+            const distFromCenter = Math.abs(charIdx - centerIdx)
+            const waveDelay = lineStartDelay + (distFromCenter * 0.024)
+
+            fruitTl.to(
+              char,
+              {
+                yPercent: 0,
+                opacity: 1,
+                filter: 'blur(0px)',
+                duration: 1.6,
+                ease: luxuryEase,
+              },
+              waveDelay
+            )
+          })
+        })
+
+        if (btn) {
+          fruitTl.to(btn, { y: 0, opacity: 1, duration: 1.2, ease: luxuryEase }, 0.4)
+        }
+        if (sub) {
+          fruitTl.to(sub, { y: 0, opacity: 1, duration: 1.2, ease: luxuryEase }, 0.5)
+        }
+      })
+
+      // Massive CRATE44 Title scaleY reveal
+      const crateTitles = footer.querySelectorAll<HTMLElement>('.footer-crate-title')
+      const titleWrappers = footer.querySelectorAll<HTMLElement>('.footer-crate-title-wrap')
+
+      titleWrappers.forEach((wrapper, idx) => {
+        const title = crateTitles[idx]
+        if (!title || wrapper.offsetParent === null) return
+
+        const origin = isDesktop ? 'top center' : 'top left'
+        gsap.fromTo(
+          title,
+          { scaleY: 0.05, opacity: 0.2, transformOrigin: origin },
+          {
+            scaleY: 1,
+            opacity: 1,
+            ease: 'none',
+            transformOrigin: origin,
+            scrollTrigger: {
+              trigger: wrapper,
+              start: 'top 95%',
+              end: 'center 65%',
+              scrub: ScrollTrigger.isTouch ? true : 0.5,
+            },
+          }
+        )
+      })
+
+      // Footer link entrance reveals
+      footer.querySelectorAll<HTMLElement>('.footer-roll-link').forEach((el) => {
+        if (el.offsetParent === null) return
+        if (el.getBoundingClientRect().top > window.innerHeight) {
+          gsap.from(el, {
+            y: 30,
+            opacity: 0,
+            duration: 0.8,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: el,
+              start: 'top 95%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
+          })
+        }
+      })
+    }
+
+    // GSAP Feathered Motion-Blur Rolling Text FX for Footer Links
+    document.querySelectorAll<HTMLElement>('.footer-roll-link').forEach((link) => {
+      const top = link.querySelector<HTMLElement>('.footer-roll-top')
+      const bottom = link.querySelector<HTMLElement>('.footer-roll-bottom')
+      if (!top || !bottom) return
+
+      gsap.set(top, { yPercent: 0, filter: 'blur(0px)' })
+      gsap.set(bottom, { yPercent: 100, filter: 'blur(3.5px)' })
+
+      link.addEventListener('mouseenter', () => {
+        gsap.to(top, {
+          yPercent: -100,
+          filter: 'blur(3.5px)',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+        gsap.to(bottom, {
+          yPercent: 0,
+          filter: 'blur(0px)',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+      })
+
+      link.addEventListener('mouseleave', () => {
+        gsap.to(top, {
+          yPercent: 0,
+          filter: 'blur(0px)',
+          duration: 0.35,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+        gsap.to(bottom, {
+          yPercent: 100,
+          filter: 'blur(3.5px)',
+          duration: 0.35,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+      })
+    })
+
+    // GSAP Corner-Morphing & Rolling Text FX for Footer Solo Buttons
+    document.querySelectorAll<HTMLElement>('.footer-btn-morph').forEach((btn) => {
+      const textTop = btn.querySelector<HTMLElement>('.roll-text-top')
+      const textBottom = btn.querySelector<HTMLElement>('.roll-text-bottom')
+
+      gsap.set(btn, {
+        borderTopLeftRadius: '28px',
+        borderBottomLeftRadius: '28px',
+        borderTopRightRadius: '28px',
+        borderBottomRightRadius: '28px',
+      })
+
+      if (textTop && textBottom) {
+        gsap.set(textTop, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(textBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+      }
+
+      btn.addEventListener('mouseenter', () => {
+        // Solo button -> Morphs on LEFT (14px 28px 28px 14px)
+        gsap.to(btn, {
+          borderTopLeftRadius: '14px',
+          borderBottomLeftRadius: '14px',
+          borderTopRightRadius: '28px',
+          borderBottomRightRadius: '28px',
+          duration: 0.45,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: -100, filter: 'blur(3.5px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          borderTopLeftRadius: '28px',
+          borderBottomLeftRadius: '28px',
+          borderTopRightRadius: '28px',
+          borderBottomRightRadius: '28px',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: 0, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 100, filter: 'blur(3.5px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+
+      btn.addEventListener('touchstart', () => {
+        gsap.to(btn, {
+          borderTopLeftRadius: '14px',
+          borderBottomLeftRadius: '14px',
+          borderTopRightRadius: '28px',
+          borderBottomRightRadius: '28px',
+          duration: 0.45,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: -100, filter: 'blur(3.5px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+        }
+      }, { passive: true })
+
+      btn.addEventListener('touchend', () => {
+        gsap.to(btn, {
+          borderTopLeftRadius: '28px',
+          borderBottomLeftRadius: '28px',
+          borderTopRightRadius: '28px',
+          borderBottomRightRadius: '28px',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: 0, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 100, filter: 'blur(3.5px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+        }
+      }, { passive: true })
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initFooterAndList)
+  } else {
+    initFooterAndList()
+  }
+</script>

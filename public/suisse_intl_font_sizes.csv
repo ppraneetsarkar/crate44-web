@@ -1,0 +1,49 @@
+Font Name,Mobile Size,Web (Desktop) Size,Weight,Line Height (Mob / Web),Letter Spacing (Mob / Web),Page,Section,Content / Text Snippet,Element Type
+Suisse Intl,11px,16px,Medium (500),Normal / 20px,-0.11px / -0.16px,The House,Footer,"""THE HOUSE IS OPEN TUE–SUN, 7 A.M.–7 P.M.""",Operating Schedule Subheading
+Suisse Intl,11px,12px,SemiBold (600),13px / 15px,0.04em / 0.04em,The Origin,Soil Badges,"""17.92° N · LATITUDE"", ""480M · ELEVATION"", ""LATERITE RED""",Terroir Micro-Spec Badges
+Suisse Intl,11px,14px,Regular (400),14px / 16px,0.02em / 0.02em,Home,Footer,"""© 2026 CRATE 44. ALL RIGHTS RESERVED.""",Legal Copyright Notice
+Suisse Intl,12px,12px,Regular (400),14px / 14px,0.05em / 0.05em,Home,Hero (Section 1),"""RATNAGIRI · DEVBURGI"", ""SEASON 2026""",Corner Metadata Tags
+Suisse Intl,12px,14px,SemiBold (600),16px / 16px,0.05em / 0.05em,The Standard,Section 2 (Ledger),"""CULTIVAR"", ""ORCHARD"", ""HARVEST DATE"", ""BRIX TARGET"", ""WINDOW""",Ledger Table Header Labels
+Suisse Intl,12px,14px,Medium (500),16px / 18px,0.02em / 0.02em,The Edit,Product Cards,"""[PICKED TUESDAY · RIPE THURSDAY · WINDOW ~36 HOURS]""",Batch Harvest Metadata
+Suisse Intl,12px,12px,SemiBold (600),15px / 15px,0.04em / 0.04em,The Origin,Soil Cards,"""ANNUAL RAINFALL 3,200MM"", ""VOLCANIC BASALT""",Terroir Soil Micro-Specs
+Suisse Intl,14px,16px,Medium (500),18px / 19.6px,0 / 0,The House,Section 1 (Anthem),"""The Anthem""",Section Intro Label
+Suisse Intl,14px,16px,Medium (500),18px / 19.6px,0 / 0,The House,Section 2 (Story),"""The Story""",Section Intro Label
+Suisse Intl,14px,16px,Medium (500),18px / 19.6px,0 / 0,The House,Section 4 (Founder),"""Corporate & weddings""",Section Intro Label
+Suisse Intl,14px,16px,SemiBold (600),17px / 20px,-0.4px / -0.4px,Home,Hero (Section 1),"""Picked Tuesday at sunrise. Graded three times before noon. At your door in Mumbai by evening.""",Hero Editorial Subtitle
+Suisse Intl,14px,16px,SemiBold (600),17px / 20px,-0.4px / -0.4px,Home,Section 2 (Six Hands),"""Six hands touch it. Three are ours. The picker, the grader in our ripening rooms, and the driver who places it in your hands.""",Six Hands Body Paragraph
+Suisse Intl,14px,16px,Regular (400),18px / 20px,-0.16px / -0.16px,Home,Section 5 (Proof),"""94% of commercial fruit in Mumbai is harvested unripe to survive wholesale transport.""",Proof Point Commentary
+Suisse Intl,14px,16px,SemiBold (600),17px / 20px,-0.4px / -0.4px,Home,Section 6 (Origins),"""Devgad, Ratnagiri, Dapoli. The red laterite soil along the Konkan coast holds rainwater like clay but drains like sand.""",Origin Terroir Narrative
+Suisse Intl,14px,16px,SemiBold (600),18px / 20px,-0.4px / -0.4px,Home,Section 9 (Refuse),"""Any fruit dropped during transit"", ""Brix below 18.5°"", ""Skin blemishes over 2mm""",Mobile Refusal Criteria Lines
+Suisse Intl,14px,16px,SemiBold (600),18px / 20px,-0.4px / -0.4px,Home,Section 9 (Refuse),"""Any fruit picked before peak sugar accumulation"", ""Fruit treated with ethylene gas chambers""",Desktop Refusal Criteria Lines
+Suisse Intl,14px,18px,SemiBold (600),18px / 22px,-0.4px / -0.4px,Home,Section 9 (Refuse Desk Large),"""Commercial fruit is picked 14 days green to survive wholesale Mandi storage. Ours is tree-ripened.""",Refusal Headline Lead
+Suisse Intl,14px,16px,Regular (400),20px / 20px,-0.16px / -0.16px,The Standard,Section 2 (Ledger),"""Ratnagiri Alphonso"", ""18.5° – 21.0°"", ""48 Hours max""",Table Data Values
+Suisse Intl,14px,15px,Normal (400),18px / 18px,0 / 0,Join The List,Allocation Rules,"""Rule 01: Members receive drops 24h prior"", ""Rule 02: Maximum two crates per household""",Membership Rule Badges
+Suisse Intl,14px,14px,SemiBold (600),18px / 18px,0.02em / 0.02em,Home,Section 4 (Cards),"""ORDER NOW"", ""REQUEST VIA WHATSAPP"", ""OUT OF STOCK""",3D Card Action Button Faces
+Suisse Intl,15px,16px,Normal (400),18px / 20px,-0.18px / -0.18px,Join The List,Sub-header,"""Private allocation only. Never listed in retail or delivery apps.""",Exclusivity Sub-label
+Suisse Intl,16px,18px,Regular (400),22px / 26px,-0.2px / -0.2px,The House,Section 3 (Story),"""Between the orchard and your table, fruit changes hands five to seven times...""",Story Paragraph 1
+Suisse Intl,16px,18px,Regular (400),22px / 26px,-0.2px / -0.2px,The House,Section 3 (Story),"""We started Crate 44 in Mumbai because this is the city that knows fruit best...""",Story Paragraph 2
+Suisse Intl,16px,18px,Regular (400),22px / 26px,-0.2px / -0.2px,The House,Section 3 (Story),"""We are small on purpose. The standard doesn't survive scale...""",Story Paragraph 3
+Suisse Intl,16px,16px,Medium (500),20px / 22px,-0.16px / -0.16px,Home,Section 10 (The List),"""The list is small on purpose. We allocate based on harvest yield, not demand.""",The List Sub-statement
+Suisse Intl,16px,"clamp(20px, 1.66vw, 24px)",Regular (400),"22px / clamp(28px, 2.22vw, 32px)",-0.16px / -0.2px,FAQ,Answers,"""We deliver across South Mumbai, Bandra, Juhu, and Worli in climate-controlled vans at 18°C.""",FAQ Answers (Mobile vs Desktop Reveal Panel)
+Suisse Intl,16px,18px,Medium (500),22px / 26px,-0.24px / -0.24px,The Standard,Section 5 (Rejected),"""Fruit that misses our Brix threshold by even 0.5° never enters a crate. It is sent directly to artisanal jam-makers.""",Rejected Fruit Explanation
+Suisse Intl,16px,20px,SemiBold (600),22px / 26px,0.04em / 0.04em,The Edit,Header,"""WEEK OF [MARCH 4]""",Drop Calendar Banner Label
+Suisse Intl,16px,18px,SemiBold (600),22px / 24px,0.02em / 0.02em,Gifting,Card Specs,"""12 ALPHONSO · RATNAGIRI ORCHARD · WOODEN KEEPSAKE CRATE""",Crate Composition Spec
+Suisse Intl,16px,18px,Medium (500),20px / 22px,-0.2px / -0.2px,FAQ,Support Section,"""Still have questions? Message our founder directly on WhatsApp.""",WhatsApp Concierge Prompt
+Suisse Intl,16px,18px,Medium (500),22px / 26px,-0.24px / -0.24px,The Standard,Section 1 (Hero Lead),"""Ultra-premium fruit sourced, ripened, and graded by hand in Mumbai.""",The Standard Opening Intro
+Suisse Intl,18px,20px,Medium (500),24px / 26px,-0.2px / -0.2px,Home,Section 3 (Button),"""READ THE FULL CHAIN"" / ""EXPLORE OUR PROTOCOL""",Section 3 3D Flip Button Faces
+Suisse Intl,18px,22px,Medium (500),24px / 28px,-0.24px / -0.24px,Gifting,Tier Descriptions,"""Hand-crafted Paulownia wooden crates with brass latch and personalized letterpress calligraphy.""",Gifting Tier Package Summary
+Suisse Intl,24px,24px / 26px,Medium (500),34px / 34px,-0.8px / -0.8px,Header,Navigation Drawer,"""Home"", ""The Edit"", ""The Origins"", ""The Standard"", ""The House"", ""Join The List"", ""FAQ""",Desktop & Mobile Slide-in Navigation Links
+Suisse Intl,24px,"clamp(32px, 2.77vw, 40px)",Bold (700),"24px / clamp(38px, 3.33vw, 48px)",-0.154px / -0.4px,FAQ,Questions,"""Why is it so expensive?"", ""Where do you deliver?"", ""Why is everything always selling out?""",FAQ Question Items (Mobile Accordion vs Desktop Content Bar)
+Suisse Intl,24px,28px,Bold (700),30px / 32px,-0.32px / -0.32px,Gifting,Product Cards,"""₹4,200 / DZ"", ""₹8,500 / 2 DZ""",Gift Crate Product Price Badges
+Suisse Intl,24px,32px,Bold (700),30px / 36px,-0.4px / -0.4px,The Origin,Terroir Cards,"""DEVGAD · RED LATERITE BELT""",Terroir Geographical Headline
+Suisse Intl,24px,32px,Medium (500),32px / 40px,-0.4px / -0.8px,Join The List & Footer,Phone Input Field,"""+91 98200 00000"" (Placeholder & active value)",WhatsApp Phone Number Input
+Suisse Intl,28px,28px,Medium (500),32px / 32px,-0.4px / -0.4px,Home,Section 6 (Origins),"""DEVGAD"", ""RATNAGIRI"", ""DAPOLI"", ""NAGPUR"", ""TANZANIA""",Orchard Region Selection Tabs
+Suisse Intl,28px,36px,Bold (700),36px / 40px,-0.4px / -0.4px,The Standard,Section 3 (Tests),"""BRIX TEST"", ""PRESSURE TEST"", ""OLFACTORY TEST"", ""SKIN BLEMISH TEST""",The Four Tests Section Headers
+Suisse Intl,32px,32px / 40px,Medium (500),32px / 40px,0.128px / 0.128px,The Standard,Section 2 (The Chain),"""Picker"", ""Agent"", ""Mandi"", ""Wholesaler"", ""Retailer"", ""You""",Step Titles next to Badges 1–6
+Suisse Intl,32px,32px / 40px,Medium (500),32px / 40px,0.128px / 0.128px,The Standard,Section 2 (Ours),"""Orchard"", ""Our van (18°C)"", ""Our ripening rooms"", ""Your door.""",Step Titles next to Badges 0–4
+Suisse Intl,32px,"clamp(32px, 3.8vw, 56px)",Bold (700),"38px / clamp(38px, 4.2vw, 64px)",-0.358px / -0.358px,Gifting,Calligraphy Section,"""Hand-written, never printed. Twelve words carry better than three hundred.""",Calligraphy Card Statement
+Suisse Intl,40px,56px,Bold (700),48px / 64px,-0.64px / -0.64px,The Standard,Section 2 (Comparison),"""The Chain"", ""Ours""",Column Headers on Comparison Flow
+Suisse Intl,40px,54px,Bold (700),48px / 1.04,-0.4px / -0.5px,The House,Section 4 (Founder),"""“I started this company because I was tired of being handed fruit that had been chilled to death.”""",Founder Quote (Sky Blue Gradient Fill on Web)
+Suisse Intl,40px,72px,Bold (700),48px / 72.14px,-0.4px / -2.405px,The House,Section 1 (Anthem),"""The world built its fruit for trucks. We built ours for the mouth.""",Anthem Main Headline
+Suisse Intl,40px,72px,Bold (700),48px / 72.14px,-0.4px / -2.405px,The House,Section 2 (Story),"""“India grows some of the best fruit on earth and then destroys it on the way to the table.”""",Story Main Headline
+Suisse Intl,56px,"clamp(48px, 4.44vw, 64px)",Bold (700),64px / 64px,-0.358px / -0.64px,FAQ,Page Hero,"""FAQ""",FAQ Main Page Header

@@ -1,0 +1,352 @@
+---
+// src/components/Section8.astro
+// Exact implementation of Section 8 (Feedback / Testimonials)
+// - MadeWithGSAP Effect 118 ("Floaty Letters Reveal"): Letters tumble in with soft bounce and slight rotational twist
+// - 3 Testimonial States (Prianka, Rahul, Vini)
+// - Pure pinned full-viewport scroll sequence with scrubbed transitions (State 1 -> State 2 -> State 3)
+// - STRICT GUIDELINES:
+//   1. ZERO DROP SHADOWS across the entire section (flat pure design)
+//   2. STRICT 16px MARGIN (px-[16px]) matching all pages & sections (Hero, Section 2, Section 3, Section 5, Section 6)
+//   3. MASSIVE SCREEN-FILLING FONT SCALING matching Figma/image references across Mobile, Desktop, and 4K
+
+interface QuoteLine {
+  text: string
+  gradient: string
+}
+
+interface Testimonial {
+  id: string
+  author: string
+  memberSince: string
+  location: string
+  city: string
+  desktopLines: QuoteLine[]
+  mobileLines: QuoteLine[]
+}
+
+const testimonials: Testimonial[] = [
+  {
+    id: 'prianka',
+    author: 'Prianka',
+    memberSince: 'Member since June',
+    location: 'Worli, Mumbai',
+    city: 'Bombay',
+    desktopLines: [
+      { text: '“THE FIRST FRUIT', gradient: 'linear-gradient(180deg, #F8FE03 0%, #EFF155 100%)' },
+      { text: 'MY KIDS FIGHT', gradient: 'linear-gradient(180deg, #EBEB7D 0%, #E3E2AB 100%)' },
+      { text: 'OVER.”', gradient: 'linear-gradient(180deg, #DFDDD1 0%, #D8D6E2 100%)' },
+    ],
+    mobileLines: [
+      { text: '“THE FIRST', gradient: 'linear-gradient(180deg, #F8FE03 0%, #F0F450 100%)' },
+      { text: 'FRUIT MY', gradient: 'linear-gradient(180deg, #EBEC75 0%, #E6E79A 100%)' },
+      { text: 'KIDS FIGHT', gradient: 'linear-gradient(180deg, #E2E1B5 0%, #DDDDCF 100%)' },
+      { text: 'OVER.”', gradient: 'linear-gradient(180deg, #DDDDCF 0%, #D8D6E2 100%)' },
+    ],
+  },
+  {
+    id: 'rahul',
+    author: 'Rahul',
+    memberSince: 'Member since March',
+    location: 'Worli',
+    city: 'Bombay',
+    desktopLines: [
+      { text: '“MY FATHER SAID IT', gradient: 'linear-gradient(180deg, #FDF4E3 0%, #F7D1C2 100%)' },
+      { text: 'TASTED LIKE', gradient: 'linear-gradient(180deg, #F7B1B5 0%, #F792A7 100%)' },
+      { text: 'RATNAGIRI IN 1974.”', gradient: 'linear-gradient(180deg, #F77199 0%, #F76291 100%)' },
+    ],
+    mobileLines: [
+      { text: '“MY FATHER', gradient: 'linear-gradient(180deg, #FDF4E3 0%, #F8D8CB 100%)' },
+      { text: 'SAID IT', gradient: 'linear-gradient(180deg, #F8C3B8 0%, #F7AEA6 100%)' },
+      { text: 'TASTED LIKE', gradient: 'linear-gradient(180deg, #F79B95 0%, #F78885 100%)' },
+      { text: 'RATNAGIRI IN', gradient: 'linear-gradient(180deg, #F77475 0%, #F76465 100%)' },
+      { text: '1974.”', gradient: 'linear-gradient(180deg, #F76465 0%, #F76291 100%)' },
+    ],
+  },
+  {
+    id: 'vini',
+    author: 'Vini',
+    memberSince: 'Member since April',
+    location: 'Cuffe Parade',
+    city: 'Bombay',
+    desktopLines: [
+      { text: '“I STOPPED ASKING THE', gradient: 'linear-gradient(180deg, #50D5F9 0%, #6FDDFB 100%)' },
+      { text: 'PRICE. THAT’S', gradient: 'linear-gradient(180deg, #8EE0F6 0%, #A5E7F9 100%)' },
+      { text: 'THE REVIEW”', gradient: 'linear-gradient(180deg, #BCEDFB 0%, #D8F4FD 100%)' },
+    ],
+    mobileLines: [
+      { text: '“I STOPPED', gradient: 'linear-gradient(180deg, #50D5F9 0%, #6FDDFB 100%)' },
+      { text: 'ASKING THE', gradient: 'linear-gradient(180deg, #7BDFFB 0%, #95E4F9 100%)' },
+      { text: 'PRICE. THAT’S', gradient: 'linear-gradient(180deg, #A8E9F9 0%, #BAEDFB 100%)' },
+      { text: 'THE REVIEW”', gradient: 'linear-gradient(180deg, #C2EFFB 0%, #D8F4FD 100%)' },
+    ],
+  },
+]
+---
+
+<section
+  id="section-8"
+  class="relative w-full bg-[#131313] select-none text-white overflow-hidden"
+  style="min-height: 100vh;"
+>
+  <!-- Pinned Sticky Full-Viewport Frame (Strict 16px margins matching whole website) -->
+  <div
+    id="section-8-pin"
+    class="relative w-full h-[100svh] bg-[#131313] overflow-hidden flex flex-col justify-between px-[16px] pt-[max(16px,env(safe-area-inset-top))] pb-[max(16px,env(safe-area-inset-bottom))] md:py-[16px] xl:py-[16px]"
+  >
+    <!-- TOP CORNERS -->
+    <div class="relative w-full flex items-center justify-between z-20 pointer-events-none min-h-[28px] sm:min-h-[32px] lg:min-h-[40px] 2xl:min-h-[50px]">
+      {testimonials.map((t, idx) => (
+        <div
+          class={`s8-meta s8-meta-${t.id} absolute inset-0 w-full flex items-center justify-between text-white font-body font-bold text-[14px] sm:text-[15px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] 3xl:text-[26px] leading-tight tracking-[-0.14px]`}
+          data-state-idx={idx}
+        >
+          <!-- Top Left: Name -->
+          <span class="tracking-normal text-left">{t.author}</span>
+          <!-- Top Right: Member Since -->
+          <span class="tracking-normal text-right">{t.memberSince}</span>
+        </div>
+      ))}
+    </div>
+
+    <!-- CENTER QUOTES (Massive screen-filling scale) -->
+    <div class="relative w-full flex-1 flex items-center justify-center my-auto z-10 pointer-events-none overflow-hidden">
+      {testimonials.map((t, tIdx) => (
+        <div
+          class={`s8-quote-state s8-quote-${t.id} absolute inset-0 w-full h-full flex flex-col items-center justify-center`}
+          data-state-idx={tIdx}
+        >
+          <!-- DESKTOP VIEW (hidden md:flex) -->
+          <div class="s8-quote-desktop hidden md:flex flex-col items-center justify-center w-full text-center">
+            {t.desktopLines.map((line) => {
+              const words = line.text.split(' ')
+              return (
+                <div class="s8-quote-line block overflow-visible text-center leading-[0.82] 2xl:leading-[0.80] my-[1px] lg:my-[2px] 2xl:my-[4px] whitespace-nowrap">
+                  {words.map((word, wIdx) => (
+                    <span class="inline-block whitespace-nowrap">
+                      {word.split('').map((char) => (
+                        <span
+                          class="s8-char-desk inline-block font-display font-semibold uppercase text-[clamp(100px,12vw,190px)] 2xl:text-[clamp(190px,9.5vw,275px)] 3xl:text-[clamp(260px,8.8vw,360px)] tracking-[-0.01em]"
+                          style={`background: ${line.gradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;`}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                      {wIdx < words.length - 1 && (
+                        <span class="s8-char-desk inline-block font-display text-[clamp(100px,12vw,190px)] 2xl:text-[clamp(190px,9.5vw,275px)] 3xl:text-[clamp(260px,8.8vw,360px)]">
+                          &nbsp;
+                        </span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+              )
+            })}
+          </div>
+
+          <!-- MOBILE VIEW (flex md:hidden) -->
+          <div class="s8-quote-mobile flex md:hidden flex-col items-center justify-center w-full text-center">
+            {t.mobileLines.map((line) => {
+              const words = line.text.split(' ')
+              return (
+                <div class="s8-quote-line block overflow-visible text-center leading-[calc(90/115)] my-[1px] whitespace-nowrap">
+                  {words.map((word, wIdx) => (
+                    <span class="inline-block whitespace-nowrap">
+                      {word.split('').map((char) => (
+                        <span
+                          class="s8-char-mob inline-block font-display font-semibold uppercase text-[clamp(62px,21.5vw,94px)] tracking-[-0.01em] will-change-transform"
+                          style={`background: ${line.gradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;`}
+                        >
+                          {char}
+                        </span>
+                      ))}
+                      {wIdx < words.length - 1 && (
+                        <span class="s8-char-mob inline-block font-display text-[clamp(62px,21.5vw,94px)] will-change-transform">
+                          &nbsp;
+                        </span>
+                      )}
+                    </span>
+                  ))}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- BOTTOM CORNERS -->
+    <div class="relative w-full flex items-center justify-between z-20 pointer-events-none min-h-[28px] sm:min-h-[32px] lg:min-h-[40px] 2xl:min-h-[50px]">
+      {testimonials.map((t, idx) => (
+        <div
+          class={`s8-bottom-meta s8-bottom-meta-${t.id} absolute inset-0 w-full flex items-center justify-between text-white font-body font-bold text-[14px] sm:text-[15px] md:text-[16px] lg:text-[18px] 2xl:text-[22px] 3xl:text-[26px] leading-tight tracking-[-0.14px]`}
+          data-state-idx={idx}
+        >
+          <!-- Bottom Left: Location -->
+          <span class="tracking-normal text-left">{t.location}</span>
+          <!-- Bottom Right: City -->
+          <span class="tracking-normal text-right">{t.city}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  const initSection8 = () => {
+    const sec = document.querySelector<HTMLElement>('#section-8')
+    const pin = document.querySelector<HTMLElement>('#section-8-pin')
+    if (!sec || !pin) return
+
+    // Alternating subtle rotational twists for MadeWithGSAP Effect 118 Floaty Letters Reveal
+    const twists = [-10, 8, -6, 11, -8, 7, -11, 9, -7, 10, -9, 8]
+
+    const mm = gsap.matchMedia()
+
+    // Helper to build timeline for a given character selector
+    const buildSection8Timeline = (charSelector: string, isMobile: boolean) => {
+      const states = [0, 1, 2].map((idx) => {
+        const stateEl = sec.querySelector<HTMLElement>(`.s8-quote-state[data-state-idx="${idx}"]`)
+        const topMeta = sec.querySelector<HTMLElement>(`.s8-meta[data-state-idx="${idx}"]`)
+        const bottomMeta = sec.querySelector<HTMLElement>(`.s8-bottom-meta[data-state-idx="${idx}"]`)
+        const chars = stateEl ? stateEl.querySelectorAll<HTMLElement>(charSelector) : []
+        return { idx, stateEl, topMeta, bottomMeta, chars }
+      })
+
+      // Initial state before reveal
+      states.forEach((s) => {
+        if (s.topMeta) gsap.set(s.topMeta, { opacity: 0, y: isMobile ? 12 : 18 })
+        if (s.bottomMeta) gsap.set(s.bottomMeta, { opacity: 0, y: isMobile ? -12 : -18 })
+        if (s.chars.length) {
+          gsap.set(s.chars, {
+            y: isMobile ? 65 : 95,
+            rotateZ: (i) => twists[i % twists.length],
+            opacity: 0,
+            scale: 0.88,
+            transformOrigin: '50% 100%',
+          })
+        }
+      })
+
+      // Master Pinned Scroll Timeline
+      // 3 states: total distance 350vh for comfortable reading pace
+      const masterTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top top',
+          end: '+=350%',
+          pin: pin,
+          pinSpacing: true,
+          scrub: isMobile ? 0.6 : 1.2,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        },
+      })
+
+      // Each state gets 1.2 units of time (total 3.6 units)
+      const unitTime = 1.2
+
+      states.forEach((s, i) => {
+        const startTime = i * unitTime
+        const isLast = i === states.length - 1
+
+        // 1. Meta in
+        if (s.topMeta) {
+          masterTl.to(s.topMeta, { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }, startTime)
+        }
+        if (s.bottomMeta) {
+          masterTl.to(s.bottomMeta, { opacity: 1, y: 0, duration: 0.28, ease: 'power2.out' }, startTime)
+        }
+
+        // 2. Letters tumble in (Effect 118 Floaty Letters Reveal with soft bounce)
+        if (s.chars.length) {
+          masterTl.to(
+            s.chars,
+            {
+              y: 0,
+              rotateZ: 0,
+              scale: 1,
+              opacity: 1,
+              duration: 0.38,
+              stagger: {
+                each: 0.007,
+                from: 'start',
+              },
+              ease: 'back.out(2)',
+            },
+            startTime + 0.04
+          )
+        }
+
+        // 3. Hold window: active from ~ startTime + 0.42 to startTime + 0.90
+
+        // 4. Letters tumble out & meta out (seamlessly hands off to next state)
+        if (!isLast) {
+          const exitTime = startTime + 0.90
+
+          if (s.chars.length) {
+            masterTl.to(
+              s.chars,
+              {
+                y: isMobile ? -60 : -85,
+                rotateZ: (ci) => -twists[ci % twists.length] * 0.75,
+                scale: 0.92,
+                opacity: 0,
+                duration: 0.28,
+                stagger: {
+                  each: 0.005,
+                  from: 'start',
+                },
+                ease: 'power2.in',
+              },
+              exitTime
+            )
+          }
+
+          if (s.topMeta) {
+            masterTl.to(s.topMeta, { opacity: 0, y: isMobile ? -12 : -18, duration: 0.22, ease: 'power2.in' }, exitTime + 0.04)
+          }
+          if (s.bottomMeta) {
+            masterTl.to(s.bottomMeta, { opacity: 0, y: isMobile ? 12 : 18, duration: 0.22, ease: 'power2.in' }, exitTime + 0.04)
+          }
+        } else {
+          // Last state stays visible through the end of the pin, then gently dissolves
+          const exitTime = startTime + 1.05
+          if (s.chars.length) {
+            masterTl.to(s.chars, { opacity: 0.2, y: -25, duration: 0.15, ease: 'power1.out' }, exitTime)
+          }
+        }
+      })
+
+      return masterTl
+    }
+
+    // Desktop & Tablet
+    mm.add('(min-width: 768px)', () => {
+      const tl = buildSection8Timeline('.s8-char-desk', false)
+      return () => {
+        tl.scrollTrigger?.kill()
+        tl.kill()
+      }
+    })
+
+    // Mobile (< 768px): Exact same MadeWithGSAP Effect 118 floaty letters animation tuned for mobile
+    mm.add('(max-width: 767px)', () => {
+      const tl = buildSection8Timeline('.s8-char-mob', true)
+      return () => {
+        tl.scrollTrigger?.kill()
+        tl.kill()
+      }
+    })
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSection8)
+  } else {
+    initSection8()
+  }
+</script>

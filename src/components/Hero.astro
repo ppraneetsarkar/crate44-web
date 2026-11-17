@@ -1,0 +1,500 @@
+---
+// src/components/Hero.astro
+// Desktop: Figma Node 1574:5012 (Section 1 · opening)
+// Mobile: Figma Node 1821:4692 (iPhone 13 & 14 - 2)
+// True Fluid System: Proportional 13.89vw text scaling so as the screen increases, the text increases dynamically
+---
+
+<section
+  id="hero-section"
+  class="relative w-full min-h-[100svh] flex flex-col justify-between items-center lg:flex-row lg:items-end px-[16px] pt-[max(16px,env(safe-area-inset-top))] pb-[max(16px,env(safe-area-inset-bottom))] lg:pt-[clamp(48px,6vh,80px)] lg:pb-[clamp(24px,4vh,48px)] overflow-hidden bg-dark text-creme"
+  data-node-id="1574:5013"
+>
+  <!-- Background Media Wrapper: Hardware accelerated layer for parallax video -->
+  <div id="hero-media-wrapper" aria-hidden="true" class="absolute inset-0 pointer-events-none z-0 overflow-hidden transform-gpu will-change-transform">
+    <!-- Keep the browser's native video pipeline; the hero is the only eager video. -->
+    <video
+      id="hero-video"
+      src="/videos/hero.mp4"
+      autoplay
+      muted
+      playsinline
+      webkit-playsinline
+      preload="auto"
+      poster="/images/hero-bg.webp"
+      class="absolute inset-0 w-full h-full object-cover object-center max-w-none scale-105 will-change-transform"
+      style="transform: translateZ(0); -webkit-transform: translateZ(0); backface-visibility: hidden;"
+    >
+      <source src="/videos/hero.mp4" type="video/mp4" />
+      <source src="/videos/hero.webm" type="video/webm" />
+    </video>
+  </div>
+
+  <!-- Exact Figma Gradient Layer (Node 1574:5033): Fills vertically across entire section for seamless transition to Section 2 -->
+  <div
+    id="hero-gradient-layer"
+    aria-hidden="true"
+    class="absolute inset-0 w-full h-full pointer-events-none z-[1]"
+    data-node-id="1574:5033"
+    style="background-image: linear-gradient(180deg, rgba(19, 19, 19, 0.5) 0%, rgba(19, 19, 19, 0.5) 27.993%, rgba(19, 19, 19, 0) 56.251%, rgba(19, 19, 19, 0.85) 85%, rgb(19, 19, 19) 100%);"
+  ></div>
+
+  <!-- Content Container: Full width with strictly fixed 16px margins on all displays -->
+  <div class="relative z-10 w-full flex-1 flex flex-col justify-between items-center lg:flex-row lg:items-end lg:justify-between mx-auto h-full">
+
+    <!-- Center/Top Block on Mobile (Headline + Copy) / Left Column on Desktop -->
+    <div class="flex-1 min-h-0 flex flex-col items-center justify-center text-center my-auto py-1 lg:my-0 lg:py-0 lg:flex-initial lg:flex-[1_0_0] lg:items-start lg:text-left lg:justify-end w-full">
+      
+      <!-- Headline: Truly dynamic font size that grows continuously with screen width (13.89vw) -->
+      <div
+        id="hero-headline"
+        class="w-full font-display uppercase not-italic text-creme break-words tracking-[0] lg:tracking-[0.48px] select-none text-fluid-hero"
+        data-node-id="1821:4706"
+        data-dev-fix-annotations="make this smoother and responsive this is breaking in screen more than 1920"
+      >
+        <!-- Line 1: Perfect -->
+        <div class="headline-mask overflow-hidden py-0.5">
+          <div class="roll-line flex flex-nowrap whitespace-nowrap justify-center lg:justify-start" data-line="Perfect">
+            <span class="char inline-block text-creme">P</span>
+            <span class="char inline-block text-creme">e</span>
+            <span class="char inline-block text-creme">r</span>
+            <span class="char inline-block text-creme">f</span>
+            <span class="char inline-block text-creme">e</span>
+            <span class="char inline-block text-creme">c</span>
+            <span class="char inline-block text-creme">t</span>
+          </div>
+        </div>
+
+        <!-- Line 2: or it never -->
+        <div class="headline-mask overflow-hidden py-0.5">
+          <div class="roll-line flex flex-nowrap whitespace-nowrap justify-center lg:justify-start" data-line="or it never">
+            <span class="char inline-block text-creme">o</span>
+            <span class="char inline-block text-creme">r</span>
+            <span class="char inline-block text-creme">&nbsp;</span>
+            <span class="char inline-block text-creme">i</span>
+            <span class="char inline-block text-creme">t</span>
+            <span class="char inline-block text-creme">&nbsp;</span>
+            <span class="char inline-block text-creme">n</span>
+            <span class="char inline-block text-creme">e</span>
+            <span class="char inline-block text-creme">v</span>
+            <span class="char inline-block text-creme">e</span>
+            <span class="char inline-block text-creme">r</span>
+          </div>
+        </div>
+
+        <!-- Line 3: leaves the -->
+        <div class="headline-mask overflow-hidden py-0.5">
+          <div class="roll-line flex flex-nowrap whitespace-nowrap justify-center lg:justify-start" data-line="leaves the">
+            <span class="char inline-block text-creme">l</span>
+            <span class="char inline-block text-creme">e</span>
+            <span class="char inline-block text-creme">a</span>
+            <span class="char inline-block text-creme">v</span>
+            <span class="char inline-block text-creme">e</span>
+            <span class="char inline-block text-creme">s</span>
+            <span class="char inline-block text-creme">&nbsp;</span>
+            <span class="char inline-block text-creme">t</span>
+            <span class="char inline-block text-creme">h</span>
+            <span class="char inline-block text-creme">e</span>
+          </div>
+        </div>
+
+        <!-- Line 4: crate. -->
+        <div class="headline-mask overflow-hidden py-0.5">
+          <div class="roll-line flex flex-nowrap whitespace-nowrap justify-center lg:justify-start" data-line="crate.">
+            <span class="char inline-block text-creme">c</span>
+            <span class="char inline-block text-creme">r</span>
+            <span class="char inline-block text-creme">a</span>
+            <span class="char inline-block text-creme">t</span>
+            <span class="char inline-block text-creme">e</span>
+            <span class="char inline-block text-creme">.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subtitle on Mobile: Suisse Intl 14px / 17px / 600 weight / -0.4px letterspacing -->
+      <p
+        class="hero-copy font-body font-semibold text-[14px] leading-[17px] tracking-[-0.4px] text-creme w-full text-center whitespace-pre-wrap break-words lg:hidden mt-2 max-w-[340px] will-change-transform"
+        data-node-id="1821:4707"
+      >
+        Ultra-premium fruit  sourced, ripened and graded by hand in Mumbai. Delivered at its exact moment, over WhatsApp
+      </p>
+    </div>
+
+    <!-- Bottom Buttons Column on Mobile / Right Column on Desktop -->
+    <div
+      class="content-stretch flex flex-col gap-[8px] lg:gap-[28px] items-center lg:items-start shrink-0 w-full lg:w-[532px] mt-auto pt-2 lg:mt-0 lg:pt-0"
+      data-node-id="1821:4708"
+    >
+      <!-- Subtitle on Desktop: Suisse Intl 16px / 20px / 600 weight / -0.4px letterspacing -->
+      <p
+        class="hero-copy hidden lg:block font-body font-semibold text-[16px] leading-[20px] tracking-[-0.4px] not-italic text-creme w-full break-words will-change-transform"
+        data-node-id="1574:5016"
+      >
+        Ultra-premium fruit sourced, ripened and graded by hand in Mumbai.<br class="hidden lg:inline" />Delivered at its exact moment, over WhatsApp
+      </p>
+
+      <!-- Buttons: Sticking firmly to bottom with exact 16px edge margins and safe bottom spacing -->
+      <div class="buttons-mask w-full overflow-hidden py-1 mb-2 lg:mb-0">
+        <div class="buttons-row content-stretch flex flex-col sm:flex-row gap-[8px] items-center lg:items-start w-full will-change-transform">
+          <!-- Button 1: JOIN THE LIST (Left Button in Pair: Morphs on RIGHT, Feathered Motion-Blur Roll) -->
+          <a
+            href="#join"
+            id="btn-join"
+            class="hero-btn-left bg-yellow text-dark relative inline-flex items-center justify-center w-full sm:flex-1 h-[52px] sm:h-[56px] font-display font-semibold text-[32px] leading-[34px] uppercase select-none flex-shrink-0 border border-yellow transition-[background-color,filter] duration-300 hover:brightness-105 will-change-[border-radius]"
+            data-node-id="445:14265"
+          >
+            <span
+              class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                JOIN THE LIST
+              </span>
+              <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                JOIN THE LIST
+              </span>
+            </span>
+          </a>
+
+          <!-- Button 2: SEE THIS WEEK’S EDIT (Right Button in Pair: Morphs on LEFT, Feathered Motion-Blur Roll) -->
+          <a
+            href="#edit"
+            id="btn-edit"
+            class="hero-btn-right bg-shadow text-creme relative inline-flex items-center justify-center w-full sm:flex-1 h-[52px] sm:h-[56px] font-display font-semibold text-[32px] leading-[34px] uppercase select-none flex-shrink-0 border border-shadow transition-[background-color,filter] duration-300 hover:brightness-110 will-change-[border-radius]"
+            data-node-id="node-445_14257"
+          >
+            <span
+              class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+              style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+            >
+              <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                SEE THIS WEEK’S EDIT
+              </span>
+              <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                SEE THIS WEEK’S EDIT
+              </span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Dynamic Font Scaling Rules for Hero -->
+<style>
+  /* Responsive typography scaling for hero headline */
+  @media (max-width: 949px) {
+    #hero-headline {
+      font-family: 'VVDS Fifties', 'VVDS_Fifties', sans-serif;
+      font-size: clamp(56px, calc(3.5778vw + 68px), 88px);
+      line-height: clamp(50px, calc(3.2200vw + 58px), 74px);
+      letter-spacing: calc(0.03578vw + 0.4605px);
+    }
+  }
+
+  @media (min-width: 950px) and (max-width: 4096px) {
+    #hero-headline {
+      font-family: 'VVDS Fifties', 'VVDS_Fifties', sans-serif;
+      font-size: calc(5.8487vw + 56.437px);
+      line-height: calc(4.6408vw + 49.913px);
+      letter-spacing: calc(0.03814vw + 0.438px);
+    }
+  }
+
+  /* The foldable's 950px viewport uses the desktop hero composition. */
+  @media (min-width: 950px) {
+    #hero-section {
+      flex-direction: row !important;
+      align-items: flex-end !important;
+      padding-top: clamp(48px, 6vh, 80px);
+      padding-bottom: clamp(24px, 4vh, 48px);
+    }
+
+    #hero-section > .relative.z-10 {
+      flex-direction: row !important;
+      align-items: flex-end !important;
+      justify-content: space-between !important;
+    }
+
+    #hero-section > .relative.z-10 > div:first-child {
+      align-items: flex-start !important;
+      justify-content: flex-end !important;
+      text-align: left !important;
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      flex: 1 0 0%;
+      width: auto;
+    }
+
+    #hero-section .roll-line { justify-content: flex-start !important; }
+    #hero-section [data-node-id="1821:4707"] { display: none !important; }
+    #hero-section [data-node-id="1574:5016"] { display: block !important; }
+    #hero-section [data-node-id="1821:4708"] {
+      width: min(532px, 100%);
+      flex-shrink: 0;
+      gap: 28px;
+      align-items: flex-start;
+      margin-top: 0;
+      padding-top: 0;
+    }
+  }
+
+</style>
+
+<!-- Scripts: Luxury CustomEase Smooth Flow + GSAP -->
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  const easeLuxury = 'cubic-bezier(0.31, 0.75, 0.22, 1)'
+
+  const lines = document.querySelectorAll<HTMLElement>('.roll-line')
+  const buttonsRow = document.querySelector<HTMLElement>('.buttons-row')
+
+  gsap.set(lines, {
+    yPercent: 140,
+    opacity: 0,
+    rotate: 0.001,
+  })
+
+  gsap.set('.hero-copy', { opacity: 0, y: 30 })
+  if (buttonsRow) {
+    gsap.set(buttonsRow, { yPercent: 120, opacity: 0 })
+  }
+
+  const masterTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '#hero-section',
+      start: 'top 85%',
+      once: true,
+    },
+    delay: 0.15,
+  })
+
+  masterTl.to(lines, {
+    yPercent: 0,
+    opacity: 1,
+    rotate: 0,
+    duration: 1.1,
+    ease: easeLuxury,
+    stagger: 0.0825,
+  }, 0)
+
+  masterTl.to('.hero-copy', {
+    opacity: 1,
+    y: 0,
+    duration: 1.0,
+    ease: easeLuxury,
+  }, 0.28)
+
+  if (buttonsRow) {
+    masterTl.to(buttonsRow, {
+      yPercent: 0,
+      opacity: 1,
+      duration: 1.1,
+      ease: easeLuxury,
+    }, 0.38)
+  }
+
+  // GSAP Corner-Morphing & Rolling Text FX for Paired Hero Buttons
+  const btnJoin = document.getElementById('btn-join')
+  const btnEdit = document.getElementById('btn-edit')
+
+  if (btnJoin) {
+    const textTop = btnJoin.querySelector<HTMLElement>('.roll-text-top')
+    const textBottom = btnJoin.querySelector<HTMLElement>('.roll-text-bottom')
+
+    gsap.set(btnJoin, {
+      borderTopLeftRadius: '28px',
+      borderBottomLeftRadius: '28px',
+      borderTopRightRadius: '28px',
+      borderBottomRightRadius: '28px',
+    })
+
+    if (textTop && textBottom) {
+      gsap.set(textTop, { yPercent: 0, filter: 'blur(0px)' })
+      gsap.set(textBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+    }
+
+    btnJoin.addEventListener('mouseenter', () => {
+      // Left button in pair -> Morphs on RIGHT (28px 14px 14px 28px)
+      gsap.to(btnJoin, {
+        borderTopRightRadius: '14px',
+        borderBottomRightRadius: '14px',
+        borderTopLeftRadius: '28px',
+        borderBottomLeftRadius: '28px',
+        duration: 0.45,
+        ease: 'power3.out',
+        overwrite: 'auto',
+      })
+
+      if (textTop && textBottom) {
+        gsap.to(textTop, { yPercent: -100, filter: 'blur(3.5px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+        gsap.to(textBottom, { yPercent: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+      }
+    })
+
+    btnJoin.addEventListener('mouseleave', () => {
+      gsap.to(btnJoin, {
+        borderTopRightRadius: '28px',
+        borderBottomRightRadius: '28px',
+        borderTopLeftRadius: '28px',
+        borderBottomLeftRadius: '28px',
+        duration: 0.38,
+        ease: 'power3.out',
+        overwrite: 'auto',
+      })
+
+      if (textTop && textBottom) {
+        gsap.to(textTop, { yPercent: 0, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+        gsap.to(textBottom, { yPercent: 100, filter: 'blur(3.5px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+      }
+    })
+  }
+
+  if (btnEdit) {
+    const textTop = btnEdit.querySelector<HTMLElement>('.roll-text-top')
+    const textBottom = btnEdit.querySelector<HTMLElement>('.roll-text-bottom')
+
+    gsap.set(btnEdit, {
+      borderTopLeftRadius: '28px',
+      borderBottomLeftRadius: '28px',
+      borderTopRightRadius: '28px',
+      borderBottomRightRadius: '28px',
+    })
+
+    if (textTop && textBottom) {
+      gsap.set(textTop, { yPercent: 0, filter: 'blur(0px)' })
+      gsap.set(textBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+    }
+
+    btnEdit.addEventListener('mouseenter', () => {
+      // Right button in pair -> Morphs on LEFT (14px 28px 28px 14px)
+      gsap.to(btnEdit, {
+        borderTopLeftRadius: '14px',
+        borderBottomLeftRadius: '14px',
+        borderTopRightRadius: '28px',
+        borderBottomRightRadius: '28px',
+        duration: 0.45,
+        ease: 'power3.out',
+        overwrite: 'auto',
+      })
+
+      if (textTop && textBottom) {
+        gsap.to(textTop, { yPercent: -100, filter: 'blur(3.5px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+        gsap.to(textBottom, { yPercent: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+      }
+    })
+
+    btnEdit.addEventListener('mouseleave', () => {
+      gsap.to(btnEdit, {
+        borderTopLeftRadius: '28px',
+        borderBottomLeftRadius: '28px',
+        borderTopRightRadius: '28px',
+        borderBottomRightRadius: '28px',
+        duration: 0.38,
+        ease: 'power3.out',
+        overwrite: 'auto',
+      })
+
+      if (textTop && textBottom) {
+        gsap.to(textTop, { yPercent: 0, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+        gsap.to(textBottom, { yPercent: 100, filter: 'blur(3.5px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+      }
+    })
+  }
+
+  // Let the browser stream the original video directly instead of buffering a
+  // second full copy in JavaScript memory. Pause decoding while the hero is away.
+  const heroVideo = document.getElementById('hero-video') as HTMLVideoElement | null
+  if (heroVideo) {
+    heroVideo.muted = true
+    heroVideo.defaultMuted = true
+    heroVideo.playsInline = true
+
+    let hasCompletedPlayback = false
+
+    const onPlaybackComplete = () => {
+      if (hasCompletedPlayback) return
+      hasCompletedPlayback = true
+      heroVideo.pause()
+    }
+
+    heroVideo.addEventListener('ended', onPlaybackComplete)
+    heroVideo.addEventListener('timeupdate', () => {
+      if (!hasCompletedPlayback && heroVideo.duration > 1) {
+        if (heroVideo.currentTime >= heroVideo.duration - 0.08) {
+          onPlaybackComplete()
+        }
+      }
+    })
+
+    const tryPlayHero = () => {
+      if (hasCompletedPlayback) return
+      if (heroVideo.paused) {
+        heroVideo.play().catch(() => {})
+      }
+    }
+    tryPlayHero()
+
+    // Unlock on first mobile interaction (bypasses iOS Low Power Mode autoplay restriction)
+    const unlockHeroVideo = () => {
+      if (!hasCompletedPlayback) tryPlayHero()
+      window.removeEventListener('touchstart', unlockHeroVideo)
+      window.removeEventListener('pointerdown', unlockHeroVideo)
+      window.removeEventListener('scroll', unlockHeroVideo)
+    }
+    window.addEventListener('touchstart', unlockHeroVideo, { passive: true })
+    window.addEventListener('pointerdown', unlockHeroVideo, { passive: true })
+    window.addEventListener('scroll', unlockHeroVideo, { passive: true })
+
+    const heroVisibility = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        if (!hasCompletedPlayback) tryPlayHero()
+      } else {
+        if (!hasCompletedPlayback) heroVideo.pause()
+      }
+    }, { threshold: 0.01 })
+    heroVisibility.observe(heroVideo)
+
+    let wasPlayingBeforeMenu = false
+    window.addEventListener('crate44:nav-open', () => {
+      const currentVideo = document.getElementById('hero-video') as HTMLVideoElement | null
+      if (!currentVideo) return
+      wasPlayingBeforeMenu = !currentVideo.paused && !currentVideo.ended && !hasCompletedPlayback
+      currentVideo.pause()
+    })
+    window.addEventListener('crate44:nav-closed', () => {
+      const currentVideo = document.getElementById('hero-video') as HTMLVideoElement | null
+      if (!currentVideo) return
+      const rect = currentVideo.getBoundingClientRect()
+      const isVisible = rect.bottom > 0 && rect.top < window.innerHeight
+      if (!hasCompletedPlayback && wasPlayingBeforeMenu && isVisible && !currentVideo.ended) {
+        currentVideo.play().catch(() => {})
+      }
+      wasPlayingBeforeMenu = false
+    })
+  }
+
+  // Subtle hero video background parallax (gradient layer stays static and fully anchored)
+  const heroVideoEl = document.getElementById('hero-video')
+  if (heroVideoEl) {
+    gsap.to(heroVideoEl, {
+      yPercent: 8,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: '#hero-section',
+        start: 'top top',
+        end: 'bottom top',
+        scrub: ScrollTrigger.isTouch ? true : 0.6,
+      },
+    })
+  }
+</script>

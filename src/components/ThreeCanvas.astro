@@ -1,0 +1,138 @@
+---
+// src/components/ThreeCanvas.astro
+// High-performance Three.js ambient particles with low GPU overhead
+---
+
+<div id="three-container" class="fixed inset-0 pointer-events-none z-[1] opacity-60"></div>
+
+<script>
+  async function initThreeCanvas() {
+    const THREE = await import('three')
+    const container = document.getElementById('three-container')
+    if (!container) return
+    const scene = new THREE.Scene()
+    const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 100)
+    camera.position.z = 5
+
+    const renderer = new THREE.WebGLRenderer({
+      alpha: true,
+      antialias: false,
+      powerPreference: 'high-performance',
+    })
+    renderer.setSize(window.innerWidth, window.innerHeight)
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5))
+    container.appendChild(renderer.domElement)
+
+    const particleCount = 35
+    const geometry = new THREE.BufferGeometry()
+    const positions = new Float32Array(particleCount * 3)
+
+    for (let i = 0; i < particleCount * 3; i += 3) {
+      positions[i] = (Math.random() - 0.5) * 12
+      positions[i + 1] = (Math.random() - 0.5) * 8
+      positions[i + 2] = (Math.random() - 0.5) * 5
+    }
+
+    geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3))
+
+    const material = new THREE.PointsMaterial({
+      color: 0xf8fe03,
+      size: 0.04,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending,
+    })
+
+    const particles = new THREE.Points(geometry, material)
+    scene.add(particles)
+
+    let mouseX = 0
+    let mouseY = 0
+    let isVisible = !document.hidden
+    let isScrolledPast = false
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+    let isTouchScrolling = false
+    let touchScrollTimer: number | null = null
+    let rafId: number | null = null
+
+    window.addEventListener('mousemove', (e) => {
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 0.3
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 0.3
+    }, { passive: true })
+
+    let lastTime = performance.now()
+    const canRender = () => isVisible && !isScrolledPast && !isTouchScrolling
+
+    const stop = () => {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+    }
+
+    const start = () => {
+      if (canRender() && rafId === null) {
+        lastTime = performance.now()
+        rafId = requestAnimationFrame(animate)
+      }
+    }
+
+    const animate = (now: number) => {
+      rafId = null
+      if (!canRender()) return
+
+      // Frame-rate independent delta time (smooth on 60Hz, 120Hz ProMotion, 144Hz+)
+      const dt = Math.min((now - lastTime) / 1000, 0.1)
+      lastTime = now
+
+      particles.rotation.y += 0.06 * dt
+      camera.position.x += (mouseX - camera.position.x) * (1 - Math.exp(-4 * dt))
+      camera.position.y += (-mouseY - camera.position.y) * (1 - Math.exp(-4 * dt))
+
+      renderer.render(scene, camera)
+      rafId = requestAnimationFrame(animate)
+    }
+
+    const updateVisibility = () => {
+      isVisible = !document.hidden
+      isScrolledPast = window.scrollY > window.innerHeight * 2.2
+      if (canRender()) start()
+      else stop()
+    }
+
+    // This decorative full-screen WebGL layer yields its frame budget while a
+    // touch gesture is scrolling content, then resumes when the gesture settles.
+    const pauseForTouchScroll = () => {
+      if (!isTouchDevice) {
+        updateVisibility()
+        return
+      }
+      isTouchScrolling = true
+      stop()
+      if (touchScrollTimer) window.clearTimeout(touchScrollTimer)
+      touchScrollTimer = window.setTimeout(() => {
+        isTouchScrolling = false
+        updateVisibility()
+      // Wait for native momentum scrolling to settle before spending GPU time
+      // on this decorative canvas again. Shorter gaps can occur during a fling.
+      }, 500)
+    }
+    window.addEventListener('scroll', pauseForTouchScroll, { passive: true })
+    window.addEventListener('touchmove', pauseForTouchScroll, { passive: true })
+    document.addEventListener('visibilitychange', updateVisibility)
+    updateVisibility()
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight
+      camera.updateProjectionMatrix()
+      renderer.setSize(window.innerWidth, window.innerHeight)
+    }, { passive: true })
+  }
+
+  const startCanvas = () => { void initThreeCanvas() }
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(startCanvas, { timeout: 1200 })
+  } else {
+    window.setTimeout(startCanvas, 0)
+  }
+</script>

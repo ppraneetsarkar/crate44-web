@@ -1,0 +1,1471 @@
+---
+// src/components/ProductCards.astro
+// Exact 1:1 Implementation from Figma Node 1838:2063 (middle card: 1838:2040 & other card: 1838:2050)
+// Exact cornering (12px rounded frame, 28px/4px/28px price badge)
+// Spacing between text and stroke: left: 11px, top: 10px from stroke edge
+// Glass blur is ONLY active on the middle (center) card, side cards have NO blur
+
+const defaultFruits = [
+  {
+    "id": "tanzania-avocado",
+    "titleLine1": "AVOCADO",
+    "titleLine2": "TANZANIA",
+    "price": "480",
+    "windowText": "HASS GRADE-A \u00b7 ULTRA BUTTERY \u00b7 100% TRACEABLE",
+    "inStock": true,
+    "threeDFile": "avocado_tanzania.glb"
+  },
+  {
+    "id": "blue-grapes",
+    "titleLine1": "BLUE",
+    "titleLine2": "GRAPES",
+    "price": "380",
+    "windowText": "CRISP & SWEET \u00b7 SEEDLESS \u00b7 HARVESTED FRESH",
+    "inStock": true,
+    "threeDFile": "blue_grapes.glb"
+  },
+  {
+    "id": "dapoli-alphonso",
+    "titleLine1": "DAPOLI",
+    "titleLine2": "ALPHONSO",
+    "price": "4500",
+    "windowText": "TREE-RIPENED \u00b7 DEVGHAR ORCHARD \u00b7 ZERO CHEMICALS",
+    "inStock": true,
+    "threeDFile": "dapoli_mango.glb"
+  },
+  {
+    "id": "dutch-strawberry",
+    "titleLine1": "DUTCH",
+    "titleLine2": "STRAWBERRY",
+    "price": "650",
+    "windowText": "SWEET VARIETY \u00b7 AIR-SHIPPED \u00b7 PEAK WINDOW 48H",
+    "inStock": false,
+    "threeDFile": "dutch_strawberry.glb"
+  },
+  {
+    "id": "donut-peach",
+    "titleLine1": "DONUT",
+    "titleLine2": "PEACH",
+    "price": "850",
+    "windowText": "FLAT PEACH \u00b7 AROMATIC HONEY \u00b7 ULTRA TENDER",
+    "inStock": true,
+    "threeDFile": "donut_peach.glb"
+  },
+  {
+    "id": "cherry",
+    "titleLine1": "SWEET",
+    "titleLine2": "CHERRY",
+    "price": "750",
+    "windowText": "AIR-SHIPPED \u00b7 BURLAT VARIETY \u00b7 DEEP RED NECTAR",
+    "inStock": true,
+    "threeDFile": "cherry.glb"
+  },
+  {
+    "id": "gala-apple",
+    "titleLine1": "GALA",
+    "titleLine2": "APPLE",
+    "price": "420",
+    "windowText": "ROYAL GALA \u00b7 CRISP & JUICY \u00b7 HIGH ALTITUDE",
+    "inStock": true,
+    "threeDFile": "gala_apple.glb"
+  },
+  {
+    "id": "honey-dew-melon",
+    "titleLine1": "HONEY DEW",
+    "titleLine2": "MELON",
+    "price": "450",
+    "windowText": "HONEY NECTAR \u00b7 SILKY FLESH \u00b7 REFRESHING CRISP",
+    "inStock": true,
+    "threeDFile": "honey_dew_melon.glb"
+  },
+  {
+    "id": "jumbo-blueberry",
+    "titleLine1": "JUMBO",
+    "titleLine2": "BLUEBERRY",
+    "price": "690",
+    "windowText": "SUPER SIZED \u00b7 PLUMP & TART \u00b7 ANTIOXIDANT RICH",
+    "inStock": true,
+    "threeDFile": "jumbo_blue_berry.glb"
+  },
+  {
+    "id": "korean-beauty-pear",
+    "titleLine1": "KOREAN",
+    "titleLine2": "PEAR",
+    "price": "560",
+    "windowText": "SHINGO PEAR \u00b7 ULTRA CRISP \u00b7 WATER BURST",
+    "inStock": true,
+    "threeDFile": "korean_beauty_pear.glb"
+  },
+  {
+    "id": "lychee",
+    "titleLine1": "ROYAL",
+    "titleLine2": "LYCHEE",
+    "price": "720",
+    "windowText": "SHAHI VARIETY \u00b7 PERFUMED FLORAL \u00b7 PURE PULP",
+    "inStock": true,
+    "threeDFile": "lychee_3d_h.glb"
+  },
+  {
+    "id": "mandarin",
+    "titleLine1": "NAGPUR",
+    "titleLine2": "MANDARIN",
+    "price": "290",
+    "windowText": "EASY PEEL \u00b7 SUN DRIED SWEET \u00b7 HIGH JUICE",
+    "inStock": true,
+    "threeDFile": "mandrin.glb"
+  },
+  {
+    "id": "purple-mangosteen",
+    "titleLine1": "PURPLE",
+    "titleLine2": "MANGOSTEEN",
+    "price": "950",
+    "windowText": "QUEEN OF FRUITS \u00b7 SNOW WHITE SEGMENTS",
+    "inStock": true,
+    "threeDFile": "mangosteen.glb"
+  },
+  {
+    "id": "nz-apple",
+    "titleLine1": "NEW ZEALAND",
+    "titleLine2": "APPLE",
+    "price": "460",
+    "windowText": "ENVY VARIETY \u00b7 DENSE CRUNCH \u00b7 SUBTLE HONEY",
+    "inStock": true,
+    "threeDFile": "nz_apple.glb"
+  },
+  {
+    "id": "cantaloupe-melon",
+    "titleLine1": "CANTALOUPE",
+    "titleLine2": "MELON",
+    "price": "420",
+    "windowText": "SWEET MUSK \u00b7 HAND PICKED \u00b7 JUICY CRISP",
+    "inStock": true,
+    "threeDFile": "cantaloupe_melon_o.glb"
+  },
+  {
+    "id": "egyptian-orange",
+    "titleLine1": "EGYPTIAN",
+    "titleLine2": "ORANGE",
+    "price": "320",
+    "windowText": "CARA CARA \u00b7 HIGH CITRUS \u00b7 SEEDLESS",
+    "inStock": true,
+    "threeDFile": "egyptian_orange.glb"
+  },
+  {
+    "id": "fresh-fig",
+    "titleLine1": "FRESH",
+    "titleLine2": "FIGS",
+    "price": "580",
+    "windowText": "POONA PURPLE \u00b7 HONEY SWEET \u00b7 RICH TEXTURE",
+    "inStock": true,
+    "threeDFile": "fig_n.glb"
+  },
+  {
+    "id": "galia-melon",
+    "titleLine1": "GALIA",
+    "titleLine2": "MELON",
+    "price": "480",
+    "windowText": "TROPICAL AROMA \u00b7 PALE GREEN \u00b7 RICH SWEET",
+    "inStock": true,
+    "threeDFile": "galia_melon.glb"
+  },
+  {
+    "id": "white-grapes",
+    "titleLine1": "WHITE",
+    "titleLine2": "GRAPES",
+    "price": "360",
+    "windowText": "THOMPSON SEEDLESS \u00b7 SWEET & FIRM SNAP",
+    "inStock": true,
+    "threeDFile": "grape_white.glb"
+  },
+  {
+    "id": "mini-mandarin",
+    "titleLine1": "MINI",
+    "titleLine2": "MANDARIN",
+    "price": "340",
+    "windowText": "BITE SIZED \u00b7 INTENSE ZEST \u00b7 AIR SHIPPED",
+    "inStock": true,
+    "threeDFile": "mini_mandarin.glb"
+  },
+  {
+    "id": "santa-claus-melon",
+    "titleLine1": "SANTA CLAUS",
+    "titleLine2": "MELON",
+    "price": "520",
+    "windowText": "PIEL DE SAPO \u00b7 EXTREME SUGAR \u00b7 CRISP BITE",
+    "inStock": true,
+    "threeDFile": "piel_de_sapo_santa_claus_meloon.glb"
+  },
+  {
+    "id": "south-africa-plum",
+    "titleLine1": "SOUTH AFRICA",
+    "titleLine2": "PLUM",
+    "price": "540",
+    "windowText": "BLACK AMBER \u00b7 VELVET SKIN \u00b7 RUBY FLESH",
+    "inStock": true,
+    "threeDFile": "plum_south_africa.glb"
+  },
+  {
+    "id": "queen-apple",
+    "titleLine1": "QUEEN",
+    "titleLine2": "APPLE",
+    "price": "490",
+    "windowText": "RED QUEEN \u00b7 FIRM SNAP \u00b7 CLASSIC SWEET",
+    "inStock": true,
+    "threeDFile": "queen_apple.glb"
+  },
+  {
+    "id": "red-grapes",
+    "titleLine1": "RED",
+    "titleLine2": "GRAPES",
+    "price": "390",
+    "windowText": "CRISP & SWEET \u00b7 SEEDLESS \u00b7 DEEP RUBY FLAVOR",
+    "inStock": true,
+    "threeDFile": "red_grapes.glb"
+  },
+  {
+    "id": "seedless-mandarin",
+    "titleLine1": "SEEDLESS",
+    "titleLine2": "MANDARIN",
+    "price": "310",
+    "windowText": "ZERO SEEDS \u00b7 EASY SEGMENTS \u00b7 CITRUS PUNCH",
+    "inStock": true,
+    "threeDFile": "seedless_mandarine.glb"
+  },
+  {
+    "id": "washington-apple",
+    "titleLine1": "WASHINGTON",
+    "titleLine2": "APPLE",
+    "price": "480",
+    "windowText": "RED DELICIOUS \u00b7 WAXED NATURAL \u00b7 CRUNCHY",
+    "inStock": true,
+    "threeDFile": "washington_apple.glb"
+  },
+  {
+    "id": "yellow-dragonfruit",
+    "titleLine1": "YELLOW",
+    "titleLine2": "DRAGONFRUIT",
+    "price": "890",
+    "windowText": "PALORA VARIETY \u00b7 ULTRA SWEET \u00b7 3X NUTRIENTS",
+    "inStock": true,
+    "threeDFile": "yellow_pithaya_yellow_dragonfruit.glb"
+  },
+  {
+    "id": "yellow-plum",
+    "titleLine1": "YELLOW",
+    "titleLine2": "PLUM",
+    "price": "510",
+    "windowText": "MIRABELLE \u00b7 GOLDEN HONEY \u00b7 TENDER FLESH",
+    "inStock": true,
+    "threeDFile": "yellow_plum.glb"
+  }
+]
+
+let fruits = defaultFruits
+try {
+  const SHEET_ID = '1HmUt6Nha-4zZHiD6St14dzv0lghP8nFjqWYk8Vn_HdM'
+  const SHEET_GID = '282778960'
+  const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${SHEET_GID}`
+  const res = await fetch(SHEET_CSV_URL, { signal: AbortSignal.timeout(3500) })
+  if (res.ok) {
+    const text = await res.text()
+    if (text.toLowerCase().includes('visible_on_site')) {
+      const lines = text.trim().split(/\r?\n/)
+      if (lines.length >= 2) {
+        const headers = lines[0].split(',').map((h) => h.trim().replace(/^["']|["']$/g, '').toLowerCase().replace(/[\s-]/g, '_'))
+        const rows: Record<string, string>[] = []
+        for (let i = 1; i < lines.length; i++) {
+          const line = lines[i]
+          if (!line.trim()) continue
+          const values: string[] = []
+          let inQuotes = false
+          let current = ''
+          for (let j = 0; j < line.length; j++) {
+            const char = line[j]
+            if (char === '"') inQuotes = !inQuotes
+            else if (char === ',' && !inQuotes) { values.push(current.trim()); current = '' }
+            else current += char
+          }
+          values.push(current.trim())
+          const row: Record<string, string> = {}
+          headers.forEach((h, idx) => {
+            row[h] = values[idx] ? values[idx].replace(/^["']|["']$/g, '').trim() : ''
+          })
+          rows.push(row)
+        }
+        const visible = rows.filter((r) => {
+          const val = String(r.visible_on_site || '').trim().toLowerCase()
+          return val === 'true' || val === '1' || val === 'yes'
+        })
+        if (visible.length > 0) {
+          fruits = visible.map((r) => {
+            const inStockVal = String(r.in_stock || '').trim().toLowerCase()
+            return {
+              id: r.id || `${r.title_line_1}-${r.title_line_2}`.toLowerCase().replace(/\s+/g, '-'),
+              titleLine1: r.title_line_1 || '',
+              titleLine2: r.title_line_2 || '',
+              price: r.price || '',
+              inStock: inStockVal === 'true' || inStockVal === '1' || inStockVal === 'yes',
+              windowText: r.window_text || '',
+              threeDFile: r['3d_file'] || '',
+            }
+          })
+        }
+      }
+    }
+  }
+} catch (e) {
+  // Silent fallback to defaultFruits
+}
+
+---
+
+<section
+  id="product-cards"
+  class="relative w-full overflow-hidden select-none pt-16 sm:pt-24 md:pt-32 lg:pt-44 pb-10 md:pb-20 lg:pb-24"
+  style="background-image:url('/images/section-4-bg.avif');background-size:cover;background-position:center"
+>
+  <style is:global>
+    @keyframes cardMarqueeAnim {
+      0% {
+        transform: translateX(0%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+    .card-marquee-wrap {
+      overflow: hidden !important;
+      contain: paint !important;
+    }
+    .card-marquee-scroll {
+      display: flex !important;
+      flex-direction: row !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      will-change: transform !important;
+      animation: cardMarqueeAnim 12s linear infinite !important;
+    }
+    .card-marquee-scroll span {
+      display: inline-block !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+      line-height: 1 !important;
+    }
+  </style>
+
+  <!-- Sky gradient overlays -->
+  <div
+    class="absolute inset-0 pointer-events-none z-0"
+    style="background:linear-gradient(180deg, rgba(225, 221, 236, 0.45) 0%, rgba(238, 238, 242, 0.25) 50%, rgba(215, 212, 226, 0.45) 100%)"
+  >
+  </div>
+  <div
+    class="absolute top-0 left-0 right-0 h-14 md:h-28 pointer-events-none z-10"
+    style="background:linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, transparent 100%)"
+  >
+  </div>
+
+  <!-- Figma Node 1570:3680 · Gradient layer filling vertically, fixed to bottom for smooth transition to next section (#FDFEFF) -->
+  <div
+    id="section-4-gradient-layer"
+    aria-hidden="true"
+    class="absolute inset-0 w-full h-full pointer-events-none z-10"
+    data-node-id="1570:3680"
+    style="background: linear-gradient(180deg, rgba(253, 254, 255, 0) 0%, rgba(253, 254, 255, 0) 55%, rgba(253, 254, 255, 0.45) 75%, #FDFEFF 100%);"
+  >
+  </div>
+
+  <div class="max-w-[1600px] mx-auto w-full flex flex-col items-center justify-center relative z-20">
+    <!-- Carousel Stage Container -->
+    <div
+      id="cards-stage"
+      class="w-full relative h-[500px] sm:h-[560px] md:h-[600px] lg:h-[720px] flex items-center justify-center overflow-visible cursor-grab active:cursor-grabbing touch-pan-y"
+      style="cursor: grab; touch-action: pan-y;"
+    >
+      {
+        fruits.map((fruit, idx) => (
+          <div
+            class="card-wrapper absolute flex flex-col items-center will-change-transform transform-gpu"
+            data-fruit-id={fruit.id}
+            data-index={idx}
+            style="transform: translate3d(0px, 0px, 0px) scale(1); z-index: 30; opacity: 1; pointer-events: auto;"
+          >
+            <!-- Card Frame with Exact Cornering from Figma Node 1838:2040 / 1838:2050 (12px rounded corners) -->
+            <div
+              class="card-inner curve-straight relative flex flex-col select-none overflow-hidden w-[280px] sm:w-[320px] md:w-[360px] lg:w-[462px] h-[380px] sm:h-[420px] md:h-[460px] lg:h-[566px] border-[4px] lg:border-[6px] border-[#F8FE03] border-solid"
+              data-curve="straight"
+              style="max-width: calc(100vw - 32px); box-shadow: 0 0 44px 0 rgba(0, 0, 0, 0.01);"
+            >
+              <!-- Frosted Background Layer: ACTIVE ONLY ON MIDDLE CARD (Seamless Native GPU Backdrop Blur) -->
+              <div
+                class="card-blur-overlay absolute -inset-[6px] rounded-[inherit] -z-10 pointer-events-none transition-opacity duration-300 bg-white/[0.14] backdrop-blur-[14px] [-webkit-backdrop-blur:14px]"
+                style="opacity: 0; display: none;"
+              />
+
+              <!-- 3D Canvas Layer: Embedded Three.js Viewer -->
+              <div
+                class="card-3d-container absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden"
+                data-3d-file={fruit.threeDFile || ''}
+              />
+
+              <!-- Top-Left: Fruit Name (Figma Spacing: left 11px, top 10px from stroke edge) -->
+              <div
+                class="absolute left-[8px] sm:left-[11px] top-[7px] sm:top-[10px] z-10 uppercase text-left font-display font-semibold text-[32px] sm:text-[40px] md:text-[44px] lg:text-[56px] leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]"
+                style="color: #F8FE03;"
+              >
+                <p class="m-0 leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]">{fruit.titleLine1}</p>
+                <p class="m-0 leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]">{fruit.titleLine2}</p>
+              </div>
+
+              <!-- Top-Right: Price Badge (Figma Node 1838:2042: rounded-bl-[28px] rounded-br-[4px] rounded-tr-[28px]) -->
+              <div
+                class="card-price-badge absolute z-10 uppercase flex items-baseline justify-center tracking-tight select-none font-display font-semibold -top-[4px] lg:-top-[5.5px] -right-[4px] lg:-right-[6px] pt-[8px] sm:pt-[10px] lg:pt-[12px] pb-[9px] sm:pb-[11px] lg:pb-[13px] pl-[10px] sm:pl-[12px] lg:pl-[15px] pr-[14px] sm:pr-[18px] lg:pr-[24px] rounded-bl-[18px] sm:rounded-bl-[22px] lg:rounded-bl-[28px] rounded-br-[3px] lg:rounded-br-[4px] rounded-tr-none bg-[#F8FE03] text-[#131313] text-center text-[34px] sm:text-[40px] md:text-[44px] lg:text-[56px] leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px] gap-[3px] lg:gap-[4px]"
+              >
+                <svg
+                  width="25"
+                  height="40"
+                  viewBox="0 0 25 40"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="shrink-0 self-center w-[16px] sm:w-[20px] lg:w-[25px] h-[26px] sm:h-[32px] lg:h-[40px]"
+                >
+                  <path
+                    d="M10.304 39.984L0 22.064V18.536H2.576C4.144 18.536 5.50667 18.3493 6.664 17.976C7.82133 17.6027 8.75467 17.024 9.464 16.24C10.2106 15.4187 10.696 14.4107 10.92 13.216H0V9.296H10.864C10.64 8.13867 10.2106 7.168 9.576 6.38401C8.94133 5.6 8.10133 5.00267 7.056 4.59201C6.01067 4.144 4.74133 3.92 3.248 3.92H0V0H24.472V3.92H15.008C15.7546 4.62934 16.352 5.43201 16.8 6.32801C17.2853 7.18667 17.6026 8.17601 17.752 9.296H24.472V13.216H17.864C17.528 15.9413 16.464 18.088 14.672 19.656C12.9173 21.1867 10.6213 22.1947 7.784 22.68L18.648 39.984H10.304Z"
+                    fill="#131313"
+                  />
+                </svg>
+                <span>{fruit.price}</span>
+              </div>
+
+              <!-- Order Now / Out of Stock CTA Button (Figma Node 1861:2854 - GPU transform animation) -->
+              <div
+                class="card-btn-wrap absolute left-0 w-full flex justify-center px-[10px] z-10 bottom-[18px] sm:bottom-[26px] lg:bottom-[37px] will-change-transform transform-gpu transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+                style="transform: translate3d(0, 0, 0);"
+              >
+                <a
+                  href={
+                    fruit.inStock
+                      ? `https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20order%20${encodeURIComponent(fruit.titleLine1 + ' ' + fruit.titleLine2)}`
+                      : '#'
+                  }
+                  target={fruit.inStock ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  class={`card-order-btn product-btn-morph relative inline-flex items-center justify-center font-display font-semibold text-[26px] sm:text-[30px] lg:text-[32px] leading-[34px] uppercase px-5 py-1.5 border transition-[background-color,filter] duration-300 will-change-[border-radius] ${fruit.inStock ? 'bg-[#F8FE03] text-[#131313] border-[#F8FE03] hover:brightness-105 active:scale-95' : 'bg-[#FBF9D6] text-[#5B0000] border-[#FBF9D6] cursor-not-allowed opacity-95'}`}
+                  data-node-id={fruit.inStock ? '1861:2846' : '1861:2849'}
+                >
+                  <span
+                    class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+                    style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+                  >
+                    <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                      {fruit.inStock ? 'ORDER NOW' : 'OUT OF STOCK'}
+                    </span>
+                    <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                      {fruit.inStock ? 'ORDER NOW' : 'OUT OF STOCK'}
+                    </span>
+                  </span>
+                </a>
+              </div>
+
+              <!-- Bottom Marquee Ribbon (Figma Node 1838:2046: Visible ONLY on middle card) -->
+              <div
+                class="card-marquee-wrap inline-flex justify-center items-center absolute z-20 transition-opacity duration-300 pointer-events-none select-none -bottom-[4px] lg:-bottom-[6.5px] -left-[4px] lg:-left-[6px] -right-[4px] lg:-right-[6px] h-[28px] sm:h-[32px] lg:h-[34px] py-[6px] lg:py-[8px] px-[8px] bg-[#F8FE03] text-[#131313] overflow-hidden"
+                style="opacity: 0; display: none;"
+              >
+                <div class="w-full relative overflow-hidden flex items-center justify-start">
+                  <div class="card-marquee-scroll flex whitespace-nowrap">
+                    <span class="pr-[16px] sm:pr-[24px] font-mono text-[7px] sm:text-[9px] md:text-[11px] font-bold tracking-[2px] sm:tracking-[3px] lg:tracking-[4.29px] uppercase whitespace-nowrap shrink-0 inline-block">
+                      {fruit.windowText}
+                    </span>
+                    <span class="pr-[16px] sm:pr-[24px] font-mono text-[7px] sm:text-[9px] md:text-[11px] font-bold tracking-[2px] sm:tracking-[3px] lg:tracking-[4.29px] uppercase whitespace-nowrap shrink-0 inline-block">
+                      {fruit.windowText}
+                    </span>
+                    <span class="pr-[16px] sm:pr-[24px] font-mono text-[7px] sm:text-[9px] md:text-[11px] font-bold tracking-[2px] sm:tracking-[3px] lg:tracking-[4.29px] uppercase whitespace-nowrap shrink-0 inline-block">
+                      {fruit.windowText}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- SEE THE FULL EDIT Button (Centered: Symmetrical Both-Side Morph) -->
+    <div class="mt-0 md:mt-12 w-full flex items-center justify-center text-center z-30">
+      <a
+        href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20see%20the%20full%20edit"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="product-btn-morph bg-[#1e1e1e] text-[#fbf9d6] border border-[#1e1e1e] relative inline-flex items-center justify-center cursor-pointer font-display font-semibold text-[26px] sm:text-[30px] lg:text-[32px] leading-[34px] uppercase px-[24px] py-[8px] active:scale-95 flex-shrink-0 transition-[background-color,filter] duration-300 hover:brightness-110 will-change-[border-radius]"
+        data-node-id="1863:2855"
+      >
+        <span
+          class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+          style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+        >
+          <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            SEE THE FULL EDIT
+          </span>
+          <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+            SEE THE FULL EDIT
+          </span>
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap'
+  import * as THREE from 'three'
+  import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+  import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
+  import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+
+  const SHEET_ID = '1HmUt6Nha-4zZHiD6St14dzv0lghP8nFjqWYk8Vn_HdM'
+  const SHEET_GID = '282778960'
+  const SHEET_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&gid=${SHEET_GID}`
+
+  interface FruitCard {
+    id: string
+    titleLine1: string
+    titleLine2: string
+    price: string
+    inStock: boolean
+    windowText: string
+    threeDFile?: string
+  }
+
+  function escapeHtml(str: string): string {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;')
+  }
+
+  function parseCSV(text: string): Record<string, string>[] {
+    const lines = text.trim().split(/\r?\n/)
+    if (lines.length < 2) return []
+    const headers = lines[0]
+      .split(',')
+      .map((h) => h.trim().replace(/^["']|["']$/g, '').toLowerCase().replace(/[\s-]/g, '_'))
+    const rows: Record<string, string>[] = []
+
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i]
+      if (!line.trim()) continue
+      const values: string[] = []
+      let inQuotes = false
+      let current = ''
+      for (let j = 0; j < line.length; j++) {
+        const char = line[j]
+        if (char === '"') {
+          inQuotes = !inQuotes
+        } else if (char === ',' && !inQuotes) {
+          values.push(current.trim())
+          current = ''
+        } else {
+          current += char
+        }
+      }
+      values.push(current.trim())
+      const row: Record<string, string> = {}
+      headers.forEach((h, idx) => {
+        row[h] = values[idx] ? values[idx].replace(/^["']|["']$/g, '').trim() : ''
+      })
+      rows.push(row)
+    }
+    return rows
+  }
+
+  function renderCardHTML(fruit: FruitCard, idx: number): string {
+    const title1 = escapeHtml(fruit.titleLine1)
+    const title2 = escapeHtml(fruit.titleLine2)
+    const price = escapeHtml(fruit.price)
+    const windowText = escapeHtml(fruit.windowText)
+    const inStock = fruit.inStock
+    const btnHref = inStock
+      ? `https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20order%20${encodeURIComponent(fruit.titleLine1 + ' ' + fruit.titleLine2)}`
+      : '#'
+    const btnTarget = inStock ? 'target="_blank" rel="noopener noreferrer"' : ''
+    const btnClass = inStock
+      ? 'bg-[#F8FE03] text-[#131313] border-[#F8FE03] hover:brightness-105 active:scale-95'
+      : 'bg-[#FBF9D6] text-[#5B0000] border-[#FBF9D6] cursor-not-allowed opacity-95'
+    const btnText = inStock ? 'ORDER NOW' : 'OUT OF STOCK'
+    const threeDFile = escapeHtml(fruit.threeDFile || '')
+
+    return `
+      <div
+        class="card-wrapper absolute flex flex-col items-center will-change-transform transform-gpu"
+        data-fruit-id="${escapeHtml(fruit.id)}"
+        data-index="${idx}"
+        style="transform: translate3d(0px, 0px, 0px) scale(1); z-index: 30; opacity: 1; pointer-events: auto;"
+      >
+        <div
+          class="card-inner curve-straight relative flex flex-col select-none overflow-hidden w-[280px] sm:w-[320px] md:w-[360px] lg:w-[462px] h-[380px] sm:h-[420px] md:h-[460px] lg:h-[566px] border-[4px] lg:border-[6px] border-[#F8FE03] border-solid"
+          data-curve="straight"
+          style="max-width: calc(100vw - 32px); box-shadow: 0 0 44px 0 rgba(0, 0, 0, 0.01);"
+        >
+          <div
+            class="card-blur-overlay absolute -inset-[6px] rounded-[inherit] -z-10 pointer-events-none transition-opacity duration-300 bg-white/[0.14] backdrop-blur-[14px] [-webkit-backdrop-blur:14px]"
+            style="opacity: 0; display: none;"
+          ></div>
+
+          <div
+            class="card-3d-container absolute inset-0 z-0 pointer-events-none flex items-center justify-center overflow-hidden"
+            data-3d-file="${threeDFile}"
+          ></div>
+
+          <div
+            class="absolute left-[8px] sm:left-[11px] top-[7px] sm:top-[10px] z-10 uppercase text-left font-display font-semibold text-[32px] sm:text-[40px] md:text-[44px] lg:text-[56px] leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]"
+            style="color: #F8FE03;"
+          >
+            <p class="m-0 leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]">${title1}</p>
+            <p class="m-0 leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px]">${title2}</p>
+          </div>
+
+          <div
+            class="card-price-badge absolute z-10 uppercase flex items-baseline justify-center tracking-tight select-none font-display font-semibold -top-[4px] lg:-top-[5.5px] -right-[4px] lg:-right-[6px] pt-[8px] sm:pt-[10px] lg:pt-[12px] pb-[9px] sm:pb-[11px] lg:pb-[13px] pl-[10px] sm:pl-[12px] lg:pl-[15px] pr-[14px] sm:pr-[18px] lg:pr-[24px] rounded-bl-[18px] sm:rounded-bl-[22px] lg:rounded-bl-[28px] rounded-br-[3px] lg:rounded-br-[4px] rounded-tr-none bg-[#F8FE03] text-[#131313] text-center text-[34px] sm:text-[40px] md:text-[44px] lg:text-[56px] leading-[30px] sm:leading-[38px] md:leading-[42px] lg:leading-[52px] gap-[3px] lg:gap-[4px]"
+          >
+            <svg
+              width="25"
+              height="40"
+              viewBox="0 0 25 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              class="shrink-0 self-center w-[16px] sm:w-[20px] lg:w-[25px] h-[26px] sm:h-[32px] lg:h-[40px]"
+            >
+              <path
+                d="M10.304 39.984L0 22.064V18.536H2.576C4.144 18.536 5.50667 18.3493 6.664 17.976C7.82133 17.6027 8.75467 17.024 9.464 16.24C10.2106 15.4187 10.696 14.4107 10.92 13.216H0V9.296H10.864C10.64 8.13867 10.2106 7.168 9.576 6.38401C8.94133 5.6 8.10133 5.00267 7.056 4.59201C6.01067 4.144 4.74133 3.92 3.248 3.92H0V0H24.472V3.92H15.008C15.7546 4.62934 16.352 5.43201 16.8 6.32801C17.2853 7.18667 17.6026 8.17601 17.752 9.296H24.472V13.216H17.864C17.528 15.9413 16.464 18.088 14.672 19.656C12.9173 21.1867 10.6213 22.1947 7.784 22.68L18.648 39.984H10.304Z"
+                fill="#131313"
+              />
+            </svg>
+            <span>${price}</span>
+          </div>
+
+          <div
+            class="card-btn-wrap absolute left-0 w-full flex justify-center px-[10px] z-10 bottom-[18px] sm:bottom-[26px] lg:bottom-[37px] will-change-transform transform-gpu transition-transform duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style="transform: translate3d(0, 0, 0);"
+          >
+            <a
+              href="${btnHref}"
+              ${btnTarget}
+              class="card-order-btn product-btn-morph relative inline-flex items-center justify-center font-display font-semibold text-[26px] sm:text-[30px] lg:text-[32px] leading-[34px] uppercase px-5 py-1.5 border transition-[background-color,filter] duration-300 will-change-[border-radius] ${btnClass}"
+            >
+              <span
+                class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+                style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+              >
+                <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                  ${btnText}
+                </span>
+                <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+                  ${btnText}
+                </span>
+              </span>
+            </a>
+          </div>
+
+          <div
+            class="card-marquee-wrap inline-flex justify-center items-center absolute z-20 transition-opacity duration-300 pointer-events-none select-none -bottom-[4px] lg:-bottom-[6.5px] -left-[4px] lg:-left-[6px] -right-[4px] lg:-right-[6px] h-[28px] sm:h-[32px] lg:h-[34px] py-[6px] lg:py-[8px] px-[8px] bg-[#F8FE03] text-[#131313] overflow-hidden"
+            style="opacity: 0; display: none;"
+          >
+            <div class="w-full relative overflow-hidden flex items-center justify-start">
+              <div class="card-marquee-scroll flex whitespace-nowrap">
+                <span class="pr-[16px] sm:pr-[24px] font-mono text-[7px] sm:text-[9px] md:text-[11px] font-bold tracking-[2px] sm:tracking-[3px] lg:tracking-[4.29px] uppercase whitespace-nowrap shrink-0 inline-block">
+                  ${windowText}
+                </span>
+                <span class="pr-[16px] sm:pr-[24px] font-mono text-[7px] sm:text-[9px] md:text-[11px] font-bold tracking-[2px] sm:tracking-[3px] lg:tracking-[4.29px] uppercase whitespace-nowrap shrink-0 inline-block">
+                  ${windowText}
+                </span>
+                <span class="pr-[16px] sm:pr-[24px] font-mono text-[7px] sm:text-[9px] md:text-[11px] font-bold tracking-[2px] sm:tracking-[3px] lg:tracking-[4.29px] uppercase whitespace-nowrap shrink-0 inline-block">
+                  ${windowText}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `
+  }
+
+  interface Fruit3DConfig {
+    color: string
+    rotX: number
+    rotY: number
+    rotZ: number
+    centerY: number
+    texture?: string
+    roughness?: number
+    metalness?: number
+    envMapIntensity?: number
+  }
+
+  const FRUIT_CONFIGS: Record<string, Fruit3DConfig> = {
+    'avocado_tanzania.glb': { color: '#696969', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.04, roughness: 0.48, metalness: 0.44 },
+    'blue_grapes.glb': { color: '#7C7FAB', rotX: 25.6, rotY: 0, rotZ: 0, centerY: 0.14, texture: '/models/fruits/blue_grapes_texture.webp', roughness: 0.55, metalness: 0.61, envMapIntensity: 2.0 },
+    'cantaloupe_melon_o.glb': { color: '#FBFF1F', rotX: 0, rotY: 0, rotZ: 248.8, centerY: 0.14, roughness: 0.70, metalness: 0.10 },
+    'egyptian_orange.glb': { color: '#FFEA00', rotX: 95.4, rotY: 278.5, rotZ: 0, centerY: 0.14, roughness: 0.70, metalness: 0.10 },
+    'gala_apple.glb': { color: '#FFD1C2', rotX: 95.4, rotY: 278.5, rotZ: 0, centerY: 0.14, roughness: 0.65, metalness: 0.10 },
+    'galia_melon.glb': { color: '#F1FF33', rotX: 0, rotY: 0, rotZ: 269.3, centerY: 0.14, roughness: 0.70, metalness: 0.10 },
+    'honey_dew_melon.glb': { color: '#AA8F09', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, texture: '/models/fruits/honeydew_melon_texture.webp', roughness: 0.47, metalness: 0.33 },
+    'korean_beauty_pear.glb': { color: '#FFEA00', rotX: 259.3, rotY: 127.3, rotZ: 95.2, centerY: 0.14, roughness: 0.71, metalness: 0.26 },
+    'mandrin.glb': { color: '#FFC96B', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.38, metalness: 0.00 },
+    'mini_mandarin.glb': { color: '#E4FFB3', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.48, metalness: 0.44 },
+    'nz_apple.glb': { color: '#FFF5F5', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.65, metalness: 0.10 },
+    'piel_de_sapo_santa_claus_meloon.glb': { color: '#B8C144', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.70, metalness: 0.10 },
+    'plum_south_africa.glb': { color: '#A8A8A8', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.65, metalness: 0.40 },
+    'queen_apple.glb': { color: '#FF8F8F', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.65, metalness: 0.05 },
+    'washington_apple.glb': { color: '#D76565', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.65, metalness: 0.10 },
+    'yellow_pithaya_yellow_dragonfruit.glb': { color: '#FBFF1F', rotX: 0, rotY: 0, rotZ: 248.8, centerY: 0.14, roughness: 0.70, metalness: 0.10 },
+    'cherry.glb': { color: '#FFFFFF', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.32, metalness: 0.05, envMapIntensity: 2.5 },
+    'dapoli_mango.glb': { color: '#FFFFFF', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.44, metalness: 0.10 },
+    'donut_peach.glb': { color: '#FF8F8F', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.55, metalness: 0.40 },
+    'dutch_strawberry.glb': { color: '#FFE0E0', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.55, metalness: 0.40 },
+    'fig_n.glb': { color: '#FFF5F5', rotX: 25.6, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.65, metalness: 0.10 },
+    'grape_white.glb': { color: '#9AFF47', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, texture: '/models/fruits/white_grape_texture.webp', roughness: 0.65, metalness: 0.45, envMapIntensity: 2.2 },
+    'jumbo_blue_berry.glb': { color: '#97A3AF', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.65, metalness: 0.31 },
+    'lychee_3d_h.glb': { color: '#FFFFFF', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.60, metalness: 0.00 },
+    'mangosteen.glb': { color: '#FFFFFF', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.58, metalness: 0.30 },
+    'red_grapes.glb': { color: '#B09299', rotX: 25.6, rotY: 0, rotZ: 0, centerY: 0.14, texture: '/models/fruits/red_grapes_texture.webp', roughness: 0.65, metalness: 0.45, envMapIntensity: 2.0 },
+    'seedless_mandarine.glb': { color: '#FFE9AD', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, roughness: 0.48, metalness: 0.00 },
+    'yellow_plum.glb': { color: '#FFEA00', rotX: 0, rotY: 0, rotZ: 0, centerY: 0.14, texture: '/models/fruits/yellow_plum_texture.webp', roughness: 0.10, metalness: 0.12, envMapIntensity: 5.0 },
+  }
+
+  class Shared3DViewer {
+    scene: THREE.Scene
+    camera: THREE.PerspectiveCamera
+    renderer: THREE.WebGLRenderer
+    roomEnv: RoomEnvironment
+    envTexture: THREE.Texture
+    pmremGenerator: THREE.PMREMGenerator
+    fruitHolder = new THREE.Group()
+    modelCache = new Map<string, THREE.Group>()
+    currentGroup: THREE.Group | null = null
+    activeFile: string = ''
+    currentCenterY: number = -0.06
+    time: number = 0
+    animId: number | null = null
+    currentContainer: HTMLElement | null = null
+    loader = new GLTFLoader()
+
+    constructor() {
+      this.scene = new THREE.Scene()
+      this.camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100)
+      this.camera.position.set(0, 0, 5.0)
+
+      this.renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true, powerPreference: 'high-performance' })
+      this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2))
+      this.renderer.toneMapping = THREE.ACESFilmicToneMapping
+      this.renderer.toneMappingExposure = 1.76
+
+      this.pmremGenerator = new THREE.PMREMGenerator(this.renderer)
+      this.pmremGenerator.compileEquirectangularShader()
+
+      // Dedicated single fruit holder to guarantee zero model overlap/lingering
+      this.scene.add(this.fruitHolder)
+
+      // Authentic PolyHaven Broadway Hall studio HDRI from HTML source
+      new RGBELoader().load('/3d-fruits/page2/photo_studio_broadway_hall_1k.hdr', (texture) => {
+        const envMap = this.pmremGenerator.fromEquirectangular(texture).texture
+        this.scene.environment = envMap
+        texture.dispose()
+      })
+
+      // Studio key, fill & ambient lighting matching HTML source
+      const mainLight = new THREE.DirectionalLight(0xffffff, 1.3)
+      mainLight.position.set(5, 8, 5)
+      this.scene.add(mainLight)
+
+      const fillLight = new THREE.DirectionalLight(0xffffff, 0.6)
+      fillLight.position.set(-5, -2, -5)
+      this.scene.add(fillLight)
+
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+      this.scene.add(ambientLight)
+
+      this.startLoop()
+    }
+
+    startLoop() {
+      const loop = () => {
+        this.time += 0.016
+        this.fruitHolder.position.y = this.currentCenterY + Math.sin(this.time * 2) * 0.04
+        this.fruitHolder.rotation.y += 0.008
+        this.renderer.render(this.scene, this.camera)
+        this.animId = requestAnimationFrame(loop)
+      }
+      this.animId = requestAnimationFrame(loop)
+    }
+
+    reset() {
+      this.currentContainer = null
+      this.activeFile = ''
+      this.currentGroup = null
+      this.fruitHolder.clear()
+      if (this.renderer.domElement.parentNode) {
+        this.renderer.domElement.parentNode.removeChild(this.renderer.domElement)
+      }
+    }
+
+    attachTo(container: HTMLElement, filename: string) {
+      if (!container || !filename) return
+
+      // Always ensure the canvas is mounted inside the active target container
+      if (this.renderer.domElement.parentNode !== container) {
+        container.appendChild(this.renderer.domElement)
+        const w = container.clientWidth || 360
+        const h = container.clientHeight || 440
+        this.camera.aspect = w / h
+        this.camera.updateProjectionMatrix()
+        this.renderer.setSize(w, h)
+      }
+      this.currentContainer = container
+
+      if (this.activeFile === filename && this.currentGroup) return
+      this.activeFile = filename
+
+      const cleanFilename = filename.startsWith('/') ? filename.split('/').pop() || filename : filename
+      const cfg = FRUIT_CONFIGS[cleanFilename] || { color: '#FFFFFF', rotX: 0, rotY: 0, rotZ: 0, centerY: -0.06 }
+      this.currentCenterY = cfg.centerY
+
+      // Clean holder so no previous fruit mesh ever lingers
+      this.fruitHolder.clear()
+      this.fruitHolder.rotation.y = 0
+      this.currentGroup = null
+
+      if (this.modelCache.has(cleanFilename)) {
+        this.currentGroup = this.modelCache.get(cleanFilename)!
+        this.currentGroup.rotation.y = 0
+        this.currentGroup.traverse((child: any) => {
+          if (child.isMesh && child.material) {
+            const mat = child.material
+            mat.roughness = cfg.roughness !== undefined ? cfg.roughness : 0.44
+            mat.metalness = cfg.metalness !== undefined ? cfg.metalness : 0.05
+            mat.envMapIntensity = cfg.envMapIntensity !== undefined ? cfg.envMapIntensity : 1.0
+            mat.needsUpdate = true
+          }
+        })
+        this.fruitHolder.add(this.currentGroup)
+        return
+      }
+
+      const filePath = filename.startsWith('/') ? filename : `/models/fruits/${cleanFilename}`
+      this.loader.load(
+        filePath,
+        (gltf) => {
+          const model = gltf.scene
+
+          // Apply authentic color tint, optional texture & PBR properties from HTML source
+          let customMap: THREE.Texture | null = null
+          if (cfg.texture) {
+            customMap = new THREE.TextureLoader().load(cfg.texture)
+            customMap.colorSpace = THREE.SRGBColorSpace
+            customMap.flipY = false
+            customMap.wrapS = THREE.RepeatWrapping
+            customMap.wrapT = THREE.RepeatWrapping
+          }
+
+          model.traverse((child: any) => {
+            if (child.isMesh && child.material) {
+              let mat = child.material
+              if (!mat.isMeshStandardMaterial) {
+                const oldMat = mat
+                mat = new THREE.MeshStandardMaterial({
+                  map: oldMat.map || null,
+                  color: oldMat.color ? oldMat.color.clone() : new THREE.Color(0xffffff),
+                  transparent: oldMat.transparent || false,
+                  opacity: oldMat.opacity !== undefined ? oldMat.opacity : 1.0,
+                })
+                child.material = mat
+              }
+              if (customMap) {
+                mat.map = customMap
+                mat.aoMap = null
+              }
+              if (cfg.color && cfg.color !== '#FFFFFF') {
+                mat.color.set(cfg.color)
+              }
+              mat.roughness = cfg.roughness !== undefined ? cfg.roughness : 0.44
+              mat.metalness = cfg.metalness !== undefined ? cfg.metalness : 0.05
+              mat.envMapIntensity = cfg.envMapIntensity !== undefined ? cfg.envMapIntensity : 1.0
+              mat.needsUpdate = true
+            }
+          })
+
+          // 1. Set source Euler orientation
+          const radX = (cfg.rotX * Math.PI) / 180
+          const radY = (cfg.rotY * Math.PI) / 180
+          const radZ = (cfg.rotZ * Math.PI) / 180
+          model.rotation.set(radX, radY, radZ)
+          model.updateMatrixWorld(true)
+
+          // 2. Measure upright bounding box
+          const box = new THREE.Box3().setFromObject(model)
+          const center = box.getCenter(new THREE.Vector3())
+          const size = box.getSize(new THREE.Vector3())
+          const maxDim = Math.max(size.x, size.y, size.z) || 1
+
+          // 3. Normalized prominent scale
+          const targetScale = 1.95 / maxDim
+          model.scale.setScalar(targetScale)
+          model.position.sub(center.clone().multiplyScalar(targetScale))
+
+          // 4. Wrap inside pivotGroup for upright continuous spin
+          const pivotGroup = new THREE.Group()
+          pivotGroup.position.set(0, 0, 0)
+          pivotGroup.add(model)
+
+          this.modelCache.set(cleanFilename, pivotGroup)
+
+          // Only mount if this model is still the active card's target
+          if (this.activeFile === filename) {
+            this.fruitHolder.clear()
+            this.currentGroup = pivotGroup
+            this.currentGroup.rotation.y = 0
+            this.fruitHolder.add(this.currentGroup)
+          }
+        },
+        undefined,
+        (err) => {
+          console.warn('Failed to load fruit model:', filePath, err)
+        }
+      )
+    }
+
+    resize() {
+      if (!this.currentContainer) return
+      const w = this.currentContainer.clientWidth || 360
+      const h = this.currentContainer.clientHeight || 440
+      this.camera.aspect = w / h
+      this.camera.updateProjectionMatrix()
+      this.renderer.setSize(w, h)
+    }
+
+    destroy() {
+      if (this.animId) cancelAnimationFrame(this.animId)
+      this.renderer.dispose()
+      this.roomEnv.dispose()
+      this.envTexture.dispose()
+      this.pmremGenerator.dispose()
+    }
+  }
+
+  let sharedViewer: Shared3DViewer | null = null
+  let cleanupCarousel: (() => void) | null = null
+
+  function initCarousel() {
+    if (cleanupCarousel) {
+      cleanupCarousel()
+      cleanupCarousel = null
+    }
+
+    const stage = document.getElementById('cards-stage')
+    if (!stage) return
+
+    const cardElements = Array.from(stage.querySelectorAll('.card-wrapper')) as HTMLElement[]
+    const numCards = cardElements.length
+    if (numCards === 0) return
+
+    if (!sharedViewer) {
+      sharedViewer = new Shared3DViewer()
+    }
+
+    const cards = cardElements.map((el) => {
+      return {
+        el,
+        blurOverlay: el.querySelector('.card-blur-overlay') as HTMLElement | null,
+        btnWrap: el.querySelector('.card-btn-wrap') as HTMLElement | null,
+        marqueeWrap: el.querySelector('.card-marquee-wrap') as HTMLElement | null,
+        container3D: el.querySelector('.card-3d-container') as HTMLElement | null,
+        wasActive: false,
+        currentZ: -1,
+        currentOpacity: -1,
+      }
+    })
+
+    let targetPos = 0
+    let currentPos = 0
+    let isDragging = false
+    let dragStartX = 0
+    let dragStartPos = 0
+    let winWidth = window.innerWidth
+    let isSectionVisible = true
+    let isLooping = false
+    let rafId: number | null = null
+
+    let lastClientX = 0
+    let lastTime = 0
+    let velocityX = 0
+
+    const animObj = { pos: 0 }
+    let activeTween: gsap.core.Tween | null = null
+
+    const onResize = () => {
+      winWidth = window.innerWidth
+      if (sharedViewer) sharedViewer.resize()
+      updateCards(currentPos)
+    }
+    window.addEventListener('resize', onResize, { passive: true })
+
+    const updateCards = (L: number) => {
+      const isSm = winWidth < 640
+      const isMd = winWidth >= 640 && winWidth < 768
+      const isLg = winWidth >= 768 && winWidth < 1024
+
+      const btnActiveY = isSm ? -24 : isMd ? -28 : -32
+
+      let closestIndex = -1
+      let minAbsR = 999
+
+      for (let l = 0; l < numCards; l++) {
+        let r = ((l - L) % numCards + numCards) % numCards
+        if (r > numCards / 2) {
+          r -= numCards
+        }
+
+        const sign = Math.sign(r)
+        const absR = Math.abs(r)
+
+        if (absR < minAbsR) {
+          minAbsR = absR
+          closestIndex = l
+        }
+
+        const posX = sign * (
+          Math.min(1, absR) * (isSm ? 260 : isMd ? 300 : isLg ? 360 : 440) +
+          Math.max(0, absR - 1) * (isSm ? 230 : isMd ? 260 : isLg ? 310 : 375)
+        )
+        const scale = Math.max(
+          0.65,
+          1 - (1 - 0.78788) * Math.min(1, absR) - 0.12 * Math.max(0, absR - 1)
+        )
+        const zIndex = Math.round(30 - 5 * absR)
+        const opacity = absR > 2.2 ? Math.max(0, 1 - (absR - 2.2) * 2) : 1
+        const isActive = absR < 0.45
+
+        const card = cards[l]
+        card.el.style.transform = `translate3d(${posX}px, 0px, 0px) scale(${scale})`
+
+        if (card.currentZ !== zIndex) {
+          card.currentZ = zIndex
+          card.el.style.zIndex = `${zIndex}`
+        }
+
+        const roundedOp = Math.round(opacity * 100) / 100
+        if (card.currentOpacity !== roundedOp) {
+          card.currentOpacity = roundedOp
+          card.el.style.opacity = `${roundedOp}`
+          card.el.style.pointerEvents = roundedOp < 0.2 ? 'none' : 'auto'
+        }
+
+        if (card.wasActive !== isActive) {
+          card.wasActive = isActive
+
+          if (card.blurOverlay) {
+            card.blurOverlay.style.display = isActive ? 'block' : 'none'
+            card.blurOverlay.style.opacity = isActive ? '1' : '0'
+          }
+
+          if (card.btnWrap) {
+            card.btnWrap.style.transform = isActive
+              ? `translate3d(0px, ${btnActiveY}px, 0px)`
+              : 'translate3d(0px, 0px, 0px)'
+          }
+
+          if (card.marqueeWrap) {
+            card.marqueeWrap.style.display = isActive ? 'inline-flex' : 'none'
+            card.marqueeWrap.style.opacity = isActive ? '1' : '0'
+          }
+        }
+      }
+
+      // Attach single Three.js viewer to active middle card (1 WebGL context total, 0 mobile crashes!)
+      if (closestIndex >= 0 && minAbsR < 0.75 && sharedViewer) {
+        const activeCard = cards[closestIndex]
+        if (activeCard && activeCard.container3D) {
+          const file = activeCard.container3D.getAttribute('data-3d-file')
+          if (file) {
+            sharedViewer.attachTo(activeCard.container3D, file)
+          }
+        }
+      }
+    }
+
+    const startLoop = () => {
+      if (!isLooping && isSectionVisible) {
+        isLooping = true
+        rafId = requestAnimationFrame(loop)
+      }
+    }
+
+    const loop = () => {
+      if (!isSectionVisible || !isDragging) {
+        isLooping = false
+        rafId = null
+        return
+      }
+
+      currentPos += (targetPos - currentPos) * 0.45
+      updateCards(currentPos)
+
+      rafId = requestAnimationFrame(loop)
+    }
+
+    const stageObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          isSectionVisible = entry.isIntersecting
+          if (isSectionVisible) {
+            updateCards(currentPos)
+          } else {
+            if (activeTween) {
+              activeTween.kill()
+              activeTween = null
+            }
+            if (rafId) {
+              cancelAnimationFrame(rafId)
+              rafId = null
+            }
+            isLooping = false
+          }
+        })
+      },
+      { rootMargin: '100px 0px' }
+    )
+    stageObserver.observe(stage)
+
+    const onPointerDown = (e: PointerEvent) => {
+      const target = e.target as HTMLElement
+      if (target.closest('.card-order-btn')) return
+
+      if (activeTween) {
+        activeTween.kill()
+        activeTween = null
+      }
+
+      isDragging = true
+      stage.style.cursor = 'grabbing'
+      dragStartX = e.clientX || 0
+      dragStartPos = currentPos
+      targetPos = currentPos
+      lastClientX = dragStartX
+      lastTime = performance.now()
+      velocityX = 0
+
+      startLoop()
+
+      window.addEventListener('pointermove', onPointerMove, { passive: true })
+      window.addEventListener('pointerup', onPointerUp)
+      window.addEventListener('pointercancel', onPointerUp)
+    }
+
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDragging) return
+      const clientX = e.clientX || 0
+      const now = performance.now()
+      const dt = now - lastTime
+
+      if (dt > 8) {
+        const delta = clientX - lastClientX
+        const dragFactor = winWidth < 768 ? 260 : 380
+        velocityX = -(delta / dragFactor) / dt
+        lastClientX = clientX
+        lastTime = now
+      }
+
+      const totalDeltaX = clientX - dragStartX
+      const dragFactor = winWidth < 768 ? 260 : 380
+      targetPos = dragStartPos - totalDeltaX / dragFactor
+      startLoop()
+    }
+
+    const onPointerUp = () => {
+      if (!isDragging) return
+      isDragging = false
+      stage.style.cursor = 'grab'
+
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerup', onPointerUp)
+      window.removeEventListener('pointercancel', onPointerUp)
+
+      if (rafId) {
+        cancelAnimationFrame(rafId)
+        rafId = null
+      }
+      isLooping = false
+
+      let snapTarget = Math.round(targetPos)
+      const speed = Math.abs(velocityX)
+
+      if (speed > 0.0008) {
+        const flickDir = Math.sign(velocityX)
+        snapTarget = Math.round(targetPos + flickDir * 0.45)
+      }
+
+      animObj.pos = currentPos
+      if (activeTween) activeTween.kill()
+
+      const dist = Math.abs(snapTarget - currentPos)
+      const duration = Math.min(0.72, Math.max(0.42, 0.38 + dist * 0.2))
+
+      activeTween = gsap.to(animObj, {
+        pos: snapTarget,
+        duration: duration,
+        ease: 'power3.out',
+        onUpdate: () => {
+          currentPos = animObj.pos
+          targetPos = animObj.pos
+          updateCards(currentPos)
+        },
+        onComplete: () => {
+          currentPos = snapTarget
+          targetPos = snapTarget
+          updateCards(currentPos)
+          activeTween = null
+        },
+      })
+    }
+
+    stage.addEventListener('pointerdown', onPointerDown)
+
+    const cardClickHandlers: { el: HTMLElement; fn: (e: MouseEvent) => void }[] = []
+    cards.forEach((card, idx) => {
+      const clickHandler = (e: MouseEvent) => {
+        const target = e.target as HTMLElement
+        if (target.closest('.card-order-btn')) return
+
+        let r = ((idx - currentPos) % numCards + numCards) % numCards
+        if (r > numCards / 2) r -= numCards
+
+        if (Math.abs(r) < 0.2) return
+        e.preventDefault()
+
+        const snapTarget = Math.round(currentPos + r)
+
+        if (rafId) {
+          cancelAnimationFrame(rafId)
+          rafId = null
+        }
+        isLooping = false
+
+        animObj.pos = currentPos
+        if (activeTween) activeTween.kill()
+
+        activeTween = gsap.to(animObj, {
+          pos: snapTarget,
+          duration: 0.65,
+          ease: 'power3.out',
+          onUpdate: () => {
+            currentPos = animObj.pos
+            targetPos = animObj.pos
+            updateCards(currentPos)
+          },
+          onComplete: () => {
+            currentPos = snapTarget
+            targetPos = snapTarget
+            updateCards(currentPos)
+            activeTween = null
+          },
+        })
+      }
+      card.el.addEventListener('click', clickHandler)
+      cardClickHandlers.push({ el: card.el, fn: clickHandler })
+    })
+
+    // Initial update
+    updateCards(0)
+
+    cleanupCarousel = () => {
+      window.removeEventListener('resize', onResize)
+      stage.removeEventListener('pointerdown', onPointerDown)
+      window.removeEventListener('pointermove', onPointerMove)
+      window.removeEventListener('pointerup', onPointerUp)
+      window.removeEventListener('pointercancel', onPointerUp)
+      cardClickHandlers.forEach(({ el, fn }) => el.removeEventListener('click', fn))
+      stageObserver.disconnect()
+      if (activeTween) activeTween.kill()
+      if (rafId) cancelAnimationFrame(rafId)
+    }
+  }
+
+  function initMorphButtons() {
+    document.querySelectorAll<HTMLElement>('.product-btn-morph').forEach((btn) => {
+      const textTop = btn.querySelector<HTMLElement>('.roll-text-top')
+      const textBottom = btn.querySelector<HTMLElement>('.roll-text-bottom')
+
+      gsap.set(btn, {
+        borderTopLeftRadius: '25px',
+        borderBottomLeftRadius: '25px',
+        borderTopRightRadius: '25px',
+        borderBottomRightRadius: '25px',
+      })
+
+      if (textTop && textBottom) {
+        gsap.set(textTop, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(textBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+      }
+
+      btn.addEventListener('mouseenter', () => {
+        gsap.to(btn, {
+          borderTopLeftRadius: '12px',
+          borderBottomLeftRadius: '12px',
+          borderTopRightRadius: '12px',
+          borderBottomRightRadius: '12px',
+          duration: 0.45,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: -100, filter: 'blur(3.5px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          borderTopLeftRadius: '25px',
+          borderBottomLeftRadius: '25px',
+          borderTopRightRadius: '25px',
+          borderBottomRightRadius: '25px',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: 0, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 100, filter: 'blur(3.5px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+    })
+  }
+
+  async function loadFruitsFromSheet() {
+    try {
+      const res = await fetch(`${SHEET_CSV_URL}&t=${Date.now()}`)
+      if (!res.ok) return
+      const text = await res.text()
+      if (!text.toLowerCase().includes('visible_on_site')) return
+
+      const rows = parseCSV(text)
+      const visibleRows = rows.filter((r) => {
+        const val = String(r.visible_on_site || '').trim().toLowerCase()
+        return val === 'true' || val === '1' || val === 'yes'
+      })
+
+      if (visibleRows.length === 0) return
+
+      const newFruits: FruitCard[] = visibleRows.map((r) => {
+        const inStockVal = String(r.in_stock || '').trim().toLowerCase()
+        const inStock = inStockVal === 'true' || inStockVal === '1' || inStockVal === 'yes'
+        return {
+          id: r.id || `${r.title_line_1}-${r.title_line_2}`.toLowerCase().replace(/\s+/g, '-'),
+          titleLine1: r.title_line_1 || '',
+          titleLine2: r.title_line_2 || '',
+          price: r.price || '',
+          inStock,
+          windowText: r.window_text || '',
+          threeDFile: r['3d_file'] || '',
+        }
+      })
+
+      const stage = document.getElementById('cards-stage')
+      if (!stage || newFruits.length === 0) return
+
+      const existingCards = Array.from(stage.querySelectorAll<HTMLElement>('.card-wrapper'))
+      const existingIds = existingCards.map((c) => c.getAttribute('data-fruit-id') || '')
+      const newIds = newFruits.map((f) => f.id)
+      const isSameStructure = existingIds.length === newIds.length && existingIds.every((id, idx) => id === newIds[idx])
+
+      if (isSameStructure) {
+        // In-place updates: Keeps 3D canvas, GSAP state, and current carousel view 100% intact!
+        newFruits.forEach((fruit, idx) => {
+          const card = existingCards[idx]
+          if (!card) return
+
+          // Update titles
+          const titleP1 = card.querySelector<HTMLParagraphElement>('div.font-display > p:first-child')
+          const titleP2 = card.querySelector<HTMLParagraphElement>('div.font-display > p:last-child')
+          if (titleP1 && titleP1.textContent !== fruit.titleLine1) titleP1.textContent = fruit.titleLine1
+          if (titleP2 && titleP2.textContent !== fruit.titleLine2) titleP2.textContent = fruit.titleLine2
+
+          // Update Price badge
+          const priceSpan = card.querySelector<HTMLSpanElement>('.card-price-badge > span')
+          if (priceSpan && priceSpan.textContent !== fruit.price) priceSpan.textContent = fruit.price
+
+          // Update Marquee window text
+          const marqueeSpans = card.querySelectorAll<HTMLSpanElement>('.card-marquee-scroll span')
+          marqueeSpans.forEach((s) => {
+            if (s.textContent !== fruit.windowText) s.textContent = fruit.windowText
+          })
+
+          // Update CTA button & In-Stock status
+          const btn = card.querySelector<HTMLAnchorElement>('.card-order-btn')
+          if (btn) {
+            const btnText = fruit.inStock ? 'ORDER NOW' : 'OUT OF STOCK'
+            const btnHref = fruit.inStock
+              ? `https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20order%20${encodeURIComponent(fruit.titleLine1 + ' ' + fruit.titleLine2)}`
+              : '#'
+            if (btn.getAttribute('href') !== btnHref) btn.setAttribute('href', btnHref)
+            if (fruit.inStock) {
+              btn.setAttribute('target', '_blank')
+              btn.setAttribute('rel', 'noopener noreferrer')
+              btn.classList.remove('bg-[#FBF9D6]', 'text-[#5B0000]', 'border-[#FBF9D6]', 'cursor-not-allowed', 'opacity-95')
+              btn.classList.add('bg-[#F8FE03]', 'text-[#131313]', 'border-[#F8FE03]', 'hover:brightness-105', 'active:scale-95')
+            } else {
+              btn.removeAttribute('target')
+              btn.removeAttribute('rel')
+              btn.classList.remove('bg-[#F8FE03]', 'text-[#131313]', 'border-[#F8FE03]', 'hover:brightness-105', 'active:scale-95')
+              btn.classList.add('bg-[#FBF9D6]', 'text-[#5B0000]', 'border-[#FBF9D6]', 'cursor-not-allowed', 'opacity-95')
+            }
+
+            const rollTop = btn.querySelector<HTMLSpanElement>('.roll-text-top')
+            const rollBottom = btn.querySelector<HTMLSpanElement>('.roll-text-bottom')
+            if (rollTop && rollTop.textContent?.trim() !== btnText) rollTop.textContent = btnText
+            if (rollBottom && rollBottom.textContent?.trim() !== btnText) rollBottom.textContent = btnText
+          }
+
+          // Update 3D file attribute if modified in Google Sheet
+          const container3D = card.querySelector<HTMLElement>('.card-3d-container')
+          if (container3D && container3D.getAttribute('data-3d-file') !== fruit.threeDFile) {
+            container3D.setAttribute('data-3d-file', fruit.threeDFile)
+            if (sharedViewer && sharedViewer.currentContainer === container3D) {
+              sharedViewer.attachTo(container3D, fruit.threeDFile)
+            }
+          }
+        })
+      } else {
+        // Clean rebuild if list of fruits was added/removed
+        if (sharedViewer) sharedViewer.reset()
+        stage.innerHTML = newFruits.map((f, i) => renderCardHTML(f, i)).join('')
+        initCarousel()
+        initMorphButtons()
+      }
+    } catch (err) {
+      console.warn('Google Sheet CMS fetch bypassed, using default cards.', err)
+    }
+  }
+
+  // Expose global manual trigger for testing / immediate sync
+  ;(window as any).__refreshFruitsFromSheet = loadFruitsFromSheet
+
+  function start() {
+    initCarousel()
+    initMorphButtons()
+    loadFruitsFromSheet()
+    // Background polling every 25 seconds for live spreadsheet updates
+    setInterval(loadFruitsFromSheet, 25000)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start)
+  } else {
+    start()
+  }
+</script>

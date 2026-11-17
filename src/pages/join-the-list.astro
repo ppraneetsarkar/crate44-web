@@ -1,0 +1,593 @@
+---
+// src/pages/join-the-list.astro
+// Figma Node 1960:2600 (Desktop 1440/1920 & Mobile 390)
+// Figma Node 1965:2842 (4K / Breakpoints after 2200px ONLY)
+// Features:
+// - Signature Crate 44 center-out luxury character wave animations across all headlines
+// - Robust per-character gradient clipping preventing WebKit layer decoupling
+// - 1440px and 1920px remain EXACTLY as designed in Node 1960:2600 (200px/162px, 18px body, 48px/16px benefits, exact card dimensions)
+// - Scaling up to 296px/240px, 40px body, 56px/24px benefits activates STRICTLY after 2200px (`min-[2200px]:`)
+// - Margin is ALWAYS 16px (`px-[16px]`) across EVERY breakpoint
+// - Zero drop shadows (completely flat)
+
+import Layout from '../layouts/Layout.astro'
+import Footer from '../components/Footer.astro'
+
+function toChars(text: string) {
+  return text.split('').map((c) => (c === ' ' ? '\u00A0' : c))
+}
+
+const whatMembersReceive = [
+  {
+    titleLine1: 'The',
+    titleLine2: 'Tuesday Edit',
+    fullTitle: 'The Tuesday Edit',
+    desc: 'first look, first claim, every week.',
+  },
+  {
+    titleLine1: 'The',
+    titleLine2: 'Windows',
+    fullTitle: 'The Windows',
+    desc: 'first access when a season opens. They close in days.',
+  },
+  {
+    titleLine1: 'The',
+    titleLine2: 'Promise',
+    fullTitle: 'The Promise',
+    desc: 'A refractometer reading on every lot and random pieces. The floor for a mango is 14°Bx. Below it, rejected — no matter how it looks.',
+  },
+  {
+    titleLine1: 'A Human',
+    titleLine2: '',
+    fullTitle: 'A Human',
+    desc: 'A refractometer reading on every lot and random pieces. The floor for a mango is 14°Bx. Below it, rejected — no matter how it looks.',
+  },
+]
+
+const stats = [
+  {
+    number: '8',
+    label: 'Months in service:',
+  },
+  {
+    number: '2,000+',
+    label: 'Households served',
+  },
+  {
+    number: '30+',
+    label: 'Farms under contract',
+  },
+  {
+    number: '17,000',
+    label: 'Pieces replaced without questions',
+  },
+]
+---
+
+<Layout title="Join the List | Crate 44">
+  <main class="w-full bg-[#131313] text-[#FBF9D6] selection:bg-[#F8FE03] selection:text-[#131313] overflow-x-clip">
+    
+    <!-- ============================================================== -->
+    <!-- SECTION 1: HERO (Wireframe - 4 / Node 1960:2602)               -->
+    <!-- ============================================================== -->
+    <section class="w-full bg-[#131313] pt-[104px] sm:pt-[120px] lg:pt-[104px] min-[2200px]:pt-[104px] pb-[64px] min-[2200px]:pb-[64px] px-[16px]">
+      <div class="w-full flex flex-col gap-[32px]">
+        
+        <!-- Big Hero Heading: "JOINING IS A CONVERSATION." with Luxury Reveal Animation -->
+        <div class="w-full">
+          <h1 class="m-0 p-0 uppercase font-display font-semibold select-none join-hero-heading">
+            <!-- Line 1: JOINING IS -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="join-hero-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px]"
+                data-line="JOINING IS"
+              >
+                {toChars('JOINING IS').map((char) => (
+                  <span
+                    class="join-hero-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #F8FE03 0%, #F6FB18 8.84%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <!-- Line 2: A CONVERSATION. -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="join-hero-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px]"
+                data-line="A CONVERSATION."
+              >
+                {toChars('A CONVERSATION.').map((char) => (
+                  <span
+                    class="join-hero-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #F8FE03 0%, #F6FB18 8.84%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </h1>
+        </div>
+
+        <!-- Slide 4:3 Card + Quote -->
+        <div class="w-full flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-[130px] pt-4 lg:pt-0">
+          <!-- Card: 696x522px (4:3), rounded-br-[64px] -->
+          <div
+            class="w-full lg:w-[696px] h-[280px] sm:h-[400px] lg:h-[522px] min-[2200px]:flex-1 min-[2200px]:w-auto min-[2200px]:aspect-[1024/768] min-[2200px]:h-auto bg-white rounded-none rounded-br-[64px] overflow-hidden shrink-0"
+            data-node-id="1960:2608"
+          >
+          </div>
+
+          <!-- Quote Text: Exactly 18px @ 1440/1920; 40px @ >2200px -->
+          <p
+            class="flex-1 font-body font-bold text-[16px] sm:text-[18px] lg:text-[18px] lg:leading-[20px] min-[2200px]:text-[40px] min-[2200px]:leading-[48px] text-[#E1DDEC] max-w-full lg:max-w-[582px] min-[2200px]:max-w-none m-0 tracking-normal min-[2200px]:tracking-[-0.4px]"
+            data-node-id="1960:2609"
+          >
+            “No app. No account. No password. The house runs on WhatsApp — the same thread every week, with people who remember what your family loves.”
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 2: WHAT MEMBERS RECEIVE & WHAT WE ASK                  -->
+    <!-- (Node 1960:2610; >2200px: Node 1965:2851)                      -->
+    <!-- Gradient Background: #F8FE03 -> #E1DDEC                        -->
+    <!-- ============================================================== -->
+    <section
+      id="section-members"
+      class="w-full text-[#131313] py-[40px] lg:py-[40px] px-[16px]"
+      style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%);"
+      data-node-id="1960:2610"
+    >
+      <div class="w-full flex flex-col gap-[80px]">
+        
+        <!-- PART A: WHAT MEMBERS RECEIVE (Node 1960:2611) -->
+        <div id="section-receive" class="w-full flex flex-col lg:flex-row items-start lg:items-end justify-between gap-10 lg:gap-[130px]" data-node-id="1960:2611">
+          <!-- Left Column: Heading + 4 List Items -->
+          <div class="w-full lg:w-[636px] min-[2200px]:flex-1 min-[2200px]:w-auto flex flex-col gap-[52px]">
+            <!-- Heading: Animated Center-Out Reveal -->
+            <h2 class="m-0 p-0 uppercase font-display font-semibold select-none text-[#131313]">
+              <!-- Line 1: WHAT -->
+              <div class="overflow-hidden pb-[4px]">
+                <div
+                  class="receive-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px] text-[#131313]"
+                  data-line="WHAT"
+                >
+                  {toChars('WHAT').map((char) => (
+                    <span class="receive-char inline-block will-change-transform text-[#131313]">{char}</span>
+                  ))}
+                </div>
+              </div>
+              <!-- Line 2: MEMBERS RECEIVE -->
+              <div class="overflow-hidden pb-[4px]">
+                <div
+                  class="receive-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px] text-[#131313]"
+                  data-line="MEMBERS RECEIVE"
+                >
+                  {toChars('MEMBERS RECEIVE').map((char) => (
+                    <span class="receive-char inline-block will-change-transform text-[#131313]">{char}</span>
+                  ))}
+                </div>
+              </div>
+            </h2>
+
+            <!-- Mobile View: Card right after heading per mobile Figma -->
+            <div
+              class="block lg:hidden w-full h-[320px] sm:h-[358px] bg-white rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[96px] my-4"
+              data-node-id="1960:2690"
+            >
+            </div>
+
+            <!-- List Items with Dividers -->
+            <div class="w-full flex flex-col gap-[36px]">
+              {whatMembersReceive.map((item, idx) => (
+                <div class="w-full flex flex-col gap-[36px]">
+                  <div class="w-full flex flex-col sm:flex-row sm:items-end justify-between gap-2 sm:gap-6 min-[2200px]:gap-[244px]">
+                    <!-- Item Title -->
+                    <div class="sm:w-[343px] shrink-0 font-body font-medium text-[32px] sm:text-[40px] lg:text-[48px] lg:leading-[48px] min-[2200px]:text-[56px] min-[2200px]:leading-[48px] tracking-[-0.48px] min-[2200px]:tracking-[-0.56px] text-[#131313]">
+                      <span class="hidden min-[2200px]:inline">{item.fullTitle}</span>
+                      <span class="inline min-[2200px]:hidden">
+                        {item.titleLine1 && <span>{item.titleLine1}</span>}
+                        {item.titleLine2 && <span class="block">{item.titleLine2}</span>}
+                      </span>
+                    </div>
+                    <!-- Item Description -->
+                    <p class="flex-1 font-body font-medium text-[15px] sm:text-[16px] lg:text-[16px] lg:leading-[20px] min-[2200px]:text-[24px] min-[2200px]:leading-[30px] tracking-[-0.16px] min-[2200px]:tracking-[-0.24px] text-[#464646] m-0">
+                      {item.desc}
+                    </p>
+                  </div>
+                  {idx < whatMembersReceive.length - 1 && (
+                    <div class="h-px bg-[#464646] w-full"></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <!-- Right Column (Desktop): Sticky Card -->
+          <div
+            class="hidden lg:block w-[642px] h-[587px] min-[2200px]:w-auto min-[2200px]:flex-1 min-[2200px]:h-[931px] bg-white rounded-tl-[16px] rounded-tr-[16px] rounded-bl-[16px] rounded-br-[96px] shrink-0 sticky top-[120px]"
+            data-node-id="1960:2636"
+          >
+          </div>
+        </div>
+
+        <!-- PART B: WHAT WE ASK OF MEMBERS (Node 1960:2637) -->
+        <div id="section-ask" class="w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-8 min-[2200px]:gap-[100px] py-[64px]" data-node-id="1960:2637">
+          <!-- Left Column (Desktop & Mobile): Sticky Card -->
+          <div
+            class="w-full lg:w-[693px] h-[320px] sm:h-[420px] lg:h-[640px] min-[2200px]:w-[1193px] min-[2200px]:h-[1076px] bg-white rounded-none shrink-0 lg:sticky lg:top-[120px]"
+            data-node-id="1960:2810"
+          >
+          </div>
+
+          <!-- Right Column: Heading + Philosophy Text -->
+          <div class="w-full lg:w-[622px] min-[2200px]:flex-1 h-full flex flex-col justify-between gap-8 py-2">
+            <!-- Heading: Animated Center-Out Reveal -->
+            <h2 class="m-0 p-0 uppercase font-display font-semibold select-none text-[#131313]">
+              <!-- Line 1: WHAT WE -->
+              <div class="overflow-hidden pb-[4px]">
+                <div
+                  class="ask-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px] text-[#131313]"
+                  data-line="WHAT WE"
+                >
+                  {toChars('WHAT WE').map((char) => (
+                    <span class="ask-char inline-block will-change-transform text-[#131313]">{char}</span>
+                  ))}
+                </div>
+              </div>
+              <!-- Line 2: ASK OF -->
+              <div class="overflow-hidden pb-[4px]">
+                <div
+                  class="ask-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px] text-[#131313]"
+                  data-line="ASK OF"
+                >
+                  {toChars('ASK OF').map((char) => (
+                    <span class="ask-char inline-block will-change-transform text-[#131313]">{char}</span>
+                  ))}
+                </div>
+              </div>
+              <!-- Line 3: MEMBERS -->
+              <div class="overflow-hidden pb-[4px]">
+                <div
+                  class="ask-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px] text-[#131313]"
+                  data-line="MEMBERS"
+                >
+                  {toChars('MEMBERS').map((char) => (
+                    <span class="ask-char inline-block will-change-transform text-[#131313]">{char}</span>
+                  ))}
+                </div>
+              </div>
+            </h2>
+
+            <!-- Philosophy Text -->
+            <p
+              class="font-body font-bold text-[16px] sm:text-[18px] lg:text-[18px] lg:leading-normal min-[2200px]:text-[40px] min-[2200px]:leading-[48px] text-[#131313] tracking-[-0.18px] min-[2200px]:tracking-[-0.4px] max-w-full lg:max-w-[594px] min-[2200px]:max-w-none m-0"
+              data-node-id="1960:2640"
+            >
+              That you tell us when something isn’t right — bluntness keeps the standard alive. And patience between seasons: we’d rather sell you nothing than almost.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 3: THE NUMBERS (Node 1960:2641; >2200px: 1965:2884)    -->
+    <!-- ============================================================== -->
+    <section id="section-numbers" class="w-full bg-[#131313] border-b-[0.5px] border-[#1E1E1E] pt-[72px] pb-[56px] min-[2200px]:h-[1147px] min-[2200px]:flex min-[2200px]:flex-col min-[2200px]:justify-end px-[16px]" data-node-id="1960:2641">
+      <div class="w-full flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-[13px] min-[2200px]:h-full">
+        
+        <!-- Left Column: "THE NUMBERS" Headline with Animation -->
+        <div class="w-full lg:flex-1 h-full flex flex-col justify-between">
+          <h2 class="m-0 p-0 uppercase font-display font-semibold select-none">
+            <!-- Line 1: THE -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="numbers-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px]"
+                data-line="THE"
+              >
+                {toChars('THE').map((char) => (
+                  <span
+                    class="numbers-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <!-- Line 2: NUMBERS -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="numbers-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,11.5vw,200px)] leading-[0.81] lg:text-[200px] lg:leading-[162px] min-[2200px]:text-[296px] min-[2200px]:leading-[240px] tracking-[0.48px] min-[2200px]:tracking-[0.8px]"
+                data-line="NUMBERS"
+              >
+                {toChars('NUMBERS').map((char) => (
+                  <span
+                    class="numbers-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #F8FE03 0%, #E1DDEC 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </h2>
+        </div>
+
+        <!-- Right Column: 4 Metrics with Horizontal Dividers -->
+        <div class="w-full lg:flex-1 h-full flex flex-col justify-between gap-[48px] min-[2200px]:gap-0" data-node-id="1960:2648">
+          {stats.map((stat, idx) => (
+            <div class="w-full">
+              <div class="w-full flex items-start justify-between py-2 sm:py-3">
+                <div class="font-body font-bold text-[64px] leading-[64px] text-[#FBF9D6] tracking-[-0.41px]">
+                  {stat.number}
+                </div>
+                <div class="font-body font-medium text-[16px] leading-[20px] text-[#FBF9D6] tracking-[-0.16px] text-right">
+                  {stat.label}
+                </div>
+              </div>
+              {idx < stats.length - 1 && (
+                <div class="h-px bg-[#464646] w-full mt-4 sm:mt-6"></div>
+              )}
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================== -->
+    <!-- SECTION 4: START THE CONVERSATION                              -->
+    <!-- (Node 1960:2661 / 1960:2735; >2200px: Node 1965:2908)         -->
+    <!-- ============================================================== -->
+    <section id="section-convo" class="w-full bg-[#131313] py-[64px] sm:py-[100px] lg:py-[152px] min-[2200px]:h-[838px] px-[16px]" data-node-id="1960:2661">
+      <div class="w-full h-full flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-[44px]">
+        
+        <!-- Left Column: Big Cyan Gradient Heading with Animation -->
+        <div class="w-full lg:flex-1">
+          <!-- Desktop Version (< 2200px: 1440px / 1920px) — 2 Lines per Figma 1960:2661 -->
+          <h2 class="hidden lg:block min-[2200px]:hidden m-0 p-0 uppercase font-display font-semibold select-none convo-heading">
+            <!-- Line 1: START THE -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="convo-line flex flex-nowrap whitespace-nowrap will-change-transform text-[194px] leading-[157px] tracking-[2.7px]"
+                data-line="START THE"
+              >
+                {toChars('START THE').map((char) => (
+                  <span
+                    class="convo-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <!-- Line 2: CONVERSATION -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="convo-line flex flex-nowrap whitespace-nowrap will-change-transform text-[194px] leading-[157px] tracking-[2.7px]"
+                data-line="CONVERSATION"
+              >
+                {toChars('CONVERSATION').map((char) => (
+                  <span
+                    class="convo-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </h2>
+
+          <!-- 4K Version (>= 2200px: 2440px) — 2 Lines per Figma 1965:2908 -->
+          <h2 class="hidden min-[2200px]:block m-0 p-0 uppercase font-display font-semibold select-none convo-heading">
+            <!-- Line 1: START -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="convo-line flex flex-nowrap whitespace-nowrap will-change-transform text-[296px] leading-[240px] tracking-[0.8px]"
+                data-line="START"
+              >
+                {toChars('START').map((char) => (
+                  <span
+                    class="convo-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <!-- Line 2: THE CONVERSATION -->
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="convo-line flex flex-nowrap whitespace-nowrap will-change-transform text-[296px] leading-[240px] tracking-[0.8px]"
+                data-line="THE CONVERSATION"
+              >
+                {toChars('THE CONVERSATION').map((char) => (
+                  <span
+                    class="convo-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </h2>
+
+          <!-- Mobile Version: IF THIS SOUNDS LIKE YOUR KIND -->
+          <h2 class="block lg:hidden m-0 p-0 uppercase font-display font-semibold select-none convo-mob-heading">
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="convo-mob-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,12.5vw,112px)] leading-[0.88] tracking-[0.8px]"
+                data-line="IF THIS SOUNDS"
+              >
+                {toChars('IF THIS SOUNDS').map((char) => (
+                  <span
+                    class="convo-mob-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div class="overflow-hidden pb-[4px]">
+              <div
+                class="convo-mob-line flex flex-nowrap whitespace-nowrap will-change-transform text-[clamp(44px,12.5vw,112px)] leading-[0.88] tracking-[0.8px]"
+                data-line="LIKE YOUR KIND"
+              >
+                {toChars('LIKE YOUR KIND').map((char) => (
+                  <span
+                    class="convo-mob-char inline-block will-change-transform"
+                    style="background: linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 134.07%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;"
+                  >
+                    {char}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </h2>
+        </div>
+
+        <!-- Right Column: Subtext + Contact Us CTA Button -->
+        <div class="w-full lg:w-[380px] shrink-0 flex flex-col gap-[44px] items-start justify-end">
+          
+          <!-- Subtext (Desktop) -->
+          <p class="hidden lg:block font-body font-bold text-[16px] leading-[20px] text-[#FBF9D6] tracking-[-0.16px] m-0">
+            “Typical reply: under 10 minutes, Tue–Sun.” · “Prefer email first? <a href="mailto:write@crate44.com" class="text-[#FF76FF] hover:underline transition-all">write@crate44.com</a> ”
+          </p>
+
+          <!-- Subtext (Mobile) -->
+          <p class="block lg:hidden font-body font-bold text-[16px] leading-[20px] text-[#FBF9D6] tracking-[-0.16px] m-0">
+            If this sounds like your kind of company, the list is open.
+          </p>
+
+          <!-- Component 16: Yellow CONTACT US Pill Button -->
+          <a
+            href="https://wa.me/?text=Hi%20Crate44%2C%20I%20would%20like%20to%20join%20the%20list"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center bg-[#F8FE03] hover:bg-[#FAF960] active:scale-[0.98] transition-all rounded-[8px] px-[24px] py-[10px] w-full sm:w-auto min-w-[148px]"
+            data-node-id="1960:2666"
+          >
+            <span class="font-display font-semibold text-[32px] leading-[34px] uppercase text-[#131313] text-center select-none">
+              CONTACT US
+            </span>
+          </a>
+
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Global Footer (without duplicate #the-list section) -->
+  <Footer showTheList={false} />
+</Layout>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  const luxuryEase = CustomEase.create('luxuryEaseCustom', '0.16, 1, 0.3, 1')
+
+  function animateHeading(
+    headingSelector: string,
+    lineSelector: string,
+    charSelector: string,
+    triggerElement?: HTMLElement | string | null,
+    delay: number = 0
+  ) {
+    const headings = Array.from(document.querySelectorAll<HTMLElement>(headingSelector))
+    if (!headings.length) return
+
+    headings.forEach((heading) => {
+      const lines = Array.from(heading.querySelectorAll<HTMLElement>(lineSelector))
+      if (!lines.length) return
+
+      const allChars = lines.flatMap((l) => Array.from(l.querySelectorAll<HTMLElement>(charSelector)))
+      if (!allChars.length) return
+
+      gsap.set(allChars, {
+        yPercent: 115,
+        opacity: 0,
+        filter: 'blur(5px)',
+      })
+
+      const tlConfig: gsap.TimelineVars = {}
+      if (triggerElement) {
+        tlConfig.scrollTrigger = {
+          trigger: triggerElement,
+          start: 'top 85%',
+          once: true,
+        }
+      } else {
+        tlConfig.delay = delay
+      }
+
+      const tl = gsap.timeline(tlConfig)
+
+      lines.forEach((line, lineIndex) => {
+        const chars = Array.from(line.querySelectorAll<HTMLElement>(charSelector))
+        const centerIdx = (chars.length - 1) / 2
+        const lineStartDelay = lineIndex * 0.095
+
+        chars.forEach((char, charIdx) => {
+          const distFromCenter = Math.abs(charIdx - centerIdx)
+          const waveDelay = lineStartDelay + (distFromCenter * 0.024)
+
+          tl.to(
+            char,
+            {
+              yPercent: 0,
+              opacity: 1,
+              filter: 'blur(0px)',
+              duration: 1.6,
+              ease: luxuryEase,
+            },
+            waveDelay
+          )
+        })
+      })
+    })
+  }
+
+  function initJoinListAnimations() {
+    // 1. Hero: "JOINING IS A CONVERSATION." on load
+    animateHeading('.join-hero-heading', '.join-hero-line', '.join-hero-char', null, 0.15)
+
+    // 2. Section 2A: "WHAT MEMBERS RECEIVE" on scroll
+    animateHeading('#section-receive h2', '.receive-line', '.receive-char', '#section-receive')
+
+    // 3. Section 2B: "WHAT WE ASK OF MEMBERS" on scroll
+    animateHeading('#section-ask h2', '.ask-line', '.ask-char', '#section-ask')
+
+    // 4. Section 3: "THE NUMBERS" on scroll
+    animateHeading('#section-numbers h2', '.numbers-line', '.numbers-char', '#section-numbers')
+
+    // 5. Section 4: "START THE CONVERSATION" on scroll (2 lines on all desktop views)
+    animateHeading('.convo-heading', '.convo-line', '.convo-char', '#section-convo')
+    animateHeading('.convo-mob-heading', '.convo-mob-line', '.convo-mob-char', '#section-convo')
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initJoinListAnimations)
+  } else {
+    initJoinListAnimations()
+  }
+  document.addEventListener('astro:page-load', initJoinListAnimations)
+</script>

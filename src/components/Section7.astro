@@ -1,0 +1,926 @@
+---
+// src/components/Section7.astro
+// Exact 1:1 Implementation of Figma Node 1885:2082 & 1570:3024 (Section 7 · How does it work)
+//
+// 1. Screen turns into #131313 before text starts appearing.
+// 2. 3D Model (Exact conversion from Google Drive 3D Studio / banana.html):
+//    - ALWAYS FIXED in the middle of the viewport (top: 50%, left: 50%, -translate-x-1/2, -translate-y-1/2).
+//    - Exact PBR material: color #FEFFA8, roughness 0.49, metalness 0.22, normalScale (2, 2), baseColor & normal maps.
+//    - Studio 3 (Warm) HDRI environment map + Studio lighting + ACESFilmic tone mapping at exposure 1.76.
+//    - Exact base orientation: rotX 10.6°, rotY 67.3°, rotZ 291.6°, camera distance 5.3.
+//    - Spins smoothly in place with scroll progress (rotation.y linked directly to scroll scrub).
+//    - Sits at z-20 directly IN FRONT of the text layer with deep hardware drop shadow.
+// 3. Text Layer (z-10 BEHIND the 3D model):
+//    - Full Implementation of MadeWithGSAP Tutorial 104 (Wave Bend Content · https://madewithgsap.com/effects/tutorial104)
+//    - The SVG container and wave path stay stationary in the viewport.
+//    - The text travels ALONG the sinusoidal wave path via startOffset.
+//    - Dynamic wave morphing: The line bends into a sinusoid as you scroll, responding to scroll velocity and progress.
+//    - Curvature axis is wide and elongated (wavelength 2800px, amplitude 65-100px) with 8px letter-spacing:
+//      zero letter cramping, zero collision, and natural reading flow.
+// 4. Part B: Pinned 3-step clipped gallery (Effect 121 · Node 1570:3024) with strict 16px margins.
+
+const steps = [
+  {
+    num: "01",
+    numGradient: "linear-gradient(180deg, #E1DDEB 0%, #F8FE03 100%)",
+    titleLines: ["Join", "the list.", "love."],
+    image: "/images/how/step_01.webp",
+    alt: "Join the list - Fresh pears at Mumbai table",
+    desc: "A short WhatsApp hello. We ask about your household and what you love.",
+  },
+  {
+    num: "02",
+    numGradient: "linear-gradient(180deg, #FBF9D6 0%, #FC558D 100%)",
+    titleLines: ["Receive", "the edit"],
+    image: "/images/how/step_02.webp",
+    alt: "Receive the edit - Handpicked crisp apples",
+    desc: "Every Tuesday the week’s fruit what’s at its moment, what’s coming, what we refused.",
+  },
+  {
+    num: "03",
+    numGradient: "linear-gradient(180deg, #3ED5FF 0%, #FFFFFF 100%)",
+    titleLines: ["The", "crate", "arrives."],
+    image: "/images/how/step_03.webp",
+    alt: "The crate arrives - Custard apples ready to eat",
+    desc: "Ripened to your date, graded twice, delivered chilled. Eat the best piece first.",
+  },
+]
+
+import Section6 from './Section6.astro'
+---
+
+<div id="section-7" class="relative w-full bg-[#131313] text-[#FBF9D6] select-none">
+
+  <!-- ============================================================== -->
+  <!-- TRACK: Wraps Section 6 through Section 7 Part B (Pure Scroll-Through) -->
+  <!-- ============================================================== -->
+  <div id="s6-s7-track" class="relative w-full">
+
+    <!-- 1. STICKY 3D BANANA STAGE (z-0): Stays pinned in viewport center, spinning smoothly -->
+    <div id="s7-sticky-stage" class="sticky top-0 w-full h-[100svh] overflow-hidden z-0 pointer-events-none">
+      <section
+        id="s7-stage-how"
+        class="w-full h-full bg-[#131313] flex items-center justify-center overflow-hidden"
+        data-node-id="1885:2082"
+      >
+      <!-- Background subtle dark gradient radial accent -->
+      <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(35,35,35,0.7)_0%,_rgba(19,19,19,1)_75%)] pointer-events-none"></div>
+
+      <!-- Pinned Viewport Container -->
+      <div class="s7-how-viewport relative w-full h-full flex items-center justify-center overflow-hidden">
+        
+        <!-- LAYER 1: TEXT LAYER (BEHIND 3D MODEL, z-10) -->
+        <!-- Fixed SVG viewport where text rides the sinusoidal wave along startOffset (Tutorial 104) -->
+        <div
+          id="s7-text-container"
+          class="absolute inset-0 z-10 flex items-center justify-center pointer-events-none will-change-transform"
+        >
+          <svg
+            id="s7-wave-svg"
+            viewBox="0 0 1440 827"
+            preserveAspectRatio="xMidYMid meet"
+            class="w-full h-full overflow-visible pointer-events-none will-change-transform"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <defs>
+              <!-- Gradient: #F8FE03 at 0% to #E1DDEC at 100% -->
+              <linearGradient id="s7-text-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#F8FE03" />
+                <stop offset="100%" stop-color="#E1DDEC" />
+              </linearGradient>
+
+              <!-- Guide Path: Extended range (-8000 to 12000) for complete off-screen entry and exit -->
+              <path
+                id="s7-wave-line"
+                d="M -8000 520 L 12000 520"
+                fill="none"
+                stroke="none"
+              />
+            </defs>
+
+            <!-- Text attached to the wave curve with bold Figma scale (font-size 340px on web, 150% scaled to 510px on mobile) -->
+            <text
+              fill="url(#s7-text-grad)"
+              font-family="VVDS_Fifties"
+              font-weight="600"
+              font-size="340"
+              letter-spacing="4"
+              class="select-none uppercase text-[510px] md:text-[340px]"
+            >
+              <textPath id="s7-textpath" href="#s7-wave-line" startOffset="9700" text-anchor="start">
+                HOW DOES THIS WORK?
+              </textPath>
+            </text>
+            <!-- Phone version uses ordinary SVG text so the browser can composite the moving line without laying out textPath glyphs during scroll. -->
+            <text
+              id="s7-mobile-text"
+              x="1700"
+              y="520"
+              fill="url(#s7-text-grad)"
+              font-family="VVDS_Fifties"
+              font-weight="600"
+              font-size="510"
+              letter-spacing="4"
+              text-anchor="start"
+              class="select-none uppercase"
+            >
+              HOW DOES THIS WORK?
+            </text>
+          </svg>
+        </div>
+
+        <!-- LAYER 2: 3D BANANA MODEL (ALWAYS FIXED IN THE MIDDLE, z-20) -->
+        <!-- Exact Figma dimensions: 659px x 1225px, centered horizontally & vertically -->
+        <div
+          id="s7-banana-stage"
+          class="absolute z-20 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] sm:w-[500px] md:w-[580px] xl:w-[659px] h-[720px] sm:h-[920px] md:h-[1050px] xl:h-[1225px] flex items-center justify-center pointer-events-none md:pointer-events-auto touch-pan-y"
+          style="touch-action: pan-y;"
+        >
+          <!-- Deep rich drop shadow underlay casting directly onto the text layer behind it -->
+          <div class="s7-banana-shadow-layer absolute inset-x-[15%] inset-y-[20%] rounded-full bg-black/90 blur-[50px] sm:blur-[75px] pointer-events-none -z-10"></div>
+          <div class="s7-banana-ambient-glow absolute w-[60%] h-[60%] rounded-full bg-[#F8FE03]/10 blur-[90px] pointer-events-none -z-10"></div>
+
+          <!-- 3D Canvas with hardware-accelerated underlay shadow -->
+          <canvas
+            id="s7-banana-canvas"
+            class="w-full h-full block cursor-grab active:cursor-grabbing will-change-transform"
+          ></canvas>
+        </div>
+
+      </div>
+    </section>
+  </div>
+
+  <!-- 2. SCROLLING SHEET (z-10): Flows naturally over the sticky banana stage -->
+  <div id="s6-s7-scroll-sheet" class="relative w-full z-10 -mt-[100svh]">
+
+    <!-- FOREGROUND CARD: SECTION 6 "WHERE IT COMES FROM" (z-10) -->
+    <!-- Solid gradient background naturally scrolls with the page -->
+    <div
+      id="s6-card-wrapper"
+      class="relative w-full z-10"
+    >
+      <Section6 />
+    </div>
+
+    <!-- TRANSPARENT CUTOUT WINDOW: Cutout through which you see the fixed spinning banana -->
+    <div id="s7-window" class="relative w-full h-[360svh] lg:h-[360vh] bg-transparent pointer-events-none"></div>
+
+    <!-- PART B: MADE WITH GSAP TUTORIAL 121 / EFFECT 121 CLIPPED SECTIONS GALLERY -->
+    <!-- Solid #131313 background rolls over the cutout and covers the banana from bottom to top -->
+    <section class="mwg_effect121 relative w-full bg-[#131313] z-20" data-node-id="1570:3024">
+    {steps.map((step, idx) => (
+      <div
+        class={`s7b-section relative w-full border-t border-white/10 overflow-hidden flex items-center justify-center py-[24px] sm:py-[32px] xl:py-[40px] ${idx === steps.length - 1 ? 'border-b' : ''}`}
+        data-step={idx}
+      >
+        <!-- DESKTOP LAYOUT (md:flex, hidden on mobile) - 100% UNTOUCHED DESKTOP VERSION -->
+        <div class="hidden md:flex items-center justify-center w-full">
+          <!-- Captions container: held at viewport center so the stroke cuts across headings on transition -->
+          <div class="s7b-content absolute top-0 inset-x-0 w-full px-[16px] flex items-start justify-between pointer-events-none z-20 will-change-transform">
+            <!-- LEFT: Step Number & Title (Figma VVDS Fifties 112px Cond SBold #FBF9D6) -->
+            <div class="s7b-text-left flex items-start gap-[16px] sm:gap-[20px] xl:gap-[24px] select-none z-20 w-[240px] sm:w-[280px] lg:w-[320px] xl:w-[380px] shrink-0 pointer-events-auto">
+              <!-- Step Number with Figma gradient -->
+              <span
+                class="font-display font-semibold uppercase text-[56px] sm:text-[84px] xl:text-[112px] leading-[52px] sm:leading-[78px] xl:leading-[100px] tracking-[0.8px] bg-clip-text text-transparent flex-shrink-0"
+                style={`background-image: ${step.numGradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;`}
+              >
+                {step.num}
+              </span>
+
+              <!-- Step Title -->
+              <div class="font-display font-semibold uppercase text-[56px] sm:text-[84px] xl:text-[112px] leading-[52px] sm:leading-[78px] xl:leading-[100px] tracking-[0.8px] text-[#FBF9D6] flex flex-col">
+                {step.titleLines.map((line) => (
+                  <span class="block m-0 whitespace-nowrap">{line}</span>
+                ))}
+              </div>
+            </div>
+
+            <!-- RIGHT: Step Description (Desktop: Suisse Intl 16px / 20px / 600 weight / -0.4px) -->
+            <div class="s7b-text-right w-[200px] sm:w-[240px] lg:w-[280px] xl:w-[350px] shrink-0 select-none text-left pointer-events-auto z-20">
+              <p class="font-body font-bold xl:font-semibold text-[14px] sm:text-[16px] xl:text-[16px] leading-[18px] sm:leading-[20px] xl:leading-[20px] tracking-[-0.16px] xl:tracking-[-0.4px] text-[#FBF9D6] m-0">
+                {step.desc}
+              </p>
+            </div>
+          </div>
+
+          <!-- CENTER: Media Card (Effect 121 + Exact Figma 491px x 648px - Corner TYPE 1) -->
+          <div class="s7b-media curve-side relative w-[400px] lg:w-[440px] xl:w-[491px] h-[540px] lg:h-[600px] xl:h-[648px] overflow-hidden bg-[#1E1E1E] shadow-2xl z-10 mx-auto shrink-0 will-change-[clip-path]" data-curve="side">
+            <img
+              src={step.image}
+              alt={step.alt}
+              class="s7b-media-img absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover block will-change-transform"
+              loading="lazy"
+              draggable="false"
+            />
+            <div class="absolute inset-0 ring-1 ring-white/10 pointer-events-none rounded-[inherit]"></div>
+          </div>
+        </div>
+
+        <!-- MOBILE LAYOUT (md:hidden): Clean vertical stack, zero text overlapping on photo -->
+        <div class="md:hidden flex flex-col w-full px-[16px] py-[20px]">
+          <!-- Top: Step Number & Title (Vertically stacked, flush left, scaled to fill horizontally edge-to-edge) -->
+          <div class="flex flex-col items-start mb-[20px] select-none w-full">
+            <span
+              class="font-display font-semibold uppercase text-[clamp(92px,32vw,136px)] leading-[0.88] tracking-[0.5px] bg-clip-text text-transparent block m-0 whitespace-nowrap text-left"
+              style={`background-image: ${step.numGradient}; -webkit-background-clip: text; -webkit-text-fill-color: transparent;`}
+            >
+              {step.num}
+            </span>
+            <div class="s7b-mobile-title font-display font-semibold uppercase text-[clamp(92px,32vw,136px)] leading-[0.88] tracking-[0.5px] text-[#FBF9D6] flex flex-col items-start text-left w-full">
+              {step.titleLines.map((line) => (
+                <span class="block m-0 whitespace-nowrap text-left">{line}</span>
+              ))}
+            </div>
+          </div>
+
+          <!-- Center: Media Card (Effect 121 - Corner TYPE 1) -->
+          <div class="s7b-media curve-side relative w-full max-w-[358px] mx-auto aspect-square overflow-hidden bg-[#1E1E1E] shadow-2xl mb-[16px] will-change-[clip-path]" data-curve="side">
+            <img
+              src={step.image}
+              alt={step.alt}
+              class="s7b-media-img absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover block will-change-transform"
+              loading="lazy"
+              draggable="false"
+            />
+            <div class="absolute inset-0 ring-1 ring-white/10 pointer-events-none rounded-[inherit]"></div>
+          </div>
+
+          <!-- Bottom: Step Description Subtext (Suisse Intl: 14px / 17px, 600 weight, -0.4px kerning) -->
+          <div class="w-full text-left select-none">
+            <p class="font-body font-semibold text-[14px] leading-[17px] tracking-[-0.4px] text-[#FBF9D6] m-0">
+              {step.desc}
+            </p>
+          </div>
+        </div>
+
+      </div>
+    ))}
+  </section>
+
+  </div> <!-- #s6-s7-scroll-sheet -->
+</div> <!-- #s6-s7-track -->
+</div> <!-- #section-7 -->
+
+<style>
+  #s7-stage-how {
+    contain: layout style paint;
+    touch-action: pan-y;
+  }
+  .s7b-section {
+    contain: layout style;
+  }
+  .s7b-media {
+    contain: strict;
+  }
+
+  /* Section 7 Part A: Scale behind text by 150% on mobile (340px * 1.5 = 510px), keep desktop untouched at 340px */
+  #s7-wave-svg text,
+  #s7-textpath {
+    font-size: 510px;
+  }
+  #s7-mobile-text {
+    display: none;
+  }
+  @media (max-width: 499px) {
+    #s7-textpath {
+      display: none;
+    }
+    #s7-mobile-text {
+      display: inline;
+    }
+    #s7-banana-canvas {
+      filter: none !important;
+    }
+  }
+  @media (min-width: 768px) {
+    #s7-wave-svg text,
+    #s7-textpath {
+      font-size: 340px;
+    }
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import type * as ThreeTypes from 'three'
+
+  gsap.registerPlugin(ScrollTrigger)
+
+  // ==============================================================
+  // 1. EXACT THREE.JS SETUP (Directly from Drive 3D Studio Setup)
+  // ==============================================================
+  let bananaModel: ThreeTypes.Group | null = null
+  let bananaScene: ThreeTypes.Scene | null = null
+  let bananaCamera: ThreeTypes.PerspectiveCamera | null = null
+  let bananaRenderer: ThreeTypes.WebGLRenderer | null = null
+  let bananaScrollProgress = 0
+  let bananaCurrentProgress = 0
+  let bananaIdleRotation = 0
+  let bananaResizeHandler: (() => void) | null = null
+  let bananaModelObserver: IntersectionObserver | null = null
+  let section7Disposed = false
+
+  // Exact artistic orientation from Drive 3D studio JSON
+  const BASE_ROT_X = 10.6 * (Math.PI / 180)   // ~0.185 rad
+  const BASE_ROT_Y = 67.3 * (Math.PI / 180)   // ~1.175 rad
+  const BASE_ROT_Z = 291.6 * (Math.PI / 180)  // ~5.089 rad
+
+  function ensureUVs(geometry: ThreeTypes.BufferGeometry, three: typeof import('three')) {
+    if (!geometry || !geometry.attributes) return
+    const uv = geometry.attributes.uv
+    if (uv && uv.count && uv.count > 0) return
+
+    const pos = geometry.attributes.position
+    if (!pos || !pos.count) return
+    const count = pos.count
+    const uvs = new Float32Array(count * 2)
+
+    geometry.computeBoundingBox()
+    const bb = geometry.boundingBox || new three.Box3()
+    const size = new three.Vector3()
+    bb.getSize(size)
+    const min = bb.min
+
+    const sx = size.x || 1
+    const sy = size.y || 1
+
+    for (let i = 0; i < count; i++) {
+      const x = pos.getX(i)
+      const y = pos.getY(i)
+      uvs[i * 2] = (x - min.x) / sx
+      uvs[i * 2 + 1] = (y - min.y) / sy
+    }
+    geometry.setAttribute('uv', new three.BufferAttribute(uvs, 2))
+  }
+
+  async function initThreeBanana() {
+    const isMobile = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches
+    const [THREE, { GLTFLoader }, { RGBELoader }] = await Promise.all([
+      import('three'),
+      import('three/examples/jsm/loaders/GLTFLoader.js'),
+      import('three/examples/jsm/loaders/RGBELoader.js'),
+    ])
+    const canvas = document.querySelector<HTMLCanvasElement>('#s7-banana-canvas')
+    const stage = document.querySelector<HTMLElement>('#s7-banana-stage')
+    if (!canvas || !stage) return
+
+    const width = stage.clientWidth || (isMobile ? 380 : 659)
+    const height = stage.clientHeight || (isMobile ? 720 : 1225)
+
+    bananaScene = new THREE.Scene()
+    bananaCamera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100)
+    bananaCamera.position.set(0, 0, 5.3)
+
+    bananaRenderer = new THREE.WebGLRenderer({
+      canvas,
+      alpha: true,
+      antialias: !isMobile,
+      powerPreference: 'high-performance',
+    })
+    bananaRenderer.setPixelRatio(isMobile
+      ? Math.min(window.devicePixelRatio, 1.25)
+      : Math.min(window.devicePixelRatio, 1.5))
+    bananaRenderer.setSize(width, height, !isMobile)
+    if (isMobile) bananaRenderer.setClearColor(0x000000, 0)
+    bananaRenderer.outputColorSpace = THREE.SRGBColorSpace
+    bananaRenderer.toneMapping = THREE.ACESFilmicToneMapping
+    bananaRenderer.toneMappingExposure = 1.76
+
+    const pmremGenerator = new THREE.PMREMGenerator(bananaRenderer)
+    pmremGenerator.compileEquirectangularShader()
+
+    // Studio Lighting from banana.html
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8)
+    bananaScene.add(ambientLight)
+
+    const mainLight = new THREE.DirectionalLight(0xffffff, 1.3)
+    mainLight.position.set(5, 8, 5)
+    bananaScene.add(mainLight)
+
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.6)
+    fillLight.position.set(-5, -2, -5)
+    bananaScene.add(fillLight)
+
+    // Load Studio 3 (Warm) HDRI Environment Map from banana.html
+    new RGBELoader().load('/textures/studio_warm.hdr', (texture) => {
+      if (!bananaScene) return
+      const envMap = pmremGenerator.fromEquirectangular(texture).texture
+      bananaScene.environment = envMap
+      bananaScene.environmentRotation.y = THREE.MathUtils.degToRad(266)
+      texture.dispose()
+      pmremGenerator.dispose()
+      if (!isMobile && bananaCamera) bananaRenderer?.render(bananaScene, bananaCamera)
+    })
+
+    // Phones use the existing 2K WebP maps; desktop retains the full 4K maps.
+    const textureLoader = new THREE.TextureLoader()
+    const colorMap = textureLoader.load(isMobile ? '/textures/banana_color_opt.webp' : '/textures/banana_color_4k.webp', () => {
+      if (!isMobile && bananaScene && bananaCamera) bananaRenderer?.render(bananaScene, bananaCamera)
+    })
+    colorMap.mapping = THREE.UVMapping
+    colorMap.colorSpace = THREE.SRGBColorSpace
+    colorMap.wrapS = THREE.RepeatWrapping
+    colorMap.wrapT = THREE.RepeatWrapping
+    colorMap.flipY = false
+
+    const normalMap = textureLoader.load(isMobile ? '/textures/banana_normal_opt.webp' : '/textures/banana_normal_4k.webp', () => {
+      if (!isMobile && bananaScene && bananaCamera) bananaRenderer?.render(bananaScene, bananaCamera)
+    })
+    normalMap.mapping = THREE.UVMapping
+    normalMap.colorSpace = THREE.NoColorSpace
+    normalMap.wrapS = THREE.RepeatWrapping
+    normalMap.wrapT = THREE.RepeatWrapping
+    normalMap.flipY = false
+
+    const customMaterial = new THREE.MeshStandardMaterial({
+      color: new THREE.Color('#FEFFA8'),
+      map: colorMap,
+      normalMap: normalMap,
+      normalScale: new THREE.Vector2(2, 2),
+      roughness: 0.49,
+      metalness: 0.22,
+      envMapIntensity: 5.0,
+    })
+
+    const loader = new GLTFLoader()
+    let dracoLoader: import('three/examples/jsm/loaders/DRACOLoader.js').DRACOLoader | null = null
+    if (isMobile) {
+      const { DRACOLoader } = await import('three/examples/jsm/loaders/DRACOLoader.js')
+      dracoLoader = new DRACOLoader()
+      dracoLoader.setDecoderPath('/draco/')
+      dracoLoader.preload()
+      loader.setDRACOLoader(dracoLoader)
+    }
+    loader.load(
+      isMobile ? '/models/banana_mobile.glb' : '/models/banana_opt.glb',
+      (gltf) => {
+        dracoLoader?.dispose()
+        const root = gltf.scene
+
+        root.traverse((child: any) => {
+          if (child.isMesh) {
+            if (child.geometry) {
+              ensureUVs(child.geometry, THREE)
+            }
+            child.material = customMaterial
+            child.castShadow = true
+            child.receiveShadow = true
+          }
+        })
+
+        const box = new THREE.Box3().setFromObject(root)
+        const size = box.getSize(new THREE.Vector3())
+        const center = box.getCenter(new THREE.Vector3())
+        const maxDim = Math.max(size.x, size.y, size.z) || 1
+        const scale = 2.4 / maxDim
+
+        root.scale.setScalar(scale)
+        root.position.sub(center.clone().multiplyScalar(scale))
+
+        const group = new THREE.Group()
+        group.add(root)
+        
+        group.rotation.x = BASE_ROT_X
+        group.rotation.y = BASE_ROT_Y
+        group.rotation.z = BASE_ROT_Z
+
+        bananaModel = group
+        bananaCurrentProgress = bananaScrollProgress
+        bananaScene?.add(group)
+        bananaRenderer?.render(bananaScene!, bananaCamera!)
+      },
+      undefined,
+      (err) => {
+        dracoLoader?.dispose()
+        console.warn('Banana GLTF notice:', err)
+      }
+    )
+
+    bananaResizeHandler = () => {
+      if (!canvas || !stage || !bananaCamera || !bananaRenderer) return
+      const w = stage.clientWidth || (isMobile ? 380 : 659)
+      const h = stage.clientHeight || (isMobile ? 720 : 1225)
+      bananaCamera.aspect = w / h
+      bananaCamera.fov = 45
+      bananaCamera.updateProjectionMatrix()
+      bananaRenderer.setSize(w, h, !isMobile)
+      if (!isMobile && bananaScene && bananaModel) {
+        bananaRenderer.render(bananaScene, bananaCamera)
+      }
+    }
+    window.addEventListener('resize', bananaResizeHandler, { passive: true })
+  }
+
+  // ==============================================================
+  // 2. TUTORIAL 104 WAVE BEND CONTENT & SCROLL ORCHESTRATION
+  // ==============================================================
+  function initSection7Animations() {
+    const isMobile = window.matchMedia('(max-width: 499px)').matches
+    const isTouchDevice = window.matchMedia('(pointer: coarse)').matches
+    const isMobileCanvas = window.matchMedia('(max-width: 767px), (pointer: coarse)').matches
+    const s6s7Track = document.querySelector<HTMLElement>('#s6-s7-track')
+    const s7Window = document.querySelector<HTMLElement>('#s7-window')
+    const step02 = document.querySelector<HTMLElement>('.s7b-section[data-step="1"]')
+    const cardWrapper = document.querySelector<HTMLElement>('#s6-card-wrapper')
+    const stageHow = document.querySelector<HTMLElement>('#s7-stage-how')
+    const textContainer = document.querySelector<HTMLElement>('#s7-text-container')
+    const waveLine = document.querySelector<SVGPathElement>('#s7-wave-line')
+    const textPath = document.querySelector<SVGTextPathElement>('#s7-textpath')
+    const sections = Array.from(document.querySelectorAll<HTMLElement>('.s7b-section'))
+
+    if (!stageHow || !waveLine || !textPath) return
+
+    // Use plain SVG text on touch devices so the browser can composite the
+    // moving line without recalculating each textPath glyph during scrolling.
+    if (isTouchDevice) {
+      const mobileText = document.querySelector<SVGTextElement>('#s7-mobile-text')
+      if (mobileText) mobileText.style.display = 'inline'
+      textPath.style.display = 'none'
+    }
+
+    // Continuous 3D Banana Render Loop (Ambient idle rotation + scroll-driven spin)
+    let isRevealVisible = false
+    let tickerAttached = false
+    let fpsWindow = 0
+    let fpsFrames = 0
+    let lowFpsTime = 0
+    let loweredResolution = false
+
+    let targetTextProgress = 0
+    let currentTextProgress = 0
+
+    // Complete off-screen exit and zone orchestration
+    function updateText(p: number) {
+      // Zone 1 (0.00 to 0.20): Banana Spin 1 alone; text waits safely off-screen right
+      // Zone 2 (0.20 to 0.70): Banana Spin 2 + Text wave glide across behind banana
+      // Zone 3 (0.70 to 1.00): Text 100% GONE into negative space; banana spins in clean window
+      // Zone 4 (p >= 1.00): Step 01 rolls up from below
+      const textP = Math.max(0, Math.min(1, (p - 0.20) / 0.50))
+
+      if (isTouchDevice && textContainer) {
+        // Mobile / touch devices:
+        // Text starts at x = 1700 SVG units (+460px screen coords, 70px off-screen right on 390px viewport).
+        // Travel 5900 SVG units puts the right edge of 980px-wide text at -158px (158px past the left screen edge).
+        const svgScale = Math.min(window.innerWidth / 1440, window.innerHeight / 827)
+        const translateX = -textP * 5900 * svgScale
+        textContainer.style.transform = textP <= 0 ? '' : `translate3d(${translateX.toFixed(1)}px, 0, 0)`
+      } else if (textPath) {
+        // Desktop:
+        // startOffset: 9700 down to 5000 (4700 travel units).
+        // At 5000, text start is at -3000px, right edge is at -563px in SVG coordinates (100% off-screen).
+        const startOffsetVal = 9700 - textP * 4700
+        textPath.setAttribute('startOffset', `${startOffsetVal.toFixed(1)}`)
+      }
+    }
+
+    const renderBananaTick = (_time: number, deltaMs: number) => {
+      const dt = Math.min(deltaMs / 1000, 0.05)
+      const blend = 1 - Math.exp(-dt * 24)
+      bananaCurrentProgress += (bananaScrollProgress - bananaCurrentProgress) * blend
+      currentTextProgress += (targetTextProgress - currentTextProgress) * blend
+
+      // 1. Text motion is ALWAYS updated every frame (Zero dependency on 3D model loading)
+      updateText(currentTextProgress)
+
+      // 2. 3D Banana model rendering
+      if (bananaModel && bananaScene && bananaCamera && bananaRenderer) {
+        bananaIdleRotation += dt * 0.35
+        bananaModel.rotation.y = BASE_ROT_Y + (bananaCurrentProgress * Math.PI * 4.0) + bananaIdleRotation
+        bananaModel.rotation.x = BASE_ROT_X + Math.sin(bananaCurrentProgress * Math.PI * 2) * 0.08
+        bananaModel.rotation.z = BASE_ROT_Z + Math.cos(bananaCurrentProgress * Math.PI * 2) * 0.08
+        bananaRenderer.render(bananaScene, bananaCamera)
+      }
+
+      if (isMobileCanvas && bananaRenderer) {
+        fpsWindow += dt
+        fpsFrames += 1
+        if (fpsWindow >= 0.5) {
+          const fps = fpsFrames / fpsWindow
+          lowFpsTime = fps < 45 ? lowFpsTime + fpsWindow : 0
+          if (!loweredResolution && lowFpsTime >= 0.5 && bananaRenderer.getPixelRatio() > 1) {
+            loweredResolution = true
+            bananaRenderer.setPixelRatio(1)
+            const bananaStage = document.querySelector<HTMLElement>('#s7-banana-stage')
+            bananaRenderer.setSize(bananaStage?.clientWidth || 380, bananaStage?.clientHeight || 720, false)
+          }
+          fpsWindow = 0
+          fpsFrames = 0
+        }
+      }
+    }
+
+    const syncBananaTicker = () => {
+      const shouldRun = isRevealVisible && !document.hidden
+      if (shouldRun && !tickerAttached) {
+        gsap.ticker.add(renderBananaTick)
+        tickerAttached = true
+      } else if (!shouldRun && tickerAttached) {
+        gsap.ticker.remove(renderBananaTick)
+        tickerAttached = false
+      }
+    }
+
+    // GPU Lifecycle: Active only between Section 6 and "Receive the edit" (Step 02)
+    // Once Step 02 covers the banana, the 3D ticker shuts off completely.
+    // 1. MASTER BANANA SCROLL CONTROLLER (Full-Range Control):
+    // Banana responds to scroll continuously through Section 6, the cutout window,
+    // and while Step 01 is rolling up, until completely submerged behind Step 02.
+    if (s6s7Track) {
+      ScrollTrigger.create({
+        trigger: s6s7Track,
+        start: 'top bottom', // Start responsive scroll control as soon as Section 6 approaches
+        endTrigger: step02 || s6s7Track,
+        end: 'bottom top',   // Continuous control until Step 02 exits
+        scrub: isTouchDevice ? 0.6 : 0.8, // Buttery-smooth physics damping
+        onToggle: (self) => {
+          isRevealVisible = self.isActive
+          syncBananaTicker()
+        },
+        onUpdate: (self) => {
+          // Continuous scroll progress across the entire lifecycle
+          bananaScrollProgress = Math.max(0, Math.min(1, self.progress))
+        },
+      })
+
+      const trackObserver = new IntersectionObserver(([entry]) => {
+        if (entry?.isIntersecting) {
+          isRevealVisible = true
+          syncBananaTicker()
+        }
+      }, { threshold: 0 })
+      trackObserver.observe(s6s7Track)
+    }
+
+    // Tutorial 104 Wave Equation:
+    // When idle (amp = 0): Exact flat horizontal line at y = 520 (matches Figma Node 1885:2082).
+    // When scrolling: Bends into a sinusoidal wave proportional to scroll velocity.
+    function getWavePathD(amp: number) {
+      const cy = 520
+      const wl = 2600
+      const half_wl = wl / 2
+      let d = `M -8000 ${cy} `
+      let x = -8000
+      let sign = 1
+      while (x < 12000) {
+        const x_next = x + half_wl
+        const cp1_x = x + half_wl * 0.3642
+        const cp1_y = cy - sign * amp
+        const cp2_x = x_next - half_wl * 0.3642
+        const cp2_y = cy - sign * amp
+        d += `C ${cp1_x.toFixed(1)} ${cp1_y.toFixed(1)}, ${cp2_x.toFixed(1)} ${cp2_y.toFixed(1)}, ${x_next.toFixed(1)} ${cy} `
+        x = x_next
+        sign = -sign
+      }
+      return d
+    }
+
+    let targetAmp = 0
+    let currentAmp = 0
+    let animationFrame = 0
+    const updateFrame = () => {
+      animationFrame = 0
+      currentAmp += (targetAmp - currentAmp) * 0.12
+      targetAmp *= 0.88
+
+      if (Math.abs(currentAmp) < 0.2 && Math.abs(targetAmp) < 0.2) {
+        currentAmp = 0
+        targetAmp = 0
+      }
+
+      if (waveLine && (Math.abs(currentAmp) > 0.1 || targetAmp !== 0)) {
+        waveLine.setAttribute('d', getWavePathD(currentAmp))
+      }
+      if (Math.abs(currentAmp) > 0.2 || Math.abs(targetAmp) > 0.2) {
+        animationFrame = requestAnimationFrame(updateFrame)
+      }
+    }
+    const queueFrame = () => {
+      if (!animationFrame) animationFrame = requestAnimationFrame(updateFrame)
+    }
+    if (!isMobileCanvas) {
+      window.addEventListener('scroll', queueFrame, { passive: true })
+      window.addEventListener('resize', queueFrame, { passive: true })
+    }
+
+    // 2. TUTORIAL 104 WAVE TEXT: COMPLETE EXIT BEFORE NEXT SECTION ROLLS UP
+    // Every word ("HOW DOES THIS WORK?") clears 100% off-screen left before Step 01 covers.
+    if (s7Window) {
+      ScrollTrigger.create({
+        trigger: s7Window,
+        start: 'top top',
+        end: 'bottom bottom',
+        scrub: isTouchDevice ? 0.4 : 0.6,
+        onUpdate: (self) => {
+          targetTextProgress = Math.max(0, Math.min(1, self.progress))
+
+          // Dynamic wave morphing on desktop
+          if (!isMobileCanvas) {
+            const vel = self.getVelocity() // px/s
+            const clampedVel = gsap.utils.clamp(-1600, 1600, vel)
+            targetAmp = (clampedVel / 1600) * 95
+            queueFrame()
+          }
+        },
+      })
+    }
+
+    // Initialize wave path flat
+    if (waveLine) {
+      waveLine.setAttribute('d', getWavePathD(0))
+    }
+
+    // -------------------------------------------------------------
+    // PART B: MadeWithGSAP Tutorial 121 / Effect 121 Gallery
+    // - Stroke wipe-out transition: holds headings locked to shared baseline on desktop
+    //   so each incoming section's 1px stroke cuts across and wipes out the previous step heading
+    // - Card frame opens on entry, holds solid & full size at center, closes on exit
+    // - Smooth parallax on image without scale resizing or bouncing
+    // -------------------------------------------------------------
+    const updatePartBCaptions = () => {
+      if (window.innerWidth < 768) return
+      const vh = window.innerHeight
+      const targetTop = vh * 0.5 - 150
+      sections.forEach((sec, idx) => {
+        const content = sec.querySelector<HTMLElement>('.s7b-content')
+        if (!content) return
+        const r = sec.getBoundingClientRect()
+        if (r.bottom > -200 && r.top < vh + 200) {
+          let targetY = targetTop - r.top
+          // Step 03 is the final step. Once it reaches center stage, release it
+          // so the 2 text points scroll up and away naturally with the section off screen
+          // as "WHAT WE REFUSE" approaches from below.
+          if (idx === sections.length - 1) {
+            const centerTop = (vh - sec.offsetHeight) * 0.5
+            const maxPinnedY = targetTop - centerTop
+            targetY = Math.min(targetY, maxPinnedY)
+          }
+          content.style.transform = `translate3d(0, ${targetY.toFixed(1)}px, 0)`
+        }
+      })
+    }
+
+    if (!isMobileCanvas) {
+      window.addEventListener('scroll', updatePartBCaptions, { passive: true })
+      window.addEventListener('resize', updatePartBCaptions, { passive: true })
+      updatePartBCaptions()
+      if ((window as any).__lenis) {
+        ;(window as any).__lenis.on('scroll', updatePartBCaptions)
+      }
+      window.addEventListener('lenis:ready', (e: any) => {
+        e.detail?.on('scroll', updatePartBCaptions)
+      })
+    }
+
+    sections.forEach((sec) => {
+      const medias = sec.querySelectorAll<HTMLElement>('.s7b-media')
+      const imgs = sec.querySelectorAll<HTMLElement>('.s7b-media-img')
+      if (medias.length === 0 || imgs.length === 0) return
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: isTouchDevice ? 0.4 : 0.6,
+        },
+      })
+
+      // Card frame vertical clipPath only (strict 0px horizontal inset prevents squishing / center drift)
+      // 0 to 3: opens smoothly as card enters from bottom
+      // 3 to 7: holds solidly at 100% full size in the center (NO size changes, NO squishing)
+      // 7 to 10: closes smoothly as card exits toward top
+      const clipObj = { y: 10 }
+      tl.fromTo(
+        clipObj,
+        { y: 10 },
+        {
+          y: 0,
+          ease: 'none',
+          duration: 3,
+          onUpdate: () => {
+            medias.forEach((m) => {
+              m.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+            })
+          },
+        }
+      )
+      .to(clipObj, {
+        y: 0,
+        ease: 'none',
+        duration: 4,
+        onUpdate: () => {
+          medias.forEach((m) => {
+            m.style.clipPath = 'inset(0% 0px round 14px)'
+          })
+        },
+      })
+      .to(clipObj, {
+        y: 10,
+        ease: 'none',
+        duration: 3,
+        onUpdate: () => {
+          medias.forEach((m) => {
+            m.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+          })
+        },
+      })
+
+      // Image vertical parallax scroll (scale stays 1.0, zero resize bounce)
+      imgs.forEach((img) => {
+        tl.fromTo(
+          img,
+          { yPercent: -6 },
+          { yPercent: 6, ease: 'none', duration: 10 },
+          0
+        )
+      })
+    })
+
+    const cleanupSection7 = () => {
+      if (section7Disposed) return
+      section7Disposed = true
+      mobileRenderMedia.revert()
+      bananaModelObserver?.disconnect()
+      if (bananaResizeHandler) window.removeEventListener('resize', bananaResizeHandler)
+
+      const section = document.querySelector<HTMLElement>('#section-7')
+      if (section) {
+        ScrollTrigger.getAll().forEach((trigger) => {
+          const triggerElement = trigger.trigger
+          if (triggerElement instanceof Element && section.contains(triggerElement)) trigger.kill(true)
+        })
+        gsap.killTweensOf(section.querySelectorAll('*'))
+      }
+
+      const textures = new Set<ThreeTypes.Texture>()
+      const geometries = new Set<ThreeTypes.BufferGeometry>()
+      const materials = new Set<ThreeTypes.Material>()
+      bananaScene?.traverse((node: any) => {
+        if (node.geometry) geometries.add(node.geometry)
+        const list = Array.isArray(node.material) ? node.material : node.material ? [node.material] : []
+        list.forEach((material: any) => {
+          materials.add(material)
+          Object.values(material).forEach((value: any) => {
+            if (value?.isTexture) textures.add(value)
+          })
+        })
+      })
+      if (bananaScene?.environment) textures.add(bananaScene.environment as ThreeTypes.Texture)
+      geometries.forEach((geometry) => geometry.dispose())
+      materials.forEach((material) => material.dispose())
+      textures.forEach((texture) => texture.dispose())
+      bananaRenderer?.dispose()
+      bananaRenderer?.forceContextLoss()
+      bananaScene?.clear()
+      bananaModel = null
+      bananaCamera = null
+      bananaRenderer = null
+      bananaScene = null
+    }
+
+    window.addEventListener('pagehide', cleanupSection7, { once: true })
+    document.addEventListener('astro:before-swap', cleanupSection7, { once: true })
+  }
+
+  // ==============================================================
+  // 3. INITIALIZATION
+  // ==============================================================
+  const init = () => {
+    initSection7Animations()
+
+    const stage = document.getElementById('s7-stage-how')
+    if (!stage) return
+
+    // Defer WebGL, model and texture work until this later page section is approaching.
+    const modelObserver = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return
+      modelObserver.disconnect()
+      void initThreeBanana().then(() => {
+        // Safe refresh: do not cause layout jumps while user is actively scrolling
+        let scrollTimer: number | null = null
+        const onScrollCheck = () => {
+          if (scrollTimer) window.clearTimeout(scrollTimer)
+          scrollTimer = window.setTimeout(() => {
+            window.removeEventListener('scroll', onScrollCheck)
+            ScrollTrigger.refresh()
+          }, 180)
+        }
+        scrollTimer = window.setTimeout(() => {
+          window.removeEventListener('scroll', onScrollCheck)
+          ScrollTrigger.refresh()
+        }, 180)
+        window.addEventListener('scroll', onScrollCheck, { passive: true })
+      })
+    }, { rootMargin: '120% 0px' })
+    bananaModelObserver = modelObserver
+    modelObserver.observe(stage)
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init)
+  } else {
+    init()
+  }
+</script>

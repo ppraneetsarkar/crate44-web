@@ -1,0 +1,420 @@
+---
+// src/components/Section6.astro
+// Exact 1:1 Implementation of Figma Node 1570:4962 (Section 6 · Where it comes from)
+// Desktop 1440: Node 1570:4953 | Large 1920: Node 1574:5198
+// - Background: Seamless vertical gradient from #FDFEFF (white) to #F8FE03 (neon yellow)
+// - Left: Square photo card with signature asymmetric corner radius [12px, 12px, 56px, 12px]
+// - Right: Giant "WHERE IT COMES FROM" headline in VVDS Fifties (solid black)
+// - Bottom row: Subtext ("Named farms. Named growers. Fruit that answers for itself.") + "MEET THE FARM" 3D button
+// - Margins: Strict 16px side padding matching Hero, Section 2, Section 3, Section 5
+---
+
+<section
+  id="section-6"
+  class="relative z-20 w-full h-auto min-h-screen select-none px-[16px] flex flex-col justify-start pt-[52px] pb-[48px] sm:pt-[58px] sm:pb-[56px] lg:py-[80px]"
+  data-node-id="1570:4962"
+  style="background: linear-gradient(180deg, #FDFEFF 0%, #F8FE03 100%);"
+>
+  <!-- Main content wrapper that scales/softens as gradient flows -->
+  <div class="s6-main-content relative w-full h-full flex flex-col justify-start z-10 will-change-[transform,opacity]">
+    <!-- ============================================================== -->
+    <!-- DESKTOP / WEB LAYOUT (hidden lg:flex) - 100% UNTOUCHED DESKTOP -->
+    <!-- ============================================================== -->
+  <div class="hidden lg:flex relative w-full flex-row items-stretch justify-between gap-[32px] xl:gap-[48px] 2xl:gap-[4vw]">
+    
+    <!-- LEFT COLUMN: Signature Image Card (Node 1570:4954 / 1574:5199) -->
+    <div
+      class="s6-image-col relative w-[48%] xl:w-[50%] flex-shrink-0 flex items-center justify-center"
+      data-node-id="1570:4954"
+    >
+      <div
+        class="group curve-side s6-image-card relative w-full aspect-square overflow-hidden bg-black/5 border border-black/5 will-change-[clip-path]"
+        data-curve="side"
+      >
+        <picture>
+          <source srcset="/images/farm_grower.webp" type="image/webp" />
+          <img
+            src="/images/farm_grower.png"
+            alt="Crate44 source farm auto-rickshaw carrying pineapples in crates"
+            class="s6-image-photo absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover block will-change-transform transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        </picture>
+        <div class="absolute inset-0 pointer-events-none rounded-[inherit] ring-1 ring-inset ring-black/10"></div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Content Box (Headline + Subtext + Button, Node 1570:4955 / 1574:5200) -->
+    <div
+      class="s6-content-col relative w-[52%] xl:w-[50%] flex flex-col justify-between items-start text-black pt-2 2xl:pt-0"
+      data-node-id="1570:4955"
+    >
+      <!-- TOP: Giant Headline (Node 1570:4956 / 1574:5201) -->
+      <div class="s6-headline w-full flex flex-col items-start select-none">
+        <!-- Line 1: WHERE IT -->
+        <div class="s6-mask overflow-hidden py-[2px] w-full">
+          <div class="s6-roll-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(130px,12.5vw,420px)] leading-[0.81] tracking-[0.48px] text-black" data-line="WHERE IT">
+            <span class="s6-char inline-block">W</span>
+            <span class="s6-char inline-block">H</span>
+            <span class="s6-char inline-block">E</span>
+            <span class="s6-char inline-block">R</span>
+            <span class="s6-char inline-block">E</span>
+            <span class="s6-char inline-block">&nbsp;</span>
+            <span class="s6-char inline-block">I</span>
+            <span class="s6-char inline-block">T</span>
+          </div>
+        </div>
+
+        <!-- Line 2: COMES -->
+        <div class="s6-mask overflow-hidden py-[2px] w-full">
+          <div class="s6-roll-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(130px,12.5vw,420px)] leading-[0.81] tracking-[0.48px] text-black" data-line="COMES">
+            <span class="s6-char inline-block">C</span>
+            <span class="s6-char inline-block">O</span>
+            <span class="s6-char inline-block">M</span>
+            <span class="s6-char inline-block">E</span>
+            <span class="s6-char inline-block">S</span>
+          </div>
+        </div>
+
+        <!-- Line 3: FROM -->
+        <div class="s6-mask overflow-hidden py-[2px] w-full">
+          <div class="s6-roll-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(130px,12.5vw,420px)] leading-[0.81] tracking-[0.48px] text-black" data-line="FROM">
+            <span class="s6-char inline-block">F</span>
+            <span class="s6-char inline-block">R</span>
+            <span class="s6-char inline-block">O</span>
+            <span class="s6-char inline-block">M</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW: Subtext + Button (Node 1570:4957 / 1574:5202) -->
+      <div class="s6-bottom-row w-full flex flex-row items-end justify-between gap-4 mt-auto pt-8 xl:pt-12">
+        <!-- Subtext (Desktop: Suisse Intl 16px / 20px / 600 weight / -0.4px) -->
+        <p class="font-body font-semibold text-[16px] leading-[20px] tracking-[-0.4px] text-black max-w-[343px] m-0 text-left">
+          Named farms. Named growers. Fruit that answers for itself.
+        </p>
+
+        <!-- Button: MEET THE FARM (Solo Button: Morphs on LEFT) -->
+        <a
+          href="#meet-the-farm"
+          class="s6-btn-morph bg-[#1e1e1e] text-[#fbf9d6] border border-[#1e1e1e] rounded-full relative inline-flex items-center justify-center cursor-pointer font-display font-semibold text-[32px] leading-[34px] uppercase px-[24px] h-[56px] active:scale-95 flex-shrink-0 transition-[background-color,filter] duration-300 hover:brightness-110 will-change-[border-radius]"
+          data-node-id="1570:4959"
+        >
+          <span
+            class="roll-fx-container relative block h-[34px] leading-[34px] overflow-hidden select-none"
+            style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+          >
+            <span class="roll-text-top block h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+              MEET THE FARM
+            </span>
+            <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[34px] leading-[34px] whitespace-nowrap will-change-[transform,filter]">
+              MEET THE FARM
+            </span>
+          </span>
+        </a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- ============================================================== -->
+  <!-- MOBILE LAYOUT (lg:hidden) - EXACT 1:1 TO FIGMA NODE 1905:2630  -->
+  <!-- ============================================================== -->
+  <div class="lg:hidden flex flex-col w-full items-start">
+    
+    <!-- 1. TOP: Giant Headline (Scaled to margins edge-to-edge with 90/115 line height) -->
+    <div class="s6-headline-mobile w-full flex flex-col items-start select-none mb-6">
+      <!-- Line 1: WHERE IT -->
+      <div class="s6-mask overflow-hidden py-1 w-full">
+        <div class="s6-roll-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(80px,32.5vw,136px)] leading-[calc(90/115)] tracking-[-0.004em] text-black text-left" data-line="WHERE IT">
+          <span class="s6-char inline-block">W</span>
+          <span class="s6-char inline-block">H</span>
+          <span class="s6-char inline-block">E</span>
+          <span class="s6-char inline-block">R</span>
+          <span class="s6-char inline-block">E</span>
+          <span class="s6-char inline-block">&nbsp;</span>
+          <span class="s6-char inline-block">I</span>
+          <span class="s6-char inline-block">T</span>
+        </div>
+      </div>
+
+      <!-- Line 2: COMES -->
+      <div class="s6-mask overflow-hidden py-1 w-full">
+        <div class="s6-roll-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(80px,32.5vw,136px)] leading-[calc(90/115)] tracking-[-0.004em] text-black text-left" data-line="COMES">
+          <span class="s6-char inline-block">C</span>
+          <span class="s6-char inline-block">O</span>
+          <span class="s6-char inline-block">M</span>
+          <span class="s6-char inline-block">E</span>
+          <span class="s6-char inline-block">S</span>
+        </div>
+      </div>
+
+      <!-- Line 3: FROM -->
+      <div class="s6-mask overflow-hidden py-1 w-full">
+        <div class="s6-roll-line flex flex-nowrap whitespace-nowrap justify-start font-display font-semibold uppercase text-[clamp(80px,32.5vw,136px)] leading-[calc(90/115)] tracking-[-0.004em] text-black text-left" data-line="FROM">
+          <span class="s6-char inline-block">F</span>
+          <span class="s6-char inline-block">R</span>
+          <span class="s6-char inline-block">O</span>
+          <span class="s6-char inline-block">M</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. MIDDLE: Image Card (Center, 1:1 square ratio matching Figma) -->
+    <div class="s6-image-col-mobile relative w-full mb-6 flex items-center justify-center">
+      <div
+        class="group curve-side s6-image-card-mob relative w-full aspect-square max-w-full overflow-hidden shadow-2xl will-change-[clip-path]"
+        data-curve="side"
+      >
+        <picture>
+          <source srcset="/images/farm_grower.webp" type="image/webp" />
+          <img
+            src="/images/farm_grower.png"
+            alt="Crate44 source farm auto-rickshaw carrying pineapples in crates"
+            class="s6-image-photo-mob absolute inset-x-0 -top-[8%] w-full h-[116%] object-cover block will-change-transform transition-transform duration-700 ease-out group-hover:scale-105"
+            loading="lazy"
+            decoding="async"
+            draggable="false"
+          />
+        </picture>
+        <div class="absolute inset-0 pointer-events-none rounded-[inherit] ring-1 ring-black/10"></div>
+      </div>
+    </div>
+
+    <!-- 3. BOTTOM: Subtext & Button (Stacked vertically, hugging closely) -->
+    <div class="s6-bottom-col-mobile w-full flex flex-col items-start text-left gap-4 pb-8">
+      <!-- Subtext (Suisse Intl: 14px, 17px line-height, 600 weight, -0.4px kerning) -->
+      <p class="font-body font-semibold text-[14px] leading-[17px] tracking-[-0.4px] text-black max-w-[340px] m-0 text-left">
+        Named farms. Named growers. Fruit that answers for itself.
+      </p>
+
+      <!-- Button: MEET THE FARM Mobile (Solo Button: Morphs on LEFT) -->
+      <a
+        href="#meet-the-farm"
+        class="s6-btn-morph bg-[#1e1e1e] text-[#fbf9d6] border border-[#1e1e1e] rounded-full relative inline-flex items-center justify-center cursor-pointer font-display font-semibold text-[28px] sm:text-[32px] leading-[28px] sm:leading-[32px] uppercase px-[20px] h-[48px] sm:h-[52px] active:scale-95 flex-shrink-0 transition-[background-color,filter] duration-300 hover:brightness-110 will-change-[border-radius]"
+      >
+        <span
+          class="roll-fx-container relative block h-[32px] leading-[32px] overflow-hidden select-none"
+          style="-webkit-mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%); mask-image: linear-gradient(180deg, transparent 0%, black 18%, black 82%, transparent 100%);"
+        >
+          <span class="roll-text-top block h-[32px] leading-[32px] whitespace-nowrap will-change-[transform,filter]">
+            MEET THE FARM
+          </span>
+          <span class="roll-text-bottom absolute inset-0 flex items-center justify-center h-[32px] leading-[32px] whitespace-nowrap will-change-[transform,filter]">
+            MEET THE FARM
+          </span>
+        </span>
+      </a>
+    </div>
+
+  </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from 'gsap'
+  import { ScrollTrigger } from 'gsap/ScrollTrigger'
+  import { CustomEase } from 'gsap/CustomEase'
+
+  gsap.registerPlugin(ScrollTrigger, CustomEase)
+
+  const initSection6 = () => {
+    const sec = document.querySelector<HTMLElement>('#section-6')
+    if (!sec) return
+
+    let luxuryEase: gsap.EaseFunction
+    try {
+      luxuryEase = CustomEase.create('luxuryS6Ripple', '0.16, 1, 0.3, 1')
+    } catch (e) {
+      luxuryEase = gsap.parseEase('power3.out')
+    }
+
+    const lines = Array.from(sec.querySelectorAll<HTMLElement>('.s6-roll-line'))
+      .filter((line) => line.getClientRects().length > 0)
+    const chars = lines.flatMap((line) => Array.from(line.querySelectorAll<HTMLElement>('.s6-char')))
+    const imgCols = sec.querySelectorAll<HTMLElement>('.s6-image-col, .s6-image-col-mobile')
+    const bottomRows = sec.querySelectorAll<HTMLElement>('.s6-bottom-row, .s6-bottom-col-mobile')
+
+    // Effect 121: MadeWithGSAP Aperture shutter + inner parallax on Section 6 image card
+    // Mobile uses pure Section 7 squircle geometry without the rectangular inset clip-path override
+    const imageCards = sec.querySelectorAll<HTMLElement>('.s6-image-card')
+    const imagePhotos = sec.querySelectorAll<HTMLElement>('.s6-image-photo, .s6-image-photo-mob')
+    if (imageCards.length > 0 && imagePhotos.length > 0) {
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
+      const cardTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: sec,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: isTouchDevice ? 0.4 : 0.6,
+        },
+      })
+
+      const clipObj = { y: 10 }
+      cardTl.fromTo(
+        clipObj,
+        { y: 10 },
+        {
+          y: 0,
+          ease: 'none',
+          duration: 3,
+          onUpdate: () => {
+            imageCards.forEach((c) => {
+              c.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+            })
+          },
+        }
+      )
+      .to(clipObj, {
+        y: 0,
+        ease: 'none',
+        duration: 4,
+        onUpdate: () => {
+          imageCards.forEach((c) => {
+            c.style.clipPath = 'inset(0% 0px round 14px)'
+          })
+        },
+      })
+      .to(clipObj, {
+        y: 10,
+        ease: 'none',
+        duration: 3,
+        onUpdate: () => {
+          imageCards.forEach((c) => {
+            c.style.clipPath = `inset(${clipObj.y.toFixed(2)}% 0px round 14px)`
+          })
+        },
+      })
+
+      imagePhotos.forEach((photo) => {
+        cardTl.fromTo(
+          photo,
+          { yPercent: -6 },
+          { yPercent: 6, ease: 'none', duration: 10 },
+          0
+        )
+      })
+    }
+
+    // GSAP Corner-Morphing & Rolling Text FX for Section 6 Solo Buttons (Runs universally on all devices)
+    document.querySelectorAll<HTMLElement>('.s6-btn-morph').forEach((btn) => {
+      const textTop = btn.querySelector<HTMLElement>('.roll-text-top')
+      const textBottom = btn.querySelector<HTMLElement>('.roll-text-bottom')
+
+      gsap.set(btn, {
+        borderTopLeftRadius: '26px',
+        borderBottomLeftRadius: '26px',
+        borderTopRightRadius: '26px',
+        borderBottomRightRadius: '26px',
+      })
+
+      if (textTop && textBottom) {
+        gsap.set(textTop, { yPercent: 0, filter: 'blur(0px)' })
+        gsap.set(textBottom, { yPercent: 100, filter: 'blur(3.5px)' })
+      }
+
+      btn.addEventListener('mouseenter', () => {
+        // Solo button -> Morphs on LEFT (13px 26px 26px 13px)
+        gsap.to(btn, {
+          borderTopLeftRadius: '13px',
+          borderBottomLeftRadius: '13px',
+          borderTopRightRadius: '26px',
+          borderBottomRightRadius: '26px',
+          duration: 0.45,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: -100, filter: 'blur(3.5px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 0, filter: 'blur(0px)', duration: 0.42, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+
+      btn.addEventListener('mouseleave', () => {
+        gsap.to(btn, {
+          borderTopLeftRadius: '26px',
+          borderBottomLeftRadius: '26px',
+          borderTopRightRadius: '26px',
+          borderBottomRightRadius: '26px',
+          duration: 0.38,
+          ease: 'power3.out',
+          overwrite: 'auto',
+        })
+
+        if (textTop && textBottom) {
+          gsap.to(textTop, { yPercent: 0, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+          gsap.to(textBottom, { yPercent: 100, filter: 'blur(3.5px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' })
+        }
+      })
+    })
+
+    // Mode 1 (Portrait) uses static copy. Avoid starting the reveal offscreen,
+    // where the section's overflow boundary can crop the heading during entry.
+    if (window.matchMedia('(max-width: 1023px), (orientation: portrait) and (max-width: 1100px)').matches || document.documentElement.hasAttribute('data-mobile-static-copy')) {
+      gsap.set(chars, { clearProps: 'transform,opacity,filter' })
+      gsap.set(imgCols, { clearProps: 'transform,opacity' })
+      gsap.set(bottomRows, { clearProps: 'transform,opacity' })
+      return
+    }
+
+    const easeLuxury = 'cubic-bezier(0.31, 0.75, 0.22, 1)'
+
+    gsap.set(lines, {
+      yPercent: 140,
+      opacity: 0,
+      rotate: 0.001,
+    })
+    gsap.set(imgCols, { y: 40, opacity: 0.9 })
+    gsap.set(bottomRows, { y: 20, opacity: 0 })
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: sec,
+        start: 'top 80%',
+        once: true,
+      },
+    })
+
+    tl.to(lines, {
+      yPercent: 0,
+      opacity: 1,
+      rotate: 0,
+      duration: 1.1,
+      ease: easeLuxury,
+      stagger: 0.0825,
+    }, 0)
+
+    tl.to(
+      imgCols,
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.1,
+        ease: easeLuxury,
+      },
+      0.25
+    )
+
+    tl.to(
+      bottomRows,
+      {
+        y: 0,
+        opacity: 1,
+        duration: 1.0,
+        ease: easeLuxury,
+      },
+      0.35
+    )
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSection6)
+  } else {
+    initSection6()
+  }
+  document.addEventListener('astro:page-load', initSection6)
+</script>

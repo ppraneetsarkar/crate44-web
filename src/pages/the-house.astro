@@ -1,0 +1,217 @@
+---
+import pageSource from '../remote-pages/the-house.html?raw'
+import Header from '../components/Header.astro'
+import '../styles/global.css'
+
+const htmlAttrs = pageSource.match(/<html([^>]*)>/i)?.[1] ?? ''
+const htmlClass = htmlAttrs.match(/class="([^"]*)"/i)?.[1] ?? ''
+const language = htmlAttrs.match(/lang="([^"]*)"/i)?.[1] ?? 'en'
+const rawHead = pageSource.match(/<head[^>]*>([\s\S]*?)<\/head>/i)?.[1] ?? ''
+const rawBody = pageSource.match(/<body[^>]*>([\s\S]*?)<\/body>/i)?.[1] ?? ''
+
+// Strip Next.js runtime chunk scripts so React hydration does not resurrect the legacy header
+const cleanHead = rawHead.replace(/<script[\s\S]*?<\/script>/gi, '')
+
+// Strip legacy header, backdrops, and mobile popup markup
+const mainStart = rawBody.indexOf('<div class="relative w-full min-h-screen bg-[#131313]')
+const bodyWithoutLegacyNav = mainStart !== -1 ? rawBody.slice(mainStart) : rawBody
+const cleanBody = bodyWithoutLegacyNav.replace(/<script[\s\S]*?<\/script>/gi, '')
+---
+<!doctype html>
+<html lang={language} class={htmlClass}>
+  <head set:html={cleanHead}></head>
+  <body class="bg-[#131313] text-[#FBF9D6] min-h-screen flex flex-col overflow-x-clip select-none">
+    <Header />
+    <Fragment set:html={cleanBody} />
+    <script>
+      import '../scripts/page-transition';
+      import { gsap } from 'gsap';
+      import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      function initHouseAnimations() {
+        const easeLuxury = 'cubic-bezier(0.83, 0, 0.17, 1)';
+
+        // 1. Hero Entrance Timeline
+        const heroTl = gsap.timeline({ delay: 0.15 });
+        heroTl
+          .fromTo('.house-heading-line', { yPercent: 150, opacity: 0, rotate: 0.001 }, { yPercent: 0, opacity: 1, rotate: 0, duration: 1.1, ease: easeLuxury, stagger: 0.0825 }, 0)
+          .fromTo('.house-media-card', { opacity: 0, y: 40, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 1, ease: easeLuxury }, 0.1)
+          .fromTo('.house-anthem-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.6, ease: easeLuxury }, 0.15)
+          .fromTo('.house-world-text', { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1.1, ease: easeLuxury }, 0.2)
+          .fromTo('.house-crate-title', { yPercent: 120, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 1, ease: easeLuxury }, 0.3);
+
+        // 2. Block A: Anthem Paragraphs (“Here’s to the ones who send it back...”)
+        const anthemWords = document.querySelectorAll<HTMLElement>('.paragraph-1 .word-span, .paragraph-2 .word-span');
+        if (anthemWords.length) {
+          gsap.set(anthemWords, { y: '100%' });
+          gsap.to(anthemWords, {
+            y: '0%',
+            duration: 0.8,
+            ease: 'power4.out',
+            stagger: 0.008,
+            scrollTrigger: {
+              trigger: '.paragraph-1',
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
+          });
+        }
+
+        // 3. Block B: Founder’s Story Paragraphs (“Between the orchard and your table...”)
+        const storyWords = document.querySelectorAll<HTMLElement>('.story-para-1 .word-span, .story-para-2 .word-span, .story-para-3 .word-span');
+        if (storyWords.length) {
+          gsap.set(storyWords, { y: '100%' });
+          gsap.to(storyWords, {
+            y: '0%',
+            duration: 0.8,
+            ease: 'power4.out',
+            stagger: 0.008,
+            scrollTrigger: {
+              trigger: '.story-para-1',
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
+          });
+        }
+
+        const storySec = document.querySelector('.story-headline');
+        if (storySec) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: '.story-headline',
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
+          })
+            .fromTo('.story-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+            .fromTo('.story-headline', { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.75, ease: easeLuxury }, '-=0.2')
+            .fromTo('.story-media-card', { opacity: 0, y: 35, scale: 0.98 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power2.out' }, '-=0.4');
+        }
+
+        // 4. Block C: The Numbers Section
+        const numbersTitle = document.querySelectorAll<HTMLElement>('.numbers-headline .effect058-letter');
+        if (numbersTitle.length) {
+          gsap.fromTo(
+            numbersTitle,
+            { rotate: -80, opacity: 0 },
+            {
+              rotate: 0,
+              opacity: 1,
+              duration: 0.45,
+              stagger: 0.008,
+              ease: 'back.out(1.1)',
+              scrollTrigger: {
+                trigger: '.numbers-headline',
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+                once: true,
+              },
+            }
+          );
+        }
+
+        const statItems = document.querySelectorAll<HTMLElement>('.stat-item');
+        statItems.forEach((stat) => {
+          const letters = stat.querySelectorAll<HTMLElement>('.effect058-letter');
+          if (letters.length) {
+            gsap.fromTo(
+              letters,
+              { rotate: -80, opacity: 0 },
+              {
+                rotate: 0,
+                opacity: 1,
+                duration: 0.45,
+                stagger: 0.008,
+                ease: 'back.out(1.1)',
+                scrollTrigger: {
+                  trigger: stat,
+                  start: 'top 85%',
+                  toggleActions: 'play none none none',
+                  once: true,
+                },
+              }
+            );
+          }
+        });
+
+        // 5. Note from Founder & Join The List sections
+        const founderSec = document.querySelector('.founder-heading-line');
+        if (founderSec) {
+          gsap.timeline({
+            scrollTrigger: {
+              trigger: '.founder-heading-line',
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+              once: true,
+            },
+          })
+            .fromTo('.founder-label', { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' })
+            .fromTo('.founder-heading-line', { y: 100, opacity: 0 }, { y: 0, opacity: 1, duration: 0.8, ease: easeLuxury, stagger: 0.08 }, '-=0.2')
+            .fromTo('.founder-media-card', { opacity: 0, y: 40, scale: 0.97 }, { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'power2.out' }, '-=0.4')
+            .fromTo('.founder-quote-text', { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.75, ease: 'power4.out' }, '-=0.4');
+        }
+
+        const joinSec = document.querySelector('.join-heading-line');
+        if (joinSec) {
+          gsap.fromTo(
+            '.join-heading-line',
+            { yPercent: 120, opacity: 0 },
+            {
+              yPercent: 0,
+              opacity: 1,
+              duration: 0.9,
+              ease: easeLuxury,
+              stagger: 0.08,
+              scrollTrigger: {
+                trigger: '.join-heading-line',
+                start: 'top 85%',
+                toggleActions: 'play none none none',
+                once: true,
+              },
+            }
+          );
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initHouseAnimations);
+      } else {
+        initHouseAnimations();
+      }
+      document.addEventListener('astro:page-load', initHouseAnimations);
+    </script>
+    <style is:global>
+      /* ─── Match VVDS Headings in The House to The Four Tests sizing ─── */
+      .house-heading-line,
+      .founder-heading-line,
+      .join-heading-line {
+        font-family: var(--Font-Display, 'VVDS Fifties'), sans-serif !important;
+        font-size: clamp(68px, 24vw, 92px) !important;
+        line-height: clamp(58px, 20vw, 76px) !important;
+      }
+
+      @media (min-width: 768px) {
+        .house-heading-line,
+        .founder-heading-line,
+        .join-heading-line {
+          font-size: clamp(92px, 12vw, 130px) !important;
+          line-height: clamp(76px, 10vw, 105px) !important;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .house-heading-line,
+        .founder-heading-line,
+        .join-heading-line {
+          font-size: clamp(130px, 13.5vw, 240px) !important;
+          line-height: clamp(105px, 11vw, 195px) !important;
+        }
+      }
+    </style>
+  </body>
+</html>
